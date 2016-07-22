@@ -133,6 +133,14 @@
     <AndroidResource Include="Resources\values\styles.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Xamarin.RangeSlider.Forms.Droid\Xamarin.RangeSlider.Forms.Droid.csproj">
+      <Project>{fd6ac821-9d62-4419-aed1-9e76c4d696e4}</Project>
+      <Name>Xamarin.RangeSlider.Forms.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Xamarin.RangeSlider.Forms\Xamarin.RangeSlider.Forms.csproj">
+      <Project>{31fb7c44-71bc-4f27-9136-01a5192aac9b}</Project>
+      <Name>Xamarin.RangeSlider.Forms</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Xamarin.RangeSlider.Forms.Samples\Xamarin.RangeSlider.Forms.Samples.csproj">
       <Project>{de031b58-1699-472e-a2d0-53c190e4a178}</Project>
       <Name>Xamarin.RangeSlider.Forms.Samples</Name>

@@ -113,6 +113,14 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Xamarin.RangeSlider.Forms.WP\Xamarin.RangeSlider.Forms.WP.csproj">
+      <Project>{cf2f8701-1de7-4aae-bddb-ba632c8e1026}</Project>
+      <Name>Xamarin.RangeSlider.Forms.WP</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Xamarin.RangeSlider.Forms\Xamarin.RangeSlider.Forms.csproj">
+      <Project>{31fb7c44-71bc-4f27-9136-01a5192aac9b}</Project>
+      <Name>Xamarin.RangeSlider.Forms</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Xamarin.RangeSlider.Forms.Samples\Xamarin.RangeSlider.Forms.Samples.csproj">
       <Project>{de031b58-1699-472e-a2d0-53c190e4a178}</Project>
       <Name>Xamarin.RangeSlider.Forms.Samples</Name>
