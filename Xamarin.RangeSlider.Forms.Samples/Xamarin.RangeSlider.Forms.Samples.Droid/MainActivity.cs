@@ -21,6 +21,8 @@ namespace Xamarin.RangeSlider.Forms.Samples.Droid
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
             LoadApplication(new App());
+
+            var t = typeof(RangeSliderRenderer);
         }
     }
 }

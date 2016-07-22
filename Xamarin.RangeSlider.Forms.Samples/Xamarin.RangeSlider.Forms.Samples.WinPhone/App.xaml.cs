@@ -35,6 +35,8 @@ namespace Xamarin.RangeSlider.Forms.Samples.WinPhone
         {
             this.InitializeComponent();
             this.Suspending += this.OnSuspending;
+
+            var t = typeof(RangeSliderRenderer);
         }
 
         /// <summary>

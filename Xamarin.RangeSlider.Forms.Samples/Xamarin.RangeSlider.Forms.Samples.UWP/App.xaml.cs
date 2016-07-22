@@ -30,6 +30,8 @@ namespace Xamarin.RangeSlider.Forms.Samples.UWP
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+
+            var t = typeof(RangeSliderRenderer);
         }
 
         /// <summary>

@@ -4,11 +4,11 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 using Xamarin.RangeSlider.Forms;
 
-[assembly: ExportRenderer(typeof(RangeSlider), typeof(RangeSeekBarRenderer))]
+[assembly: ExportRenderer(typeof(RangeSlider), typeof(RangeSliderRenderer))]
 
 namespace Xamarin.RangeSlider.Forms
 {
-    public class RangeSeekBarRenderer : ViewRenderer<RangeSlider, RangeSliderControl>
+    public class RangeSliderRenderer : ViewRenderer<RangeSlider, RangeSliderControl>
     {
         protected override void OnElementChanged(ElementChangedEventArgs<RangeSlider> e)
         {
