@@ -148,6 +148,12 @@
       <Project>{31fb7c44-71bc-4f27-9136-01a5192aac9b}</Project>
       <Name>Xamarin.RangeSlider.Forms</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Xamarin.RangeSlider.iOS\Xamarin.RangeSlider.iOS.csproj">
+      <Project>{386a1be8-add9-497b-a3de-5697511c8927}</Project>
+      <Name>Xamarin.RangeSlider.iOS</Name>
+      <IsAppExtension>false</IsAppExtension>
+      <IsWatchApp>false</IsWatchApp>
+    </ProjectReference>
     <ProjectReference Include="..\Xamarin.RangeSlider.Forms.Samples\Xamarin.RangeSlider.Forms.Samples.csproj">
       <Project>{de031b58-1699-472e-a2d0-53c190e4a178}</Project>
       <Name>Xamarin.RangeSlider.Forms.Samples</Name>

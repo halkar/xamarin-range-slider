@@ -27,6 +27,53 @@ namespace Xamarin.RangeSlider.Forms.Samples.Droid
 		public static void UpdateIdValues()
 		{
 			global::Xamarin.Forms.Platform.Android.Resource.Attribute.actionBarSize = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.actionBarSize;
+			global::Xamarin.RangeSlider.Resource.Attribute.absoluteMaxValue = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.absoluteMaxValue;
+			global::Xamarin.RangeSlider.Resource.Attribute.absoluteMinValue = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.absoluteMinValue;
+			global::Xamarin.RangeSlider.Resource.Attribute.activateOnDefaultValues = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.activateOnDefaultValues;
+			global::Xamarin.RangeSlider.Resource.Attribute.activeColor = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.activeColor;
+			global::Xamarin.RangeSlider.Resource.Attribute.alwaysActive = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.alwaysActive;
+			global::Xamarin.RangeSlider.Resource.Attribute.barHeight = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.barHeight;
+			global::Xamarin.RangeSlider.Resource.Attribute.defaultColor = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.defaultColor;
+			global::Xamarin.RangeSlider.Resource.Attribute.internalPadding = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.internalPadding;
+			global::Xamarin.RangeSlider.Resource.Attribute.showLabels = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.showLabels;
+			global::Xamarin.RangeSlider.Resource.Attribute.singleThumb = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.singleThumb;
+			global::Xamarin.RangeSlider.Resource.Attribute.textAboveThumbsColor = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.textAboveThumbsColor;
+			global::Xamarin.RangeSlider.Resource.Attribute.thumbDisabled = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.thumbDisabled;
+			global::Xamarin.RangeSlider.Resource.Attribute.thumbNormal = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.thumbNormal;
+			global::Xamarin.RangeSlider.Resource.Attribute.thumbPressed = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.thumbPressed;
+			global::Xamarin.RangeSlider.Resource.Attribute.thumbShadow = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.thumbShadow;
+			global::Xamarin.RangeSlider.Resource.Attribute.thumbShadowBlur = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.thumbShadowBlur;
+			global::Xamarin.RangeSlider.Resource.Attribute.thumbShadowColor = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.thumbShadowColor;
+			global::Xamarin.RangeSlider.Resource.Attribute.thumbShadowXOffset = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.thumbShadowXOffset;
+			global::Xamarin.RangeSlider.Resource.Attribute.thumbShadowYOffset = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.thumbShadowYOffset;
+			global::Xamarin.RangeSlider.Resource.Attribute.valuesAboveThumbs = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.valuesAboveThumbs;
+			global::Xamarin.RangeSlider.Resource.Drawable.seek_thumb_disabled = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Drawable.seek_thumb_disabled;
+			global::Xamarin.RangeSlider.Resource.Drawable.seek_thumb_normal = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Drawable.seek_thumb_normal;
+			global::Xamarin.RangeSlider.Resource.Drawable.seek_thumb_pressed = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Drawable.seek_thumb_pressed;
+			global::Xamarin.RangeSlider.Resource.String.app_name = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.String.app_name;
+			global::Xamarin.RangeSlider.Resource.String.demo_max_label = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.String.demo_max_label;
+			global::Xamarin.RangeSlider.Resource.String.demo_min_label = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.String.demo_min_label;
+			global::Xamarin.RangeSlider.Resource.Styleable.RangeSliderControl = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Styleable.RangeSliderControl;
+			global::Xamarin.RangeSlider.Resource.Styleable.RangeSliderControl_absoluteMaxValue = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Styleable.RangeSliderControl_absoluteMaxValue;
+			global::Xamarin.RangeSlider.Resource.Styleable.RangeSliderControl_absoluteMinValue = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Styleable.RangeSliderControl_absoluteMinValue;
+			global::Xamarin.RangeSlider.Resource.Styleable.RangeSliderControl_activateOnDefaultValues = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Styleable.RangeSliderControl_activateOnDefaultValues;
+			global::Xamarin.RangeSlider.Resource.Styleable.RangeSliderControl_activeColor = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Styleable.RangeSliderControl_activeColor;
+			global::Xamarin.RangeSlider.Resource.Styleable.RangeSliderControl_alwaysActive = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Styleable.RangeSliderControl_alwaysActive;
+			global::Xamarin.RangeSlider.Resource.Styleable.RangeSliderControl_barHeight = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Styleable.RangeSliderControl_barHeight;
+			global::Xamarin.RangeSlider.Resource.Styleable.RangeSliderControl_defaultColor = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Styleable.RangeSliderControl_defaultColor;
+			global::Xamarin.RangeSlider.Resource.Styleable.RangeSliderControl_internalPadding = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Styleable.RangeSliderControl_internalPadding;
+			global::Xamarin.RangeSlider.Resource.Styleable.RangeSliderControl_showLabels = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Styleable.RangeSliderControl_showLabels;
+			global::Xamarin.RangeSlider.Resource.Styleable.RangeSliderControl_singleThumb = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Styleable.RangeSliderControl_singleThumb;
+			global::Xamarin.RangeSlider.Resource.Styleable.RangeSliderControl_textAboveThumbsColor = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Styleable.RangeSliderControl_textAboveThumbsColor;
+			global::Xamarin.RangeSlider.Resource.Styleable.RangeSliderControl_thumbDisabled = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Styleable.RangeSliderControl_thumbDisabled;
+			global::Xamarin.RangeSlider.Resource.Styleable.RangeSliderControl_thumbNormal = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Styleable.RangeSliderControl_thumbNormal;
+			global::Xamarin.RangeSlider.Resource.Styleable.RangeSliderControl_thumbPressed = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Styleable.RangeSliderControl_thumbPressed;
+			global::Xamarin.RangeSlider.Resource.Styleable.RangeSliderControl_thumbShadow = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Styleable.RangeSliderControl_thumbShadow;
+			global::Xamarin.RangeSlider.Resource.Styleable.RangeSliderControl_thumbShadowBlur = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Styleable.RangeSliderControl_thumbShadowBlur;
+			global::Xamarin.RangeSlider.Resource.Styleable.RangeSliderControl_thumbShadowColor = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Styleable.RangeSliderControl_thumbShadowColor;
+			global::Xamarin.RangeSlider.Resource.Styleable.RangeSliderControl_thumbShadowXOffset = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Styleable.RangeSliderControl_thumbShadowXOffset;
+			global::Xamarin.RangeSlider.Resource.Styleable.RangeSliderControl_thumbShadowYOffset = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Styleable.RangeSliderControl_thumbShadowYOffset;
+			global::Xamarin.RangeSlider.Resource.Styleable.RangeSliderControl_valuesAboveThumbs = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Styleable.RangeSliderControl_valuesAboveThumbs;
 			global::Xamarin.RangeSlider.Forms.Resource.Animation.abc_fade_in = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Animation.abc_fade_in;
 			global::Xamarin.RangeSlider.Forms.Resource.Animation.abc_fade_out = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Animation.abc_fade_out;
 			global::Xamarin.RangeSlider.Forms.Resource.Animation.abc_grow_fade_in_from_bottom = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Animation.abc_grow_fade_in_from_bottom;
@@ -4839,11 +4886,11 @@ namespace Xamarin.RangeSlider.Forms.Samples.Droid
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f08002a
-			public const int ApplicationName = 2131230762;
+			// aapt resource value: 0x7f080027
+			public const int ApplicationName = 2131230759;
 			
-			// aapt resource value: 0x7f080029
-			public const int Hello = 2131230761;
+			// aapt resource value: 0x7f080026
+			public const int Hello = 2131230758;
 			
 			// aapt resource value: 0x7f08000f
 			public const int abc_action_bar_home_description = 2131230735;
@@ -4902,8 +4949,8 @@ namespace Xamarin.RangeSlider.Forms.Samples.Droid
 			// aapt resource value: 0x7f080021
 			public const int abc_toolbar_collapse_description = 2131230753;
 			
-			// aapt resource value: 0x7f080026
-			public const int app_name = 2131230758;
+			// aapt resource value: 0x7f080028
+			public const int app_name = 2131230760;
 			
 			// aapt resource value: 0x7f080023
 			public const int appbar_scrolling_view_behavior = 2131230755;
@@ -4914,11 +4961,11 @@ namespace Xamarin.RangeSlider.Forms.Samples.Droid
 			// aapt resource value: 0x7f080025
 			public const int character_counter_pattern = 2131230757;
 			
-			// aapt resource value: 0x7f080028
-			public const int demo_max_label = 2131230760;
+			// aapt resource value: 0x7f08002a
+			public const int demo_max_label = 2131230762;
 			
-			// aapt resource value: 0x7f080027
-			public const int demo_min_label = 2131230759;
+			// aapt resource value: 0x7f080029
+			public const int demo_min_label = 2131230761;
 			
 			// aapt resource value: 0x7f080000
 			public const int mr_button_content_description = 2131230720;

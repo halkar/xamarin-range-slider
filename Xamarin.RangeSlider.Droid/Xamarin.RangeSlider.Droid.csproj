@@ -53,13 +53,13 @@
     <None Include="Resources\AboutResources.txt" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\seek_thumb_disabled.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\seek_thumb_disabled.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\seek_thumb_normal.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\seek_thumb_normal.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\seek_thumb_pressed.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\seek_thumb_pressed.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\Values\attrs.xml" />
