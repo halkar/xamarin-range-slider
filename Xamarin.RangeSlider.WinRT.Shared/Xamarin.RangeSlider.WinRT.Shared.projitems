@@ -9,5 +9,14 @@
     <Import_RootNamespace>Xamarin.RangeSlider.WinRT.Shared</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Page Include="$(MSBuildThisFileDirectory)RangeSliderControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)RangeSliderControl.xaml.cs">
+      <DependentUpon>RangeSliderControl.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>

@@ -9,7 +9,7 @@
     <ProjectGuid>{A1601BB5-E8FC-4066-985E-02DB04FA2795}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Xamarin.RangeSlider.WinRT</RootNamespace>
+    <RootNamespace>Xamarin.RangeSlider</RootNamespace>
     <AssemblyName>Xamarin.RangeSlider.WinRT</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformVersion>8.1</TargetPlatformVersion>

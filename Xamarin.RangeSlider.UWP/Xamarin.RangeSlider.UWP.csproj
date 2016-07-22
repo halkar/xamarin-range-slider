@@ -7,7 +7,7 @@
     <ProjectGuid>{74AFDBFF-95E7-4AEB-BEB5-05A5B6068BFE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Xamarin.RangeSlider.UWP</RootNamespace>
+    <RootNamespace>Xamarin.RangeSlider</RootNamespace>
     <AssemblyName>Xamarin.RangeSlider.UWP</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>

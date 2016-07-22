@@ -9,7 +9,7 @@
     <ProjectGuid>{7E6E562D-CDD5-4A55-BD3F-002C45AD4049}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Xamarin.RangeSlider.WP</RootNamespace>
+    <RootNamespace>Xamarin.RangeSlider</RootNamespace>
     <AssemblyName>Xamarin.RangeSlider.WP</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformVersion>8.1</TargetPlatformVersion>

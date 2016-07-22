@@ -7,7 +7,7 @@
     <ProjectGuid>{E676F5E4-4D56-4081-A04C-1025F99774B3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Xamarin.RangeSlider.Forms.UWP</RootNamespace>
+    <RootNamespace>Xamarin.RangeSlider.Forms</RootNamespace>
     <AssemblyName>Xamarin.RangeSlider.Forms.UWP</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
@@ -109,6 +109,16 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Xamarin.RangeSlider.Forms.UWP.rd.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Xamarin.RangeSlider.Forms\Xamarin.RangeSlider.Forms.csproj">
+      <Project>{31fb7c44-71bc-4f27-9136-01a5192aac9b}</Project>
+      <Name>Xamarin.RangeSlider.Forms</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xamarin.RangeSlider.UWP\Xamarin.RangeSlider.UWP.csproj">
+      <Project>{74afdbff-95e7-4aeb-beb5-05a5b6068bfe}</Project>
+      <Name>Xamarin.RangeSlider.UWP</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="..\Xamarin.RangeSlider.Forms.WinRT.Shared\Xamarin.RangeSlider.Forms.WinRT.Shared.projitems" Label="Shared" />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

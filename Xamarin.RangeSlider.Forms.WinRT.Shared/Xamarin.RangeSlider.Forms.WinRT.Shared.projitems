@@ -9,5 +9,6 @@
     <Import_RootNamespace>Xamarin.RangeSlider.Forms.WinRT.Shared</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)RangeSeekBarRenderer.cs" />
   </ItemGroup>
 </Project>
