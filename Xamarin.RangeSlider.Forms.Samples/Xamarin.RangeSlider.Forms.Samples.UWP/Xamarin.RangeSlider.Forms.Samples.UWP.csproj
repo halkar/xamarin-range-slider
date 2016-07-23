@@ -136,6 +136,14 @@
       <Project>{31fb7c44-71bc-4f27-9136-01a5192aac9b}</Project>
       <Name>Xamarin.RangeSlider.Forms</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Xamarin.RangeSlider.UWP\Xamarin.RangeSlider.UWP.csproj">
+      <Project>{74afdbff-95e7-4aeb-beb5-05a5b6068bfe}</Project>
+      <Name>Xamarin.RangeSlider.UWP</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xamarin.RangeSlider.Forms.Samples\Xamarin.RangeSlider.Forms.Samples.csproj">
+      <Project>{de031b58-1699-472e-a2d0-53c190e4a178}</Project>
+      <Name>Xamarin.RangeSlider.Forms.Samples</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

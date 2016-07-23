@@ -20,6 +20,8 @@ namespace Xamarin.RangeSlider.Forms
             if (Control == null)
             {
                 var rangeSlider = new RangeSliderControl();
+                if (Element != null)
+                    UpdateControl(rangeSlider, Element);
                 rangeSlider.LowerValueChanged += RangeSlider_LowerValueChanged;
                 rangeSlider.UpperValueChanged += RangeSlider_UpperValueChanged;
                 SetNativeControl(rangeSlider);
@@ -27,11 +29,16 @@ namespace Xamarin.RangeSlider.Forms
 
             if (Control != null && Element != null)
             {
-                Control.Minimum = Element.MinimumValue;
-                Control.Maximum = Element.MaximumValue;
-                Control.RangeMin = Element.LowerValue;
-                Control.RangeMax = Element.UpperValue;
+                UpdateControl(Control, Element);
             }
+        }
+
+        private void UpdateControl(RangeSliderControl control, RangeSlider element)
+        {
+            control.Minimum = element.MinimumValue;
+            control.Maximum = element.MaximumValue;
+            control.RangeMin = element.LowerValue;
+            control.RangeMax = element.UpperValue;
         }
 
         private void RangeSlider_UpperValueChanged(object sender, System.EventArgs e)
