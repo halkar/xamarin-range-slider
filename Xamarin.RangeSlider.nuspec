@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>Xamarin.RangeSlider</id>
-        <version>0.1.3</version>
+        <version>0.1.6</version>
         <title>Xamarin.RangeSlider</title>
         <authors>Artur Shamsutdinov</authors>
         <projectUrl>https://github.com/halkar/xamarin-range-slider</projectUrl>
@@ -11,13 +11,19 @@
         <tags>xamarin range slider</tags>
     </metadata>
     <files>
+        <!--Android-->
         <file src="Xamarin.RangeSlider.Droid\bin\Release\Xamarin.RangeSlider.Droid.dll" target="lib\MonoAndroid10\Xamarin.RangeSlider.Droid.dll" />
-        <file src="Xamarin.RangeSlider.UWP\bin\Release\RangeSliderControl.xbf" target="lib\uap10.0\RangeSliderControl.xbf" />
+        <!--UWP-->
+        <file src="Xamarin.RangeSlider.UWP\bin\Release\RangeSliderControl.xbf" target="lib\uap10.0\Xamarin.RangeSlider.UWP\RangeSliderControl.xbf" />
         <file src="Xamarin.RangeSlider.UWP\bin\Release\Xamarin.RangeSlider.UWP.dll" target="lib\uap10.0\Xamarin.RangeSlider.UWP.dll" />
         <file src="Xamarin.RangeSlider.UWP\bin\Release\Xamarin.RangeSlider.UWP.pri" target="lib\uap10.0\Xamarin.RangeSlider.UWP.pri" />
-        <file src="Xamarin.RangeSlider.WinRT\bin\Release\RangeSliderControl.xbf" target="lib\win81\RangeSliderControl.xbf" />
+        <file src="Xamarin.RangeSlider.UWP\bin\Release\Xamarin.RangeSlider.UWP.xr.xml" target="lib\uap10.0\Xamarin.RangeSlider.UWP\Xamarin.RangeSlider.UWP.xr.xml" />
+        <!--WinRT-->
+        <file src="Xamarin.RangeSlider.WinRT\bin\Release\RangeSliderControl.xbf" target="lib\win81\Xamarin.RangeSlider.WinRT\RangeSliderControl.xbf" />
+        <file src="Xamarin.RangeSlider.WinRT\bin\Release\Xamarin.RangeSlider.WinRT.xr.xml" target="lib\win81\Xamarin.RangeSlider.WinRT\Xamarin.RangeSlider.WinRT.xr.xml" />
         <file src="Xamarin.RangeSlider.WinRT\bin\Release\Xamarin.RangeSlider.WinRT.dll" target="lib\win81\Xamarin.RangeSlider.WinRT.dll" />
         <file src="Xamarin.RangeSlider.WinRT\bin\Release\Xamarin.RangeSlider.WinRT.pri" target="lib\win81\Xamarin.RangeSlider.WinRT.pri" />
+        <!--iOS-->
         <file src="Xamarin.RangeSlider.iOS\bin\Release\Xamarin.RangeSlider.iOS.dll" target="lib\Xamarin.iOS10\Xamarin.RangeSlider.iOS.dll" />
     </files>
 </package>
