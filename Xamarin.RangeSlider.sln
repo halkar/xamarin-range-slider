@@ -47,6 +47,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xamarin.RangeSlider.Forms.S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xamarin.RangeSlider.Forms.Samples", "Xamarin.RangeSlider.Forms.Samples\Xamarin.RangeSlider.Forms.Samples\Xamarin.RangeSlider.Forms.Samples.csproj", "{DE031B58-1699-472E-A2D0-53C190E4A178}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BB777682-FA30-4C65-9CA8-55003C641722}"
+	ProjectSection(SolutionItems) = preProject
+		Xamarin.Forms.RangeSlider.nuspec = Xamarin.Forms.RangeSlider.nuspec
+		Xamarin.RangeSlider.nuspec = Xamarin.RangeSlider.nuspec
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Xamarin.RangeSlider.Forms.WinRT.Shared\Xamarin.RangeSlider.Forms.WinRT.Shared.projitems*{087ea443-c168-4174-9e85-b33bbeceb3a6}*SharedItemsImports = 4
@@ -712,6 +718,7 @@ Global
 		{E2E68D0A-7FD3-4772-925A-FDCACD939A1B}.Debug|x86.ActiveCfg = Debug|iPhoneSimulator
 		{E2E68D0A-7FD3-4772-925A-FDCACD939A1B}.Debug|x86.Build.0 = Debug|iPhoneSimulator
 		{E2E68D0A-7FD3-4772-925A-FDCACD939A1B}.Release|Any CPU.ActiveCfg = Release|iPhone
+		{E2E68D0A-7FD3-4772-925A-FDCACD939A1B}.Release|Any CPU.Build.0 = Release|iPhone
 		{E2E68D0A-7FD3-4772-925A-FDCACD939A1B}.Release|ARM.ActiveCfg = Release|iPhone
 		{E2E68D0A-7FD3-4772-925A-FDCACD939A1B}.Release|iPhone.ActiveCfg = Release|iPhone
 		{E2E68D0A-7FD3-4772-925A-FDCACD939A1B}.Release|iPhone.Build.0 = Release|iPhone
@@ -844,6 +851,8 @@ Global
 		{079F18D3-C1BE-432E-8AC1-2189A34E40BC}.Debug|x86.Build.0 = Debug|x86
 		{079F18D3-C1BE-432E-8AC1-2189A34E40BC}.Debug|x86.Deploy.0 = Debug|x86
 		{079F18D3-C1BE-432E-8AC1-2189A34E40BC}.Release|Any CPU.ActiveCfg = Release|x86
+		{079F18D3-C1BE-432E-8AC1-2189A34E40BC}.Release|Any CPU.Build.0 = Release|x86
+		{079F18D3-C1BE-432E-8AC1-2189A34E40BC}.Release|Any CPU.Deploy.0 = Release|x86
 		{079F18D3-C1BE-432E-8AC1-2189A34E40BC}.Release|ARM.ActiveCfg = Release|ARM
 		{079F18D3-C1BE-432E-8AC1-2189A34E40BC}.Release|ARM.Build.0 = Release|ARM
 		{079F18D3-C1BE-432E-8AC1-2189A34E40BC}.Release|ARM.Deploy.0 = Release|ARM
