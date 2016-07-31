@@ -41,7 +41,9 @@
                        Canvas.Top="8"
                        Height="16"
                        Canvas.ZIndex="-1"
-                       Fill="#FF69A0CC" />
+                       Fill="#FF69A0CC"
+                       RadiusX="5"
+                       RadiusY="5" />
         </Canvas>
     </Grid>
 </UserControl>

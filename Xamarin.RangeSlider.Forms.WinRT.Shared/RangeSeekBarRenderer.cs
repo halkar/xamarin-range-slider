@@ -39,6 +39,7 @@ namespace Xamarin.RangeSlider.Forms
             control.Maximum = element.MaximumValue;
             control.RangeMin = element.LowerValue;
             control.RangeMax = element.UpperValue;
+            control.MinThumbHidden = true;
         }
 
         private void RangeSlider_UpperValueChanged(object sender, System.EventArgs e)
