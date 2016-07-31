@@ -15,7 +15,10 @@ namespace Xamarin.RangeSlider.Forms
             base.OnElementChanged(e);
             if (Control == null)
             {
-                var rangeSeekBar = new RangeSliderControl(Context) {NotifyWhileDragging = true};
+                var rangeSeekBar = new RangeSliderControl(Context)
+                {
+                    NotifyWhileDragging = true
+                };
                 rangeSeekBar.LowerValueChanged += RangeSeekBarLowerValueChanged;
                 rangeSeekBar.UpperValueChanged += RangeSeekBarUpperValueChanged;
                 SetNativeControl(rangeSeekBar);

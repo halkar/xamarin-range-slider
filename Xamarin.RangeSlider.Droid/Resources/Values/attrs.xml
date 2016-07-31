@@ -8,8 +8,11 @@
         <!-- the maximum of the range -->
         <attr name="absoluteMaxValue" format="integer|float"/>
 
-        <!-- show a single slider -->
-        <attr name="singleThumb" format="boolean"/>
+        <!-- show a single min slider -->
+        <attr name="minThumbHidden" format="boolean"/>
+
+        <!-- show a single max slider -->
+        <attr name="maxThumbHidden" format="boolean"/>
 
         <!-- show the labels on the right and left-->
         <attr name="showLabels" format="boolean"/>

@@ -35,8 +35,9 @@ namespace Xamarin.RangeSlider.Forms.Samples.Droid
 			global::Xamarin.RangeSlider.Resource.Attribute.barHeight = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.barHeight;
 			global::Xamarin.RangeSlider.Resource.Attribute.defaultColor = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.defaultColor;
 			global::Xamarin.RangeSlider.Resource.Attribute.internalPadding = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.internalPadding;
+			global::Xamarin.RangeSlider.Resource.Attribute.maxThumbHidden = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.maxThumbHidden;
+			global::Xamarin.RangeSlider.Resource.Attribute.minThumbHidden = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.minThumbHidden;
 			global::Xamarin.RangeSlider.Resource.Attribute.showLabels = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.showLabels;
-			global::Xamarin.RangeSlider.Resource.Attribute.singleThumb = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.singleThumb;
 			global::Xamarin.RangeSlider.Resource.Attribute.textAboveThumbsColor = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.textAboveThumbsColor;
 			global::Xamarin.RangeSlider.Resource.Attribute.thumbDisabled = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.thumbDisabled;
 			global::Xamarin.RangeSlider.Resource.Attribute.thumbNormal = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.thumbNormal;
@@ -62,8 +63,9 @@ namespace Xamarin.RangeSlider.Forms.Samples.Droid
 			global::Xamarin.RangeSlider.Resource.Styleable.RangeSliderControl_barHeight = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Styleable.RangeSliderControl_barHeight;
 			global::Xamarin.RangeSlider.Resource.Styleable.RangeSliderControl_defaultColor = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Styleable.RangeSliderControl_defaultColor;
 			global::Xamarin.RangeSlider.Resource.Styleable.RangeSliderControl_internalPadding = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Styleable.RangeSliderControl_internalPadding;
+			global::Xamarin.RangeSlider.Resource.Styleable.RangeSliderControl_maxThumbHidden = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Styleable.RangeSliderControl_maxThumbHidden;
+			global::Xamarin.RangeSlider.Resource.Styleable.RangeSliderControl_minThumbHidden = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Styleable.RangeSliderControl_minThumbHidden;
 			global::Xamarin.RangeSlider.Resource.Styleable.RangeSliderControl_showLabels = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Styleable.RangeSliderControl_showLabels;
-			global::Xamarin.RangeSlider.Resource.Styleable.RangeSliderControl_singleThumb = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Styleable.RangeSliderControl_singleThumb;
 			global::Xamarin.RangeSlider.Resource.Styleable.RangeSliderControl_textAboveThumbsColor = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Styleable.RangeSliderControl_textAboveThumbsColor;
 			global::Xamarin.RangeSlider.Resource.Styleable.RangeSliderControl_thumbDisabled = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Styleable.RangeSliderControl_thumbDisabled;
 			global::Xamarin.RangeSlider.Resource.Styleable.RangeSliderControl_thumbNormal = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Styleable.RangeSliderControl_thumbNormal;
@@ -281,6 +283,7 @@ namespace Xamarin.RangeSlider.Forms.Samples.Droid
 			global::Xamarin.RangeSlider.Forms.Resource.Attribute.logoDescription = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.logoDescription;
 			global::Xamarin.RangeSlider.Forms.Resource.Attribute.maxActionInlineWidth = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.maxActionInlineWidth;
 			global::Xamarin.RangeSlider.Forms.Resource.Attribute.maxButtonHeight = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.maxButtonHeight;
+			global::Xamarin.RangeSlider.Forms.Resource.Attribute.maxThumbHidden = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.maxThumbHidden;
 			global::Xamarin.RangeSlider.Forms.Resource.Attribute.measureWithLargestChild = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.measureWithLargestChild;
 			global::Xamarin.RangeSlider.Forms.Resource.Attribute.mediaRouteAudioTrackDrawable = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.mediaRouteAudioTrackDrawable;
 			global::Xamarin.RangeSlider.Forms.Resource.Attribute.mediaRouteBluetoothIconDrawable = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.mediaRouteBluetoothIconDrawable;
@@ -304,6 +307,7 @@ namespace Xamarin.RangeSlider.Forms.Samples.Droid
 			global::Xamarin.RangeSlider.Forms.Resource.Attribute.mediaRouteSpeakerIconDrawable = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.mediaRouteSpeakerIconDrawable;
 			global::Xamarin.RangeSlider.Forms.Resource.Attribute.mediaRouteTvIconDrawable = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.mediaRouteTvIconDrawable;
 			global::Xamarin.RangeSlider.Forms.Resource.Attribute.menu = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.menu;
+			global::Xamarin.RangeSlider.Forms.Resource.Attribute.minThumbHidden = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.minThumbHidden;
 			global::Xamarin.RangeSlider.Forms.Resource.Attribute.multiChoiceItemLayout = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.multiChoiceItemLayout;
 			global::Xamarin.RangeSlider.Forms.Resource.Attribute.navigationContentDescription = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.navigationContentDescription;
 			global::Xamarin.RangeSlider.Forms.Resource.Attribute.navigationIcon = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.navigationIcon;
@@ -340,7 +344,6 @@ namespace Xamarin.RangeSlider.Forms.Samples.Droid
 			global::Xamarin.RangeSlider.Forms.Resource.Attribute.showLabels = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.showLabels;
 			global::Xamarin.RangeSlider.Forms.Resource.Attribute.showText = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.showText;
 			global::Xamarin.RangeSlider.Forms.Resource.Attribute.singleChoiceItemLayout = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.singleChoiceItemLayout;
-			global::Xamarin.RangeSlider.Forms.Resource.Attribute.singleThumb = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.singleThumb;
 			global::Xamarin.RangeSlider.Forms.Resource.Attribute.spanCount = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.spanCount;
 			global::Xamarin.RangeSlider.Forms.Resource.Attribute.spinBars = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.spinBars;
 			global::Xamarin.RangeSlider.Forms.Resource.Attribute.spinnerDropDownItemStyle = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.spinnerDropDownItemStyle;
@@ -1763,8 +1766,9 @@ namespace Xamarin.RangeSlider.Forms.Samples.Droid
 			global::Xamarin.RangeSlider.Forms.Resource.Styleable.RangeSliderControl_barHeight = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Styleable.RangeSliderControl_barHeight;
 			global::Xamarin.RangeSlider.Forms.Resource.Styleable.RangeSliderControl_defaultColor = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Styleable.RangeSliderControl_defaultColor;
 			global::Xamarin.RangeSlider.Forms.Resource.Styleable.RangeSliderControl_internalPadding = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Styleable.RangeSliderControl_internalPadding;
+			global::Xamarin.RangeSlider.Forms.Resource.Styleable.RangeSliderControl_maxThumbHidden = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Styleable.RangeSliderControl_maxThumbHidden;
+			global::Xamarin.RangeSlider.Forms.Resource.Styleable.RangeSliderControl_minThumbHidden = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Styleable.RangeSliderControl_minThumbHidden;
 			global::Xamarin.RangeSlider.Forms.Resource.Styleable.RangeSliderControl_showLabels = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Styleable.RangeSliderControl_showLabels;
-			global::Xamarin.RangeSlider.Forms.Resource.Styleable.RangeSliderControl_singleThumb = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Styleable.RangeSliderControl_singleThumb;
 			global::Xamarin.RangeSlider.Forms.Resource.Styleable.RangeSliderControl_textAboveThumbsColor = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Styleable.RangeSliderControl_textAboveThumbsColor;
 			global::Xamarin.RangeSlider.Forms.Resource.Styleable.RangeSliderControl_thumbDisabled = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Styleable.RangeSliderControl_thumbDisabled;
 			global::Xamarin.RangeSlider.Forms.Resource.Styleable.RangeSliderControl_thumbNormal = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Styleable.RangeSliderControl_thumbNormal;
@@ -2081,11 +2085,11 @@ namespace Xamarin.RangeSlider.Forms.Samples.Droid
 			// aapt resource value: 0x7f0100ca
 			public const int actionViewClass = 2130772170;
 			
-			// aapt resource value: 0x7f01014f
-			public const int activateOnDefaultValues = 2130772303;
+			// aapt resource value: 0x7f010150
+			public const int activateOnDefaultValues = 2130772304;
 			
-			// aapt resource value: 0x7f010145
-			public const int activeColor = 2130772293;
+			// aapt resource value: 0x7f010146
+			public const int activeColor = 2130772294;
 			
 			// aapt resource value: 0x7f010083
 			public const int activityChooserViewStyle = 2130772099;
@@ -2105,8 +2109,8 @@ namespace Xamarin.RangeSlider.Forms.Samples.Droid
 			// aapt resource value: 0x7f0100ba
 			public const int allowStacking = 2130772154;
 			
-			// aapt resource value: 0x7f010140
-			public const int alwaysActive = 2130772288;
+			// aapt resource value: 0x7f010141
+			public const int alwaysActive = 2130772289;
 			
 			// aapt resource value: 0x7f0100c1
 			public const int arrowHeadLength = 2130772161;
@@ -2132,8 +2136,8 @@ namespace Xamarin.RangeSlider.Forms.Samples.Droid
 			// aapt resource value: 0x7f0100f6
 			public const int backgroundTintMode = 2130772214;
 			
-			// aapt resource value: 0x7f010143
-			public const int barHeight = 2130772291;
+			// aapt resource value: 0x7f010144
+			public const int barHeight = 2130772292;
 			
 			// aapt resource value: 0x7f0100c3
 			public const int barLength = 2130772163;
@@ -2309,8 +2313,8 @@ namespace Xamarin.RangeSlider.Forms.Samples.Droid
 			// aapt resource value: 0x7f010035
 			public const int customNavigationLayout = 2130772021;
 			
-			// aapt resource value: 0x7f010144
-			public const int defaultColor = 2130772292;
+			// aapt resource value: 0x7f010145
+			public const int defaultColor = 2130772293;
 			
 			// aapt resource value: 0x7f0100d2
 			public const int defaultQueryHint = 2130772178;
@@ -2450,8 +2454,8 @@ namespace Xamarin.RangeSlider.Forms.Samples.Droid
 			// aapt resource value: 0x7f010120
 			public const int insetForeground = 2130772256;
 			
-			// aapt resource value: 0x7f010142
-			public const int internalPadding = 2130772290;
+			// aapt resource value: 0x7f010143
+			public const int internalPadding = 2130772291;
 			
 			// aapt resource value: 0x7f010028
 			public const int isLightTheme = 2130772008;
@@ -2546,6 +2550,9 @@ namespace Xamarin.RangeSlider.Forms.Samples.Droid
 			// aapt resource value: 0x7f0100ea
 			public const int maxButtonHeight = 2130772202;
 			
+			// aapt resource value: 0x7f01013f
+			public const int maxThumbHidden = 2130772287;
+			
 			// aapt resource value: 0x7f0100c5
 			public const int measureWithLargestChild = 2130772165;
 			
@@ -2614,6 +2621,9 @@ namespace Xamarin.RangeSlider.Forms.Samples.Droid
 			
 			// aapt resource value: 0x7f01011a
 			public const int menu = 2130772250;
+			
+			// aapt resource value: 0x7f01013e
+			public const int minThumbHidden = 2130772286;
 			
 			// aapt resource value: 0x7f010047
 			public const int multiChoiceItemLayout = 2130772039;
@@ -2714,17 +2724,14 @@ namespace Xamarin.RangeSlider.Forms.Samples.Droid
 			// aapt resource value: 0x7f0100c6
 			public const int showDividers = 2130772166;
 			
-			// aapt resource value: 0x7f01013f
-			public const int showLabels = 2130772287;
+			// aapt resource value: 0x7f010140
+			public const int showLabels = 2130772288;
 			
 			// aapt resource value: 0x7f0100e2
 			public const int showText = 2130772194;
 			
 			// aapt resource value: 0x7f010048
 			public const int singleChoiceItemLayout = 2130772040;
-			
-			// aapt resource value: 0x7f01013e
-			public const int singleThumb = 2130772286;
 			
 			// aapt resource value: 0x7f010001
 			public const int spanCount = 2130771969;
@@ -2834,8 +2841,8 @@ namespace Xamarin.RangeSlider.Forms.Samples.Droid
 			// aapt resource value: 0x7f01012c
 			public const int tabTextColor = 2130772268;
 			
-			// aapt resource value: 0x7f010146
-			public const int textAboveThumbsColor = 2130772294;
+			// aapt resource value: 0x7f010147
+			public const int textAboveThumbsColor = 2130772295;
 			
 			// aapt resource value: 0x7f01004b
 			public const int textAllCaps = 2130772043;
@@ -2873,29 +2880,29 @@ namespace Xamarin.RangeSlider.Forms.Samples.Droid
 			// aapt resource value: 0x7f0100c4
 			public const int thickness = 2130772164;
 			
-			// aapt resource value: 0x7f010149
-			public const int thumbDisabled = 2130772297;
-			
-			// aapt resource value: 0x7f010147
-			public const int thumbNormal = 2130772295;
+			// aapt resource value: 0x7f01014a
+			public const int thumbDisabled = 2130772298;
 			
 			// aapt resource value: 0x7f010148
-			public const int thumbPressed = 2130772296;
+			public const int thumbNormal = 2130772296;
 			
-			// aapt resource value: 0x7f01014a
-			public const int thumbShadow = 2130772298;
-			
-			// aapt resource value: 0x7f01014e
-			public const int thumbShadowBlur = 2130772302;
+			// aapt resource value: 0x7f010149
+			public const int thumbPressed = 2130772297;
 			
 			// aapt resource value: 0x7f01014b
-			public const int thumbShadowColor = 2130772299;
+			public const int thumbShadow = 2130772299;
+			
+			// aapt resource value: 0x7f01014f
+			public const int thumbShadowBlur = 2130772303;
 			
 			// aapt resource value: 0x7f01014c
-			public const int thumbShadowXOffset = 2130772300;
+			public const int thumbShadowColor = 2130772300;
 			
 			// aapt resource value: 0x7f01014d
-			public const int thumbShadowYOffset = 2130772301;
+			public const int thumbShadowXOffset = 2130772301;
+			
+			// aapt resource value: 0x7f01014e
+			public const int thumbShadowYOffset = 2130772302;
 			
 			// aapt resource value: 0x7f0100dd
 			public const int thumbTextPadding = 2130772189;
@@ -2945,8 +2952,8 @@ namespace Xamarin.RangeSlider.Forms.Samples.Droid
 			// aapt resource value: 0x7f010118
 			public const int useCompatPadding = 2130772248;
 			
-			// aapt resource value: 0x7f010141
-			public const int valuesAboveThumbs = 2130772289;
+			// aapt resource value: 0x7f010142
+			public const int valuesAboveThumbs = 2130772290;
 			
 			// aapt resource value: 0x7f0100d7
 			public const int voiceIcon = 2130772183;
@@ -7408,7 +7415,8 @@ namespace Xamarin.RangeSlider.Forms.Samples.Droid
 					2130772300,
 					2130772301,
 					2130772302,
-					2130772303};
+					2130772303,
+					2130772304};
 			
 			// aapt resource value: 1
 			public const int RangeSliderControl_absoluteMaxValue = 1;
@@ -7416,59 +7424,62 @@ namespace Xamarin.RangeSlider.Forms.Samples.Droid
 			// aapt resource value: 0
 			public const int RangeSliderControl_absoluteMinValue = 0;
 			
-			// aapt resource value: 19
-			public const int RangeSliderControl_activateOnDefaultValues = 19;
-			
-			// aapt resource value: 9
-			public const int RangeSliderControl_activeColor = 9;
-			
-			// aapt resource value: 4
-			public const int RangeSliderControl_alwaysActive = 4;
-			
-			// aapt resource value: 7
-			public const int RangeSliderControl_barHeight = 7;
-			
-			// aapt resource value: 8
-			public const int RangeSliderControl_defaultColor = 8;
-			
-			// aapt resource value: 6
-			public const int RangeSliderControl_internalPadding = 6;
-			
-			// aapt resource value: 3
-			public const int RangeSliderControl_showLabels = 3;
-			
-			// aapt resource value: 2
-			public const int RangeSliderControl_singleThumb = 2;
+			// aapt resource value: 20
+			public const int RangeSliderControl_activateOnDefaultValues = 20;
 			
 			// aapt resource value: 10
-			public const int RangeSliderControl_textAboveThumbsColor = 10;
-			
-			// aapt resource value: 13
-			public const int RangeSliderControl_thumbDisabled = 13;
-			
-			// aapt resource value: 11
-			public const int RangeSliderControl_thumbNormal = 11;
-			
-			// aapt resource value: 12
-			public const int RangeSliderControl_thumbPressed = 12;
-			
-			// aapt resource value: 14
-			public const int RangeSliderControl_thumbShadow = 14;
-			
-			// aapt resource value: 18
-			public const int RangeSliderControl_thumbShadowBlur = 18;
-			
-			// aapt resource value: 15
-			public const int RangeSliderControl_thumbShadowColor = 15;
-			
-			// aapt resource value: 16
-			public const int RangeSliderControl_thumbShadowXOffset = 16;
-			
-			// aapt resource value: 17
-			public const int RangeSliderControl_thumbShadowYOffset = 17;
+			public const int RangeSliderControl_activeColor = 10;
 			
 			// aapt resource value: 5
-			public const int RangeSliderControl_valuesAboveThumbs = 5;
+			public const int RangeSliderControl_alwaysActive = 5;
+			
+			// aapt resource value: 8
+			public const int RangeSliderControl_barHeight = 8;
+			
+			// aapt resource value: 9
+			public const int RangeSliderControl_defaultColor = 9;
+			
+			// aapt resource value: 7
+			public const int RangeSliderControl_internalPadding = 7;
+			
+			// aapt resource value: 3
+			public const int RangeSliderControl_maxThumbHidden = 3;
+			
+			// aapt resource value: 2
+			public const int RangeSliderControl_minThumbHidden = 2;
+			
+			// aapt resource value: 4
+			public const int RangeSliderControl_showLabels = 4;
+			
+			// aapt resource value: 11
+			public const int RangeSliderControl_textAboveThumbsColor = 11;
+			
+			// aapt resource value: 14
+			public const int RangeSliderControl_thumbDisabled = 14;
+			
+			// aapt resource value: 12
+			public const int RangeSliderControl_thumbNormal = 12;
+			
+			// aapt resource value: 13
+			public const int RangeSliderControl_thumbPressed = 13;
+			
+			// aapt resource value: 15
+			public const int RangeSliderControl_thumbShadow = 15;
+			
+			// aapt resource value: 19
+			public const int RangeSliderControl_thumbShadowBlur = 19;
+			
+			// aapt resource value: 16
+			public const int RangeSliderControl_thumbShadowColor = 16;
+			
+			// aapt resource value: 17
+			public const int RangeSliderControl_thumbShadowXOffset = 17;
+			
+			// aapt resource value: 18
+			public const int RangeSliderControl_thumbShadowYOffset = 18;
+			
+			// aapt resource value: 6
+			public const int RangeSliderControl_valuesAboveThumbs = 6;
 			
 			public static int[] RecyclerView = new int[] {
 					16842948,

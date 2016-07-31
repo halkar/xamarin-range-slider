@@ -100,7 +100,8 @@ namespace Xamarin.RangeSlider
         public bool ShowLabels { get; set; }
         public bool ShowTextAboveThumbs { get; set; }
 
-        public bool SingleThumb { get; set; }
+        public bool MinThumbHidden { get; set; }
+        public bool MaxThumbHidden { get; set; }
         public Color TextAboveThumbsColor { get; set; }
         public Bitmap ThumbDisabledImage { get; set; }
 
@@ -160,7 +161,8 @@ namespace Xamarin.RangeSlider
                         extractNumericValueFromAttributes(a, Resource.Styleable.RangeSliderControl_absoluteMaxValue, DefaultMaximum));
                     ShowTextAboveThumbs = a.GetBoolean(Resource.Styleable.RangeSliderControl_valuesAboveThumbs, true);
                     TextAboveThumbsColor = a.GetColor(Resource.Styleable.RangeSliderControl_textAboveThumbsColor, Color.White);
-                    SingleThumb = a.GetBoolean(Resource.Styleable.RangeSliderControl_singleThumb, false);
+                    MinThumbHidden = a.GetBoolean(Resource.Styleable.RangeSliderControl_minThumbHidden, false);
+                    MaxThumbHidden = a.GetBoolean(Resource.Styleable.RangeSliderControl_maxThumbHidden, false);
                     ShowLabels = a.GetBoolean(Resource.Styleable.RangeSliderControl_showLabels, true);
                     _internalPad = a.GetDimensionPixelSize(Resource.Styleable.RangeSliderControl_internalPadding, InitialPaddingInDp);
                     barHeight = a.GetDimensionPixelSize(Resource.Styleable.RangeSliderControl_barHeight, LineHeightInDp);
@@ -498,11 +500,11 @@ namespace Xamarin.RangeSlider
             var pointerIndex = ev.FindPointerIndex(_activePointerId);
             var x = ev.GetX(pointerIndex);
 
-            if (Thumb.Min.Equals(_pressedThumb) && !SingleThumb)
+            if (Thumb.Min.Equals(_pressedThumb) && !MinThumbHidden)
             {
                 SetNormalizedMinValue(ScreenToNormalized(x));
             }
-            else if (Thumb.Max.Equals(_pressedThumb))
+            else if (Thumb.Max.Equals(_pressedThumb) && !MaxThumbHidden)
             {
                 SetNormalizedMaxValue(ScreenToNormalized(x));
             }
@@ -600,7 +602,7 @@ namespace Xamarin.RangeSlider
             canvas.DrawRect(_rect, _paint);
 
             // draw minimum thumb (& shadow if requested) if not a single thumb control
-            if (!SingleThumb)
+            if (!MinThumbHidden)
             {
                 if (ThumbShadow)
                 {
@@ -611,12 +613,15 @@ namespace Xamarin.RangeSlider
             }
 
             // draw maximum thumb & shadow (if necessary)
-            if (ThumbShadow)
+            if (!MaxThumbHidden)
             {
-                DrawThumbShadow(NormalizedToScreen(NormalizedMaxValue), canvas);
+                if (ThumbShadow)
+                {
+                    DrawThumbShadow(NormalizedToScreen(NormalizedMaxValue), canvas);
+                }
+                DrawThumb(NormalizedToScreen(NormalizedMaxValue), Thumb.Max.Equals(_pressedThumb), canvas,
+                    selectedValuesAreDefault);
             }
-            DrawThumb(NormalizedToScreen(NormalizedMaxValue), Thumb.Max.Equals(_pressedThumb), canvas,
-                selectedValuesAreDefault);
 
             // draw the text if sliders have moved from default edges
             if (!ShowTextAboveThumbs || (!ActivateOnDefaultValues && selectedValuesAreDefault))
@@ -634,7 +639,7 @@ namespace Xamarin.RangeSlider
             var maxPosition = Math.Min(Width - maxTextWidth,
                 NormalizedToScreen(NormalizedMaxValue) - maxTextWidth*0.5f);
 
-            if (!SingleThumb)
+            if (!MaxThumbHidden && !MinThumbHidden)
             {
                 // check if the labels overlap, or are too close to each other
                 var spacing = PixelUtil.DpToPx(Context, TextLateralPaddingInDp);
