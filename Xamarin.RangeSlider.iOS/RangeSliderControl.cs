@@ -689,15 +689,15 @@ namespace Xamarin.RangeSlider
         {
             base.LayoutSubviews();
 
-            if (_lowerHandleHidden)
-            {
-                LowerValue = MinimumValue;
-            }
-
-            if (_upperHandleHidden)
-            {
-                UpperValue = MaximumValue;
-            }
+//            if (_lowerHandleHidden)
+//            {
+//                LowerValue = MinimumValue;
+//            }
+//
+//            if (_upperHandleHidden)
+//            {
+//                UpperValue = MaximumValue;
+//            }
 
             _trackBackground.Frame = TrackBackgroundRect();
             _track.Frame = TrackRect();
@@ -724,13 +724,13 @@ namespace Xamarin.RangeSlider
             //Check both buttons upper and lower thumb handles because
             //they could be on top of each other.
 
-            if (_lowerTouchEdgeInsets.InsetRect(_lowerHandle.Frame).Contains(touchPoint))
+            if (_lowerTouchEdgeInsets.InsetRect(_lowerHandle.Frame).Contains(touchPoint) && !LowerHandleHidden)
             {
                 _lowerHandle.Highlighted = true;
                 _lowerTouchOffset = (float) touchPoint.X - (float) _lowerHandle.Center.X;
             }
 
-            if (_upperTouchEdgeInsets.InsetRect(_upperHandle.Frame).Contains(touchPoint))
+            if (_upperTouchEdgeInsets.InsetRect(_upperHandle.Frame).Contains(touchPoint) && !UpperHandleHidden)
             {
                 _upperHandle.Highlighted = true;
                 _upperTouchOffset = (float) touchPoint.X - (float) _upperHandle.Center.X;

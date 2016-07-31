@@ -66,6 +66,9 @@ namespace Xamarin.RangeSlider
         protected float MinDeltaForDefault = 0;
         protected float NormalizedMaxValue = 1f;
         protected float NormalizedMinValue;
+        private Color _activeColor;
+        private bool _minThumbHidden;
+        private bool _maxThumbHidden;
 
         protected RangeSliderControl(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
@@ -94,14 +97,42 @@ namespace Xamarin.RangeSlider
         }
 
         public bool ActivateOnDefaultValues { get; set; }
-        public Color ActiveColor { get; set; }
+
+        public Color ActiveColor
+        {
+            get { return _activeColor; }
+            set
+            {
+                _activeColor = value;
+                Invalidate();
+            }
+        }
+
         public bool AlwaysActive { get; set; }
         public Color DefaultColor { get; set; }
         public bool ShowLabels { get; set; }
         public bool ShowTextAboveThumbs { get; set; }
 
-        public bool MinThumbHidden { get; set; }
-        public bool MaxThumbHidden { get; set; }
+        public bool MinThumbHidden
+        {
+            get { return _minThumbHidden; }
+            set
+            {
+                _minThumbHidden = value;
+                Invalidate();
+            }
+        }
+
+        public bool MaxThumbHidden
+        {
+            get { return _maxThumbHidden; }
+            set
+            {
+                _maxThumbHidden = value;
+                Invalidate();
+            }
+        }
+
         public Color TextAboveThumbsColor { get; set; }
         public Bitmap ThumbDisabledImage { get; set; }
 

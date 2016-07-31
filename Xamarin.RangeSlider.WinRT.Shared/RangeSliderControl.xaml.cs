@@ -185,14 +185,14 @@ namespace Xamarin.RangeSlider
         {
             var min = DragThumb(MinThumb, 0, Canvas.GetLeft(MaxThumb), e.HorizontalChange);
             UpdateMinThumb(min, true);
-            RangeMin = Math.Round(min);
+            RangeMin = min;
         }
 
         private void MaxThumb_DragDelta(object sender, DragDeltaEventArgs e)
         {
             var max = DragThumb(MaxThumb, Canvas.GetLeft(MinThumb), ContainerCanvas.ActualWidth, e.HorizontalChange);
             UpdateMaxThumb(max, true);
-            RangeMax = Math.Round(max);
+            RangeMax = max;
         }
 
         private double DragThumb(Thumb thumb, double min, double max, double offset)

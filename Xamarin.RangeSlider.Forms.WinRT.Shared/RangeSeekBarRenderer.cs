@@ -20,8 +20,7 @@ namespace Xamarin.RangeSlider.Forms
             if (Control == null)
             {
                 var rangeSlider = new RangeSliderControl();
-                if (Element != null)
-                    UpdateControl(rangeSlider, Element);
+                UpdateControl(rangeSlider, Element);
                 rangeSlider.LowerValueChanged += RangeSlider_LowerValueChanged;
                 rangeSlider.UpperValueChanged += RangeSlider_UpperValueChanged;
                 SetNativeControl(rangeSlider);
@@ -39,7 +38,8 @@ namespace Xamarin.RangeSlider.Forms
             control.Maximum = element.MaximumValue;
             control.RangeMin = element.LowerValue;
             control.RangeMax = element.UpperValue;
-            control.MinThumbHidden = true;
+            control.MinThumbHidden = element.MinThumbHidden;
+            control.MaxThumbHidden = element.MaxThumbHidden;
         }
 
         private void RangeSlider_UpperValueChanged(object sender, System.EventArgs e)
@@ -68,6 +68,12 @@ namespace Xamarin.RangeSlider.Forms
                     break;
                 case RangeSlider.MaximumValuePropertyName:
                     Control.Maximum = Element.MaximumValue;
+                    break;
+                case RangeSlider.MaxThumbHiddenPropertyName:
+                    Control.MaxThumbHidden = Element.MaxThumbHidden;
+                    break;
+                case RangeSlider.MinThumbHiddenPropertyName:
+                    Control.MinThumbHidden = Element.MinThumbHidden;
                     break;
             }
         }
