@@ -132,9 +132,11 @@ namespace Xamarin.RangeSlider
         [Browsable(true)]
         public float StepValue { get; set; }
 
-        // If false the slider will move freely with the tounch. When the touch ends, the value will snap to the nearest step value
-        // If true the slider will stay in its current position until it reaches a new step value.
-        // default false
+        /// <summary>
+        /// If false the slider will move freely with the tounch. When the touch ends, the value will snap to the nearest step value
+        /// If true the slider will stay in its current position until it reaches a new step value.
+        /// default false
+        /// </summary>
         [Export("StepValueContinuously")]
         [Browsable(true)]
         public bool StepValueContinuously { get; set; }

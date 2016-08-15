@@ -294,7 +294,9 @@ namespace Xamarin.RangeSlider
         }
 
 
-        // only used to set default values when initialised from XML without any values specified
+        /// <summary>
+        /// only used to set default values when initialised from XML without any values specified
+        /// </summary>
         private void SetRangeToDefaultValues()
         {
             AbsoluteMinValue = DefaultMinimum;
@@ -341,12 +343,10 @@ namespace Xamarin.RangeSlider
             return NormalizedToValue(NormalizedMinValue);
         }
 
-        /**
-         * Sets the currently selected minimum value. The widget will be Invalidated and redrawn.
-         *
-         * @param value The Number value to set the minimum value to. Will be clamped to given absolute minimum/maximum range.
-         */
-
+        /// <summary>
+        /// Sets the currently selected minimum value. The widget will be Invalidated and redrawn.
+        /// </summary>
+        /// <param name="value">The Number value to set the minimum value to. Will be clamped to given absolute minimum/maximum range.</param>
         public void SetSelectedMinValue(float value)
         {
             // in case absoluteMinValue == absoluteMaxValue, avoid division by zero when normalizing.
@@ -736,16 +736,11 @@ namespace Xamarin.RangeSlider
         {
             Bitmap buttonToDraw;
             if (!ActivateOnDefaultValues && areSelectedValuesDefault)
-            {
                 buttonToDraw = ThumbDisabledImage;
-            }
             else
-            {
                 buttonToDraw = pressed ? ThumbPressedImage : ThumbImage;
-            }
 
-            canvas.DrawBitmap(buttonToDraw, screenCoord - _thumbHalfWidth,
-                _textOffset, _paint);
+            canvas.DrawBitmap(buttonToDraw, screenCoord - _thumbHalfWidth, _textOffset, _paint);
         }
 
         /// <summary>
