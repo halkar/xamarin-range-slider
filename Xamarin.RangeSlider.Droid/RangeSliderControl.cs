@@ -64,7 +64,6 @@ namespace Xamarin.RangeSlider
         private int _thumbShadowBlur;
         private Path _thumbShadowPath;
         protected float AbsoluteMinValue, AbsoluteMaxValue;
-        protected float AbsoluteMinValuePrim, AbsoluteMaxValuePrim;
         protected float MinDeltaForDefault = 0;
         protected float NormalizedMaxValue = 1f;
         protected float NormalizedMinValue;
@@ -263,8 +262,6 @@ namespace Xamarin.RangeSlider
             _thumbHalfWidth = 0.5f*ThumbImage.Width;
             _thumbHalfHeight = 0.5f*ThumbImage.Height;
 
-            SetValuePrimAndNumberType();
-
             _textSize = PixelUtil.DpToPx(context, DefaultTextSizeInDp);
             _distanceToTop = PixelUtil.DpToPx(context, DefaultTextDistanceToTopInDp);
             _textOffset = !ShowTextAboveThumbs
@@ -296,7 +293,6 @@ namespace Xamarin.RangeSlider
         {
             AbsoluteMinValue = minValue;
             AbsoluteMaxValue = maxValue;
-            SetValuePrimAndNumberType();
         }
 
         public void SetTextAboveThumbsColor(Color textAboveThumbsColor)
@@ -307,7 +303,7 @@ namespace Xamarin.RangeSlider
 
         public void SetTextAboveThumbsColorResource(int resId)
         {
-            SetTextAboveThumbsColor(Resources.GetColor(resId));
+            SetTextAboveThumbsColor(Resources.GetColor(resId, Context.Theme));
         }
 
 
@@ -318,13 +314,6 @@ namespace Xamarin.RangeSlider
         {
             AbsoluteMinValue = DefaultMinimum;
             AbsoluteMaxValue = DefaultMaximum;
-            SetValuePrimAndNumberType();
-        }
-
-        private void SetValuePrimAndNumberType()
-        {
-            AbsoluteMinValuePrim = AbsoluteMinValue;
-            AbsoluteMaxValuePrim = AbsoluteMaxValue;
         }
 
         public void ResetSelectedValues()
@@ -366,45 +355,43 @@ namespace Xamarin.RangeSlider
         /// <param name="value">The Number value to set the minimum value to. Will be clamped to given absolute minimum/maximum range.</param>
         public void SetSelectedMinValue(float value)
         {
+            if(_pressedThumb == Thumb.Min)
+                return;
             // in case absoluteMinValue == absoluteMaxValue, avoid division by zero when normalizing.
-            SetNormalizedMinValue(Math.Abs(AbsoluteMaxValuePrim - AbsoluteMinValuePrim) < float.Epsilon
+            SetNormalizedMinValue(Math.Abs(AbsoluteMaxValue - AbsoluteMinValue) < float.Epsilon
                 ? 0f
                 : ValueToNormalized(value));
         }
 
-        /**
-         * Returns the currently selected max value.
-         *
-         * @return The currently selected max value.
-         */
-
+        /// <summary>
+        /// Returns the currently selected max value.
+        /// </summary>
+        /// <returns>The currently selected max value.</returns>
         public float GetSelectedMaxValue()
         {
             return NormalizedToValue(NormalizedMaxValue);
         }
 
-        /**
-         * Sets the currently selected maximum value. The widget will be Invalidated and redrawn.
-         *
-         * @param value The Number value to set the maximum value to. Will be clamped to given absolute minimum/maximum range.
-         */
-
+        /// <summary>
+        /// Sets the currently selected maximum value. The widget will be Invalidated and redrawn.
+        /// </summary>
+        /// <param name="value">The Number value to set the maximum value to. Will be clamped to given absolute minimum/maximum range.</param>
         public void SetSelectedMaxValue(float value)
         {
+            if (_pressedThumb == Thumb.Max)
+                return;
             // in case absoluteMinValue == absoluteMaxValue, avoid division by zero when normalizing.
-            SetNormalizedMaxValue(Math.Abs(AbsoluteMaxValuePrim - AbsoluteMinValuePrim) < float.Epsilon
+            SetNormalizedMaxValue(Math.Abs(AbsoluteMaxValue - AbsoluteMinValue) < float.Epsilon
                 ? 1f
                 : ValueToNormalized(value));
         }
 
-        /**
-     * Set the path that defines the shadow of the thumb. This path should be defined assuming
-     * that the center of the shadow is at the top left corner (0,0) of the canvas. The
-     * {@link #drawThumbShadow(float, Canvas)} method will place the shadow appropriately.
-     *
-     * @param thumbShadowPath The path defining the thumb shadow
-     */
-
+        /// <summary>
+        /// Set the path that defines the shadow of the thumb. This path should be defined assuming
+        /// that the center of the shadow is at the top left corner(0,0) of the canvas.The
+        /// <see cref="DrawThumbShadow"/> method will place the shadow appropriately.
+        /// </summary>
+        /// <param name="thumbShadowPath">The path defining the thumb shadow</param>
         public void SetThumbShadowPath(Path thumbShadowPath)
         {
             _thumbShadowPath = thumbShadowPath;
@@ -502,14 +489,12 @@ namespace Xamarin.RangeSlider
                         OnUpperValueChanged();
                     break;
                 case MotionEventActions.PointerDown:
-                {
                     var index = ev.PointerCount - 1;
                     // readonly int index = ev.getActionIndex();
                     _downMotionX = ev.GetX(index);
                     _activePointerId = ev.GetPointerId(index);
                     Invalidate();
                     break;
-                }
                 case MotionEventActions.PointerUp:
                     OnSecondaryPointerUp(ev);
                     Invalidate();
@@ -622,7 +607,7 @@ namespace Xamarin.RangeSlider
                 var minLabel = Context.GetString(Resource.String.demo_min_label);
                 var maxLabel = Context.GetString(Resource.String.demo_max_label);
                 minMaxLabelSize = Math.Max(_paint.MeasureText(minLabel), _paint.MeasureText(maxLabel));
-                var minMaxHeight = _textOffset + _thumbHalfHeight + _textSize/3;
+                var minMaxHeight = _textOffset + _thumbHalfHeight + (float)_textSize/3;
                 canvas.DrawText(minLabel, 0, minMaxHeight, _paint);
                 canvas.DrawText(maxLabel, Width - minMaxLabelSize, minMaxHeight, _paint);
             }
@@ -835,47 +820,50 @@ namespace Xamarin.RangeSlider
         /// </summary>
         protected float NormalizedToValue(float normalized)
         {
-            var v = AbsoluteMinValuePrim + normalized*(AbsoluteMaxValuePrim - AbsoluteMinValuePrim);
+            var v = AbsoluteMinValue + normalized*(AbsoluteMaxValue - AbsoluteMinValue);
             // TODO parameterize this rounding to allow variable decimal points
-            return (float) Math.Round(v*100)/100f;
+            if (Math.Abs(StepValue) < float.Epsilon)
+                return (float) Math.Round(v*100)/100f;
+            var normalizedToValue = (float) Math.Round(v/StepValue)*StepValue;
+            if (normalizedToValue < AbsoluteMinValue)
+                normalizedToValue = AbsoluteMinValue;
+            if (normalizedToValue > AbsoluteMaxValue)
+                normalizedToValue = AbsoluteMaxValue;
+            return normalizedToValue;
         }
 
-/**
- * Converts the given Number value to a normalized float.
- *
- * @param value The Number value to normalize.
- * @return The normalized float.
- */
 
+        /// <summary>
+        /// Converts the given Number value to a normalized float.
+        /// </summary>
+        /// <param name="value">The Number value to normalize.</param>
+        /// <returns>The normalized float.</returns>
         protected float ValueToNormalized(float value)
         {
-            if (Math.Abs(AbsoluteMaxValuePrim - AbsoluteMinValuePrim) < float.Epsilon)
+            if (Math.Abs(AbsoluteMaxValue - AbsoluteMinValue) < float.Epsilon)
             {
                 // prev division by zero, simply return 0.
                 return 0f;
             }
-            return (value - AbsoluteMinValuePrim)/(AbsoluteMaxValuePrim - AbsoluteMinValuePrim);
+            return (value - AbsoluteMinValue)/(AbsoluteMaxValue - AbsoluteMinValue);
         }
 
-/**
- * Converts a normalized value into screen space.
- *
- * @param normalizedCoord The normalized value to convert.
- * @return The converted value in screen space.
- */
 
+        /// <summary>
+        /// Converts a normalized value into screen space.
+        /// </summary>
+        /// <param name="normalizedCoord">The normalized value to convert.</param>
+        /// <returns>The converted value in screen space.</returns>
         private float NormalizedToScreen(float normalizedCoord)
         {
             return _padding + normalizedCoord*(Width - 2*_padding);
         }
 
-/**
- * Converts screen space x-coordinates into normalized values.
- *
- * @param screenCoord The x-coordinate in screen space to convert.
- * @return The normalized value.
- */
-
+        /// <summary>
+        /// Converts screen space x-coordinates into normalized values.
+        /// </summary>
+        /// <param name="screenCoord">The x-coordinate in screen space to convert.</param>
+        /// <returns>The normalized value.</returns>
         private float ScreenToNormalized(float screenCoord)
         {
             var width = Width;

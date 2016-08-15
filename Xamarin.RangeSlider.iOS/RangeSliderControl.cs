@@ -691,16 +691,6 @@ namespace Xamarin.RangeSlider
         {
             base.LayoutSubviews();
 
-//            if (_lowerHandleHidden)
-//            {
-//                LowerValue = MinimumValue;
-//            }
-//
-//            if (_upperHandleHidden)
-//            {
-//                UpperValue = MaximumValue;
-//            }
-
             _trackBackground.Frame = TrackBackgroundRect();
             _track.Frame = TrackRect();
             _track.Image = TrackImageForCurrentValues;

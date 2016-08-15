@@ -2,7 +2,13 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:forms="clr-namespace:Xamarin.RangeSlider.Forms;assembly=Xamarin.RangeSlider.Forms"
+             xmlns:samples="clr-namespace:Xamarin.RangeSlider.Forms.Samples;assembly=Xamarin.RangeSlider.Forms.Samples"
              x:Class="Xamarin.RangeSlider.Forms.Samples.MainPage">
+  <ContentPage.Resources>
+    <ResourceDictionary>
+      <samples:StringToFloatConverter x:Key="StringToFloatConverter"/>
+    </ResourceDictionary>
+  </ContentPage.Resources>
   <ContentPage.Padding>
     <OnPlatform x:TypeArguments="Thickness">
       <OnPlatform.iOS>
@@ -22,6 +28,8 @@
         <RowDefinition/>
         <RowDefinition/>
         <RowDefinition/>
+        <RowDefinition/>
+        <RowDefinition/>
       </Grid.RowDefinitions>
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="50"/>
@@ -35,6 +43,10 @@
       <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="Min Thumb Hidden" VerticalOptions="Center"/>
       <Switch Grid.Row="2"  BindingContext="{x:Reference Name=RangeSlider}" IsToggled="{Binding MaxThumbHidden, Mode=TwoWay}" VerticalOptions="Center"/>
       <Label Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Text="Max Thumb Hidden" VerticalOptions="Center"/>
+      <Label Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Text="Step value" VerticalOptions="Center"/>
+      <Entry Grid.Row="3" Grid.Column="2" BindingContext="{x:Reference Name=RangeSlider}" Text="{Binding StepValue, Mode=TwoWay, Converter={StaticResource StringToFloatConverter}}"/>
+      <Switch Grid.Row="4"  BindingContext="{x:Reference Name=RangeSlider}" IsToggled="{Binding StepValueContinuously, Mode=TwoWay}" VerticalOptions="Center"/>
+      <Label Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Text="Step value continuously" VerticalOptions="Center"/>
     </Grid>
   </StackLayout>
 </ContentPage>
