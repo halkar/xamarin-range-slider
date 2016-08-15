@@ -52,6 +52,9 @@
 
         <!-- to activate the thumbs and texts when the min and max values are the default ones (defaults to false) -->
         <attr name="activateOnDefaultValues" format="boolean"/>
+
+        <attr name="stepValue" format="integer|float"/>
+        <attr name="stepValueContinuously" format="boolean"/>
     </declare-styleable>
 
 </resources>

@@ -874,6 +874,12 @@ namespace Xamarin.RangeSlider.Forms
 			// aapt resource value: 0x7f010106
 			public static int statusBarScrim = 2130772230;
 			
+			// aapt resource value: 0x7f010151
+			public static int stepValue = 2130772305;
+			
+			// aapt resource value: 0x7f010152
+			public static int stepValueContinuously = 2130772306;
+			
 			// aapt resource value: 0x7f0100db
 			public static int submitBackground = 2130772187;
 			
@@ -5503,7 +5509,9 @@ namespace Xamarin.RangeSlider.Forms
 					2130772301,
 					2130772302,
 					2130772303,
-					2130772304};
+					2130772304,
+					2130772305,
+					2130772306};
 			
 			// aapt resource value: 1
 			public static int RangeSliderControl_absoluteMaxValue = 1;
@@ -5537,6 +5545,12 @@ namespace Xamarin.RangeSlider.Forms
 			
 			// aapt resource value: 4
 			public static int RangeSliderControl_showLabels = 4;
+			
+			// aapt resource value: 21
+			public static int RangeSliderControl_stepValue = 21;
+			
+			// aapt resource value: 22
+			public static int RangeSliderControl_stepValueContinuously = 22;
 			
 			// aapt resource value: 11
 			public static int RangeSliderControl_textAboveThumbsColor = 11;

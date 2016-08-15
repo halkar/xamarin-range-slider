@@ -29,7 +29,7 @@
         <ColumnDefinition Width="50"/>
       </Grid.ColumnDefinitions>
       <Label Grid.Column="0" BindingContext="{x:Reference Name=RangeSlider}" Text="{Binding LowerValue, StringFormat='{0:F2}'}" VerticalOptions="Center"/>
-      <forms:RangeSlider Grid.Column="1" x:Name="RangeSlider" MinimumValue="1" MaximumValue="100" LowerValue="10" UpperValue="100" StepValue="5" VerticalOptions="Center"/>
+      <forms:RangeSlider Grid.Column="1" x:Name="RangeSlider" MinimumValue="1" MaximumValue="100" LowerValue="10" UpperValue="100" StepValue="5" StepValueContinuously="True" VerticalOptions="Center"/>
       <Label Grid.Column="2" BindingContext="{x:Reference Name=RangeSlider}" Text="{Binding UpperValue, StringFormat='{0:F2}'}" VerticalOptions="Center"/>
       <Switch Grid.Row="1"  BindingContext="{x:Reference Name=RangeSlider}" IsToggled="{Binding MinThumbHidden, Mode=TwoWay}" VerticalOptions="Center"/>
       <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="Min Thumb Hidden" VerticalOptions="Center"/>

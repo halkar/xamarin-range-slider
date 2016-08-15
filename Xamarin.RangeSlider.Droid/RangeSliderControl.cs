@@ -18,23 +18,25 @@ namespace Xamarin.RangeSlider
         /// <summary>
         ///     An invalid pointer id.
         /// </summary>
-        public static readonly int InvalidPointerId = 255;
+        public const int InvalidPointerId = 255;
 
         // Localized constants from MotionEvent for compatibility
         // with API < 8 "Froyo".
-        public static readonly int ActionPointerIndexMask = 0x0000ff00, ActionPointerIndexShift = 8;
+        public const int ActionPointerIndexMask = 0x0000ff00, ActionPointerIndexShift = 8;
 
-        public static readonly int DefaultMinimum = 0;
-        public static readonly int DefaultMaximum = 100;
-        public static readonly int HeightInDp = 30;
-        public static readonly int TextLateralPaddingInDp = 3;
+        public const int DefaultMinimum = 0;
+        public const int DefaultMaximum = 100;
+        public const int HeightInDp = 30;
+        public const int TextLateralPaddingInDp = 3;
 
-        private static readonly int InitialPaddingInDp = 8;
-        private static readonly int DefaultTextSizeInDp = 14;
-        private static readonly int DefaultTextDistanceToButtonInDp = 8;
-        private static readonly int DefaultTextDistanceToTopInDp = 8;
+        private const int InitialPaddingInDp = 8;
+        private const int DefaultTextSizeInDp = 14;
+        private const int DefaultTextDistanceToButtonInDp = 8;
+        private const int DefaultTextDistanceToTopInDp = 8;
 
-        private static readonly int LineHeightInDp = 1;
+        private const int DefaultStepValue = 0;
+
+        private const int LineHeightInDp = 1;
         private readonly Paint _paint = new Paint(PaintFlags.AntiAlias);
         private readonly Paint _shadowPaint = new Paint();
         private readonly Matrix _thumbShadowMatrix = new Matrix();
@@ -148,8 +150,19 @@ namespace Xamarin.RangeSlider
         /// </summary>
         public bool NotifyWhileDragging { get; set; }
 
+        /// <summary>
+        ///     default 0.0 (disabled)
+        /// </summary>
+        public float StepValue { get; set; }
 
-        private float extractNumericValueFromAttributes(TypedArray a, int attribute, int defaultValue)
+        /// <summary>
+        /// If false the slider will move freely with the tounch. When the touch ends, the value will snap to the nearest step value
+        /// If true the slider will stay in its current position until it reaches a new step value.
+        /// default false
+        /// </summary>
+        public bool StepValueContinuously { get; set; }
+
+        private float ExtractNumericValueFromAttributes(TypedArray a, int attribute, int defaultValue)
         {
             var tv = a.PeekValue(attribute);
             return tv == null ? defaultValue : a.GetFloat(attribute, defaultValue);
@@ -188,8 +201,8 @@ namespace Xamarin.RangeSlider
                 var a = Context.ObtainStyledAttributes(attrs, Resource.Styleable.RangeSliderControl, 0, 0);
                 try
                 {
-                    SetRangeValues(extractNumericValueFromAttributes(a, Resource.Styleable.RangeSliderControl_absoluteMinValue, DefaultMinimum),
-                        extractNumericValueFromAttributes(a, Resource.Styleable.RangeSliderControl_absoluteMaxValue, DefaultMaximum));
+                    SetRangeValues(ExtractNumericValueFromAttributes(a, Resource.Styleable.RangeSliderControl_absoluteMinValue, DefaultMinimum),
+                        ExtractNumericValueFromAttributes(a, Resource.Styleable.RangeSliderControl_absoluteMaxValue, DefaultMaximum));
                     ShowTextAboveThumbs = a.GetBoolean(Resource.Styleable.RangeSliderControl_valuesAboveThumbs, true);
                     TextAboveThumbsColor = a.GetColor(Resource.Styleable.RangeSliderControl_textAboveThumbsColor, Color.White);
                     MinThumbHidden = a.GetBoolean(Resource.Styleable.RangeSliderControl_minThumbHidden, false);
@@ -200,6 +213,10 @@ namespace Xamarin.RangeSlider
                     ActiveColor = a.GetColor(Resource.Styleable.RangeSliderControl_activeColor, DefaultActiveColor);
                     DefaultColor = a.GetColor(Resource.Styleable.RangeSliderControl_defaultColor, Color.Gray);
                     AlwaysActive = a.GetBoolean(Resource.Styleable.RangeSliderControl_alwaysActive, false);
+                    StepValue = ExtractNumericValueFromAttributes(a,
+                        Resource.Styleable.RangeSliderControl_stepValue, DefaultStepValue);
+                    StepValueContinuously = a.GetBoolean(Resource.Styleable.RangeSliderControl_stepValueContinuously,
+                        false);
 
                     var normalDrawable = a.GetDrawable(Resource.Styleable.RangeSliderControl_thumbNormal);
                     if (normalDrawable != null)
@@ -757,31 +774,23 @@ namespace Xamarin.RangeSlider
             canvas.DrawPath(_translatedThumbShadowPath, _shadowPaint);
         }
 
-/**
- * Decides which (if any) thumb is touched by the given x-coordinate.
- *
- * @param touchX The x-coordinate of a touch ev in screen space.
- * @return The pressed thumb or null if none has been touched.
- */
-
+        /// <summary>
+        /// Decides which (if any) thumb is touched by the given x-coordinate.
+        /// </summary>
+        /// <param name="touchX">The x-coordinate of a touch ev in screen space.</param>
+        /// <returns>The pressed thumb or null if none has been touched.</returns>
         private Thumb? EvalPressedThumb(float touchX)
         {
             Thumb? result = null;
             var minThumbPressed = IsInThumbRange(touchX, NormalizedMinValue);
             var maxThumbPressed = IsInThumbRange(touchX, NormalizedMaxValue);
             if (minThumbPressed && maxThumbPressed)
-            {
                 // if both thumbs are pressed (they lie on top of each other), choose the one with more room to drag. this avoids "stalling" the thumbs in a corner, not being able to drag them apart anymore.
                 result = touchX/Width > 0.5f ? Thumb.Min : Thumb.Max;
-            }
             else if (minThumbPressed)
-            {
                 result = Thumb.Min;
-            }
             else if (maxThumbPressed)
-            {
                 result = Thumb.Max;
-            }
             return result;
         }
 

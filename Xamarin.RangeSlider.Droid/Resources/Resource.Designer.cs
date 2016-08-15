@@ -60,6 +60,12 @@ namespace Xamarin.RangeSlider
 			// aapt resource value: 0x7f010004
 			public static int showLabels = 2130771972;
 			
+			// aapt resource value: 0x7f010015
+			public static int stepValue = 2130771989;
+			
+			// aapt resource value: 0x7f010016
+			public static int stepValueContinuously = 2130771990;
+			
 			// aapt resource value: 0x7f01000b
 			public static int textAboveThumbsColor = 2130771979;
 			
@@ -168,7 +174,9 @@ namespace Xamarin.RangeSlider
 					2130771985,
 					2130771986,
 					2130771987,
-					2130771988};
+					2130771988,
+					2130771989,
+					2130771990};
 			
 			// aapt resource value: 1
 			public static int RangeSliderControl_absoluteMaxValue = 1;
@@ -202,6 +210,12 @@ namespace Xamarin.RangeSlider
 			
 			// aapt resource value: 4
 			public static int RangeSliderControl_showLabels = 4;
+			
+			// aapt resource value: 21
+			public static int RangeSliderControl_stepValue = 21;
+			
+			// aapt resource value: 22
+			public static int RangeSliderControl_stepValueContinuously = 22;
 			
 			// aapt resource value: 11
 			public static int RangeSliderControl_textAboveThumbsColor = 11;
