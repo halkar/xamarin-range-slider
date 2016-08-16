@@ -40,6 +40,8 @@ namespace Xamarin.RangeSlider.Forms
             control.RangeMax = element.UpperValue;
             control.MinThumbHidden = element.MinThumbHidden;
             control.MaxThumbHidden = element.MaxThumbHidden;
+            control.StepValue = element.StepValue;
+            control.StepValueContinuously = element.StepValueContinuously;
         }
 
         private void RangeSlider_UpperValueChanged(object sender, System.EventArgs e)
@@ -74,6 +76,12 @@ namespace Xamarin.RangeSlider.Forms
                     break;
                 case RangeSlider.MinThumbHiddenPropertyName:
                     Control.MinThumbHidden = Element.MinThumbHidden;
+                    break;
+                case RangeSlider.StepValuePropertyName:
+                    Control.StepValue = Element.StepValue;
+                    break;
+                case RangeSlider.StepValueContinuouslyPropertyName:
+                    Control.StepValueContinuously = Element.StepValueContinuously;
                     break;
             }
         }

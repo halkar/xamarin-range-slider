@@ -15,6 +15,8 @@ namespace Xamarin.RangeSlider
         public const string RangemaxPropertyName = "RangeMax";
         public const string MinThumbHiddenPropertyName = "MinThumbHidden";
         public const string MaxThumbHiddenPropertyName = "MaxThumbHidden";
+        public const string StepValuePropertyName = "StepValue";
+        public const string StepValueContinuouslyPropertyName = "StepValueContinuously";
 
         public static readonly DependencyProperty MinimumProperty = DependencyProperty.Register(MinimumPropertyName,
             typeof(double), typeof(RangeSliderControl), new PropertyMetadata(0.0));
@@ -29,10 +31,16 @@ namespace Xamarin.RangeSlider
             typeof(double), typeof(RangeSliderControl), new PropertyMetadata(1.0, OnRangeMaxPropertyChanged));
 
         public static readonly DependencyProperty MinThumbHiddenProperty = DependencyProperty.Register(MinThumbHiddenPropertyName,
-            typeof(double), typeof(RangeSliderControl), new PropertyMetadata(false, MinThumbHiddenPropertyChanged));
+            typeof(bool), typeof(RangeSliderControl), new PropertyMetadata(false, MinThumbHiddenPropertyChanged));
 
         public static readonly DependencyProperty MaxThumbHiddenProperty = DependencyProperty.Register(MaxThumbHiddenPropertyName,
-            typeof(double), typeof(RangeSliderControl), new PropertyMetadata(false, MaxThumbHiddenPropertyChanged));
+            typeof(bool), typeof(RangeSliderControl), new PropertyMetadata(false, MaxThumbHiddenPropertyChanged));
+
+        public static readonly DependencyProperty StepValueProperty = DependencyProperty.Register(StepValuePropertyName,
+            typeof(double), typeof(RangeSliderControl), new PropertyMetadata(0.0));
+
+        public static readonly DependencyProperty StepValueContinuouslyProperty = DependencyProperty.Register(StepValueContinuouslyPropertyName,
+            typeof(bool), typeof(RangeSliderControl), new PropertyMetadata(false));
 
         public RangeSliderControl()
         {
@@ -73,6 +81,18 @@ namespace Xamarin.RangeSlider
         {
             get { return (bool)GetValue(MaxThumbHiddenProperty); }
             set { SetValue(MaxThumbHiddenProperty, value); }
+        }
+
+        public double StepValue
+        {
+            get { return (double)GetValue(StepValueProperty); }
+            set { SetValue(StepValueProperty, value); }
+        }
+
+        public bool StepValueContinuously
+        {
+            get { return (bool)GetValue(StepValueContinuouslyProperty); }
+            set { SetValue(StepValueContinuouslyProperty, value); }
         }
 
         public event EventHandler LowerValueChanged;
@@ -185,14 +205,21 @@ namespace Xamarin.RangeSlider
         {
             var min = DragThumb(MinThumb, 0, Canvas.GetLeft(MaxThumb), e.HorizontalChange);
             UpdateMinThumb(min, true);
-            RangeMin = min;
+            RangeMin = Normalize(min);
         }
 
         private void MaxThumb_DragDelta(object sender, DragDeltaEventArgs e)
         {
             var max = DragThumb(MaxThumb, Canvas.GetLeft(MinThumb), ContainerCanvas.ActualWidth, e.HorizontalChange);
             UpdateMaxThumb(max, true);
-            RangeMax = max;
+            RangeMax = Normalize(max);
+        }
+
+        private double Normalize(double value)
+        {
+            if (Math.Abs(StepValue) < float.Epsilon)
+                return value;
+            return (float) Math.Round(value / StepValue)*StepValue;
         }
 
         private double DragThumb(Thumb thumb, double min, double max, double offset)
