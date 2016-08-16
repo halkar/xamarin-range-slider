@@ -360,7 +360,7 @@ namespace Xamarin.RangeSlider
             // in case absoluteMinValue == absoluteMaxValue, avoid division by zero when normalizing.
             SetNormalizedMinValue(Math.Abs(AbsoluteMaxValue - AbsoluteMinValue) < float.Epsilon
                 ? 0f
-                : ValueToNormalized(value));
+                : ValueToNormalized(value), true);
         }
 
         /// <summary>
@@ -383,7 +383,7 @@ namespace Xamarin.RangeSlider
             // in case absoluteMinValue == absoluteMaxValue, avoid division by zero when normalizing.
             SetNormalizedMaxValue(Math.Abs(AbsoluteMaxValue - AbsoluteMinValue) < float.Epsilon
                 ? 1f
-                : ValueToNormalized(value));
+                : ValueToNormalized(value), true);
         }
 
         /// <summary>
@@ -429,7 +429,7 @@ namespace Xamarin.RangeSlider
                     Pressed = true;
                     Invalidate();
                     OnStartTrackingTouch();
-                    TrackTouchEvent(ev);
+                    TrackTouchEvent(ev, StepValueContinuously);
                     AttemptClaimDrag();
 
                     break;
@@ -438,7 +438,7 @@ namespace Xamarin.RangeSlider
                     {
                         if (_isDragging)
                         {
-                            TrackTouchEvent(ev);
+                            TrackTouchEvent(ev, StepValueContinuously);
                         }
                         else
                         {
@@ -451,7 +451,7 @@ namespace Xamarin.RangeSlider
                                 Pressed = true;
                                 Invalidate();
                                 OnStartTrackingTouch();
-                                TrackTouchEvent(ev);
+                                TrackTouchEvent(ev, StepValueContinuously);
                                 AttemptClaimDrag();
                             }
                         }
@@ -468,7 +468,7 @@ namespace Xamarin.RangeSlider
                 case MotionEventActions.Up:
                     if (_isDragging)
                     {
-                        TrackTouchEvent(ev);
+                        TrackTouchEvent(ev, true);
                         OnStopTrackingTouch();
                         Pressed = false;
                     }
@@ -477,7 +477,7 @@ namespace Xamarin.RangeSlider
                         // Touch up when we never crossed the touch slop threshold
                         // should be interpreted as a tap-seek to that location.
                         OnStartTrackingTouch();
-                        TrackTouchEvent(ev);
+                        TrackTouchEvent(ev, true);
                         OnStopTrackingTouch();
                     }
 
@@ -528,18 +528,18 @@ namespace Xamarin.RangeSlider
             }
         }
 
-        private void TrackTouchEvent(MotionEvent ev)
+        private void TrackTouchEvent(MotionEvent ev, bool step)
         {
             var pointerIndex = ev.FindPointerIndex(_activePointerId);
             var x = ev.GetX(pointerIndex);
 
             if (Thumb.Min.Equals(_pressedThumb) && !MinThumbHidden)
             {
-                SetNormalizedMinValue(ScreenToNormalized(x));
+                SetNormalizedMinValue(ScreenToNormalized(x), step);
             }
             else if (Thumb.Max.Equals(_pressedThumb) && !MaxThumbHidden)
             {
-                SetNormalizedMaxValue(ScreenToNormalized(x));
+                SetNormalizedMaxValue(ScreenToNormalized(x), step);
             }
         }
 
@@ -791,27 +791,29 @@ namespace Xamarin.RangeSlider
             return Math.Abs(touchX - NormalizedToScreen(normalizedThumbValue)) <= _thumbHalfWidth;
         }
 
-/**
- * Sets normalized min value to value so that 0 <= value <= normalized max value <= 1. The View will get Invalidated when calling this method.
- *
- * @param value The new normalized min value to set.
- */
-
-        private void SetNormalizedMinValue(float value)
+        /// <summary>
+        /// Sets normalized min value to value so that 0 <= value <= normalized max value <= 1. The View will get Invalidated when calling this method.
+        /// </summary>
+        /// <param name="value">The new normalized min value to set.</param>
+        /// <param name="step">If true then value is rounded to <see cref="StepValue"/></param>
+        private void SetNormalizedMinValue(float value, bool step)
         {
             NormalizedMinValue = Math.Max(0f, Math.Min(1f, Math.Min(value, NormalizedMaxValue)));
+            if(step)
+                NormalizedMinValue = ValueToNormalized(NormalizedToValue(NormalizedMinValue));
             Invalidate();
         }
 
-/**
- * Sets normalized max value to value so that 0 <= normalized min value <= value <= 1. The View will get Invalidated when calling this method.
- *
- * @param value The new normalized max value to set.
- */
-
-        private void SetNormalizedMaxValue(float value)
+        /// <summary>
+        /// Sets normalized max value to value so that 0 <= normalized min value <= value <= 1. The View will get Invalidated when calling this method.
+        /// </summary>
+        /// <param name="value">The new normalized max value to set.</param>
+        /// <param name="step">If true then value is rounded to <see cref="StepValue"/></param>
+        private void SetNormalizedMaxValue(float value, bool step)
         {
             NormalizedMaxValue = Math.Max(0f, Math.Min(1f, Math.Max(value, NormalizedMinValue)));
+            if(step)
+                NormalizedMaxValue = ValueToNormalized(NormalizedToValue(NormalizedMaxValue));
             Invalidate();
         }
 
@@ -831,7 +833,6 @@ namespace Xamarin.RangeSlider
                 normalizedToValue = AbsoluteMaxValue;
             return normalizedToValue;
         }
-
 
         /// <summary>
         /// Converts the given Number value to a normalized float.
