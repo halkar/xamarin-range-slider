@@ -98,6 +98,9 @@ namespace Xamarin.RangeSlider
         public event EventHandler LowerValueChanged;
         public event EventHandler UpperValueChanged;
 
+        private double _aggregatedDrag = 0;
+        private double _initialLeft = 0;
+
         private static void OnRangeMinPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var slider = (RangeSliderControl) d;
@@ -202,17 +205,39 @@ namespace Xamarin.RangeSlider
         }
 
         private void MinThumb_DragDelta(object sender, DragDeltaEventArgs e)
-        {
-            var min = DragThumb(MinThumb, 0, Canvas.GetLeft(MaxThumb), e.HorizontalChange);
-            UpdateMinThumb(min, true);
-            RangeMin = Normalize(min);
+        {   
+            if (StepValueContinuously)
+            {
+                _aggregatedDrag += e.HorizontalChange;
+                var min = DragThumb(MinThumb, 0, Canvas.GetLeft(MaxThumb), _aggregatedDrag);
+                var normalized = Normalize(min);
+                UpdateMinThumb(normalized, true);
+                RangeMin = normalized;
+            }
+            else
+            {
+                var min = DragThumb(MinThumb, 0, Canvas.GetLeft(MaxThumb), e.HorizontalChange);
+                UpdateMinThumb(min, true);
+                RangeMin = Normalize(min);
+            }
         }
 
         private void MaxThumb_DragDelta(object sender, DragDeltaEventArgs e)
         {
-            var max = DragThumb(MaxThumb, Canvas.GetLeft(MinThumb), ContainerCanvas.ActualWidth, e.HorizontalChange);
-            UpdateMaxThumb(max, true);
-            RangeMax = Normalize(max);
+            if (StepValueContinuously)
+            {
+                _aggregatedDrag += e.HorizontalChange;
+                var max = DragThumb(MaxThumb, Canvas.GetLeft(MinThumb), ContainerCanvas.ActualWidth, _aggregatedDrag);
+                var normalized = Normalize(max);
+                UpdateMaxThumb(normalized, true);
+                RangeMax = Normalize(normalized);
+            }
+            else
+            {
+                var max = DragThumb(MaxThumb, Canvas.GetLeft(MinThumb), ContainerCanvas.ActualWidth, e.HorizontalChange);
+                UpdateMaxThumb(max, true);
+                RangeMax = Normalize(max);
+            }
         }
 
         private double Normalize(double value)
@@ -224,7 +249,7 @@ namespace Xamarin.RangeSlider
 
         private double DragThumb(Thumb thumb, double min, double max, double offset)
         {
-            var currentPos = Canvas.GetLeft(thumb);
+            var currentPos = StepValueContinuously ? _initialLeft : Canvas.GetLeft(thumb);
             var nextPos = currentPos + offset;
 
             nextPos = Math.Max(min, nextPos);
@@ -255,6 +280,18 @@ namespace Xamarin.RangeSlider
         private void OnUpperValueChanged()
         {
             UpperValueChanged?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void MinThumb_DragStarted(object sender, DragStartedEventArgs e)
+        {
+            _aggregatedDrag = 0;
+            _initialLeft = Canvas.GetLeft(MinThumb);
+        }
+
+        private void MaxThumb_DragStarted(object sender, DragStartedEventArgs e)
+        {
+            _aggregatedDrag = 0;
+            _initialLeft = Canvas.GetLeft(MaxThumb);
         }
     }
 }
