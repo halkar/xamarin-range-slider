@@ -7,6 +7,7 @@
   <ContentPage.Resources>
     <ResourceDictionary>
       <samples:StringToFloatConverter x:Key="StringToFloatConverter"/>
+      <samples:StringToIntConverter x:Key="StringToIntConverter"/>
     </ResourceDictionary>
   </ContentPage.Resources>
   <ContentPage.Padding>
@@ -30,6 +31,7 @@
         <RowDefinition/>
         <RowDefinition/>
         <RowDefinition/>
+        <RowDefinition/>
       </Grid.RowDefinitions>
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="50"/>
@@ -37,7 +39,8 @@
         <ColumnDefinition Width="50"/>
       </Grid.ColumnDefinitions>
       <Label Grid.Column="0" BindingContext="{x:Reference Name=RangeSlider}" Text="{Binding LowerValue, StringFormat='{0:F2}'}" VerticalOptions="Center"/>
-      <forms:RangeSlider Grid.Column="1" x:Name="RangeSlider" MinimumValue="1" MaximumValue="100" LowerValue="10" UpperValue="100" StepValue="5" StepValueContinuously="True" VerticalOptions="Center"/>
+      <forms:RangeSlider Grid.Column="1" x:Name="RangeSlider" MinimumValue="1" MaximumValue="100" LowerValue="10" UpperValue="100"
+                         StepValue="5" StepValueContinuously="True" VerticalOptions="Center"/>
       <Label Grid.Column="2" BindingContext="{x:Reference Name=RangeSlider}" Text="{Binding UpperValue, StringFormat='{0:F2}'}" VerticalOptions="Center"/>
       <Switch Grid.Row="1"  BindingContext="{x:Reference Name=RangeSlider}" IsToggled="{Binding MinThumbHidden, Mode=TwoWay}" VerticalOptions="Center"/>
       <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="Min Thumb Hidden" VerticalOptions="Center"/>
@@ -47,6 +50,8 @@
       <Entry Grid.Row="3" Grid.Column="2" BindingContext="{x:Reference Name=RangeSlider}" Text="{Binding StepValue, Mode=TwoWay, Converter={StaticResource StringToFloatConverter}}"/>
       <Switch Grid.Row="4"  BindingContext="{x:Reference Name=RangeSlider}" IsToggled="{Binding StepValueContinuously, Mode=TwoWay}" VerticalOptions="Center"/>
       <Label Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Text="Step value continuously" VerticalOptions="Center"/>
+      <Label Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Text="Bar height" VerticalOptions="Center"/>
+      <Entry Grid.Row="5" Grid.Column="2" BindingContext="{x:Reference Name=RangeSlider}" Text="{Binding BarHeight, Mode=TwoWay, Converter={StaticResource StringToIntConverter}}"/>
     </Grid>
   </StackLayout>
 </ContentPage>

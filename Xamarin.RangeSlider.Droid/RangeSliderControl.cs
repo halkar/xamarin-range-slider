@@ -268,10 +268,7 @@ namespace Xamarin.RangeSlider
                 ? 0
                 : _textSize + PixelUtil.DpToPx(context, DefaultTextDistanceToButtonInDp) + _distanceToTop;
 
-            _rect = new RectF(_padding,
-                _textOffset + _thumbHalfHeight - barHeight/2,
-                Width - _padding,
-                _textOffset + _thumbHalfHeight + barHeight/2);
+            SetBarHeight(barHeight);
 
             // make RangeSliderControl focusable. This solves focus handling issues in case EditText widgets are being used along with the RangeSliderControl within ScrollViews.
             Focusable = true;
@@ -287,6 +284,20 @@ namespace Xamarin.RangeSlider
                 _thumbShadowPath = new Path();
                 _thumbShadowPath.AddCircle(0, 0, _thumbHalfHeight, Path.Direction.Cw);
             }
+        }
+
+        public void SetBarHeight(float barHeight)
+        {
+            if (_rect == null)
+                _rect = new RectF(_padding,
+                    _textOffset + _thumbHalfHeight - barHeight/2,
+                    Width - _padding,
+                    _textOffset + _thumbHalfHeight + barHeight/2);
+            else
+                _rect = new RectF(_rect.Left,
+                    _textOffset + _thumbHalfHeight - barHeight/2,
+                    _rect.Right,
+                    _textOffset + _thumbHalfHeight + barHeight/2);
         }
 
         public void SetRangeValues(float minValue, float maxValue)

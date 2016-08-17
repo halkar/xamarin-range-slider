@@ -18,6 +18,8 @@ namespace Xamarin.RangeSlider
         public const string StepValuePropertyName = "StepValue";
         public const string StepValueContinuouslyPropertyName = "StepValueContinuously";
 
+        public const int ControlHeight = 32;
+
         public static readonly DependencyProperty MinimumProperty = DependencyProperty.Register(MinimumPropertyName,
             typeof(double), typeof(RangeSliderControl), new PropertyMetadata(0.0));
 
@@ -292,6 +294,15 @@ namespace Xamarin.RangeSlider
         {
             _aggregatedDrag = 0;
             _initialLeft = Canvas.GetLeft(MaxThumb);
+        }
+
+        public void SetBarHeight(int barHeight)
+        {
+            int margin = (ControlHeight - barHeight)/2;
+            InactiveRectangle.Margin = new Thickness(0, margin, 0, margin);
+            InactiveRectangle.Height = barHeight;
+            Canvas.SetTop(ActiveRectangle, margin);
+            ActiveRectangle.Height = barHeight;
         }
     }
 }

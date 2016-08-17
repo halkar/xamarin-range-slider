@@ -42,6 +42,8 @@ namespace Xamarin.RangeSlider.Forms
             control.MaxThumbHidden = element.MaxThumbHidden;
             control.StepValue = element.StepValue;
             control.StepValueContinuously = element.StepValueContinuously;
+            if (element.BarHeight.HasValue)
+                control.SetBarHeight(element.BarHeight.Value);
         }
 
         private void RangeSlider_UpperValueChanged(object sender, System.EventArgs e)
@@ -82,6 +84,10 @@ namespace Xamarin.RangeSlider.Forms
                     break;
                 case RangeSlider.StepValueContinuouslyPropertyName:
                     Control.StepValueContinuously = Element.StepValueContinuously;
+                    break;
+                case RangeSlider.BarHeightPropertyName:
+                    if (Element.BarHeight.HasValue)
+                        Control.SetBarHeight(Element.BarHeight.Value);
                     break;
             }
         }

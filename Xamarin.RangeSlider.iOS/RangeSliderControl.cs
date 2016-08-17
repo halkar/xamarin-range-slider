@@ -327,17 +327,7 @@ namespace Xamarin.RangeSlider
             }
         }
 
-        private UIImage TrackImageForCurrentValues
-        {
-            get
-            {
-                if (LowerValue <= UpperValue)
-                {
-                    return TrackImage;
-                }
-                return TrackCrossedOverImage;
-            }
-        }
+        private UIImage TrackImageForCurrentValues => LowerValue <= UpperValue ? TrackImage : TrackCrossedOverImage;
 
         public override CGSize IntrinsicContentSize => new CGSize(NoIntrinsicMetric,
             Math.Max(LowerHandleImageNormal.Size.Height, UpperHandleImageNormal.Size.Height));

@@ -13,6 +13,7 @@ namespace Xamarin.RangeSlider.Forms
         public const string MaxThumbHiddenPropertyName = "MaxThumbHidden";
         public const string StepValuePropertyName = "StepValue";
         public const string StepValueContinuouslyPropertyName = "StepValueContinuously";
+        public const string BarHeightPropertyName = "BarHeight";
 
         public readonly BindableProperty LowerValueProperty =
             BindableProperty.Create(LowerValuePropertyName, typeof(float), typeof(RangeSlider), 0f);
@@ -37,6 +38,9 @@ namespace Xamarin.RangeSlider.Forms
 
         public readonly BindableProperty UpperValueProperty =
             BindableProperty.Create(UpperValuePropertyName, typeof(float), typeof(RangeSlider), 1f);
+
+        public readonly BindableProperty BarHeightProperty =
+            BindableProperty.Create(BarHeightPropertyName, typeof(int?), typeof(RangeSlider));
 
         public float MinimumValue
         {
@@ -84,6 +88,12 @@ namespace Xamarin.RangeSlider.Forms
         {
             get { return (bool) GetValue(StepValueContinuouslyProperty); }
             set { SetValue(StepValueContinuouslyProperty, value); }
+        }
+
+        public int? BarHeight
+        {
+            get { return (int?)GetValue(BarHeightProperty); }
+            set { SetValue(BarHeightProperty, value); }
         }
 
         public event EventHandler LowerValueChanged;

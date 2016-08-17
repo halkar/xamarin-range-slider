@@ -29,7 +29,8 @@
                 </Setter>
             </Style>
         </Grid.Resources>
-        <Rectangle Height="16"
+        <Rectangle x:Name="InactiveRectangle"
+                   Height="16"
                    Margin="8,0"
                    Fill="#FFD5D5D5"
                    RadiusX="5"
