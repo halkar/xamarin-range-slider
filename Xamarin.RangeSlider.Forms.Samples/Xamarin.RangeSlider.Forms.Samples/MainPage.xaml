@@ -24,8 +24,9 @@
     </OnPlatform>
   </ContentPage.Padding>
   <StackLayout>
-    <Grid>
+    <Grid x:Name="Grid">
       <Grid.RowDefinitions>
+        <RowDefinition/>
         <RowDefinition/>
         <RowDefinition/>
         <RowDefinition/>
@@ -53,8 +54,10 @@
       <Label Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Text="Step value continuously" VerticalOptions="Center"/>
       <Label Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Text="Bar height" VerticalOptions="Center"/>
       <Entry Grid.Row="5" Grid.Column="2" BindingContext="{x:Reference Name=RangeSlider}" Text="{Binding BarHeight, Mode=TwoWay, Converter={StaticResource StringToIntConverter}}"/>
-      <Switch Grid.Row="6"  BindingContext="{x:Reference Name=RangeSlider}" IsToggled="{Binding ShowTextAboveThumbs, Mode=TwoWay}" VerticalOptions="Center"/>
+      <Switch Grid.Row="6"  BindingContext="{x:Reference Name=RangeSlider}" IsToggled="{Binding ShowTextAboveThumbs, Mode=TwoWay}" VerticalOptions="Center" Toggled="Switch_OnToggled"/>
       <Label Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" Text="Show text abowe thumbs" VerticalOptions="Center"/>
+      <Label Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Text="Text size" VerticalOptions="Center"/>
+      <Entry Grid.Row="7" Grid.Column="2" BindingContext="{x:Reference Name=RangeSlider}" Text="{Binding TextSize, Mode=TwoWay, Converter={StaticResource StringToIntConverter}}"/>
     </Grid>
   </StackLayout>
 </ContentPage>

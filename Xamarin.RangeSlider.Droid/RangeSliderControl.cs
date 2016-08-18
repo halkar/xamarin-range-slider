@@ -72,7 +72,7 @@ namespace Xamarin.RangeSlider
         private bool _maxThumbHidden;
         private bool _showTextAboveThumbs;
         private float _barHeight;
-
+        
         protected RangeSliderControl(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
         }
@@ -115,15 +115,26 @@ namespace Xamarin.RangeSlider
         public Color DefaultColor { get; set; }
         public bool ShowLabels { get; set; }
 
+        public int TextSizeInDp
+        {
+            get { return PixelUtil.PxToDp(Context, _textSize); }
+            set
+            {
+                _textSize = PixelUtil.DpToPx(Context, value);
+                UpdateTextOffset();
+                SetBarHeight(_barHeight);
+                RequestLayout();
+                Invalidate();
+            }
+        }
+
         public bool ShowTextAboveThumbs
         {
             get { return _showTextAboveThumbs; }
             set
             {
                 _showTextAboveThumbs = value;
-                _textOffset = _showTextAboveThumbs
-                    ? _textSize + PixelUtil.DpToPx(Context, DefaultTextDistanceToButtonInDp) + _distanceToTop
-                    : 0;
+                UpdateTextOffset();
                 SetBarHeight(_barHeight);
                 RequestLayout();
                 Invalidate();
@@ -274,8 +285,8 @@ namespace Xamarin.RangeSlider
                 ThumbDisabledImage = BitmapFactory.DecodeResource(Resources, thumbDisabled);
             }
 
-            _thumbHalfWidth = 0.5f*ThumbImage.Width;
-            _thumbHalfHeight = 0.5f*ThumbImage.Height;
+            _thumbHalfWidth = 0.5f * ThumbImage.Width;
+            _thumbHalfHeight = 0.5f * ThumbImage.Height;
 
             _textSize = PixelUtil.DpToPx(context, DefaultTextSizeInDp);
             _distanceToTop = PixelUtil.DpToPx(context, DefaultTextDistanceToTopInDp);
@@ -303,14 +314,14 @@ namespace Xamarin.RangeSlider
             _barHeight = barHeight;
             if (_rect == null)
                 _rect = new RectF(_padding,
-                    _textOffset + _thumbHalfHeight - barHeight/2,
+                    _textOffset + _thumbHalfHeight - barHeight / 2,
                     Width - _padding,
-                    _textOffset + _thumbHalfHeight + barHeight/2);
+                    _textOffset + _thumbHalfHeight + barHeight / 2);
             else
                 _rect = new RectF(_rect.Left,
-                    _textOffset + _thumbHalfHeight - barHeight/2,
+                    _textOffset + _thumbHalfHeight - barHeight / 2,
                     _rect.Right,
-                    _textOffset + _thumbHalfHeight + barHeight/2);
+                    _textOffset + _thumbHalfHeight + barHeight / 2);
             Invalidate();
         }
 
@@ -380,7 +391,7 @@ namespace Xamarin.RangeSlider
         /// <param name="value">The Number value to set the minimum value to. Will be clamped to given absolute minimum/maximum range.</param>
         public void SetSelectedMinValue(float value)
         {
-            if(_pressedThumb == Thumb.Min)
+            if (_pressedThumb == Thumb.Min)
                 return;
             // in case absoluteMinValue == absoluteMaxValue, avoid division by zero when normalizing.
             SetNormalizedMinValue(Math.Abs(AbsoluteMaxValue - AbsoluteMinValue) < float.Epsilon
@@ -538,8 +549,8 @@ namespace Xamarin.RangeSlider
 
         private void OnSecondaryPointerUp(MotionEvent ev)
         {
-            var pointerIndex = (int) (ev.Action & MotionEventActions.PointerIndexMask) >>
-                               (int) MotionEventActions.PointerIndexShift;
+            var pointerIndex = (int)(ev.Action & MotionEventActions.PointerIndexMask) >>
+                               (int)MotionEventActions.PointerIndexShift;
 
             var pointerId = ev.GetPointerId(pointerIndex);
             if (pointerId == _activePointerId)
@@ -604,7 +615,7 @@ namespace Xamarin.RangeSlider
             }
 
             var height = ThumbImage.Height
-                         + (ShowTextAboveThumbs ? PixelUtil.DpToPx(Context, HeightInDp + DefaultTextSizeInDp) : 0)
+                         + (ShowTextAboveThumbs ? PixelUtil.DpToPx(Context, HeightInDp + TextSizeInDp) : 0)
                          + (ThumbShadow ? ThumbShadowYOffset + _thumbShadowBlur : 0);
             if (MeasureSpecMode.Unspecified != MeasureSpec.GetMode(heightMeasureSpec))
             {
@@ -632,7 +643,7 @@ namespace Xamarin.RangeSlider
                 var minLabel = Context.GetString(Resource.String.demo_min_label);
                 var maxLabel = Context.GetString(Resource.String.demo_max_label);
                 minMaxLabelSize = Math.Max(_paint.MeasureText(minLabel), _paint.MeasureText(maxLabel));
-                var minMaxHeight = _textOffset + _thumbHalfHeight + (float)_textSize/3;
+                var minMaxHeight = _textOffset + _thumbHalfHeight + (float)_textSize / 3;
                 canvas.DrawText(minLabel, 0, minMaxHeight, _paint);
                 canvas.DrawText(maxLabel, Width - minMaxLabelSize, minMaxHeight, _paint);
             }
@@ -693,9 +704,9 @@ namespace Xamarin.RangeSlider
             var minTextWidth = _paint.MeasureText(minText);
             var maxTextWidth = _paint.MeasureText(maxText);
             // keep the position so that the labels don't get cut off
-            var minPosition = Math.Max(0f, NormalizedToScreen(NormalizedMinValue) - minTextWidth*0.5f);
+            var minPosition = Math.Max(0f, NormalizedToScreen(NormalizedMinValue) - minTextWidth * 0.5f);
             var maxPosition = Math.Min(Width - maxTextWidth,
-                NormalizedToScreen(NormalizedMaxValue) - maxTextWidth*0.5f);
+                NormalizedToScreen(NormalizedMaxValue) - maxTextWidth * 0.5f);
 
             if (!MaxThumbHidden && !MinThumbHidden)
             {
@@ -706,8 +717,8 @@ namespace Xamarin.RangeSlider
                 {
                     // we could move them the same ("overlap * 0.5f")
                     // but we rather move more the one which is farther from the ends, as it has more space
-                    minPosition -= overlap*NormalizedMinValue/(NormalizedMinValue + 1 - NormalizedMaxValue);
-                    maxPosition += overlap*(1 - NormalizedMaxValue)/(NormalizedMinValue + 1 - NormalizedMaxValue);
+                    minPosition -= overlap * NormalizedMinValue / (NormalizedMinValue + 1 - NormalizedMaxValue);
+                    maxPosition += overlap * (1 - NormalizedMaxValue) / (NormalizedMinValue + 1 - NormalizedMaxValue);
                 }
                 canvas.DrawText(minText,
                     minPosition,
@@ -746,8 +757,8 @@ namespace Xamarin.RangeSlider
         /// </summary>
         protected override void OnRestoreInstanceState(IParcelable parcel)
         {
-            var bundle = (Bundle) parcel;
-            base.OnRestoreInstanceState((IParcelable) bundle.GetParcelable("SUPER"));
+            var bundle = (Bundle)parcel;
+            base.OnRestoreInstanceState((IParcelable)bundle.GetParcelable("SUPER"));
             NormalizedMinValue = bundle.GetFloat("MIN");
             NormalizedMaxValue = bundle.GetFloat("MAX");
         }
@@ -796,7 +807,7 @@ namespace Xamarin.RangeSlider
             var maxThumbPressed = IsInThumbRange(touchX, NormalizedMaxValue);
             if (minThumbPressed && maxThumbPressed)
                 // if both thumbs are pressed (they lie on top of each other), choose the one with more room to drag. this avoids "stalling" the thumbs in a corner, not being able to drag them apart anymore.
-                result = touchX/Width > 0.5f ? Thumb.Min : Thumb.Max;
+                result = touchX / Width > 0.5f ? Thumb.Min : Thumb.Max;
             else if (minThumbPressed)
                 result = Thumb.Min;
             else if (maxThumbPressed)
@@ -824,7 +835,7 @@ namespace Xamarin.RangeSlider
         private void SetNormalizedMinValue(float value, bool step)
         {
             NormalizedMinValue = Math.Max(0f, Math.Min(1f, Math.Min(value, NormalizedMaxValue)));
-            if(step)
+            if (step)
                 NormalizedMinValue = ValueToNormalized(NormalizedToValue(NormalizedMinValue));
             Invalidate();
         }
@@ -837,7 +848,7 @@ namespace Xamarin.RangeSlider
         private void SetNormalizedMaxValue(float value, bool step)
         {
             NormalizedMaxValue = Math.Max(0f, Math.Min(1f, Math.Max(value, NormalizedMinValue)));
-            if(step)
+            if (step)
                 NormalizedMaxValue = ValueToNormalized(NormalizedToValue(NormalizedMaxValue));
             Invalidate();
         }
@@ -847,11 +858,11 @@ namespace Xamarin.RangeSlider
         /// </summary>
         protected float NormalizedToValue(float normalized)
         {
-            var v = AbsoluteMinValue + normalized*(AbsoluteMaxValue - AbsoluteMinValue);
+            var v = AbsoluteMinValue + normalized * (AbsoluteMaxValue - AbsoluteMinValue);
             // TODO parameterize this rounding to allow variable decimal points
             if (Math.Abs(StepValue) < float.Epsilon)
-                return (float) Math.Round(v*100)/100f;
-            var normalizedToValue = (float) Math.Round(v/StepValue)*StepValue;
+                return (float)Math.Round(v * 100) / 100f;
+            var normalizedToValue = (float)Math.Round(v / StepValue) * StepValue;
             if (normalizedToValue < AbsoluteMinValue)
                 normalizedToValue = AbsoluteMinValue;
             if (normalizedToValue > AbsoluteMaxValue)
@@ -871,7 +882,14 @@ namespace Xamarin.RangeSlider
                 // prev division by zero, simply return 0.
                 return 0f;
             }
-            return (value - AbsoluteMinValue)/(AbsoluteMaxValue - AbsoluteMinValue);
+            return (value - AbsoluteMinValue) / (AbsoluteMaxValue - AbsoluteMinValue);
+        }
+
+        private void UpdateTextOffset()
+        {
+            _textOffset = _showTextAboveThumbs
+                ? _textSize + PixelUtil.DpToPx(Context, DefaultTextDistanceToButtonInDp) + _distanceToTop
+                : 0;
         }
 
 
@@ -882,7 +900,7 @@ namespace Xamarin.RangeSlider
         /// <returns>The converted value in screen space.</returns>
         private float NormalizedToScreen(float normalizedCoord)
         {
-            return _padding + normalizedCoord*(Width - 2*_padding);
+            return _padding + normalizedCoord * (Width - 2 * _padding);
         }
 
         /// <summary>
@@ -893,12 +911,12 @@ namespace Xamarin.RangeSlider
         private float ScreenToNormalized(float screenCoord)
         {
             var width = Width;
-            if (width <= 2*_padding)
+            if (width <= 2 * _padding)
             {
                 // prev division by zero, simply return 0.
                 return 0f;
             }
-            var result = (screenCoord - _padding)/(width - 2*_padding);
+            var result = (screenCoord - _padding) / (width - 2 * _padding);
             return Math.Min(1f, Math.Max(0f, result));
         }
 
