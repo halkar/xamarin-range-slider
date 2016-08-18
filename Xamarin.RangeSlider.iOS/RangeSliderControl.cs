@@ -726,9 +726,7 @@ namespace Xamarin.RangeSlider
         public override bool ContinueTracking(UITouch uitouch, UIEvent uievent)
         {
             if (!_lowerHandle.Highlighted && !_upperHandle.Highlighted)
-            {
                 return true;
-            }
 
             var touchPoint = uitouch.LocationInView(this); //[touch locationInView: self];
 
@@ -773,9 +771,7 @@ namespace Xamarin.RangeSlider
 
             //send the control event
             if (Continuous)
-            {
                 SendActionForControlEvents(UIControlEvent.ValueChanged);
-            }
 
             //redraw
             SetNeedsLayout();

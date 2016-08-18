@@ -32,6 +32,7 @@
         <RowDefinition/>
         <RowDefinition/>
         <RowDefinition/>
+        <RowDefinition/>
       </Grid.RowDefinitions>
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="50"/>
@@ -52,6 +53,8 @@
       <Label Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Text="Step value continuously" VerticalOptions="Center"/>
       <Label Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Text="Bar height" VerticalOptions="Center"/>
       <Entry Grid.Row="5" Grid.Column="2" BindingContext="{x:Reference Name=RangeSlider}" Text="{Binding BarHeight, Mode=TwoWay, Converter={StaticResource StringToIntConverter}}"/>
+      <Switch Grid.Row="6"  BindingContext="{x:Reference Name=RangeSlider}" IsToggled="{Binding ShowTextAboveThumbs, Mode=TwoWay}" VerticalOptions="Center"/>
+      <Label Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" Text="Show text abowe thumbs" VerticalOptions="Center"/>
     </Grid>
   </StackLayout>
 </ContentPage>

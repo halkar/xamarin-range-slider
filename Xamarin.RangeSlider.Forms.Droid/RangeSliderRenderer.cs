@@ -3,6 +3,7 @@ using System.ComponentModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using Xamarin.RangeSlider.Forms;
+using Color = Android.Graphics.Color;
 
 [assembly: ExportRenderer(typeof(RangeSlider), typeof(RangeSliderRenderer))]
 
@@ -17,7 +18,8 @@ namespace Xamarin.RangeSlider.Forms
             {
                 var rangeSeekBar = new RangeSliderControl(Context)
                 {
-                    NotifyWhileDragging = true
+                    NotifyWhileDragging = true,
+                    TextAboveThumbsColor = Color.Black
                 };
                 rangeSeekBar.LowerValueChanged += RangeSeekBarLowerValueChanged;
                 rangeSeekBar.UpperValueChanged += RangeSeekBarUpperValueChanged;
@@ -41,6 +43,7 @@ namespace Xamarin.RangeSlider.Forms
             control.StepValueContinuously = element.StepValueContinuously;
             if(element.BarHeight.HasValue)
                 control.SetBarHeight(element.BarHeight.Value);
+            control.ShowTextAboveThumbs = element.ShowTextAboveThumbs;
         }
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -73,6 +76,15 @@ namespace Xamarin.RangeSlider.Forms
                 case RangeSlider.BarHeightPropertyName:
                     if (Element.BarHeight.HasValue)
                         Control.SetBarHeight(Element.BarHeight.Value);
+                    break;
+                case RangeSlider.ShowTextAboveThumbsPropertyName:
+                    Control.ShowTextAboveThumbs = Element.ShowTextAboveThumbs;
+                    //HACK to force Xamarin.Forms layout engine to update control size
+                    if (Element.IsVisible)
+                    {
+                        Element.IsVisible = false;
+                        Element.IsVisible = true;
+                    }
                     break;
             }
         }

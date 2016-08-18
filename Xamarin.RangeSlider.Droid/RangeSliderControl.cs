@@ -26,11 +26,11 @@ namespace Xamarin.RangeSlider
 
         public const int DefaultMinimum = 0;
         public const int DefaultMaximum = 100;
-        public const int HeightInDp = 30;
+        public const int HeightInDp = 16;
         public const int TextLateralPaddingInDp = 3;
 
         private const int InitialPaddingInDp = 8;
-        private const int DefaultTextSizeInDp = 14;
+        private const int DefaultTextSizeInDp = 30;
         private const int DefaultTextDistanceToButtonInDp = 8;
         private const int DefaultTextDistanceToTopInDp = 8;
 
@@ -70,6 +70,8 @@ namespace Xamarin.RangeSlider
         private Color _activeColor;
         private bool _minThumbHidden;
         private bool _maxThumbHidden;
+        private bool _showTextAboveThumbs;
+        private float _barHeight;
 
         protected RangeSliderControl(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
@@ -112,7 +114,21 @@ namespace Xamarin.RangeSlider
         public bool AlwaysActive { get; set; }
         public Color DefaultColor { get; set; }
         public bool ShowLabels { get; set; }
-        public bool ShowTextAboveThumbs { get; set; }
+
+        public bool ShowTextAboveThumbs
+        {
+            get { return _showTextAboveThumbs; }
+            set
+            {
+                _showTextAboveThumbs = value;
+                _textOffset = _showTextAboveThumbs
+                    ? _textSize + PixelUtil.DpToPx(Context, DefaultTextDistanceToButtonInDp) + _distanceToTop
+                    : 0;
+                SetBarHeight(_barHeight);
+                RequestLayout();
+                Invalidate();
+            }
+        }
 
         public bool MinThumbHidden
         {
@@ -169,7 +185,6 @@ namespace Xamarin.RangeSlider
 
         private void Init(Context context, IAttributeSet attrs)
         {
-            float barHeight;
             var thumbNormal = Resource.Drawable.seek_thumb_normal;
             var thumbPressed = Resource.Drawable.seek_thumb_pressed;
             var thumbDisabled = Resource.Drawable.seek_thumb_disabled;
@@ -183,7 +198,7 @@ namespace Xamarin.RangeSlider
             {
                 SetRangeToDefaultValues();
                 _internalPad = PixelUtil.DpToPx(context, InitialPaddingInDp);
-                barHeight = PixelUtil.DpToPx(context, LineHeightInDp);
+                _barHeight = PixelUtil.DpToPx(context, LineHeightInDp);
                 ActiveColor = DefaultActiveColor;
                 DefaultColor = Color.Gray;
                 AlwaysActive = false;
@@ -208,7 +223,7 @@ namespace Xamarin.RangeSlider
                     MaxThumbHidden = a.GetBoolean(Resource.Styleable.RangeSliderControl_maxThumbHidden, false);
                     ShowLabels = a.GetBoolean(Resource.Styleable.RangeSliderControl_showLabels, true);
                     _internalPad = a.GetDimensionPixelSize(Resource.Styleable.RangeSliderControl_internalPadding, InitialPaddingInDp);
-                    barHeight = a.GetDimensionPixelSize(Resource.Styleable.RangeSliderControl_barHeight, LineHeightInDp);
+                    _barHeight = a.GetDimensionPixelSize(Resource.Styleable.RangeSliderControl_barHeight, LineHeightInDp);
                     ActiveColor = a.GetColor(Resource.Styleable.RangeSliderControl_activeColor, DefaultActiveColor);
                     DefaultColor = a.GetColor(Resource.Styleable.RangeSliderControl_defaultColor, Color.Gray);
                     AlwaysActive = a.GetBoolean(Resource.Styleable.RangeSliderControl_alwaysActive, false);
@@ -264,11 +279,8 @@ namespace Xamarin.RangeSlider
 
             _textSize = PixelUtil.DpToPx(context, DefaultTextSizeInDp);
             _distanceToTop = PixelUtil.DpToPx(context, DefaultTextDistanceToTopInDp);
-            _textOffset = !ShowTextAboveThumbs
-                ? 0
-                : _textSize + PixelUtil.DpToPx(context, DefaultTextDistanceToButtonInDp) + _distanceToTop;
 
-            SetBarHeight(barHeight);
+            SetBarHeight(_barHeight);
 
             // make RangeSliderControl focusable. This solves focus handling issues in case EditText widgets are being used along with the RangeSliderControl within ScrollViews.
             Focusable = true;
@@ -288,6 +300,7 @@ namespace Xamarin.RangeSlider
 
         public void SetBarHeight(float barHeight)
         {
+            _barHeight = barHeight;
             if (_rect == null)
                 _rect = new RectF(_padding,
                     _textOffset + _thumbHalfHeight - barHeight/2,
@@ -298,6 +311,7 @@ namespace Xamarin.RangeSlider
                     _textOffset + _thumbHalfHeight - barHeight/2,
                     _rect.Right,
                     _textOffset + _thumbHalfHeight + barHeight/2);
+            Invalidate();
         }
 
         public void SetRangeValues(float minValue, float maxValue)
@@ -590,7 +604,7 @@ namespace Xamarin.RangeSlider
             }
 
             var height = ThumbImage.Height
-                         + (!ShowTextAboveThumbs ? 0 : PixelUtil.DpToPx(Context, HeightInDp))
+                         + (ShowTextAboveThumbs ? PixelUtil.DpToPx(Context, HeightInDp + DefaultTextSizeInDp) : 0)
                          + (ThumbShadow ? ThumbShadowYOffset + _thumbShadowBlur : 0);
             if (MeasureSpecMode.Unspecified != MeasureSpec.GetMode(heightMeasureSpec))
             {
