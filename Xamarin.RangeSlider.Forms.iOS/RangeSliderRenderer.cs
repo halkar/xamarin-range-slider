@@ -36,6 +36,9 @@ namespace Xamarin.RangeSlider.Forms
             control.UpperHandleHidden = element.MaxThumbHidden;
             control.StepValue = element.StepValue;
             control.StepValueContinuously = element.StepValueContinuously;
+            control.ShowTextAboveThumbs = element.ShowTextAboveThumbs;
+            if (element.TextSize.HasValue)
+                control.TextSize = element.TextSize.Value;
         }
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -67,7 +70,24 @@ namespace Xamarin.RangeSlider.Forms
                 case RangeSlider.StepValueContinuouslyPropertyName:
                     Control.StepValueContinuously = Element.StepValueContinuously;
                     break;
+                case RangeSlider.ShowTextAboveThumbsPropertyName:
+                    Control.ShowTextAboveThumbs = Element.ShowTextAboveThumbs;
+                    ForceFormsLayout();
+                    break;
+                case RangeSlider.TextSizePropertyName:
+                    if (Element.TextSize.HasValue)
+                        Control.TextSize = Element.TextSize.Value;
+                    ForceFormsLayout();
+                    break;
             }
+        }
+
+        private void ForceFormsLayout()
+        {
+            //HACK to force Xamarin.Forms layout engine to update control size
+            if (!Element.IsVisible) return;
+            Element.IsVisible = false;
+            Element.IsVisible = true;
         }
 
         private void RangeSeekBarUpperValueChanged(object sender, EventArgs e)

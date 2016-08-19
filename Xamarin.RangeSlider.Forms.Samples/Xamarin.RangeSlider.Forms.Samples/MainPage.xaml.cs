@@ -8,10 +8,5 @@ namespace Xamarin.RangeSlider.Forms.Samples
         {
             InitializeComponent();
         }
-
-        private void Switch_OnToggled(object sender, ToggledEventArgs e)
-        {
-//            Grid.ForceLayout();
-        }
     }
 }

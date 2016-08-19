@@ -72,7 +72,8 @@ namespace Xamarin.RangeSlider
         private bool _maxThumbHidden;
         private bool _showTextAboveThumbs;
         private float _barHeight;
-        
+        private string _textFormat = "F0";
+
         protected RangeSliderControl(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
         }
@@ -137,6 +138,16 @@ namespace Xamarin.RangeSlider
                 UpdateTextOffset();
                 SetBarHeight(_barHeight);
                 RequestLayout();
+                Invalidate();
+            }
+        }
+
+        public string TextFormat
+        {
+            get { return _textFormat; }
+            set
+            {
+                _textFormat = string.IsNullOrWhiteSpace(value) ? "F0" : value;
                 Invalidate();
             }
         }
@@ -734,7 +745,7 @@ namespace Xamarin.RangeSlider
 
         protected string ValueToString(float value)
         {
-            return value.ToString(CultureInfo.InvariantCulture);
+            return value.ToString(_textFormat, CultureInfo.InvariantCulture);
         }
 
         /// <summary>

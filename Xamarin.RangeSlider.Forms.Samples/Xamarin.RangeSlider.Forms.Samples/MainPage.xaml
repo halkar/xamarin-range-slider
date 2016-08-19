@@ -26,7 +26,7 @@
   <StackLayout>
     <Grid x:Name="Grid">
       <Grid.RowDefinitions>
-        <RowDefinition/>
+        <RowDefinition Height="Auto"/>
         <RowDefinition/>
         <RowDefinition/>
         <RowDefinition/>
@@ -42,7 +42,7 @@
       </Grid.ColumnDefinitions>
       <Label Grid.Column="0" BindingContext="{x:Reference Name=RangeSlider}" Text="{Binding LowerValue, StringFormat='{0:F2}'}" VerticalOptions="Center"/>
       <forms:RangeSlider Grid.Column="1" x:Name="RangeSlider" MinimumValue="1" MaximumValue="100" LowerValue="10" UpperValue="100"
-                         StepValue="5" StepValueContinuously="True" VerticalOptions="Center"/>
+                         StepValue="0" StepValueContinuously="False" VerticalOptions="Center"/>
       <Label Grid.Column="2" BindingContext="{x:Reference Name=RangeSlider}" Text="{Binding UpperValue, StringFormat='{0:F2}'}" VerticalOptions="Center"/>
       <Switch Grid.Row="1"  BindingContext="{x:Reference Name=RangeSlider}" IsToggled="{Binding MinThumbHidden, Mode=TwoWay}" VerticalOptions="Center"/>
       <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="Min Thumb Hidden" VerticalOptions="Center"/>
@@ -54,7 +54,7 @@
       <Label Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Text="Step value continuously" VerticalOptions="Center"/>
       <Label Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Text="Bar height" VerticalOptions="Center"/>
       <Entry Grid.Row="5" Grid.Column="2" BindingContext="{x:Reference Name=RangeSlider}" Text="{Binding BarHeight, Mode=TwoWay, Converter={StaticResource StringToIntConverter}}"/>
-      <Switch Grid.Row="6"  BindingContext="{x:Reference Name=RangeSlider}" IsToggled="{Binding ShowTextAboveThumbs, Mode=TwoWay}" VerticalOptions="Center" Toggled="Switch_OnToggled"/>
+      <Switch Grid.Row="6"  BindingContext="{x:Reference Name=RangeSlider}" IsToggled="{Binding ShowTextAboveThumbs, Mode=TwoWay}" VerticalOptions="Center"/>
       <Label Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" Text="Show text abowe thumbs" VerticalOptions="Center"/>
       <Label Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Text="Text size" VerticalOptions="Center"/>
       <Entry Grid.Row="7" Grid.Column="2" BindingContext="{x:Reference Name=RangeSlider}" Text="{Binding TextSize, Mode=TwoWay, Converter={StaticResource StringToIntConverter}}"/>

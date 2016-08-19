@@ -15,7 +15,8 @@ namespace Xamarin.RangeSlider.Forms
         public const string StepValueContinuouslyPropertyName = "StepValueContinuously";
         public const string BarHeightPropertyName = "BarHeight";
         public const string ShowTextAboveThumbsPropertyName = "ShowTextAboveThumbs";
-        public const string TextSizePropertyName = "TextSizePropertyName";
+        public const string TextSizePropertyName = "TextSize";
+        public const string TextFormatPropertyName = "TextFormat";
 
         public readonly BindableProperty LowerValueProperty =
             BindableProperty.Create(LowerValuePropertyName, typeof(float), typeof(RangeSlider), 0f);
@@ -49,6 +50,9 @@ namespace Xamarin.RangeSlider.Forms
 
         public readonly BindableProperty TextSizeProperty =
             BindableProperty.Create(TextSizePropertyName, typeof(int?), typeof(RangeSlider));
+
+        public readonly BindableProperty TextFormatProperty =
+            BindableProperty.Create(TextFormatPropertyName, typeof(string), typeof(RangeSlider), "F0");
 
         public float MinimumValue
         {
@@ -114,6 +118,12 @@ namespace Xamarin.RangeSlider.Forms
         {
             get { return (int?)GetValue(TextSizeProperty); }
             set { SetValue(TextSizeProperty, value); }
+        }
+
+        public string TextFormat
+        {
+            get { return (string)GetValue(TextFormatProperty); }
+            set { SetValue(TextFormatProperty, value); }
         }
 
         public event EventHandler LowerValueChanged;

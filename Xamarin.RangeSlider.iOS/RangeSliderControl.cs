@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Globalization;
 using CoreGraphics;
 using Foundation;
 using UIKit;
@@ -72,6 +73,13 @@ namespace Xamarin.RangeSlider
 
         private UIEdgeInsets _upperTouchEdgeInsets;
         private float _upperTouchOffset;
+
+        private UILabel _lowerHandleLabel;
+        private UILabel _upperHandleLabel;
+        private bool _showTextAboveThumbs;
+        private float _textSize = 10;
+        private string _textFormat = "F0";
+
 
         public RangeSliderControl()
         {
@@ -168,6 +176,48 @@ namespace Xamarin.RangeSlider
             set
             {
                 _upperHandleHidden = value;
+                SetNeedsLayout();
+            }
+        }
+
+        [Export("TextSize")]
+        [Browsable(true)]
+        public float TextSize
+        {
+            get { return _textSize; }
+            set
+            {
+                _textSize = value;
+                _lowerHandleLabel.Font = UIFont.SystemFontOfSize(_textSize);
+                _upperHandleLabel.Font = UIFont.SystemFontOfSize(_textSize);
+                InvalidateIntrinsicContentSize();
+                Frame = new CGRect(new CGPoint(0, 0), IntrinsicContentSize);
+                SetNeedsLayout();
+            }
+        }
+
+        [Export("ShowTextAboveThumbs")]
+        [Browsable(true)]
+        public bool ShowTextAboveThumbs
+        {
+            get { return _showTextAboveThumbs; }
+            set
+            {
+                _showTextAboveThumbs = value;
+                InvalidateIntrinsicContentSize();
+                Frame = new CGRect(new CGPoint(0, 0), IntrinsicContentSize);
+                SetNeedsLayout();
+            }
+        }
+
+        [Export("TextFormat")]
+        [Browsable(true)]
+        public string TextFormat
+        {
+            get { return _textFormat; }
+            set
+            {
+                _textFormat = string.IsNullOrWhiteSpace(value) ? "F0" : value;
                 SetNeedsLayout();
             }
         }
@@ -330,7 +380,10 @@ namespace Xamarin.RangeSlider
         private UIImage TrackImageForCurrentValues => LowerValue <= UpperValue ? TrackImage : TrackCrossedOverImage;
 
         public override CGSize IntrinsicContentSize => new CGSize(NoIntrinsicMetric,
-            Math.Max(LowerHandleImageNormal.Size.Height, UpperHandleImageNormal.Size.Height));
+            Math.Max(LowerHandleImageNormal.Size.Height, UpperHandleImageNormal.Size.Height) + SpaceAboveThumbs);
+
+        private nfloat SpaceAboveThumbs
+            => ShowTextAboveThumbs ? GetTextAboveThumbSize(_lowerHandleLabel).Height : 0;
 
         public event EventHandler LowerValueChanged;
         public event EventHandler UpperValueChanged;
@@ -403,7 +456,7 @@ namespace Xamarin.RangeSlider
 
             if (_stepValueInternal > 0)
             {
-                value = (float) Math.Round(value/_stepValueInternal)*_stepValueInternal;
+                value = (float)Math.Round(value / _stepValueInternal) * _stepValueInternal;
             }
 
             value = Math.Min(value, MaximumValue);
@@ -429,7 +482,7 @@ namespace Xamarin.RangeSlider
 
             if (_stepValueInternal > 0)
             {
-                value = (float) Math.Round(value/_stepValueInternal)*_stepValueInternal;
+                value = (float)Math.Round(value / _stepValueInternal) * _stepValueInternal;
             }
 
             value = Math.Max(value, MinimumValue);
@@ -509,9 +562,9 @@ namespace Xamarin.RangeSlider
         /// </summary>
         private float LowerValueForCenterX(float x)
         {
-            var padding = (float) _lowerHandle.Frame.Size.Width/2.0f;
+            var padding = (float)_lowerHandle.Frame.Size.Width / 2.0f;
             var value = MinimumValue +
-                        (x - padding)/((float) Frame.Size.Width - padding*2)*(MaximumValue - MinimumValue);
+                        (x - padding) / ((float)Frame.Size.Width - padding * 2) * (MaximumValue - MinimumValue);
 
             value = Math.Max(value, MinimumValue);
             value = Math.Min(value, UpperValue - MinimumRange);
@@ -525,15 +578,20 @@ namespace Xamarin.RangeSlider
         /// </summary>
         private float UpperValueForCenterX(float x)
         {
-            var padding = (float) _upperHandle.Frame.Size.Width/2.0f;
+            var padding = (float)_upperHandle.Frame.Size.Width / 2.0f;
 
             var value = MinimumValue +
-                        (x - padding)/((float) Frame.Size.Width - padding*2)*(MaximumValue - MinimumValue);
+                        (x - padding) / ((float)Frame.Size.Width - padding * 2) * (MaximumValue - MinimumValue);
 
             value = Math.Min(value, MaximumValue);
             value = Math.Max(value, LowerValue + MinimumRange);
 
             return value;
+        }
+
+        private string ValueToString(float value)
+        {
+            return value.ToString(_textFormat, CultureInfo.InvariantCulture);
         }
 
 
@@ -542,15 +600,20 @@ namespace Xamarin.RangeSlider
             var lowerAlignmentInsets = LowerHandleImageNormal.AlignmentRectInsets;
             var upperAlignmentInsets = UpperHandleImageNormal.AlignmentRectInsets;
 
-            var lowerOffset = Math.Max((float) lowerAlignmentInsets.Right, (float) upperAlignmentInsets.Left);
-            var upperOffset = Math.Max((float) upperAlignmentInsets.Right, (float) lowerAlignmentInsets.Left);
+            var lowerOffset = Math.Max((float)lowerAlignmentInsets.Right, (float)upperAlignmentInsets.Left);
+            var upperOffset = Math.Max((float)upperAlignmentInsets.Right, (float)lowerAlignmentInsets.Left);
 
             var leftOffset = Math.Max(lowerOffset, upperOffset);
             var rightOffset = leftOffset;
-            var topOffset = (float) lowerAlignmentInsets.Top;
-            var bottomOffset = (float) lowerAlignmentInsets.Bottom;
+            var topOffset = (float)lowerAlignmentInsets.Top;
+            var bottomOffset = (float)lowerAlignmentInsets.Bottom;
 
             return new UIEdgeInsets(topOffset, leftOffset, bottomOffset, rightOffset);
+        }
+
+        private static CGSize GetTextAboveThumbSize(UILabel label)
+        {
+            return label.SizeThatFits(new CGSize(float.MaxValue, float.MaxValue));
         }
 
         /// <summary>
@@ -564,26 +627,27 @@ namespace Xamarin.RangeSlider
 
             retValue.Size = new CGSize(currentTrackImage.Size.Width, currentTrackImage.Size.Height);
 
+            var height = Bounds.Size.Height - SpaceAboveThumbs;
             if (Math.Abs(currentTrackImage.CapInsets.Top) > float.Epsilon ||
                 Math.Abs(currentTrackImage.CapInsets.Bottom) > float.Epsilon)
             {
-                retValue.Height = Bounds.Size.Height;
+                retValue.Height = height;
             }
 
             var lowerHandleWidth = _lowerHandleHidden
                 ? _lowerHandleHiddenWidth
-                : (float) _lowerHandle.Frame.Size.Width;
+                : (float)_lowerHandle.Frame.Size.Width;
             var upperHandleWidth = _upperHandleHidden
                 ? _upperHandleHiddenWidth
-                : (float) _upperHandle.Frame.Size.Width;
+                : (float)_upperHandle.Frame.Size.Width;
 
-            var xLowerValue = ((float) Bounds.Size.Width - lowerHandleWidth)*(LowerValue - MinimumValue)/
-                              (MaximumValue - MinimumValue) + lowerHandleWidth/2.0f;
-            var xUpperValue = ((float) Bounds.Size.Width - upperHandleWidth)*(UpperValue - MinimumValue)/
-                              (MaximumValue - MinimumValue) + upperHandleWidth/2.0f;
+            var xLowerValue = ((float)Bounds.Size.Width - lowerHandleWidth) * (LowerValue - MinimumValue) /
+                              (MaximumValue - MinimumValue) + lowerHandleWidth / 2.0f;
+            var xUpperValue = ((float)Bounds.Size.Width - upperHandleWidth) * (UpperValue - MinimumValue) /
+                              (MaximumValue - MinimumValue) + upperHandleWidth / 2.0f;
 
             retValue.X = xLowerValue;
-            retValue.Y = Bounds.Size.Height/2.0f - retValue.Size.Height/2.0f;
+            retValue.Y = SpaceAboveThumbs + height / 2.0f - retValue.Size.Height / 2.0f;
             retValue.Width = xUpperValue - xLowerValue;
 
             var alignmentInsets = TrackAlignmentInsets();
@@ -600,10 +664,11 @@ namespace Xamarin.RangeSlider
             };
 
 
+            var height = Bounds.Size.Height - SpaceAboveThumbs;
             if (Math.Abs(TrackBackgroundImage.CapInsets.Top) > float.Epsilon ||
                 Math.Abs(TrackBackgroundImage.CapInsets.Bottom) > float.Epsilon)
             {
-                rect.Height = Bounds.Size.Height;
+                rect.Height = height;
             }
 
             if (Math.Abs(TrackBackgroundImage.CapInsets.Left) > float.Epsilon ||
@@ -613,7 +678,7 @@ namespace Xamarin.RangeSlider
             }
 
             rect.X = 0;
-            rect.Y = Bounds.Size.Height/2.0f - rect.Size.Height/2.0f;
+            rect.Y = SpaceAboveThumbs + height / 2.0f - rect.Size.Height / 2.0f;
 
             // Adjust the track rect based on the image alignment rects
 
@@ -633,15 +698,30 @@ namespace Xamarin.RangeSlider
 
             thumbRect.Size = new CGSize(thumbImage.Size.Width, thumbImage.Size.Height);
 
+            var height = Bounds.Size.Height - SpaceAboveThumbs;
             if (Math.Abs(insets.Top) > float.Epsilon || Math.Abs(insets.Bottom) > float.Epsilon)
             {
-                thumbRect.Height = Bounds.Size.Height;
+                thumbRect.Height = height;
             }
 
-            var xValue = ((float) Bounds.Size.Width - (float) thumbRect.Size.Width)*
-                         ((value - MinimumValue)/(MaximumValue - MinimumValue));
-            thumbRect.X = (float) Math.Round(xValue);
-            thumbRect.Y = Bounds.Size.Height/2.0f - thumbRect.Size.Height/2.0f;
+            var xValue = ((float)Bounds.Size.Width - (float)thumbRect.Size.Width) *
+                         ((value - MinimumValue) / (MaximumValue - MinimumValue));
+            thumbRect.X = (float)Math.Round(xValue);
+            thumbRect.Y = SpaceAboveThumbs + height / 2.0f - thumbRect.Size.Height / 2.0f;
+
+            return thumbRect.Integral();
+        }
+
+        /// <summary>
+        /// returms the rect of the tumb image for a given track rect and value
+        /// </summary>
+        private CGRect HandleLabelRect(UILabel label, CGRect handleFrame)
+        {
+            var thumbRect = new CGRect {Size = GetTextAboveThumbSize(label)};
+
+            var xValue = handleFrame.X + handleFrame.Size.Width/2 - thumbRect.Size.Width/2;
+            thumbRect.X = (float)Math.Round(xValue);
+            thumbRect.Y = SpaceAboveThumbs / 2.0f - thumbRect.Size.Height / 2.0f;
 
             return thumbRect.Integral();
         }
@@ -665,16 +745,31 @@ namespace Xamarin.RangeSlider
 
             //------------------------------
             // Track
-            _track = new UIImageView(TrackImageForCurrentValues) {Frame = TrackRect()};
+            _track = new UIImageView(TrackImageForCurrentValues) { Frame = TrackRect() };
 
             //------------------------------
             // Track Brackground
-            _trackBackground = new UIImageView(TrackBackgroundImage) {Frame = TrackBackgroundRect()};
+            _trackBackground = new UIImageView(TrackBackgroundImage) { Frame = TrackBackgroundRect() };
+
+            _lowerHandleLabel = new UILabel
+            {
+                Text = "123",
+                Hidden = !ShowTextAboveThumbs,
+                Font = UIFont.SystemFontOfSize(_textSize)
+            };
+            _upperHandleLabel = new UILabel
+            {
+                Text = "123",
+                Hidden = !ShowTextAboveThumbs,
+                Font = UIFont.SystemFontOfSize(_textSize)
+            };
 
             AddSubview(_trackBackground);
             AddSubview(_track);
             AddSubview(_lowerHandle);
             AddSubview(_upperHandle);
+            AddSubview(_lowerHandleLabel);
+            AddSubview(_upperHandleLabel);
         }
 
         public override CGSize SizeThatFits(CGSize size)
@@ -701,6 +796,16 @@ namespace Xamarin.RangeSlider
             _upperHandle.Image = UpperHandleImageNormal;
             _upperHandle.HighlightedImage = UpperHandleImageHighlighted;
             _upperHandle.Hidden = _upperHandleHidden;
+
+            _lowerHandleLabel.Text = ValueToString(LowerValue);
+            _lowerHandleLabel.Font = UIFont.SystemFontOfSize(_textSize);
+            _lowerHandleLabel.Frame = HandleLabelRect(_lowerHandleLabel, _lowerHandle.Frame);
+            _lowerHandleLabel.Hidden = !ShowTextAboveThumbs;
+
+            _upperHandleLabel.Text = ValueToString(UpperValue);
+            _upperHandleLabel.Font = UIFont.SystemFontOfSize(_textSize);
+            _upperHandleLabel.Frame = HandleLabelRect(_upperHandleLabel, _upperHandle.Frame);
+            _upperHandleLabel.Hidden = !ShowTextAboveThumbs;
         }
 
         public override bool BeginTracking(UITouch uitouch, UIEvent uievent)
@@ -714,13 +819,13 @@ namespace Xamarin.RangeSlider
             if (_lowerTouchEdgeInsets.InsetRect(_lowerHandle.Frame).Contains(touchPoint) && !LowerHandleHidden)
             {
                 _lowerHandle.Highlighted = true;
-                _lowerTouchOffset = (float) touchPoint.X - (float) _lowerHandle.Center.X;
+                _lowerTouchOffset = (float)touchPoint.X - (float)_lowerHandle.Center.X;
             }
 
             if (_upperTouchEdgeInsets.InsetRect(_upperHandle.Frame).Contains(touchPoint) && !UpperHandleHidden)
             {
                 _upperHandle.Highlighted = true;
-                _upperTouchOffset = (float) touchPoint.X - (float) _upperHandle.Center.X;
+                _upperTouchOffset = (float)touchPoint.X - (float)_upperHandle.Center.X;
             }
 
             _stepValueInternal = StepValueContinuously ? StepValue : 0.0f;
@@ -739,7 +844,7 @@ namespace Xamarin.RangeSlider
             {
                 //get new lower value based on the touch location.
                 //This is automatically contained within a valid range.
-                var newValue = LowerValueForCenterX((float) touchPoint.X - _lowerTouchOffset);
+                var newValue = LowerValueForCenterX((float)touchPoint.X - _lowerTouchOffset);
 
                 //if both upper and lower is selected, then the new value must be LOWER
                 //otherwise the touch event is ignored.
@@ -757,7 +862,7 @@ namespace Xamarin.RangeSlider
 
             if (_upperHandle.Highlighted)
             {
-                var newValue = UpperValueForCenterX((float) touchPoint.X - _upperTouchOffset);
+                var newValue = UpperValueForCenterX((float)touchPoint.X - _upperTouchOffset);
 
                 //if both upper and lower is selected, then the new value must be HIGHER
                 //otherwise the touch event is ignored.
