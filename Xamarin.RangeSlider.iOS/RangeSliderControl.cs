@@ -677,6 +677,11 @@ namespace Xamarin.RangeSlider
             AddSubview(_upperHandle);
         }
 
+        public override CGSize SizeThatFits(CGSize size)
+        {
+            return IntrinsicContentSize;
+        }
+
         public override void LayoutSubviews()
         {
             base.LayoutSubviews();
