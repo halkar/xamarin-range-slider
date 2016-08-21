@@ -594,7 +594,6 @@ namespace Xamarin.RangeSlider
             return value.ToString(_textFormat, CultureInfo.InvariantCulture);
         }
 
-
         private UIEdgeInsets TrackAlignmentInsets()
         {
             var lowerAlignmentInsets = LowerHandleImageNormal.AlignmentRectInsets;

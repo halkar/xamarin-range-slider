@@ -23,6 +23,7 @@ namespace Xamarin.RangeSlider.Forms
                 UpdateControl(rangeSlider, Element);
                 rangeSlider.LowerValueChanged += RangeSlider_LowerValueChanged;
                 rangeSlider.UpperValueChanged += RangeSlider_UpperValueChanged;
+                rangeSlider.SizeChanged += RangeSlider_SizeChanged;
                 SetNativeControl(rangeSlider);
             }
 
@@ -30,6 +31,11 @@ namespace Xamarin.RangeSlider.Forms
             {
                 UpdateControl(Control, Element);
             }
+        }
+
+        private void RangeSlider_SizeChanged(object sender, Windows.UI.Xaml.SizeChangedEventArgs e)
+        {
+            ForceFormsLayout();
         }
 
         private void UpdateControl(RangeSliderControl control, RangeSlider element)
@@ -44,6 +50,10 @@ namespace Xamarin.RangeSlider.Forms
             control.StepValueContinuously = element.StepValueContinuously;
             if (element.BarHeight.HasValue)
                 control.SetBarHeight(element.BarHeight.Value);
+            control.ShowTextAboveThumbs = element.ShowTextAboveThumbs;
+            if (element.TextSize.HasValue)
+                control.TextSize = element.TextSize.Value;
+            control.TextFormat = element.TextFormat;
         }
 
         private void RangeSlider_UpperValueChanged(object sender, System.EventArgs e)
@@ -89,7 +99,25 @@ namespace Xamarin.RangeSlider.Forms
                     if (Element.BarHeight.HasValue)
                         Control.SetBarHeight(Element.BarHeight.Value);
                     break;
+                case RangeSlider.ShowTextAboveThumbsPropertyName:
+                    Control.ShowTextAboveThumbs = Element.ShowTextAboveThumbs;
+                    break;
+                case RangeSlider.TextSizePropertyName:
+                    if (Element.TextSize.HasValue)
+                        Control.TextSize = Element.TextSize.Value;
+                    break;
+                case RangeSlider.TextFormatPropertyName:
+                    Control.TextFormat = Element.TextFormat;
+                    break;
             }
+        }
+
+        private void ForceFormsLayout()
+        {
+            //HACK to force Xamarin.Forms layout engine to update control size
+            if (!Element.IsVisible) return;
+            Element.IsVisible = false;
+            Element.IsVisible = true;
         }
     }
 }

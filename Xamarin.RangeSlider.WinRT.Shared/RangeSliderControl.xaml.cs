@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Globalization;
+using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -17,6 +19,9 @@ namespace Xamarin.RangeSlider
         public const string MaxThumbHiddenPropertyName = "MaxThumbHidden";
         public const string StepValuePropertyName = "StepValue";
         public const string StepValueContinuouslyPropertyName = "StepValueContinuously";
+        public const string ShowTextAboveThumbsPropertyName = "ShowTextAboveThumbs";
+        public const string TextSizePropertyName = "TextSize";
+        public const string TextFormatPropertyName = "TextFormat";
 
         public const int ControlHeight = 32;
 
@@ -43,6 +48,15 @@ namespace Xamarin.RangeSlider
 
         public static readonly DependencyProperty StepValueContinuouslyProperty = DependencyProperty.Register(StepValueContinuouslyPropertyName,
             typeof(bool), typeof(RangeSliderControl), new PropertyMetadata(false));
+
+        public static readonly DependencyProperty ShowTextAboveThumbsProperty = DependencyProperty.Register(ShowTextAboveThumbsPropertyName,
+            typeof(bool), typeof(RangeSliderControl), new PropertyMetadata(false, ShowTextAboveThumbsPropertyChanged));
+
+        public static readonly DependencyProperty TextSizeProperty = DependencyProperty.Register(TextSizePropertyName,
+            typeof(int), typeof(RangeSliderControl), new PropertyMetadata(10, TextSizePropertyChanged));
+
+        public static readonly DependencyProperty TextFormatProperty = DependencyProperty.Register(TextFormatPropertyName,
+            typeof(string), typeof(RangeSliderControl), new PropertyMetadata("F0"));
 
         public RangeSliderControl()
         {
@@ -95,6 +109,24 @@ namespace Xamarin.RangeSlider
         {
             get { return (bool)GetValue(StepValueContinuouslyProperty); }
             set { SetValue(StepValueContinuouslyProperty, value); }
+        }
+
+        public bool ShowTextAboveThumbs
+        {
+            get { return (bool)GetValue(ShowTextAboveThumbsProperty); }
+            set { SetValue(ShowTextAboveThumbsProperty, value); }
+        }
+
+        public int TextSize
+        {
+            get { return (int)GetValue(TextSizeProperty); }
+            set { SetValue(TextSizeProperty, value); }
+        }
+
+        public string TextFormat
+        {
+            get { return (string)GetValue(TextFormatProperty); }
+            set { SetValue(TextFormatProperty, value); }
         }
 
         public event EventHandler LowerValueChanged;
@@ -171,27 +203,71 @@ namespace Xamarin.RangeSlider
             slider.MaxThumb.Visibility = (bool)e.NewValue ? Visibility.Collapsed : Visibility.Visible;
         }
 
+        private static void TextSizePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var slider = (RangeSliderControl)d;
+            var newValue = (int?)e.NewValue;
+            if (newValue.HasValue)
+            {
+                slider.MinThumbText.FontSize = newValue.Value;
+                slider.MaxThumbText.FontSize = newValue.Value;
+            }
+        }
+
+        private static void ShowTextAboveThumbsPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var slider = (RangeSliderControl)d;
+            var newValue = (bool)e.NewValue;
+            slider.TexContainerCanvas.Visibility = newValue ? Visibility.Visible : Visibility.Collapsed;
+            slider.UpdateMinThumb(slider.RangeMin);
+            slider.UpdateMaxThumb(slider.RangeMax);
+        }
+
+        private void UpdateTextContainerSize()
+        {
+            TexContainerCanvas.Height = Math.Max(MinThumbText.ActualHeight, MaxThumbText.ActualHeight);
+            var height = ControlHeight + (ShowTextAboveThumbs ? TexContainerCanvas.Height : 0);
+            Grid.Height = height;
+            Height = height;
+        }
+
         public void UpdateMinThumb(double min, bool update = false)
         {
             if (ContainerCanvas == null) return;
             if (!update && MinThumb.IsDragging) return;
-            var relativeLeft = (min - Minimum)/(Maximum - Minimum)*ContainerCanvas.ActualWidth;
+            var relativeLeft = ValueToRelativeLeft(min);
 
             Canvas.SetLeft(MinThumb, relativeLeft);
             Canvas.SetLeft(ActiveRectangle, relativeLeft);
 
             ActiveRectangle.Width = (RangeMax - min)/(Maximum - Minimum)*ContainerCanvas.ActualWidth;
+
+            MinThumbText.Text = ValueToString(min);
+            Canvas.SetLeft(MinThumbText, relativeLeft - MinThumbText.ActualWidth/2);
         }
 
         public void UpdateMaxThumb(double max, bool update = false)
         {
             if (ContainerCanvas == null) return;
             if (!update && MaxThumb.IsDragging) return;
-            var relativeRight = (max - Minimum)/(Maximum - Minimum)*ContainerCanvas.ActualWidth;
+            var relativeRight = ValueToRelativeLeft(max);
 
             Canvas.SetLeft(MaxThumb, relativeRight);
 
             ActiveRectangle.Width = (max - RangeMin)/(Maximum - Minimum)*ContainerCanvas.ActualWidth;
+
+            MaxThumbText.Text = ValueToString(max);
+            Canvas.SetLeft(MaxThumbText, relativeRight - MaxThumbText.ActualWidth/2);
+        }
+
+        private double ValueToRelativeLeft(double value)
+        {
+            return (value - Minimum) / (Maximum - Minimum) * ContainerCanvas.ActualWidth;
+        }
+
+        private string ValueToString(double max)
+        {
+            return max.ToString(TextFormat, CultureInfo.InvariantCulture);
         }
 
         private void ContainerCanvas_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -303,6 +379,13 @@ namespace Xamarin.RangeSlider
             InactiveRectangle.Height = barHeight;
             Canvas.SetTop(ActiveRectangle, margin);
             ActiveRectangle.Height = barHeight;
+        }
+
+        private void ThumbTextSizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            UpdateTextContainerSize();
+            Canvas.SetLeft(MinThumbText, ValueToRelativeLeft(RangeMin) - MinThumbText.ActualWidth / 2);
+            Canvas.SetLeft(MaxThumbText, ValueToRelativeLeft(RangeMax) - MaxThumbText.ActualWidth / 2);
         }
     }
 }

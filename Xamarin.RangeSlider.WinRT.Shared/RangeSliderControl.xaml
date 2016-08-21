@@ -6,9 +6,14 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     d:DesignHeight="300"
-    d:DesignWidth="400">
+    d:DesignWidth="400"
+    Height="32">
 
-    <Grid Height="32" Margin="8,0">
+    <Grid x:Name="Grid" Height="32" Margin="8,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
         <Grid.Resources>
             <Style TargetType="Thumb">
                 <Setter Property="Template">
@@ -29,13 +34,18 @@
                 </Setter>
             </Style>
         </Grid.Resources>
+        <Canvas x:Name="TexContainerCanvas" Grid.Row="0" Margin="8,0" Visibility="Collapsed">
+            <TextBlock x:Name="MinThumbText" FontSize="10" SizeChanged="ThumbTextSizeChanged"/>
+            <TextBlock x:Name="MaxThumbText" FontSize="10" SizeChanged="ThumbTextSizeChanged"/>
+        </Canvas>
         <Rectangle x:Name="InactiveRectangle"
+                   Grid.Row="1"
                    Height="16"
                    Margin="8,0"
                    Fill="#FFD5D5D5"
                    RadiusX="5"
                    RadiusY="5" />
-        <Canvas x:Name="ContainerCanvas" Margin="8,0" SizeChanged="ContainerCanvas_SizeChanged">
+        <Canvas x:Name="ContainerCanvas" Grid.Row="1" Margin="8,0" Height="32" SizeChanged="ContainerCanvas_SizeChanged">
             <Thumb x:Name="MinThumb" DragStarted="MinThumb_DragStarted" DragCompleted="MinThumb_DragCompleted" DragDelta="MinThumb_DragDelta" />
             <Thumb x:Name="MaxThumb" DragStarted="MaxThumb_DragStarted" DragCompleted="MaxThumb_DragCompleted" DragDelta="MaxThumb_DragDelta" />
             <Rectangle x:Name="ActiveRectangle"
