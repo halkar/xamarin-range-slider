@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Xamarin.RangeSlider</id>
+    <version>0.5.0</version>
+    <title>Xamarin.RangeSlider</title>
+    <authors>Artur Shamsutdinov</authors>
+    <owners>Artur Shamsutdinov</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <projectUrl>https://github.com/halkar/xamarin-range-slider</projectUrl>
+    <description>Range Slider for Xamarin</description>
+    <tags>xamarin range slider</tags>
+  </metadata>
+</package>

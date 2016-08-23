@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Foundation;
+﻿using Foundation;
 using UIKit;
+using Xamarin.Forms;
+using Xamarin.RangeSlider.Forms;
+
+[assembly: ExportRenderer(typeof(RangeSlider), typeof(RangeSliderRenderer))]
 
 namespace Xamarin.RangeSlider.Forms.Samples.iOS
 {

@@ -553,7 +553,7 @@ namespace Xamarin.RangeSlider
         /// </summary>
         private UIImage ImageFromBundle(string imageName)
         {
-            return UIImage.FromBundle(imageName);
+            return UIImage.FromFile(imageName);
         }
 
         /// <summary>
