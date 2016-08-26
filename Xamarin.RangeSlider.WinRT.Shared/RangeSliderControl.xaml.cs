@@ -56,7 +56,7 @@ namespace Xamarin.RangeSlider
             typeof(int), typeof(RangeSliderControl), new PropertyMetadata(10, TextSizePropertyChanged));
 
         public static readonly DependencyProperty TextFormatProperty = DependencyProperty.Register(TextFormatPropertyName,
-            typeof(string), typeof(RangeSliderControl), new PropertyMetadata("F0"));
+            typeof(string), typeof(RangeSliderControl), new PropertyMetadata("F0", TextFormatPropertyChanged));
 
         public RangeSliderControl()
         {
@@ -212,6 +212,13 @@ namespace Xamarin.RangeSlider
                 slider.MinThumbText.FontSize = newValue.Value;
                 slider.MaxThumbText.FontSize = newValue.Value;
             }
+        }
+
+        private static void TextFormatPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var slider = (RangeSliderControl)d;
+            slider.UpdateMinThumb(slider.RangeMin);
+            slider.UpdateMaxThumb(slider.RangeMax);
         }
 
         private static void ShowTextAboveThumbsPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)

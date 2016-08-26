@@ -22,7 +22,7 @@ namespace Xamarin.RangeSlider.Forms
             BindableProperty.Create(LowerValuePropertyName, typeof(float), typeof(RangeSlider), 0f);
 
         public readonly BindableProperty MaximumValueProperty =
-            BindableProperty.Create(MaximumValuePropertyName, typeof(float), typeof(RangeSlider), 1f);
+            BindableProperty.Create(MaximumValuePropertyName, typeof(float), typeof(RangeSlider), 0f);
 
         public readonly BindableProperty MaxThumbHiddenProperty =
             BindableProperty.Create(MaxThumbHiddenPropertyName, typeof(bool), typeof(RangeSlider), false);
@@ -37,10 +37,10 @@ namespace Xamarin.RangeSlider.Forms
             BindableProperty.Create(StepValueContinuouslyPropertyName, typeof(bool), typeof(RangeSlider), false);
 
         public readonly BindableProperty StepValueProperty =
-            BindableProperty.Create(StepValuePropertyName, typeof(float), typeof(RangeSlider), 1f);
+            BindableProperty.Create(StepValuePropertyName, typeof(float), typeof(RangeSlider), 0f);
 
         public readonly BindableProperty UpperValueProperty =
-            BindableProperty.Create(UpperValuePropertyName, typeof(float), typeof(RangeSlider), 1f);
+            BindableProperty.Create(UpperValuePropertyName, typeof(float), typeof(RangeSlider), 0f);
 
         public readonly BindableProperty BarHeightProperty =
             BindableProperty.Create(BarHeightPropertyName, typeof(int?), typeof(RangeSlider));
