@@ -49,7 +49,7 @@ namespace Xamarin.RangeSlider.Forms
             BindableProperty.Create(ShowTextAboveThumbsPropertyName, typeof(bool), typeof(RangeSlider), false);
 
         public readonly BindableProperty TextSizeProperty =
-            BindableProperty.Create(TextSizePropertyName, typeof(int?), typeof(RangeSlider));
+            BindableProperty.Create(TextSizePropertyName, typeof(double), typeof(RangeSlider), 10D);
 
         public readonly BindableProperty TextFormatProperty =
             BindableProperty.Create(TextFormatPropertyName, typeof(string), typeof(RangeSlider), "F0");
@@ -114,9 +114,10 @@ namespace Xamarin.RangeSlider.Forms
             set { SetValue(ShowTextAboveThumbsProperty, value); }
         }
 
-        public int? TextSize
+        [TypeConverter(typeof(FontSizeConverter))]
+        public double TextSize
         {
-            get { return (int?)GetValue(TextSizeProperty); }
+            get { return (double)GetValue(TextSizeProperty); }
             set { SetValue(TextSizeProperty, value); }
         }
 

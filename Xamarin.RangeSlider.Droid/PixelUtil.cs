@@ -6,6 +6,16 @@ namespace Xamarin.RangeSlider
 {
     public class PixelUtil
     {
+        public static int SpToPx(Context context, int dp)
+        {
+            return (int)Math.Round(dp * context.Resources.DisplayMetrics.ScaledDensity);
+        }
+
+        public static int PxToSp(Context context, int px)
+        {
+            return (int)Math.Round(px / context.Resources.DisplayMetrics.ScaledDensity); ;
+        }
+
         public static int DpToPx(Context context, int dp)
         {
             int px = (int)Math.Round(dp * GetPixelScaleFactor(context));

@@ -30,7 +30,7 @@ namespace Xamarin.RangeSlider
         public const int TextLateralPaddingInDp = 3;
 
         private const int InitialPaddingInDp = 8;
-        private const int DefaultTextSizeInDp = 30;
+        private const int DefaultTextSizeInSp = 15;
         private const int DefaultTextDistanceToButtonInDp = 8;
         private const int DefaultTextDistanceToTopInDp = 8;
 
@@ -116,12 +116,12 @@ namespace Xamarin.RangeSlider
         public Color DefaultColor { get; set; }
         public bool ShowLabels { get; set; }
 
-        public int TextSizeInDp
+        public int TextSizeInSp
         {
-            get { return PixelUtil.PxToDp(Context, _textSize); }
+            get { return PixelUtil.PxToSp(Context, _textSize); }
             set
             {
-                _textSize = PixelUtil.DpToPx(Context, value);
+                _textSize = PixelUtil.SpToPx(Context, value);
                 UpdateTextOffset();
                 SetBarHeight(_barHeight);
                 RequestLayout();
@@ -299,7 +299,7 @@ namespace Xamarin.RangeSlider
             _thumbHalfWidth = 0.5f * ThumbImage.Width;
             _thumbHalfHeight = 0.5f * ThumbImage.Height;
 
-            _textSize = PixelUtil.DpToPx(context, DefaultTextSizeInDp);
+            _textSize = PixelUtil.SpToPx(context, DefaultTextSizeInSp);
             _distanceToTop = PixelUtil.DpToPx(context, DefaultTextDistanceToTopInDp);
 
             SetBarHeight(_barHeight);
@@ -626,7 +626,7 @@ namespace Xamarin.RangeSlider
             }
 
             var height = ThumbImage.Height
-                         + (ShowTextAboveThumbs ? PixelUtil.DpToPx(Context, HeightInDp + TextSizeInDp) : 0)
+                         + (ShowTextAboveThumbs ? PixelUtil.DpToPx(Context, HeightInDp) + PixelUtil.SpToPx(Context, TextSizeInSp) : 0)
                          + (ThumbShadow ? ThumbShadowYOffset + _thumbShadowBlur : 0);
             if (MeasureSpecMode.Unspecified != MeasureSpec.GetMode(heightMeasureSpec))
             {

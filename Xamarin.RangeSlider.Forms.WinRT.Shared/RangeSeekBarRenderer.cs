@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using Xamarin.Forms;
 using Xamarin.RangeSlider.Forms;
 using RangeSlider = Xamarin.RangeSlider.Forms.RangeSlider;
 
@@ -51,8 +52,7 @@ namespace Xamarin.RangeSlider.Forms
             if (element.BarHeight.HasValue)
                 control.SetBarHeight(element.BarHeight.Value);
             control.ShowTextAboveThumbs = element.ShowTextAboveThumbs;
-            if (element.TextSize.HasValue)
-                control.TextSize = element.TextSize.Value;
+            control.TextSize = (int) element.TextSize;
             control.TextFormat = element.TextFormat;
         }
 
@@ -103,8 +103,7 @@ namespace Xamarin.RangeSlider.Forms
                     Control.ShowTextAboveThumbs = Element.ShowTextAboveThumbs;
                     break;
                 case RangeSlider.TextSizePropertyName:
-                    if (Element.TextSize.HasValue)
-                        Control.TextSize = Element.TextSize.Value;
+                    Control.TextSize = (int) Element.TextSize;
                     break;
                 case RangeSlider.TextFormatPropertyName:
                     Control.TextFormat = Element.TextFormat;

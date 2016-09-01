@@ -37,8 +37,7 @@ namespace Xamarin.RangeSlider.Forms
             control.StepValue = element.StepValue;
             control.StepValueContinuously = element.StepValueContinuously;
             control.ShowTextAboveThumbs = element.ShowTextAboveThumbs;
-            if (element.TextSize.HasValue)
-                control.TextSize = element.TextSize.Value;
+            control.TextSize = (float) element.TextSize;
             control.TextFormat = element.TextFormat;
         }
 
@@ -76,8 +75,7 @@ namespace Xamarin.RangeSlider.Forms
                     ForceFormsLayout();
                     break;
                 case RangeSlider.TextSizePropertyName:
-                    if (Element.TextSize.HasValue)
-                        Control.TextSize = Element.TextSize.Value;
+                    Control.TextSize = (float) Element.TextSize;
                     ForceFormsLayout();
                     break;
                 case RangeSlider.TextFormatPropertyName:
