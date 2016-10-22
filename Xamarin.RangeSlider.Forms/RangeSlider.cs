@@ -18,40 +18,40 @@ namespace Xamarin.RangeSlider.Forms
         public const string TextSizePropertyName = "TextSize";
         public const string TextFormatPropertyName = "TextFormat";
 
-        public readonly BindableProperty LowerValueProperty =
+        public static readonly BindableProperty LowerValueProperty =
             BindableProperty.Create(LowerValuePropertyName, typeof(float), typeof(RangeSlider), 0f);
 
-        public readonly BindableProperty MaximumValueProperty =
+        public static readonly BindableProperty MaximumValueProperty =
             BindableProperty.Create(MaximumValuePropertyName, typeof(float), typeof(RangeSlider), 0f);
 
-        public readonly BindableProperty MaxThumbHiddenProperty =
+        public static readonly BindableProperty MaxThumbHiddenProperty =
             BindableProperty.Create(MaxThumbHiddenPropertyName, typeof(bool), typeof(RangeSlider), false);
 
-        public readonly BindableProperty MinimumValueProperty =
+        public static readonly BindableProperty MinimumValueProperty =
             BindableProperty.Create(MinimumValuePropertyName, typeof(float), typeof(RangeSlider), 0f);
 
-        public readonly BindableProperty MinThumbHiddenProperty =
+        public static readonly BindableProperty MinThumbHiddenProperty =
             BindableProperty.Create(MinThumbHiddenPropertyName, typeof(bool), typeof(RangeSlider), false);
 
-        public readonly BindableProperty StepValueContinuouslyProperty =
+        public static readonly BindableProperty StepValueContinuouslyProperty =
             BindableProperty.Create(StepValueContinuouslyPropertyName, typeof(bool), typeof(RangeSlider), false);
 
-        public readonly BindableProperty StepValueProperty =
+        public static readonly BindableProperty StepValueProperty =
             BindableProperty.Create(StepValuePropertyName, typeof(float), typeof(RangeSlider), 0f);
 
-        public readonly BindableProperty UpperValueProperty =
+        public static readonly BindableProperty UpperValueProperty =
             BindableProperty.Create(UpperValuePropertyName, typeof(float), typeof(RangeSlider), 0f);
 
-        public readonly BindableProperty BarHeightProperty =
+        public static readonly BindableProperty BarHeightProperty =
             BindableProperty.Create(BarHeightPropertyName, typeof(int?), typeof(RangeSlider));
 
-        public readonly BindableProperty ShowTextAboveThumbsProperty =
+        public static readonly BindableProperty ShowTextAboveThumbsProperty =
             BindableProperty.Create(ShowTextAboveThumbsPropertyName, typeof(bool), typeof(RangeSlider), false);
 
-        public readonly BindableProperty TextSizeProperty =
+        public static readonly BindableProperty TextSizeProperty =
             BindableProperty.Create(TextSizePropertyName, typeof(double), typeof(RangeSlider), 10D);
 
-        public readonly BindableProperty TextFormatProperty =
+        public static readonly BindableProperty TextFormatProperty =
             BindableProperty.Create(TextFormatPropertyName, typeof(string), typeof(RangeSlider), "F0");
 
         public float MinimumValue
