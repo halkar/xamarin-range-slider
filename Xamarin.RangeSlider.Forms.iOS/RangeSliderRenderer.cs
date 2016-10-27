@@ -94,6 +94,7 @@ namespace Xamarin.RangeSlider.Forms
                     Control.TextFormat = Element.TextFormat;
                     break;
             }
+            Control.SetNeedsLayout();
         }
 
         private void ForceFormsLayout()
