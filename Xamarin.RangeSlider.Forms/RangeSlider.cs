@@ -129,6 +129,8 @@ namespace Xamarin.RangeSlider.Forms
 
         public event EventHandler LowerValueChanged;
         public event EventHandler UpperValueChanged;
+        public event EventHandler DragStarted;
+        public event EventHandler DragCompleted;
 
         public void OnLowerValueChanged(float value)
         {
@@ -140,6 +142,16 @@ namespace Xamarin.RangeSlider.Forms
         {
             UpperValue = value;
             UpperValueChanged?.Invoke(this, EventArgs.Empty);
+        }
+
+        public void OnDragStarted()
+        {
+            DragStarted?.Invoke(this, EventArgs.Empty);
+        }
+
+        public void OnDragCompleted()
+        {
+            DragCompleted?.Invoke(this, EventArgs.Empty);
         }
     }
 }

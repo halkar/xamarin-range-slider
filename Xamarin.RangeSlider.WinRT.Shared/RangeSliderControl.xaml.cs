@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Globalization;
-using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -131,6 +130,8 @@ namespace Xamarin.RangeSlider
 
         public event EventHandler LowerValueChanged;
         public event EventHandler UpperValueChanged;
+        public event EventHandler DragStarted;
+        public event EventHandler DragCompleted;
 
         private double _aggregatedDrag = 0;
         private double _initialLeft = 0;
@@ -348,6 +349,7 @@ namespace Xamarin.RangeSlider
             UpdateMinThumb(RangeMin);
             Canvas.SetZIndex(MinThumb, 10);
             Canvas.SetZIndex(MaxThumb, 0);
+            DragCompleted?.Invoke(this, EventArgs.Empty);
         }
 
         private void MaxThumb_DragCompleted(object sender, DragCompletedEventArgs e)
@@ -355,6 +357,7 @@ namespace Xamarin.RangeSlider
             UpdateMaxThumb(RangeMax);
             Canvas.SetZIndex(MinThumb, 0);
             Canvas.SetZIndex(MaxThumb, 10);
+            DragCompleted?.Invoke(this, EventArgs.Empty);
         }
 
         private void OnLowerValueChanged()
@@ -371,12 +374,14 @@ namespace Xamarin.RangeSlider
         {
             _aggregatedDrag = 0;
             _initialLeft = Canvas.GetLeft(MinThumb);
+            DragStarted?.Invoke(this, EventArgs.Empty);
         }
 
         private void MaxThumb_DragStarted(object sender, DragStartedEventArgs e)
         {
             _aggregatedDrag = 0;
             _initialLeft = Canvas.GetLeft(MaxThumb);
+            DragStarted?.Invoke(this, EventArgs.Empty);
         }
 
         public void SetBarHeight(int barHeight)

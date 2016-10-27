@@ -18,12 +18,24 @@ namespace Xamarin.RangeSlider.Forms
                 var rangeSeekBar = new RangeSliderControl(Bounds);
                 rangeSeekBar.LowerValueChanged += RangeSeekBarLowerValueChanged;
                 rangeSeekBar.UpperValueChanged += RangeSeekBarUpperValueChanged;
+                rangeSeekBar.DragStarted += RangeSeekBarDragStarted;
+                rangeSeekBar.DragCompleted += RangeSeekBarDragCompleted;
                 SetNativeControl(rangeSeekBar);
             }
             if (Control != null && Element != null)
             {
                 UpdateControl(Control, Element);
             }
+        }
+
+        private void RangeSeekBarDragCompleted(object sender, EventArgs e)
+        {
+            Element.OnDragCompleted();
+        }
+
+        private void RangeSeekBarDragStarted(object sender, EventArgs e)
+        {
+            Element.OnDragStarted();
         }
 
         private void UpdateControl(RangeSliderControl control, RangeSlider element)

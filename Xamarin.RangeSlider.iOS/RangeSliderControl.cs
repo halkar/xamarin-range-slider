@@ -387,6 +387,8 @@ namespace Xamarin.RangeSlider
 
         public event EventHandler LowerValueChanged;
         public event EventHandler UpperValueChanged;
+        public event EventHandler DragStarted;
+        public event EventHandler DragCompleted;
 
         private static bool IS_PRE_IOS7()
         {
@@ -829,6 +831,8 @@ namespace Xamarin.RangeSlider
 
             _stepValueInternal = StepValueContinuously ? StepValue : 0.0f;
 
+            DragStarted?.Invoke(this, EventArgs.Empty);
+
             return true;
         }
 
@@ -902,6 +906,8 @@ namespace Xamarin.RangeSlider
             }
 
             SendActionForControlEvents(UIControlEvent.ValueChanged);
+
+            DragCompleted?.Invoke(this, EventArgs.Empty);
         }
 
         protected virtual void OnLowerValueChanged()

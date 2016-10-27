@@ -604,6 +604,7 @@ namespace Xamarin.RangeSlider
         private void OnStartTrackingTouch()
         {
             _isDragging = true;
+            DragStarted?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
@@ -612,6 +613,7 @@ namespace Xamarin.RangeSlider
         private void OnStopTrackingTouch()
         {
             _isDragging = false;
+            DragCompleted?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
@@ -933,6 +935,8 @@ namespace Xamarin.RangeSlider
 
         public event EventHandler LowerValueChanged;
         public event EventHandler UpperValueChanged;
+        public event EventHandler DragStarted;
+        public event EventHandler DragCompleted;
 
         protected virtual void OnLowerValueChanged()
         {

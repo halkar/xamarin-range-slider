@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using Xamarin.Forms;
 using Xamarin.RangeSlider.Forms;
 using RangeSlider = Xamarin.RangeSlider.Forms.RangeSlider;
@@ -24,6 +25,8 @@ namespace Xamarin.RangeSlider.Forms
                 UpdateControl(rangeSlider, Element);
                 rangeSlider.LowerValueChanged += RangeSlider_LowerValueChanged;
                 rangeSlider.UpperValueChanged += RangeSlider_UpperValueChanged;
+                rangeSlider.DragStarted += RangeSlider_DragStarted;
+                rangeSlider.DragCompleted += RangeSlider_DragCompleted;
                 rangeSlider.SizeChanged += RangeSlider_SizeChanged;
                 SetNativeControl(rangeSlider);
             }
@@ -32,6 +35,16 @@ namespace Xamarin.RangeSlider.Forms
             {
                 UpdateControl(Control, Element);
             }
+        }
+
+        private void RangeSlider_DragCompleted(object sender, EventArgs e)
+        {
+            Element.OnDragCompleted();
+        }
+
+        private void RangeSlider_DragStarted(object sender, EventArgs e)
+        {
+            Element.OnDragStarted();
         }
 
         private void RangeSlider_SizeChanged(object sender, Windows.UI.Xaml.SizeChangedEventArgs e)
