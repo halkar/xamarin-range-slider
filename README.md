@@ -2,7 +2,7 @@
 With Xamarin.RangeSlider you can pick ranges in Xamarin and Xamarin.Forms (Android, iOS, UWP, Win8 supported).
 Project is based on https://github.com/anothem/android-range-seek-bar (Android) and on https://github.com/muZZkat/NMRangeSlider (iOS).
 
-You can find NuGet packages [here](https://www.nuget.org/packages/Xamarin.RangeSlider/) and [here](https://www.nuget.org/packages/Xamarin.Forms.RangeSlider/).
+You can find NuGet packages [here](https://www.nuget.org/packages/Xamarin.Forms.RangeSlider/). Version without Xamarin.Forms support is available [here](https://www.nuget.org/packages/Xamarin.RangeSlider/).
 
 ## Supported Properties
 | Name                  | Description | Remarks |
@@ -19,6 +19,12 @@ You can find NuGet packages [here](https://www.nuget.org/packages/Xamarin.RangeS
 | ShowTextAboveThumbs   | Show current values above the thumbs ||
 | TextSize              | Text above the thumbs size | *dp* on Android, *points* on iOS, *pixels* on UWP |
 | TextFormat            | Format string for text above the thumbs ||
+
+## Supported Events
+| Name                  | Description |
+| --------------------- | ----------- | 
+| DragStarted           | User started moving one of the thumbs to changenge value |
+| DragCompleted         | Thumb has been released |
 
 ## Screenshots
 | Android | iOS | UWP |
