@@ -46,6 +46,10 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\slider-default_trackBackground%402x.png" />
+    <BundleResource Include="Resources\slider-default-handle-disabled.png" />
+    <BundleResource Include="Resources\slider-default7-handle-disabled.png" />
+    <BundleResource Include="Resources\slider-default-handle-disabled%402x.png" />
+    <BundleResource Include="Resources\slider-default7-handle-disabled%402x.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\slider-default7-handle.png" />

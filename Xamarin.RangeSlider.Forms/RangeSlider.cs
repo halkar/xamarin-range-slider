@@ -56,49 +56,49 @@ namespace Xamarin.RangeSlider.Forms
 
         public float MinimumValue
         {
-            get { return (float) GetValue(MinimumValueProperty); }
+            get { return (float)GetValue(MinimumValueProperty); }
             set { SetValue(MinimumValueProperty, value); }
         }
 
         public float MaximumValue
         {
-            get { return (float) GetValue(MaximumValueProperty); }
+            get { return (float)GetValue(MaximumValueProperty); }
             set { SetValue(MaximumValueProperty, value); }
         }
 
         public float LowerValue
         {
-            get { return (float) GetValue(LowerValueProperty); }
+            get { return (float)GetValue(LowerValueProperty); }
             set { SetValue(LowerValueProperty, value); }
         }
 
         public float UpperValue
         {
-            get { return (float) GetValue(UpperValueProperty); }
+            get { return (float)GetValue(UpperValueProperty); }
             set { SetValue(UpperValueProperty, value); }
         }
 
         public bool MinThumbHidden
         {
-            get { return (bool) GetValue(MinThumbHiddenProperty); }
+            get { return (bool)GetValue(MinThumbHiddenProperty); }
             set { SetValue(MinThumbHiddenProperty, value); }
         }
 
         public bool MaxThumbHidden
         {
-            get { return (bool) GetValue(MaxThumbHiddenProperty); }
+            get { return (bool)GetValue(MaxThumbHiddenProperty); }
             set { SetValue(MaxThumbHiddenProperty, value); }
         }
 
         public float StepValue
         {
-            get { return (float) GetValue(StepValueProperty); }
+            get { return (float)GetValue(StepValueProperty); }
             set { SetValue(StepValueProperty, value); }
         }
 
         public bool StepValueContinuously
         {
-            get { return (bool) GetValue(StepValueContinuouslyProperty); }
+            get { return (bool)GetValue(StepValueContinuouslyProperty); }
             set { SetValue(StepValueContinuouslyProperty, value); }
         }
 

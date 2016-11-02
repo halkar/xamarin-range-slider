@@ -222,6 +222,22 @@ namespace Xamarin.RangeSlider
             }
         }
 
+        public override bool Enabled
+        {
+            get
+            {
+                return base.Enabled;
+            }
+            set
+            {
+                base.Enabled = value;
+                _lowerHandleImageNormal = null;
+                _upperHandleImageNormal = null;
+                _track.Alpha = Enabled ? 1f : 0.2f;
+                SetNeedsLayout();
+            }
+        }
+
         private UIImage TrackBackgroundImage
         {
             get
@@ -300,12 +316,12 @@ namespace Xamarin.RangeSlider
                     return _lowerHandleImageNormal;
                 if (IS_PRE_IOS7())
                 {
-                    var image = ImageFromBundle(@"slider-default-handle");
+                    var image = ImageFromBundle(Enabled ? @"slider-default-handle" : @"slider-default-handle-disabled");
                     _lowerHandleImageNormal = image.ImageWithAlignmentRectInsets(new UIEdgeInsets(0, 2, 0, 2));
                 }
                 else
                 {
-                    var image = ImageFromBundle(@"slider-default7-handle");
+                    var image = ImageFromBundle(Enabled ? @"slider-default7-handle" : @"slider-default7-handle-disabled");
                     _lowerHandleImageNormal = image.ImageWithAlignmentRectInsets(new UIEdgeInsets(-1, 8, 1, 8));
                 }
 
@@ -343,12 +359,12 @@ namespace Xamarin.RangeSlider
                     return _upperHandleImageNormal;
                 if (IS_PRE_IOS7())
                 {
-                    var image = ImageFromBundle(@"slider-default-handle");
+                    var image = ImageFromBundle(Enabled ? @"slider-default-handle" : @"slider-default-handle-disabled");
                     _upperHandleImageNormal = image.ImageWithAlignmentRectInsets(new UIEdgeInsets(0, 2, 0, 2));
                 }
                 else
                 {
-                    var image = ImageFromBundle(@"slider-default7-handle");
+                    var image = ImageFromBundle(Enabled ? @"slider-default7-handle" : @"slider-default7-handle-disabled");
                     _upperHandleImageNormal = image.ImageWithAlignmentRectInsets(new UIEdgeInsets(-1, 8, 1, 8));
                 }
 
@@ -718,9 +734,9 @@ namespace Xamarin.RangeSlider
         /// </summary>
         private CGRect HandleLabelRect(UILabel label, CGRect handleFrame)
         {
-            var thumbRect = new CGRect {Size = GetTextAboveThumbSize(label)};
+            var thumbRect = new CGRect { Size = GetTextAboveThumbSize(label) };
 
-            var xValue = handleFrame.X + handleFrame.Size.Width/2 - thumbRect.Size.Width/2;
+            var xValue = handleFrame.X + handleFrame.Size.Width / 2 - thumbRect.Size.Width / 2;
             thumbRect.X = (float)Math.Round(xValue);
             thumbRect.Y = SpaceAboveThumbs / 2.0f - thumbRect.Size.Height / 2.0f;
 
