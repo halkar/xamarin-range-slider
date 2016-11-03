@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Globalization;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml.Media;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -60,6 +62,12 @@ namespace Xamarin.RangeSlider
         public RangeSliderControl()
         {
             InitializeComponent();
+            IsEnabledChanged += RangeSliderControlIsEnabledChanged;
+        }
+
+        private void RangeSliderControlIsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            ActiveRectangle.Fill = new SolidColorBrush(IsEnabled ? Color.FromArgb(255, 105, 160, 204) : Color.FromArgb(255, 184, 197, 209));
         }
 
         public double Minimum
