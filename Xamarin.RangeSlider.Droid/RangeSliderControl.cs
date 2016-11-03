@@ -112,6 +112,19 @@ namespace Xamarin.RangeSlider
             }
         }
 
+        public override bool Enabled
+        {
+            get
+            {
+                return base.Enabled;
+            }
+            set
+            {
+                base.Enabled = value;
+                Invalidate();
+            }
+        }
+
         public bool AlwaysActive { get; set; }
         public Color DefaultColor { get; set; }
         public bool ShowLabels { get; set; }
@@ -670,11 +683,10 @@ namespace Xamarin.RangeSlider
             var selectedValuesAreDefault = NormalizedMinValue <= MinDeltaForDefault &&
                                            NormalizedMaxValue >= 1 - MinDeltaForDefault;
 
-            var colorToUseForButtonsAndHighlightedLine = !AlwaysActive && !ActivateOnDefaultValues &&
-                                                         selectedValuesAreDefault
-                ? DefaultColor
-                : // default values
-                ActiveColor; // non default, filter is active
+            var colorToUseForButtonsAndHighlightedLine =
+                !Enabled || (!AlwaysActive && !ActivateOnDefaultValues && selectedValuesAreDefault)
+                    ? DefaultColor // default values
+                    : ActiveColor; // non default, filter is active
 
             // draw seek bar active range line
             _rect.Left = NormalizedToScreen(NormalizedMinValue);
@@ -786,7 +798,7 @@ namespace Xamarin.RangeSlider
         private void DrawThumb(float screenCoord, bool pressed, Canvas canvas, bool areSelectedValuesDefault)
         {
             Bitmap buttonToDraw;
-            if (!ActivateOnDefaultValues && areSelectedValuesDefault)
+            if (!Enabled || (!ActivateOnDefaultValues && areSelectedValuesDefault))
                 buttonToDraw = ThumbDisabledImage;
             else
                 buttonToDraw = pressed ? ThumbPressedImage : ThumbImage;
