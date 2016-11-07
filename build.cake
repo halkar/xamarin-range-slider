@@ -1,5 +1,5 @@
 var target = Argument("target", "Default");
-var nugetPackagesDir = Directory("./artefacts");
+var nugetPackagesDir = Directory("./artifacts");
 
 Task("Restore-NuGet-Packages")
     .Does(() =>
