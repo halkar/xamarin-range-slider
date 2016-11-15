@@ -541,13 +541,12 @@ namespace Xamarin.RangeSlider
                         TrackTouchEvent(ev, true);
                         OnStopTrackingTouch();
                     }
-
-                    _pressedThumb = null;
-                    Invalidate();
                     if (_pressedThumb == Thumb.Min)
                         OnLowerValueChanged();
                     if (_pressedThumb == Thumb.Max)
                         OnUpperValueChanged();
+                    _pressedThumb = null;
+                    Invalidate();
                     break;
                 case MotionEventActions.PointerDown:
                     var index = ev.PointerCount - 1;
