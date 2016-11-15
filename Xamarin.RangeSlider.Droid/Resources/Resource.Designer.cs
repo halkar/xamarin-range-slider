@@ -69,6 +69,9 @@ namespace Xamarin.RangeSlider
 			// aapt resource value: 0x7f01000b
 			public static int textAboveThumbsColor = 2130771979;
 			
+			// aapt resource value: 0x7f010017
+			public static int textSize = 2130771991;
+			
 			// aapt resource value: 0x7f01000e
 			public static int thumbDisabled = 2130771982;
 			
@@ -177,7 +180,8 @@ namespace Xamarin.RangeSlider
 					2130771987,
 					2130771988,
 					2130771989,
-					2130771990};
+					2130771990,
+					2130771991};
 			
 			// aapt resource value: 1
 			public static int RangeSliderControl_absoluteMaxValue = 1;
@@ -220,6 +224,9 @@ namespace Xamarin.RangeSlider
 			
 			// aapt resource value: 11
 			public static int RangeSliderControl_textAboveThumbsColor = 11;
+			
+			// aapt resource value: 23
+			public static int RangeSliderControl_textSize = 23;
 			
 			// aapt resource value: 14
 			public static int RangeSliderControl_thumbDisabled = 14;

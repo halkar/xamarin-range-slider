@@ -229,6 +229,8 @@ namespace Xamarin.RangeSlider
             var defaultShadowXOffset = PixelUtil.DpToPx(context, 0);
             var defaultShadowBlur = PixelUtil.DpToPx(context, 2);
 
+            _distanceToTop = PixelUtil.DpToPx(context, DefaultTextDistanceToTopInDp);
+
             if (attrs == null)
             {
                 SetRangeToDefaultValues();
@@ -244,6 +246,7 @@ namespace Xamarin.RangeSlider
                 ThumbShadowYOffset = defaultShadowYOffset;
                 _thumbShadowBlur = defaultShadowBlur;
                 ActivateOnDefaultValues = false;
+                TextSizeInSp = DefaultTextSizeInSp;
             }
             else
             {
@@ -289,6 +292,7 @@ namespace Xamarin.RangeSlider
                     _thumbShadowBlur = a.GetDimensionPixelSize(Resource.Styleable.RangeSliderControl_thumbShadowBlur, defaultShadowBlur);
 
                     ActivateOnDefaultValues = a.GetBoolean(Resource.Styleable.RangeSliderControl_activateOnDefaultValues, false);
+                    TextSizeInSp = a.GetInt(Resource.Styleable.RangeSliderControl_textSize, DefaultTextSizeInSp);
                 }
                 finally
                 {
@@ -311,9 +315,6 @@ namespace Xamarin.RangeSlider
 
             _thumbHalfWidth = 0.5f * ThumbImage.Width;
             _thumbHalfHeight = 0.5f * ThumbImage.Height;
-
-            _textSize = PixelUtil.SpToPx(context, DefaultTextSizeInSp);
-            _distanceToTop = PixelUtil.DpToPx(context, DefaultTextDistanceToTopInDp);
 
             SetBarHeight(_barHeight);
 
