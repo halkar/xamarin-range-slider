@@ -991,6 +991,9 @@ namespace Xamarin.RangeSlider.Forms
 			// aapt resource value: 0x7f01008d
 			public static int textColorSearchUrl = 2130772109;
 			
+			// aapt resource value: 0x7f010153
+			public static int textSize = 2130772307;
+			
 			// aapt resource value: 0x7f0100f4
 			public static int theme = 2130772212;
 			
@@ -5545,7 +5548,8 @@ namespace Xamarin.RangeSlider.Forms
 					2130772303,
 					2130772304,
 					2130772305,
-					2130772306};
+					2130772306,
+					2130772307};
 			
 			// aapt resource value: 1
 			public static int RangeSliderControl_absoluteMaxValue = 1;
@@ -5588,6 +5592,9 @@ namespace Xamarin.RangeSlider.Forms
 			
 			// aapt resource value: 11
 			public static int RangeSliderControl_textAboveThumbsColor = 11;
+			
+			// aapt resource value: 23
+			public static int RangeSliderControl_textSize = 23;
 			
 			// aapt resource value: 14
 			public static int RangeSliderControl_thumbDisabled = 14;
