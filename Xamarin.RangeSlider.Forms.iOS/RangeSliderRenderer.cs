@@ -13,6 +13,8 @@ namespace Xamarin.RangeSlider.Forms
         protected override void OnElementChanged(ElementChangedEventArgs<RangeSlider> e)
         {
             base.OnElementChanged(e);
+            if (Element == null)
+                return;
             if (Control == null)
             {
                 var rangeSeekBar = new RangeSliderControl(Bounds);
@@ -22,10 +24,7 @@ namespace Xamarin.RangeSlider.Forms
                 rangeSeekBar.DragCompleted += RangeSeekBarDragCompleted;
                 SetNativeControl(rangeSeekBar);
             }
-            if (Control != null && Element != null)
-            {
-                UpdateControl(Control, Element);
-            }
+            UpdateControl(Control, Element);
         }
 
         private void RangeSeekBarDragCompleted(object sender, EventArgs e)

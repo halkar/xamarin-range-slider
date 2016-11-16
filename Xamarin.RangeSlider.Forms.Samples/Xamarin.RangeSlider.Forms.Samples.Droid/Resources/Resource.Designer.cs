@@ -41,6 +41,7 @@ namespace Xamarin.RangeSlider.Forms.Samples.Droid
 			global::Xamarin.RangeSlider.Resource.Attribute.stepValue = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.stepValue;
 			global::Xamarin.RangeSlider.Resource.Attribute.stepValueContinuously = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.stepValueContinuously;
 			global::Xamarin.RangeSlider.Resource.Attribute.textAboveThumbsColor = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.textAboveThumbsColor;
+			global::Xamarin.RangeSlider.Resource.Attribute.textSize = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.textSize;
 			global::Xamarin.RangeSlider.Resource.Attribute.thumbDisabled = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.thumbDisabled;
 			global::Xamarin.RangeSlider.Resource.Attribute.thumbNormal = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.thumbNormal;
 			global::Xamarin.RangeSlider.Resource.Attribute.thumbPressed = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.thumbPressed;
@@ -71,6 +72,7 @@ namespace Xamarin.RangeSlider.Forms.Samples.Droid
 			global::Xamarin.RangeSlider.Resource.Styleable.RangeSliderControl_stepValue = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Styleable.RangeSliderControl_stepValue;
 			global::Xamarin.RangeSlider.Resource.Styleable.RangeSliderControl_stepValueContinuously = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Styleable.RangeSliderControl_stepValueContinuously;
 			global::Xamarin.RangeSlider.Resource.Styleable.RangeSliderControl_textAboveThumbsColor = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Styleable.RangeSliderControl_textAboveThumbsColor;
+			global::Xamarin.RangeSlider.Resource.Styleable.RangeSliderControl_textSize = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Styleable.RangeSliderControl_textSize;
 			global::Xamarin.RangeSlider.Resource.Styleable.RangeSliderControl_thumbDisabled = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Styleable.RangeSliderControl_thumbDisabled;
 			global::Xamarin.RangeSlider.Resource.Styleable.RangeSliderControl_thumbNormal = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Styleable.RangeSliderControl_thumbNormal;
 			global::Xamarin.RangeSlider.Resource.Styleable.RangeSliderControl_thumbPressed = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Styleable.RangeSliderControl_thumbPressed;
@@ -397,6 +399,7 @@ namespace Xamarin.RangeSlider.Forms.Samples.Droid
 			global::Xamarin.RangeSlider.Forms.Resource.Attribute.textColorAlertDialogListItem = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.textColorAlertDialogListItem;
 			global::Xamarin.RangeSlider.Forms.Resource.Attribute.textColorError = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.textColorError;
 			global::Xamarin.RangeSlider.Forms.Resource.Attribute.textColorSearchUrl = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.textColorSearchUrl;
+			global::Xamarin.RangeSlider.Forms.Resource.Attribute.textSize = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.textSize;
 			global::Xamarin.RangeSlider.Forms.Resource.Attribute.theme = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.theme;
 			global::Xamarin.RangeSlider.Forms.Resource.Attribute.thickness = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.thickness;
 			global::Xamarin.RangeSlider.Forms.Resource.Attribute.thumbDisabled = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.thumbDisabled;
@@ -1778,6 +1781,7 @@ namespace Xamarin.RangeSlider.Forms.Samples.Droid
 			global::Xamarin.RangeSlider.Forms.Resource.Styleable.RangeSliderControl_stepValue = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Styleable.RangeSliderControl_stepValue;
 			global::Xamarin.RangeSlider.Forms.Resource.Styleable.RangeSliderControl_stepValueContinuously = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Styleable.RangeSliderControl_stepValueContinuously;
 			global::Xamarin.RangeSlider.Forms.Resource.Styleable.RangeSliderControl_textAboveThumbsColor = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Styleable.RangeSliderControl_textAboveThumbsColor;
+			global::Xamarin.RangeSlider.Forms.Resource.Styleable.RangeSliderControl_textSize = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Styleable.RangeSliderControl_textSize;
 			global::Xamarin.RangeSlider.Forms.Resource.Styleable.RangeSliderControl_thumbDisabled = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Styleable.RangeSliderControl_thumbDisabled;
 			global::Xamarin.RangeSlider.Forms.Resource.Styleable.RangeSliderControl_thumbNormal = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Styleable.RangeSliderControl_thumbNormal;
 			global::Xamarin.RangeSlider.Forms.Resource.Styleable.RangeSliderControl_thumbPressed = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Styleable.RangeSliderControl_thumbPressed;
@@ -2887,6 +2891,9 @@ namespace Xamarin.RangeSlider.Forms.Samples.Droid
 			
 			// aapt resource value: 0x7f01008d
 			public const int textColorSearchUrl = 2130772109;
+			
+			// aapt resource value: 0x7f010153
+			public const int textSize = 2130772307;
 			
 			// aapt resource value: 0x7f0100f4
 			public const int theme = 2130772212;
@@ -7466,7 +7473,8 @@ namespace Xamarin.RangeSlider.Forms.Samples.Droid
 					2130772303,
 					2130772304,
 					2130772305,
-					2130772306};
+					2130772306,
+					2130772307};
 			
 			// aapt resource value: 1
 			public const int RangeSliderControl_absoluteMaxValue = 1;
@@ -7509,6 +7517,9 @@ namespace Xamarin.RangeSlider.Forms.Samples.Droid
 			
 			// aapt resource value: 11
 			public const int RangeSliderControl_textAboveThumbsColor = 11;
+			
+			// aapt resource value: 23
+			public const int RangeSliderControl_textSize = 23;
 			
 			// aapt resource value: 14
 			public const int RangeSliderControl_thumbDisabled = 14;
