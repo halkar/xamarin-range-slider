@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using Xamarin.Forms;
 using Xamarin.RangeSlider.Forms;
 using RangeSlider = Xamarin.RangeSlider.Forms.RangeSlider;
 
@@ -19,10 +18,11 @@ namespace Xamarin.RangeSlider.Forms
         protected override void OnElementChanged(ElementChangedEventArgs<RangeSlider> e)
         {
             base.OnElementChanged(e);
+            if(Element == null)
+                return;
             if (Control == null)
             {
                 var rangeSlider = new RangeSliderControl();
-                UpdateControl(rangeSlider, Element);
                 rangeSlider.LowerValueChanged += RangeSlider_LowerValueChanged;
                 rangeSlider.UpperValueChanged += RangeSlider_UpperValueChanged;
                 rangeSlider.DragStarted += RangeSlider_DragStarted;
@@ -30,11 +30,7 @@ namespace Xamarin.RangeSlider.Forms
                 rangeSlider.SizeChanged += RangeSlider_SizeChanged;
                 SetNativeControl(rangeSlider);
             }
-
-            if (Control != null && Element != null)
-            {
-                UpdateControl(Control, Element);
-            }
+            UpdateControl(Control, Element);
         }
 
         private void RangeSlider_DragCompleted(object sender, EventArgs e)
@@ -69,12 +65,12 @@ namespace Xamarin.RangeSlider.Forms
             control.TextFormat = element.TextFormat;
         }
 
-        private void RangeSlider_UpperValueChanged(object sender, System.EventArgs e)
+        private void RangeSlider_UpperValueChanged(object sender, EventArgs e)
         {
             Element.UpperValue = (float)Control.RangeMax;
         }
 
-        private void RangeSlider_LowerValueChanged(object sender, System.EventArgs e)
+        private void RangeSlider_LowerValueChanged(object sender, EventArgs e)
         {
             Element.LowerValue = (float)Control.RangeMin;
         }
