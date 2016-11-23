@@ -7,9 +7,8 @@ using UIKit;
 
 namespace Xamarin.RangeSlider
 {
-    [Register("RangeSlider")]
     [DesignTimeVisible(true)]
-    public class RangeSliderControl : UIControl
+    public partial class RangeSliderControl : UIControl
     {
         private const string KeyPath = "frame";
 
