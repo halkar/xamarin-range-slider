@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
         <id>Xamarin.Forms.RangeSlider</id>
-        <version>0.6.3</version>
+        <version>0.6.4</version>
         <title>Xamarin.Forms.RangeSlider</title>
         <authors>Artur Shamsutdinov</authors>
         <projectUrl>https://github.com/halkar/xamarin-range-slider</projectUrl>
@@ -12,19 +12,19 @@
         <dependencies>
             <group targetFramework="xamarinios10">
                 <dependency id="Xamarin.Forms" />
-                <dependency id="Xamarin.RangeSlider" version="0.6.3" />
+                <dependency id="Xamarin.RangeSlider" version="0.6.4" />
             </group>
             <group targetFramework="monoandroid10">
                 <dependency id="Xamarin.Forms" />
-                <dependency id="Xamarin.RangeSlider" version="0.6.3" />
+                <dependency id="Xamarin.RangeSlider" version="0.6.4" />
             </group>
             <group targetFramework="uap10">
                 <dependency id="Xamarin.Forms" />
-                <dependency id="Xamarin.RangeSlider" version="0.6.3" />
+                <dependency id="Xamarin.RangeSlider" version="0.6.4" />
             </group>
             <group targetFramework="win81">
                 <dependency id="Xamarin.Forms" />
-                <dependency id="Xamarin.RangeSlider" version="0.6.3" />
+                <dependency id="Xamarin.RangeSlider" version="0.6.4" />
             </group>
         </dependencies>
     </metadata>
