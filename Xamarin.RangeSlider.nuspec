@@ -11,6 +11,8 @@
         <tags>xamarin range slider</tags>
     </metadata>
     <files>
+        <!--Portable-->
+        <file src="Xamarin.RangeSlider.Forms\bin\Release\Xamarin.RangeSlider.Forms.dll" target="lib\portable-net45+win+wp80+MonoAndroid10+xamarinios10" />
         <!--Android-->
         <file src="Xamarin.RangeSlider.Droid\bin\Release\Xamarin.RangeSlider.Droid.dll" target="lib\MonoAndroid10\Xamarin.RangeSlider.Droid.dll" />
         <!--UWP-->
