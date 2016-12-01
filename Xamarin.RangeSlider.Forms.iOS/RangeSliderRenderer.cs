@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using Foundation;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 using Xamarin.RangeSlider.Forms;
@@ -8,6 +9,7 @@ using Xamarin.RangeSlider.Forms;
 
 namespace Xamarin.RangeSlider.Forms
 {
+    [Preserve(AllMembers = true)]
     public class RangeSliderRenderer : ViewRenderer<RangeSlider, RangeSliderControl>
     {
         protected override void OnElementChanged(ElementChangedEventArgs<RangeSlider> e)

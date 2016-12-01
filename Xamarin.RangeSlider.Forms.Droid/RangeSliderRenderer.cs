@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using Android.Runtime;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using Xamarin.RangeSlider.Forms;
@@ -9,6 +10,7 @@ using Color = Android.Graphics.Color;
 
 namespace Xamarin.RangeSlider.Forms
 {
+    [Preserve(AllMembers = true)]
     public class RangeSliderRenderer : ViewRenderer<RangeSlider, RangeSliderControl>
     {
         protected override void OnElementChanged(ElementChangedEventArgs<RangeSlider> e)
@@ -51,7 +53,7 @@ namespace Xamarin.RangeSlider.Forms
             control.MaxThumbHidden = element.MaxThumbHidden;
             control.StepValue = element.StepValue;
             control.StepValueContinuously = element.StepValueContinuously;
-            if(element.BarHeight.HasValue)
+            if (element.BarHeight.HasValue)
                 control.SetBarHeight(element.BarHeight.Value);
             control.ShowTextAboveThumbs = element.ShowTextAboveThumbs;
             control.TextSizeInSp = (int)Font.SystemFontOfSize(element.TextSize).ToScaledPixel();
