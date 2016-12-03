@@ -11,6 +11,7 @@ using Android.Widget;
 
 namespace Xamarin.RangeSlider
 {
+    [Preserve(AllMembers = true)]
     public class RangeSliderControl : ImageView
     {
         public static readonly Color DefaultActiveColor = Color.Argb(0xFF, 0x33, 0xB5, 0xE5);

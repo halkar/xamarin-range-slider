@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Globalization;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 
 namespace Xamarin.RangeSlider.Forms.Samples
 {
+    [Preserve(AllMembers = true)]
     public class StringToIntConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

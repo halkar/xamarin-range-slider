@@ -1,8 +1,10 @@
 ﻿using System;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 
 namespace Xamarin.RangeSlider.Forms
 {
+    [Preserve(AllMembers = true)]
     public class RangeSlider : View
     {
         public const string LowerValuePropertyName = "LowerValue";

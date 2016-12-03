@@ -7,6 +7,7 @@ using UIKit;
 
 namespace Xamarin.RangeSlider
 {
+    [Preserve(AllMembers = true)]
     [DesignTimeVisible(true)]
     public partial class RangeSliderControl : UIControl
     {
