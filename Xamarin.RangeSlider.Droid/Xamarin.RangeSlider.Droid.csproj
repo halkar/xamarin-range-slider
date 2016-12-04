@@ -67,6 +67,12 @@
   <ItemGroup>
     <AndroidResource Include="Resources\Values\strings.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Xamarin.RangeSlider.Common\Xamarin.RangeSlider.Common.csproj">
+      <Project>{8ea35996-d247-4847-bc05-5d4bd97b2d7d}</Project>
+      <Name>Xamarin.RangeSlider.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -8,6 +8,7 @@ using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
+using Xamarin.RangeSlider.Common;
 
 namespace Xamarin.RangeSlider
 {
@@ -112,6 +113,8 @@ namespace Xamarin.RangeSlider
                 Invalidate();
             }
         }
+
+        public Func<Thumb, float, string> FormatLabel { get; set; }
 
         public override bool Enabled
         {
@@ -417,7 +420,7 @@ namespace Xamarin.RangeSlider
         /// <param name="value">The Number value to set the minimum value to. Will be clamped to given absolute minimum/maximum range.</param>
         public void SetSelectedMinValue(float value)
         {
-            if (_pressedThumb == Thumb.Min)
+            if (_pressedThumb == Thumb.Lower)
                 return;
             // in case absoluteMinValue == absoluteMaxValue, avoid division by zero when normalizing.
             SetNormalizedMinValue(Math.Abs(AbsoluteMaxValue - AbsoluteMinValue) < float.Epsilon
@@ -440,7 +443,7 @@ namespace Xamarin.RangeSlider
         /// <param name="value">The Number value to set the maximum value to. Will be clamped to given absolute minimum/maximum range.</param>
         public void SetSelectedMaxValue(float value)
         {
-            if (_pressedThumb == Thumb.Max)
+            if (_pressedThumb == Thumb.Upper)
                 return;
             // in case absoluteMinValue == absoluteMaxValue, avoid division by zero when normalizing.
             SetNormalizedMaxValue(Math.Abs(AbsoluteMaxValue - AbsoluteMinValue) < float.Epsilon
@@ -520,9 +523,9 @@ namespace Xamarin.RangeSlider
 
                         if (NotifyWhileDragging)
                         {
-                            if (_pressedThumb == Thumb.Min)
+                            if (_pressedThumb == Thumb.Lower)
                                 OnLowerValueChanged();
-                            if (_pressedThumb == Thumb.Max)
+                            if (_pressedThumb == Thumb.Upper)
                                 OnUpperValueChanged();
                         }
                     }
@@ -542,9 +545,9 @@ namespace Xamarin.RangeSlider
                         TrackTouchEvent(ev, true);
                         OnStopTrackingTouch();
                     }
-                    if (_pressedThumb == Thumb.Min)
+                    if (_pressedThumb == Thumb.Lower)
                         OnLowerValueChanged();
-                    if (_pressedThumb == Thumb.Max)
+                    if (_pressedThumb == Thumb.Upper)
                         OnUpperValueChanged();
                     _pressedThumb = null;
                     Invalidate();
@@ -594,11 +597,11 @@ namespace Xamarin.RangeSlider
             var pointerIndex = ev.FindPointerIndex(_activePointerId);
             var x = ev.GetX(pointerIndex);
 
-            if (Thumb.Min.Equals(_pressedThumb) && !MinThumbHidden)
+            if (Thumb.Lower.Equals(_pressedThumb) && !MinThumbHidden)
             {
                 SetNormalizedMinValue(ScreenToNormalized(x), step);
             }
-            else if (Thumb.Max.Equals(_pressedThumb) && !MaxThumbHidden)
+            else if (Thumb.Upper.Equals(_pressedThumb) && !MaxThumbHidden)
             {
                 SetNormalizedMaxValue(ScreenToNormalized(x), step);
             }
@@ -703,7 +706,7 @@ namespace Xamarin.RangeSlider
                 {
                     DrawThumbShadow(NormalizedToScreen(NormalizedMinValue), canvas);
                 }
-                DrawThumb(NormalizedToScreen(NormalizedMinValue), Thumb.Min.Equals(_pressedThumb), canvas,
+                DrawThumb(NormalizedToScreen(NormalizedMinValue), Thumb.Lower.Equals(_pressedThumb), canvas,
                     selectedValuesAreDefault);
             }
 
@@ -714,7 +717,7 @@ namespace Xamarin.RangeSlider
                 {
                     DrawThumbShadow(NormalizedToScreen(NormalizedMaxValue), canvas);
                 }
-                DrawThumb(NormalizedToScreen(NormalizedMaxValue), Thumb.Max.Equals(_pressedThumb), canvas,
+                DrawThumb(NormalizedToScreen(NormalizedMaxValue), Thumb.Upper.Equals(_pressedThumb), canvas,
                     selectedValuesAreDefault);
             }
 
@@ -725,8 +728,8 @@ namespace Xamarin.RangeSlider
             _paint.TextSize = _textSize;
             _paint.Color = TextAboveThumbsColor;
 
-            var minText = ValueToString(GetSelectedMinValue());
-            var maxText = ValueToString(GetSelectedMaxValue());
+            var minText = ValueToString(GetSelectedMinValue(), Thumb.Lower);
+            var maxText = ValueToString(GetSelectedMaxValue(), Thumb.Upper);
             var minTextWidth = _paint.MeasureText(minText);
             var maxTextWidth = _paint.MeasureText(maxText);
             // keep the position so that the labels don't get cut off
@@ -758,9 +761,12 @@ namespace Xamarin.RangeSlider
                 _paint);
         }
 
-        protected string ValueToString(float value)
+        protected string ValueToString(float value, Thumb thumb)
         {
-            return value.ToString(_textFormat, CultureInfo.InvariantCulture);
+            var func = FormatLabel;
+            return func == null
+                ? value.ToString(_textFormat, CultureInfo.InvariantCulture)
+                : func(thumb, value);
         }
 
         /// <summary>
@@ -833,11 +839,11 @@ namespace Xamarin.RangeSlider
             var maxThumbPressed = IsInThumbRange(touchX, NormalizedMaxValue);
             if (minThumbPressed && maxThumbPressed)
                 // if both thumbs are pressed (they lie on top of each other), choose the one with more room to drag. this avoids "stalling" the thumbs in a corner, not being able to drag them apart anymore.
-                result = touchX / Width > 0.5f ? Thumb.Min : Thumb.Max;
+                result = touchX / Width > 0.5f ? Thumb.Lower : Thumb.Upper;
             else if (minThumbPressed)
-                result = Thumb.Min;
+                result = Thumb.Lower;
             else if (maxThumbPressed)
-                result = Thumb.Max;
+                result = Thumb.Upper;
             return result;
         }
 
@@ -959,15 +965,6 @@ namespace Xamarin.RangeSlider
         protected virtual void OnUpperValueChanged()
         {
             UpperValueChanged?.Invoke(this, EventArgs.Empty);
-        }
-
-        /// <summary>
-        ///     Thumb constants (min and max).
-        /// </summary>
-        private enum Thumb
-        {
-            Min,
-            Max
         }
     }
 }

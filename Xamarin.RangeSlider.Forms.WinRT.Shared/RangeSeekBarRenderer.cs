@@ -65,6 +65,7 @@ namespace Xamarin.RangeSlider.Forms
             control.ShowTextAboveThumbs = element.ShowTextAboveThumbs;
             control.TextSize = (int) element.TextSize;
             control.TextFormat = element.TextFormat;
+            control.FormatLabel = element.FormatLabel;
         }
 
         private void RangeSlider_UpperValueChanged(object sender, EventArgs e)

@@ -109,6 +109,10 @@
     <AndroidResource Include="Resources\Values\Strings.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Xamarin.RangeSlider.Common\Xamarin.RangeSlider.Common.csproj">
+      <Project>{8ea35996-d247-4847-bc05-5d4bd97b2d7d}</Project>
+      <Name>Xamarin.RangeSlider.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Xamarin.RangeSlider.Droid\Xamarin.RangeSlider.Droid.csproj">
       <Project>{4db83e8b-c19a-4724-878b-9241bcbb8d0d}</Project>
       <Name>Xamarin.RangeSlider.Droid</Name>

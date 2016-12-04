@@ -52,6 +52,7 @@ namespace Xamarin.RangeSlider.Forms
             control.ShowTextAboveThumbs = element.ShowTextAboveThumbs;
             control.TextSize = (float)element.TextSize;
             control.TextFormat = element.TextFormat;
+            control.FormatLabel = element.FormatLabel;
         }
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
