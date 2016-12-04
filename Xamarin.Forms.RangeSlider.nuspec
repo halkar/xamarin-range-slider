@@ -44,7 +44,7 @@
         <file src="Xamarin.RangeSlider.Forms.WinRT\bin\Release\Xamarin.RangeSlider.Forms.dll" target="lib\win81\Xamarin.RangeSlider.Forms.dll" />
         <file src="Xamarin.RangeSlider.Forms.WinRT\bin\Release\Xamarin.RangeSlider.Forms.WinRT.dll" target="lib\win81\Xamarin.RangeSlider.Forms.WinRT.dll" />
         <file src="Xamarin.RangeSlider.Forms.WinRT\bin\Release\Xamarin.RangeSlider.Forms.WinRT.pri" target="lib\win81\Xamarin.RangeSlider.Forms.WinRT.pri" />
-        <file src="XamarinRangeSliderInitialization.cs" target="content\win81\RangeSliderInitialization.cs" />
+        <file src="RangeSliderInitialization.cs" target="content\win81\RangeSliderInitialization.cs" />
         <!--WinRT-->
         <file src="Xamarin.RangeSlider.Forms.iOS\bin\Release\Xamarin.RangeSlider.Forms.dll" target="lib\Xamarin.iOS10\Xamarin.RangeSlider.Forms.dll" />
         <file src="Xamarin.RangeSlider.Forms.iOS\bin\Release\Xamarin.RangeSlider.Forms.iOS.dll" target="lib\Xamarin.iOS10\Xamarin.RangeSlider.Forms.iOS.dll" />
