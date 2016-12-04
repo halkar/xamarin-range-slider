@@ -1,6 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
+using Xamarin.RangeSlider.Common;
 
 namespace Xamarin.RangeSlider.Forms
 {
@@ -128,6 +129,8 @@ namespace Xamarin.RangeSlider.Forms
             get { return (string)GetValue(TextFormatProperty); }
             set { SetValue(TextFormatProperty, value); }
         }
+
+        public Func<Thumb, float, string> FormatLabel { get; set; }
 
         public event EventHandler LowerValueChanged;
         public event EventHandler UpperValueChanged;

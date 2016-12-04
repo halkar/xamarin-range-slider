@@ -5,6 +5,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Media;
+using Thumb = Xamarin.RangeSlider.Common.Thumb;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -136,6 +137,8 @@ namespace Xamarin.RangeSlider
             set { SetValue(TextFormatProperty, value); }
         }
 
+        public Func<Thumb, float, string> FormatLabel { get; set; }
+
         public event EventHandler LowerValueChanged;
         public event EventHandler UpperValueChanged;
         public event EventHandler DragStarted;
@@ -258,7 +261,7 @@ namespace Xamarin.RangeSlider
 
             ActiveRectangle.Width = (RangeMax - min)/(Maximum - Minimum)*ContainerCanvas.ActualWidth;
 
-            MinThumbText.Text = ValueToString(min);
+            MinThumbText.Text = ValueToString(min, Thumb.Lower);
             Canvas.SetLeft(MinThumbText, relativeLeft - MinThumbText.ActualWidth/2);
         }
 
@@ -272,7 +275,7 @@ namespace Xamarin.RangeSlider
 
             ActiveRectangle.Width = (max - RangeMin)/(Maximum - Minimum)*ContainerCanvas.ActualWidth;
 
-            MaxThumbText.Text = ValueToString(max);
+            MaxThumbText.Text = ValueToString(max, Thumb.Upper);
             Canvas.SetLeft(MaxThumbText, relativeRight - MaxThumbText.ActualWidth/2);
         }
 
@@ -281,9 +284,12 @@ namespace Xamarin.RangeSlider
             return (value - Minimum) / (Maximum - Minimum) * ContainerCanvas.ActualWidth;
         }
 
-        private string ValueToString(double max)
+        private string ValueToString(double value, Thumb thumb)
         {
-            return max.ToString(TextFormat, CultureInfo.InvariantCulture);
+            var func = FormatLabel;
+            return func == null
+                ? value.ToString(TextFormat, CultureInfo.InvariantCulture)
+                : func(thumb, (float) value);
         }
 
         private void ContainerCanvas_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -341,7 +347,7 @@ namespace Xamarin.RangeSlider
             return (float) Math.Round(value / StepValue)*StepValue;
         }
 
-        private double DragThumb(Thumb thumb, double min, double max, double offset)
+        private double DragThumb(Windows.UI.Xaml.Controls.Primitives.Thumb thumb, double min, double max, double offset)
         {
             var currentPos = StepValueContinuously ? _initialLeft : Canvas.GetLeft(thumb);
             var nextPos = currentPos + offset;

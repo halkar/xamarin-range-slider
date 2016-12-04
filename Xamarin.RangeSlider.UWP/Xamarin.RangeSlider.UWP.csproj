@@ -110,6 +110,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Xamarin.RangeSlider.UWP.rd.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Xamarin.RangeSlider.Common\Xamarin.RangeSlider.Common.csproj">
+      <Project>{8ea35996-d247-4847-bc05-5d4bd97b2d7d}</Project>
+      <Name>Xamarin.RangeSlider.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="..\Xamarin.RangeSlider.WinRT.Shared\Xamarin.RangeSlider.WinRT.Shared.projitems" Label="Shared" />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

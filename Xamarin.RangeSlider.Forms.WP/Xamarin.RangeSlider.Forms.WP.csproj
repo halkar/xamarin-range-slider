@@ -109,6 +109,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Xamarin.RangeSlider.Common\Xamarin.RangeSlider.Common.csproj">
+      <Project>{8ea35996-d247-4847-bc05-5d4bd97b2d7d}</Project>
+      <Name>Xamarin.RangeSlider.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Xamarin.RangeSlider.Forms\Xamarin.RangeSlider.Forms.csproj">
       <Project>{31fb7c44-71bc-4f27-9136-01a5192aac9b}</Project>
       <Name>Xamarin.RangeSlider.Forms</Name>

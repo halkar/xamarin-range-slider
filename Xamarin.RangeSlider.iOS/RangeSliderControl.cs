@@ -4,6 +4,7 @@ using System.Globalization;
 using CoreGraphics;
 using Foundation;
 using UIKit;
+using Xamarin.RangeSlider.Common;
 
 namespace Xamarin.RangeSlider
 {
@@ -12,11 +13,6 @@ namespace Xamarin.RangeSlider
     public partial class RangeSliderControl : UIControl
     {
         private const string KeyPath = "frame";
-
-        /// <summary>
-        ///     center location for the lower handle control
-        /// </summary>
-        private CGPoint _lowerCenter;
 
         private UIImageView _lowerHandle;
 
@@ -53,11 +49,6 @@ namespace Xamarin.RangeSlider
         private UIImage _trackCrossedOverImage;
 
         private UIImage _trackImage;
-
-        /// <summary>
-        ///     center location for the upper handle control
-        /// </summary>
-        private CGPoint _upperCenter;
 
         private UIImageView _upperHandle;
         private bool _upperHandleHidden;
@@ -221,6 +212,8 @@ namespace Xamarin.RangeSlider
                 SetNeedsLayout();
             }
         }
+
+        public Func<Thumb, float, string> FormatLabel { get; set; }
 
         public override bool Enabled
         {
@@ -458,11 +451,9 @@ namespace Xamarin.RangeSlider
             {
                 if (Equals(ofObject, _lowerHandle))
                 {
-                    _lowerCenter = _lowerHandle.Center;
                 }
                 else if (Equals(ofObject, _upperHandle))
                 {
-                    _upperCenter = _upperHandle.Center;
                 }
             }
         }
@@ -607,9 +598,12 @@ namespace Xamarin.RangeSlider
             return value;
         }
 
-        private string ValueToString(float value)
+        private string ValueToString(float value, Thumb thumb)
         {
-            return value.ToString(_textFormat, CultureInfo.InvariantCulture);
+            var func = FormatLabel;
+            return func == null
+                ? value.ToString(_textFormat, CultureInfo.InvariantCulture)
+                : func(thumb, value);
         }
 
         private UIEdgeInsets TrackAlignmentInsets()
@@ -814,12 +808,12 @@ namespace Xamarin.RangeSlider
             _upperHandle.HighlightedImage = UpperHandleImageHighlighted;
             _upperHandle.Hidden = _upperHandleHidden;
 
-            _lowerHandleLabel.Text = ValueToString(LowerValue);
+            _lowerHandleLabel.Text = ValueToString(LowerValue, Thumb.Lower);
             _lowerHandleLabel.Font = UIFont.SystemFontOfSize(_textSize);
             _lowerHandleLabel.Frame = HandleLabelRect(_lowerHandleLabel, _lowerHandle.Frame);
             _lowerHandleLabel.Hidden = !ShowTextAboveThumbs;
 
-            _upperHandleLabel.Text = ValueToString(UpperValue);
+            _upperHandleLabel.Text = ValueToString(UpperValue, Thumb.Upper);
             _upperHandleLabel.Font = UIFont.SystemFontOfSize(_textSize);
             _upperHandleLabel.Frame = HandleLabelRect(_upperHandleLabel, _upperHandle.Frame);
             _upperHandleLabel.Hidden = !ShowTextAboveThumbs;
