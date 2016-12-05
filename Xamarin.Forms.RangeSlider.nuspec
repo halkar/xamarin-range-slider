@@ -10,22 +10,8 @@
         <description>Range Slider for Xamarin</description>
         <tags>xamarin range slider xamarin.forms</tags>
         <dependencies>
-            <group targetFramework="xamarinios10">
-                <dependency id="Xamarin.Forms" />
-                <dependency id="Xamarin.RangeSlider" version="0.6.6" />
-            </group>
-            <group targetFramework="monoandroid10">
-                <dependency id="Xamarin.Forms" />
-                <dependency id="Xamarin.RangeSlider" version="0.6.6" />
-            </group>
-            <group targetFramework="uap10">
-                <dependency id="Xamarin.Forms" />
-                <dependency id="Xamarin.RangeSlider" version="0.6.6" />
-            </group>
-            <group targetFramework="win81">
-                <dependency id="Xamarin.Forms" />
-                <dependency id="Xamarin.RangeSlider" version="0.6.6" />
-            </group>
+            <dependency id="Xamarin.Forms" />
+            <dependency id="Xamarin.RangeSlider" version="0.6.6" />
         </dependencies>
     </metadata>
     <files>
