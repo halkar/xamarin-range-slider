@@ -95,6 +95,9 @@ namespace Xamarin.RangeSlider.Forms
                 case RangeSlider.TextFormatPropertyName:
                     Control.TextFormat = Element.TextFormat;
                     break;
+                case RangeSlider.FormatLabelPropertyName:
+                    Control.FormatLabel = Element.FormatLabel;
+                    break;
             }
             Control.SetNeedsLayout();
         }
