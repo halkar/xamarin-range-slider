@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
         <id>Xamarin.Forms.RangeSlider</id>
-        <version>0.6.5</version>
+        <version>0.6.6</version>
         <title>Xamarin.Forms.RangeSlider</title>
         <authors>Artur Shamsutdinov</authors>
         <projectUrl>https://github.com/halkar/xamarin-range-slider</projectUrl>
@@ -12,19 +12,19 @@
         <dependencies>
             <group targetFramework="xamarinios10">
                 <dependency id="Xamarin.Forms" />
-                <dependency id="Xamarin.RangeSlider" version="0.6.5" />
+                <dependency id="Xamarin.RangeSlider" version="0.6.6" />
             </group>
             <group targetFramework="monoandroid10">
                 <dependency id="Xamarin.Forms" />
-                <dependency id="Xamarin.RangeSlider" version="0.6.5" />
+                <dependency id="Xamarin.RangeSlider" version="0.6.6" />
             </group>
             <group targetFramework="uap10">
                 <dependency id="Xamarin.Forms" />
-                <dependency id="Xamarin.RangeSlider" version="0.6.5" />
+                <dependency id="Xamarin.RangeSlider" version="0.6.6" />
             </group>
             <group targetFramework="win81">
                 <dependency id="Xamarin.Forms" />
-                <dependency id="Xamarin.RangeSlider" version="0.6.5" />
+                <dependency id="Xamarin.RangeSlider" version="0.6.6" />
             </group>
         </dependencies>
     </metadata>
@@ -34,20 +34,20 @@
     	<!--Android-->
         <file src="Xamarin.RangeSlider.Forms.Droid\bin\Release\Xamarin.RangeSlider.Forms.dll" target="lib\MonoAndroid10\Xamarin.RangeSlider.Forms.dll" />
         <file src="Xamarin.RangeSlider.Forms.Droid\bin\Release\Xamarin.RangeSlider.Forms.Droid.dll" target="lib\MonoAndroid10\Xamarin.RangeSlider.Forms.Droid.dll" />
-        <file src="RangeSliderInitialization.cs" target="content\MonoAndroid10\RangeSliderInitialization.cs" />
+        <file src="XamarinRangeSliderInitialization.cs" target="content\MonoAndroid10\XamarinRangeSliderInitialization.cs" />
         <!--UWP-->
         <file src="Xamarin.RangeSlider.Forms.UWP\bin\Release\Xamarin.RangeSlider.Forms.dll" target="lib\uap10.0\Xamarin.RangeSlider.Forms.dll" />
         <file src="Xamarin.RangeSlider.Forms.UWP\bin\Release\Xamarin.RangeSlider.Forms.UWP.dll" target="lib\uap10.0\Xamarin.RangeSlider.Forms.UWP.dll" />
         <file src="Xamarin.RangeSlider.Forms.UWP\bin\Release\Xamarin.RangeSlider.Forms.UWP.pri" target="lib\uap10.0\Xamarin.RangeSlider.Forms.UWP.pri" />
-        <file src="RangeSliderInitialization.cs" target="content\uap10.0\RangeSliderInitialization.cs" />
+        <file src="XamarinRangeSliderInitialization.cs" target="content\uap10.0\XamarinRangeSliderInitialization.cs" />
         <!--WinRT-->
         <file src="Xamarin.RangeSlider.Forms.WinRT\bin\Release\Xamarin.RangeSlider.Forms.dll" target="lib\win81\Xamarin.RangeSlider.Forms.dll" />
         <file src="Xamarin.RangeSlider.Forms.WinRT\bin\Release\Xamarin.RangeSlider.Forms.WinRT.dll" target="lib\win81\Xamarin.RangeSlider.Forms.WinRT.dll" />
         <file src="Xamarin.RangeSlider.Forms.WinRT\bin\Release\Xamarin.RangeSlider.Forms.WinRT.pri" target="lib\win81\Xamarin.RangeSlider.Forms.WinRT.pri" />
-        <file src="RangeSliderInitialization.cs" target="content\win81\RangeSliderInitialization.cs" />
+        <file src="XamarinRangeSliderInitialization.cs" target="content\win81\XamarinRangeSliderInitialization.cs" />
         <!--WinRT-->
         <file src="Xamarin.RangeSlider.Forms.iOS\bin\Release\Xamarin.RangeSlider.Forms.dll" target="lib\Xamarin.iOS10\Xamarin.RangeSlider.Forms.dll" />
         <file src="Xamarin.RangeSlider.Forms.iOS\bin\Release\Xamarin.RangeSlider.Forms.iOS.dll" target="lib\Xamarin.iOS10\Xamarin.RangeSlider.Forms.iOS.dll" />
-        <file src="RangeSliderInitialization.cs" target="content\Xamarin.iOS10\RangeSliderInitialization.cs" />
+        <file src="XamarinRangeSliderInitialization.cs" target="content\Xamarin.iOS10\XamarinRangeSliderInitialization.cs" />
     </files>
 </package>
