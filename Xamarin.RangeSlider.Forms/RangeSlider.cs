@@ -20,6 +20,7 @@ namespace Xamarin.RangeSlider.Forms
         public const string ShowTextAboveThumbsPropertyName = "ShowTextAboveThumbs";
         public const string TextSizePropertyName = "TextSize";
         public const string TextFormatPropertyName = "TextFormat";
+        public const string FormatLabelPropertyName = "FormatLabel";
 
         public static readonly BindableProperty LowerValueProperty =
             BindableProperty.Create(LowerValuePropertyName, typeof(float), typeof(RangeSlider), 0f);
@@ -56,6 +57,9 @@ namespace Xamarin.RangeSlider.Forms
 
         public static readonly BindableProperty TextFormatProperty =
             BindableProperty.Create(TextFormatPropertyName, typeof(string), typeof(RangeSlider), "F0");
+
+        public static readonly BindableProperty FormatLabelProperty =
+            BindableProperty.Create(FormatLabelPropertyName, typeof(Func<Thumb, float, string>), typeof(RangeSlider), null);
 
         public float MinimumValue
         {
@@ -130,7 +134,11 @@ namespace Xamarin.RangeSlider.Forms
             set { SetValue(TextFormatProperty, value); }
         }
 
-        public Func<Thumb, float, string> FormatLabel { get; set; }
+        public Func<Thumb, float, string> FormatLabel
+        {
+            get { return (Func<Thumb, float, string>)GetValue(FormatLabelProperty); }
+            set { SetValue(FormatLabelProperty, value); }
+        }
 
         public event EventHandler LowerValueChanged;
         public event EventHandler UpperValueChanged;
