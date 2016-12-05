@@ -26,7 +26,7 @@ Task("Pack-NugetPackages")
 {
     CreateDirectory(nugetPackagesDir);
     NuGetPack("./Xamarin.RangeSlider.nuspec", nuGetPackSettings);
-	   NuGetPack("./Xamarin.Forms.RangeSlider.nuspec", nuGetPackSettings);
+	NuGetPack("./Xamarin.Forms.RangeSlider.nuspec", nuGetPackSettings);
 });
 
 Task("Default")
