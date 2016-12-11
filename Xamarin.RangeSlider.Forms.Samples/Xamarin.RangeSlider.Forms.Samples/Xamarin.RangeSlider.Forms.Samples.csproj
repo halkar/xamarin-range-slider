@@ -78,6 +78,10 @@
       <Project>{31fb7c44-71bc-4f27-9136-01a5192aac9b}</Project>
       <Name>Xamarin.RangeSlider.Forms</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Xamarin.RangeSlider.Common\Xamarin.RangeSlider.Common.csproj">
+      <Project>{8EA35996-D247-4847-BC05-5D4BD97B2D7D}</Project>
+      <Name>Xamarin.RangeSlider.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.0.107\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.0.107\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
