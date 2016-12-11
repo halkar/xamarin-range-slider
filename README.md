@@ -27,7 +27,32 @@ You can find NuGet packages [here](https://www.nuget.org/packages/Xamarin.Forms.
 | DragStarted           | User started moving one of the thumbs to changenge value |
 | DragCompleted         | Thumb has been released |
 
+## Supported Delegates
+| Name                  | Description |
+| --------------------- | ----------- | 
+| FormatLabel           | Provide custom formatting for text above thumbs |
+
 ## Screenshots
 | Android | iOS | UWP |
 | ---| --- | --- |
 | <img src="https://raw.githubusercontent.com/halkar/xamarin-range-slider/master/Screenshots/android.png" alt="Android" style="width: 300px;"/> | <img src="https://raw.githubusercontent.com/halkar/xamarin-range-slider/master/Screenshots/ios.png" alt="iOS" style="width: 300px;"/> | <img src="https://raw.githubusercontent.com/halkar/xamarin-range-slider/master/Screenshots/uwp.png" alt="UWP" style="width: 300px;"/> |
+
+## Samples
+### Sample [project](https://github.com/halkar/xamarin-range-slider/tree/master/Xamarin.RangeSlider.Forms.Samples).
+### XAML initialization
+```xml
+<forms:RangeSlider x:Name="RangeSlider" MinimumValue="1" MaximumValue="100" LowerValue="1" UpperValue="100" StepValue="0" StepValueContinuously="False" VerticalOptions="Center" TextSize="15" />
+```
+### Displaying dates
+```csharp
+public MainPage()
+{
+    InitializeComponent();
+    RangeSlider.FormatLabel = FormaLabel;
+}
+
+private string FormaLabel(Thumb thumb, float val)
+{
+    return DateTime.Today.AddDays(val).ToString("d");
+}
+```
