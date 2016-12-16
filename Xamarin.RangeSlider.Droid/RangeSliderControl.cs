@@ -356,8 +356,12 @@ namespace Xamarin.RangeSlider
 
         public void SetRangeValues(float minValue, float maxValue)
         {
+			var oldRange = AbsoluteMaxValue - AbsoluteMinValue;
+			var newRange = maxValue - minValue;
             AbsoluteMinValue = minValue;
             AbsoluteMaxValue = maxValue;
+			SetNormalizedMinValue(RenormalizeValues(oldRange, newRange, NormalizedMinValue), StepValueContinuously);
+			SetNormalizedMaxValue(RenormalizeValues(oldRange, newRange, NormalizedMaxValue), StepValueContinuously);
         }
 
         public void SetTextAboveThumbsColor(Color textAboveThumbsColor)
@@ -413,6 +417,16 @@ namespace Xamarin.RangeSlider
         {
             return NormalizedToValue(NormalizedMinValue);
         }
+
+		/// <summary>
+		/// Renormalizes current values.
+		/// </summary>
+		/// <param name="oldRange">Old range (max to min).</param>
+		/// <param name="newRange">New range (max to min).</param>
+		private float RenormalizeValues(float oldRange, float newRange, float val)
+		{
+			return (val * oldRange) / newRange;
+		}
 
         /// <summary>
         /// Sets the currently selected minimum value. The widget will be Invalidated and redrawn.
