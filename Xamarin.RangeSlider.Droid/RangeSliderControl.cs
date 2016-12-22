@@ -76,6 +76,14 @@ namespace Xamarin.RangeSlider
         private float _barHeight;
         private string _textFormat = "F0";
 
+        private float MinToMaxRange
+        {
+            get
+            {
+                return AbsoluteMaxValue - AbsoluteMinValue;
+            }
+        }
+
         protected RangeSliderControl(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
         }
@@ -356,12 +364,21 @@ namespace Xamarin.RangeSlider
 
         public void SetRangeValues(float minValue, float maxValue)
         {
-			var oldRange = AbsoluteMaxValue - AbsoluteMinValue;
-			var newRange = maxValue - minValue;
+            var oldMinValue = NormalizedToValue(NormalizedMinValue);
+            var oldMaxValue = NormalizedToValue(NormalizedMaxValue);
             AbsoluteMinValue = minValue;
             AbsoluteMaxValue = maxValue;
-			SetNormalizedMinValue(RenormalizeValues(oldRange, newRange, NormalizedMinValue), StepValueContinuously);
-			SetNormalizedMaxValue(RenormalizeValues(oldRange, newRange, NormalizedMaxValue), StepValueContinuously);
+            if (Math.Abs(MinToMaxRange) < float.Epsilon)
+            {
+                SetNormalizedMinValue(0f, true, true);
+                SetNormalizedMaxValue(0f, true, true);
+            }
+            else
+            {
+                SetNormalizedMinValue(ValueToNormalized(oldMinValue), true, true);
+                SetNormalizedMaxValue(ValueToNormalized(oldMaxValue), true, true);
+            }
+            Invalidate();
         }
 
         public void SetTextAboveThumbsColor(Color textAboveThumbsColor)
@@ -418,16 +435,6 @@ namespace Xamarin.RangeSlider
             return NormalizedToValue(NormalizedMinValue);
         }
 
-		/// <summary>
-		/// Renormalizes current values.
-		/// </summary>
-		/// <param name="oldRange">Old range (max to min).</param>
-		/// <param name="newRange">New range (max to min).</param>
-		private float RenormalizeValues(float oldRange, float newRange, float val)
-		{
-			return (val * oldRange) / newRange;
-		}
-
         /// <summary>
         /// Sets the currently selected minimum value. The widget will be Invalidated and redrawn.
         /// </summary>
@@ -437,9 +444,9 @@ namespace Xamarin.RangeSlider
             if (_pressedThumb == Thumb.Lower)
                 return;
             // in case absoluteMinValue == absoluteMaxValue, avoid division by zero when normalizing.
-            SetNormalizedMinValue(Math.Abs(AbsoluteMaxValue - AbsoluteMinValue) < float.Epsilon
+            SetNormalizedMinValue(Math.Abs(MinToMaxRange) < float.Epsilon
                 ? 0f
-                : ValueToNormalized(value), true);
+                : ValueToNormalized(value), true, false);
         }
 
         /// <summary>
@@ -460,9 +467,9 @@ namespace Xamarin.RangeSlider
             if (_pressedThumb == Thumb.Upper)
                 return;
             // in case absoluteMinValue == absoluteMaxValue, avoid division by zero when normalizing.
-            SetNormalizedMaxValue(Math.Abs(AbsoluteMaxValue - AbsoluteMinValue) < float.Epsilon
+            SetNormalizedMaxValue(Math.Abs(MinToMaxRange) < float.Epsilon
                 ? 1f
-                : ValueToNormalized(value), true);
+                : ValueToNormalized(value), true, false);
         }
 
         /// <summary>
@@ -613,11 +620,11 @@ namespace Xamarin.RangeSlider
 
             if (Thumb.Lower.Equals(_pressedThumb) && !MinThumbHidden)
             {
-                SetNormalizedMinValue(ScreenToNormalized(x), step);
+                SetNormalizedMinValue(ScreenToNormalized(x), step, true);
             }
             else if (Thumb.Upper.Equals(_pressedThumb) && !MaxThumbHidden)
             {
-                SetNormalizedMaxValue(ScreenToNormalized(x), step);
+                SetNormalizedMaxValue(ScreenToNormalized(x), step, true);
             }
         }
 
@@ -878,9 +885,12 @@ namespace Xamarin.RangeSlider
         /// </summary>
         /// <param name="value">The new normalized min value to set.</param>
         /// <param name="step">If true then value is rounded to <see cref="StepValue"/></param>
-        private void SetNormalizedMinValue(float value, bool step)
+        /// <param name="checkValue">If true check if value falls inside min/max</param>
+        private void SetNormalizedMinValue(float value, bool step, bool checkValue)
         {
-            NormalizedMinValue = Math.Max(0f, Math.Min(1f, Math.Min(value, NormalizedMaxValue)));
+            NormalizedMinValue = checkValue
+                                    ? Math.Max(0f, Math.Min(1f, Math.Min(value, NormalizedMaxValue)))
+                                    : value;
             if (step)
                 NormalizedMinValue = ValueToNormalized(NormalizedToValue(NormalizedMinValue));
             Invalidate();
@@ -891,9 +901,12 @@ namespace Xamarin.RangeSlider
         /// </summary>
         /// <param name="value">The new normalized max value to set.</param>
         /// <param name="step">If true then value is rounded to <see cref="StepValue"/></param>
-        private void SetNormalizedMaxValue(float value, bool step)
+        /// <param name="checkValue">If true check if value falls inside min/max</param>
+        private void SetNormalizedMaxValue(float value, bool step, bool checkValue)
         {
-            NormalizedMaxValue = Math.Max(0f, Math.Min(1f, Math.Max(value, NormalizedMinValue)));
+            NormalizedMaxValue = checkValue
+                                    ? Math.Max(0f, Math.Min(1f, Math.Max(value, NormalizedMinValue)))
+                                    : value;
             if (step)
                 NormalizedMaxValue = ValueToNormalized(NormalizedToValue(NormalizedMaxValue));
             Invalidate();
@@ -904,16 +917,12 @@ namespace Xamarin.RangeSlider
         /// </summary>
         protected float NormalizedToValue(float normalized)
         {
-            var v = AbsoluteMinValue + normalized * (AbsoluteMaxValue - AbsoluteMinValue);
+            var v = AbsoluteMinValue + normalized * MinToMaxRange;
             // TODO parameterize this rounding to allow variable decimal points
             if (Math.Abs(StepValue) < float.Epsilon)
                 return (float)Math.Round(v * 100) / 100f;
             var normalizedToValue = (float)Math.Round(v / StepValue) * StepValue;
-            if (normalizedToValue < AbsoluteMinValue)
-                normalizedToValue = AbsoluteMinValue;
-            if (normalizedToValue > AbsoluteMaxValue)
-                normalizedToValue = AbsoluteMaxValue;
-            return normalizedToValue;
+            return Math.Max(AbsoluteMinValue, Math.Min(AbsoluteMaxValue, normalizedToValue));
         }
 
         /// <summary>
@@ -923,12 +932,12 @@ namespace Xamarin.RangeSlider
         /// <returns>The normalized float.</returns>
         protected float ValueToNormalized(float value)
         {
-            if (Math.Abs(AbsoluteMaxValue - AbsoluteMinValue) < float.Epsilon)
+            if (Math.Abs(MinToMaxRange) < float.Epsilon)
             {
                 // prev division by zero, simply return 0.
                 return 0f;
             }
-            return (value - AbsoluteMinValue) / (AbsoluteMaxValue - AbsoluteMinValue);
+            return (value - AbsoluteMinValue) / MinToMaxRange;
         }
 
         private void UpdateTextOffset()
