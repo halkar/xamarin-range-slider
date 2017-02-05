@@ -271,7 +271,7 @@ namespace Xamarin.RangeSlider
                     TextAboveThumbsColor = a.GetColor(Resource.Styleable.RangeSliderControl_textAboveThumbsColor, Color.White);
                     MinThumbHidden = a.GetBoolean(Resource.Styleable.RangeSliderControl_minThumbHidden, false);
                     MaxThumbHidden = a.GetBoolean(Resource.Styleable.RangeSliderControl_maxThumbHidden, false);
-                    ShowLabels = a.GetBoolean(Resource.Styleable.RangeSliderControl_showLabels, true);
+                    ShowLabels = a.GetBoolean(Resource.Styleable.RangeSliderControl_showRangeLabels, true);
                     _internalPad = a.GetDimensionPixelSize(Resource.Styleable.RangeSliderControl_internalPadding, InitialPaddingInDp);
                     _barHeight = a.GetDimensionPixelSize(Resource.Styleable.RangeSliderControl_barHeight, LineHeightInDp);
                     ActiveColor = a.GetColor(Resource.Styleable.RangeSliderControl_activeColor, DefaultActiveColor);

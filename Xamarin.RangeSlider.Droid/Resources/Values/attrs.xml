@@ -10,7 +10,7 @@
 		<!-- show a single max slider -->
 		<attr name="maxThumbHidden" format="boolean" />
 		<!-- show the labels on the right and left-->
-		<attr name="showLabels" format="boolean" />
+		<attr name="showRangeLabels" format="boolean" />
 		<!-- alwaysActive will make the buttons and bar always draw as the activeColor (the default is false) -->
 		<attr name="alwaysActive" format="boolean" />
 		<!-- show the currently selected value above each thumb (defaults to true) -->
