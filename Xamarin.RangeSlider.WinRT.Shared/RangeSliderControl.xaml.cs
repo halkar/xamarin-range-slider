@@ -138,6 +138,7 @@ namespace Xamarin.RangeSlider
         }
 
         public Func<Thumb, float, string> FormatLabel { get; set; }
+        public bool IgnoreRangeChecks { get; set; }
 
         public event EventHandler LowerValueChanged;
         public event EventHandler UpperValueChanged;
@@ -152,23 +153,10 @@ namespace Xamarin.RangeSlider
             var slider = (RangeSliderControl) d;
             var newValue = (double) e.NewValue;
 
-            if (newValue < slider.Minimum)
-            {
-                slider.RangeMin = slider.Minimum;
-            }
-            else if (newValue > slider.Maximum)
-            {
-                slider.RangeMin = slider.Maximum;
-            }
-            else
-            {
+            if (slider.IgnoreRangeChecks)
                 slider.RangeMin = newValue;
-            }
-
-            if (slider.RangeMin > slider.RangeMax)
-            {
-                slider.RangeMax = slider.RangeMin;
-            }
+            else
+                slider.ValidateMinValue(newValue);
 
             slider.UpdateMinThumb(slider.RangeMin);
 
@@ -180,23 +168,10 @@ namespace Xamarin.RangeSlider
             var slider = (RangeSliderControl) d;
             var newValue = (double) e.NewValue;
 
-            if (newValue < slider.Minimum)
-            {
-                slider.RangeMax = slider.Minimum;
-            }
-            else if (newValue > slider.Maximum)
-            {
-                slider.RangeMax = slider.Maximum;
-            }
-            else
-            {
+            if (slider.IgnoreRangeChecks)
                 slider.RangeMax = newValue;
-            }
-
-            if (slider.RangeMax < slider.RangeMin)
-            {
-                slider.RangeMin = slider.RangeMax;
-            }
+            else
+                slider.ValidateMaxValue(newValue);
 
             slider.UpdateMaxThumb(slider.RangeMax);
 
@@ -412,6 +387,31 @@ namespace Xamarin.RangeSlider
             UpdateTextContainerSize();
             Canvas.SetLeft(MinThumbText, ValueToRelativeLeft(RangeMin) - MinThumbText.ActualWidth / 2);
             Canvas.SetLeft(MaxThumbText, ValueToRelativeLeft(RangeMax) - MaxThumbText.ActualWidth / 2);
+        }
+        public void ValidateMinValue(double value)
+        {
+            if (value < Minimum)
+                RangeMin = Minimum;
+            else if (value > Maximum)
+                RangeMin = Maximum;
+            else
+                RangeMin = value;
+
+            if (RangeMin > RangeMax)
+                RangeMax = RangeMin;
+        }
+
+        public void ValidateMaxValue(double value)
+        {
+            if (value < Minimum)
+                RangeMax = Minimum;
+            else if (value > Maximum)
+                RangeMax = Maximum;
+            else
+                RangeMax = value;
+
+            if (RangeMax < RangeMin)
+                RangeMin = RangeMax;
         }
     }
 }

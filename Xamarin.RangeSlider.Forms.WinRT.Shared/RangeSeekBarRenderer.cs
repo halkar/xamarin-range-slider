@@ -52,6 +52,7 @@ namespace Xamarin.RangeSlider.Forms
 
         private void UpdateControl(RangeSliderControl control, RangeSlider element)
         {
+            control.IgnoreRangeChecks = true;
             control.Minimum = element.MinimumValue;
             control.Maximum = element.MaximumValue;
             control.RangeMin = element.LowerValue;
@@ -66,6 +67,9 @@ namespace Xamarin.RangeSlider.Forms
             control.TextSize = (int) element.TextSize;
             control.TextFormat = element.TextFormat;
             control.FormatLabel = element.FormatLabel;
+            control.IgnoreRangeChecks = false;
+            control.ValidateMinValue(element.LowerValue);
+            control.ValidateMaxValue(element.UpperValue);
         }
 
         private void RangeSlider_UpperValueChanged(object sender, EventArgs e)
