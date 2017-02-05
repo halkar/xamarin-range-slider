@@ -5,6 +5,7 @@ using Android.Content.Res;
 using Android.Graphics;
 using Android.OS;
 using Android.Runtime;
+using Android.Support.V4.Content;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
@@ -389,7 +390,7 @@ namespace Xamarin.RangeSlider
 
         public void SetTextAboveThumbsColorResource(int resId)
         {
-            SetTextAboveThumbsColor(Resources.GetColor(resId, Context.Theme));
+            SetTextAboveThumbsColor(new Color(ContextCompat.GetColor(Context, resId)));
         }
 
 
