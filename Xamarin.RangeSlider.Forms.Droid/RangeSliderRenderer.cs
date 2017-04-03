@@ -13,6 +13,7 @@ namespace Xamarin.RangeSlider.Forms
     [Preserve(AllMembers = true)]
     public class RangeSliderRenderer : ViewRenderer<RangeSlider, RangeSliderControl>
     {
+        private bool _gestureEnabledPreviousState;
         protected override void OnElementChanged(ElementChangedEventArgs<RangeSlider> e)
         {
             base.OnElementChanged(e);
@@ -36,12 +37,14 @@ namespace Xamarin.RangeSlider.Forms
 
         private void RangeSeekBarDragCompleted(object sender, EventArgs e)
         {
+            RestoreGestures();
             Element.OnDragCompleted();
         }
 
         private void RangeSeekBarDragStarted(object sender, EventArgs e)
         {
             Element.OnDragStarted();
+            DisableGestures();
         }
 
         private void UpdateControl(RangeSliderControl control, RangeSlider element)
@@ -126,6 +129,26 @@ namespace Xamarin.RangeSlider.Forms
         private void RangeSeekBarLowerValueChanged(object sender, EventArgs e)
         {
             Element.OnLowerValueChanged(Control.GetSelectedMinValue());
+        }
+
+        // TODO find less weird hack to make slider work on Master-Detail page
+        private void DisableGestures()
+        {
+            var masterDetailPage = Application.Current.MainPage as MasterDetailPage;
+            if (masterDetailPage != null)
+            {
+                _gestureEnabledPreviousState = masterDetailPage.IsGestureEnabled;
+                masterDetailPage.IsGestureEnabled = false;
+            }
+        }
+
+        private void RestoreGestures()
+        {
+            var masterDetailPage = Application.Current.MainPage as MasterDetailPage;
+            if (masterDetailPage != null)
+            {
+                masterDetailPage.IsGestureEnabled = _gestureEnabledPreviousState;
+            }
         }
     }
 }
