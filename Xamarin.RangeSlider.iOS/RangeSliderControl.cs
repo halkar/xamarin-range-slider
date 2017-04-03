@@ -811,12 +811,12 @@ namespace Xamarin.RangeSlider
             _lowerHandleLabel.Text = ValueToString(LowerValue, Thumb.Lower);
             _lowerHandleLabel.Font = UIFont.SystemFontOfSize(_textSize);
             _lowerHandleLabel.Frame = HandleLabelRect(_lowerHandleLabel, _lowerHandle.Frame);
-            _lowerHandleLabel.Hidden = !ShowTextAboveThumbs;
+            _lowerHandleLabel.Hidden = !ShowTextAboveThumbs || _lowerHandleHidden;
 
             _upperHandleLabel.Text = ValueToString(UpperValue, Thumb.Upper);
             _upperHandleLabel.Font = UIFont.SystemFontOfSize(_textSize);
             _upperHandleLabel.Frame = HandleLabelRect(_upperHandleLabel, _upperHandle.Frame);
-            _upperHandleLabel.Hidden = !ShowTextAboveThumbs;
+            _upperHandleLabel.Hidden = !ShowTextAboveThumbs || _upperHandleHidden;
         }
 
         public override bool BeginTracking(UITouch uitouch, UIEvent uievent)
