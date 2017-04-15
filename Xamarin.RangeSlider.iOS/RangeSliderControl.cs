@@ -70,6 +70,14 @@ namespace Xamarin.RangeSlider
         private bool _showTextAboveThumbs;
         private float _textSize = 10;
         private string _textFormat = "F0";
+        private float _lowerValue;
+        private float _maximumValue;
+        private float _minimumRange;
+        private float _minimumValue;
+        private bool _continuous;
+        private float _stepValue;
+        private bool _stepValueContinuously;
+        private float _upperValue;
 
 
         public RangeSliderControl()
@@ -97,39 +105,87 @@ namespace Xamarin.RangeSlider
         /// </summary>
         [Export("Continuous")]
         [Browsable(true)]
-        public bool Continuous { get; set; }
+        public bool Continuous
+        {
+            get { return _continuous; }
+            set
+            {
+                _continuous = value;
+                SetNeedsLayout();
+            }
+        }
 
         /// <summary>
         ///     default 0.0. this value will be pinned to min/max
         /// </summary>
         [Export("LowerValue")]
         [Browsable(true)]
-        public float LowerValue { get; set; }
+        public float LowerValue
+        {
+            get { return _lowerValue; }
+            set
+            {
+                _lowerValue = value;
+                SetNeedsLayout();
+            }
+        }
 
         /// <summary>
         ///     default 1.0
         /// </summary>
         [Export("MaximumValue")]
         [Browsable(true)]
-        public float MaximumValue { get; set; }
+        public float MaximumValue
+        {
+            get { return _maximumValue; }
+            set
+            {
+                _maximumValue = value;
+                SetNeedsLayout();
+            }
+        }
 
         /// <summary>
         ///     default 0.0. This is the minimum distance between between the upper and lower values
         /// </summary>
         [Export("MinimumRange")]
         [Browsable(true)]
-        public float MinimumRange { get; set; }
+        public float MinimumRange
+        {
+            get { return _minimumRange; }
+            set
+            {
+                _minimumRange = value;
+                SetNeedsLayout();
+            }
+        }
 
         [Export("MinimumValue")]
         [Browsable(true)]
-        public float MinimumValue { get; set; }
+        public float MinimumValue
+        {
+            get { return _minimumValue; }
+            set
+            {
+                _minimumValue = value;
+                SetNeedsLayout();
+            }
+        }
 
         /// <summary>
         ///     default 0.0 (disabled)
         /// </summary>
         [Export("StepValue")]
         [Browsable(true)]
-        public float StepValue { get; set; }
+        public float StepValue
+        {
+            get { return _stepValue; }
+            set
+            {
+                _stepValue = value;
+                SetNeedsLayout();
+            }
+        }
 
         /// <summary>
         /// If false the slider will move freely with the tounch. When the touch ends, the value will snap to the nearest step value
@@ -138,14 +194,30 @@ namespace Xamarin.RangeSlider
         /// </summary>
         [Export("StepValueContinuously")]
         [Browsable(true)]
-        public bool StepValueContinuously { get; set; }
+        public bool StepValueContinuously
+        {
+            get { return _stepValueContinuously; }
+            set
+            {
+                _stepValueContinuously = value;
+                SetNeedsLayout();
+            }
+        }
 
         /// <summary>
         ///     default 1.0. this value will be pinned to min/max
         /// </summary>
         [Export("UpperValue")]
         [Browsable(true)]
-        public float UpperValue { get; set; }
+        public float UpperValue
+        {
+            get { return _upperValue; }
+            set
+            {
+                _upperValue = value;
+                SetNeedsLayout();
+            }
+        }
 
         [Export("LowerHandleHidden")]
         [Browsable(true)]
