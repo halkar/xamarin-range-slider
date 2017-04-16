@@ -1,4 +1,4 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/b90itu0lka0fj1sv/branch/master?svg=true)](https://ci.appveyor.com/project/halkar/xamarin-range-slider/branch/master)
+﻿[![Build status](https://ci.appveyor.com/api/projects/status/b90itu0lka0fj1sv/branch/master?svg=true)](https://ci.appveyor.com/project/halkar/xamarin-range-slider/branch/master)
 # Xamarin.RangeSlider
 With Xamarin.RangeSlider you can pick ranges in Xamarin and Xamarin.Forms (Android, iOS, UWP, Win8 supported).
 Project is based on https://github.com/anothem/android-range-seek-bar (Android) and on https://github.com/muZZkat/NMRangeSlider (iOS).
@@ -54,5 +54,101 @@ public MainPage()
 private string FormaLabel(Thumb thumb, float val)
 {
     return DateTime.Today.AddDays(val).ToString("d");
+}
+```
+
+## Customization
+### Android
+#### Change thumb image
+```csharp
+using Android.Graphics;
+using Android.Graphics.Drawables;
+using Xamarin.Forms;
+using Xamarin.Forms.Platform.Android;
+
+[assembly: ExportEffect(typeof(Droid.Effects.RangeSliderEffect), nameof(Droid.Effects.RangeSliderEffect))]
+
+namespace Droid.Effects
+{
+    public class RangeSliderEffect : PlatformEffect
+    {
+        protected override void OnAttached()
+        {
+            var themeColor = Xamarin.Forms.Color.Fuchsia.ToAndroid();
+            var ctrl = (Xamarin.RangeSlider.RangeSliderControl)Control;
+            ctrl.ActiveColor = themeColor;
+
+            var thumbImage = new BitmapDrawable(ctrl.ThumbImage);
+            thumbImage.SetColorFilter(new PorterDuffColorFilter(themeColor, PorterDuff.Mode.SrcIn));
+            ctrl.ThumbImage = ConvertToBitmap(thumbImage, ctrl.ThumbImage.Width, ctrl.ThumbImage.Height);
+
+            var thumbPressedImage = new BitmapDrawable(ctrl.ThumbPressedImage);
+            thumbPressedImage.SetColorFilter(new PorterDuffColorFilter(themeColor, PorterDuff.Mode.SrcIn));
+            ctrl.ThumbPressedImage = ConvertToBitmap(thumbPressedImage, ctrl.ThumbPressedImage.Width, ctrl.ThumbPressedImage.Height);
+        }
+
+        protected override void OnDetached()
+        {
+        }
+
+        private static Bitmap ConvertToBitmap(Drawable drawable, int widthPixels, int heightPixels)
+        {
+            var mutableBitmap = Bitmap.CreateBitmap(widthPixels, heightPixels, Bitmap.Config.Argb8888);
+            var canvas = new Canvas(mutableBitmap);
+            drawable.SetBounds(0, 0, widthPixels, heightPixels);
+            drawable.Draw(canvas);
+            return mutableBitmap;
+        }
+    }
+}
+```
+#### Change bar color
+```csharp
+using Xamarin.Forms;
+using Xamarin.Forms.Platform.Android;
+
+[assembly: ExportEffect(typeof(Droid.Effects.RangeSliderEffect), nameof(Droid.Effects.RangeSliderEffect))]
+
+namespace Droid.Effects
+{
+    public class RangeSliderEffect : PlatformEffect
+    {
+        protected override void OnAttached()
+        {
+            var ctrl = (Xamarin.RangeSlider.RangeSliderControl)Control;
+            ctrl.DefaultColor = Color.Fuchsia.ToAndroid();
+            ctrl.ActiveColor = Color.Aqua.ToAndroid();
+        }
+
+        protected override void OnDetached()
+        {
+        }
+    }
+}
+```
+### iOS
+#### Change thumb image
+Just replace handle images in the `Resources` folder.
+#### Change bar color
+```csharp
+using Xamarin.Forms;
+using Xamarin.Forms.Platform.iOS;
+
+[assembly: ExportEffect(typeof(iOS.Effects.RangeSliderEffect), nameof(iOS.Effects.RangeSliderEffect))]
+
+namespace iOS.Effects
+{
+    public class RangeSliderEffect : PlatformEffect
+    {
+        protected override void OnAttached()
+        {
+            var ctrl = (Xamarin.RangeSlider.RangeSliderControl)Control;
+            ctrl.TintColor = Color.Fuchsia.ToUIColor();
+        }
+
+        protected override void OnDetached()
+        {
+        }
+    }
 }
 ```
