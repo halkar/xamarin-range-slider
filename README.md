@@ -154,7 +154,7 @@ namespace iOS.Effects
 ```
 ## Using Range Slider in native UI
 ### iOS
-Just pick throw the element on your storyboard in visual editor.
+Just throw the element on your storyboard in visual editor.
 ### Android
 #### Activity
 ```csharp
