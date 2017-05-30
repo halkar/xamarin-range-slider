@@ -152,3 +152,43 @@ namespace iOS.Effects
     }
 }
 ```
+## Using Range Slider in native UI
+### iOS
+Just pick throw the element on your storyboard in visual editor.
+### Android
+#### Activity
+```csharp
+protected override void OnCreate(Bundle savedInstanceState)
+{
+    base.OnCreate(savedInstanceState);
+
+    // Set our view from the "main" layout resource
+    SetContentView(Resource.Layout.Main);
+
+    var slider = FindViewById<Xamarin.RangeSlider.RangeSliderControl>(Resource.Id.slider);
+    slider.SetSelectedMinValue(11);
+    slider.SetSelectedMaxValue(16);
+}
+```
+#### .axml
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res/YOUR.PACKAGE.NAME"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minWidth="25px"
+    android:minHeight="25px">
+    <xamarin.rangeslider.RangeSliderControl
+        android:id="@+id/slider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        local:absoluteMinValue="10"
+        local:absoluteMaxValue="20"
+        local:showRangeLabels="false"
+        local:barHeight="1dp"
+    />
+</LinearLayout>
+```
+List of available attributes can be found [here](https://github.com/halkar/xamarin-range-slider/blob/master/Xamarin.RangeSlider.Droid/Resources/Values/attrs.xml).
