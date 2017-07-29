@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
         <id>Xamarin.Forms.RangeSlider</id>
-        <version>0.6.17</version>
+        <version>0.6.18</version>
         <title>Xamarin.Forms.RangeSlider</title>
         <authors>Artur Shamsutdinov</authors>
         <projectUrl>https://github.com/halkar/xamarin-range-slider</projectUrl>
@@ -11,7 +11,7 @@
         <tags>xamarin range slider xamarin.forms</tags>
         <dependencies>
             <dependency id="Xamarin.Forms" version="2.3.0" />
-            <dependency id="Xamarin.RangeSlider" version="0.6.17" />
+            <dependency id="Xamarin.RangeSlider" version="0.6.18" />
         </dependencies>
     </metadata>
     <files>

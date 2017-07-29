@@ -78,12 +78,12 @@ namespace Xamarin.RangeSlider.Forms
 
         private void RangeSlider_UpperValueChanged(object sender, EventArgs e)
         {
-            Element.UpperValue = (float)Control.RangeMax;
+            Element.OnUpperValueChanged((float)Control.RangeMax);
         }
 
         private void RangeSlider_LowerValueChanged(object sender, EventArgs e)
         {
-            Element.LowerValue = (float)Control.RangeMin;
+            Element.OnLowerValueChanged((float)Control.RangeMin);
         }
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)

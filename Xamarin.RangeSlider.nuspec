@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>Xamarin.RangeSlider</id>
-        <version>0.6.17</version>
+        <version>0.6.18</version>
         <title>Xamarin.RangeSlider</title>
         <authors>Artur Shamsutdinov</authors>
         <projectUrl>https://github.com/halkar/xamarin-range-slider</projectUrl>
