@@ -38,12 +38,14 @@ Task("Update-Version")
             OutputType = GitVersionOutput.BuildServer
         });
         var versionInfo = GitVersion(new GitVersionSettings{ OutputType = GitVersionOutput.Json });
-		Information("MajorMinorPatch: {0}", versionInfo.MajorMinorPatch);
-		Information("FullSemVer: {0}", versionInfo.FullSemVer);
-		Information("InformationalVersion: {0}", versionInfo.InformationalVersion);
-		Information("LegacySemVer: {0}", versionInfo.LegacySemVer);
-		Information("Nuget v1 version: {0}", versionInfo.NuGetVersion);
-		Information("Nuget v2 version: {0}", versionInfo.NuGetVersionV2);
+		var files = GetFiles("./*.nuspec");
+		foreach(var file in files)
+		{
+			Information("Updating {0} with MajorMinorPatch: {1}", file, versionInfo.MajorMinorPatch);
+			TransformTextFile(file)
+				.WithToken("version", versionInfo.MajorMinorPatch)
+				.Save(file);
+		}
     });
 
 Task("Default")
