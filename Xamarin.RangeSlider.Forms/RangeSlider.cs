@@ -20,6 +20,7 @@ namespace Xamarin.RangeSlider.Forms
         public const string ShowTextAboveThumbsPropertyName = "ShowTextAboveThumbs";
         public const string TextSizePropertyName = "TextSize";
         public const string TextFormatPropertyName = "TextFormat";
+        public const string TextColorPropertyName = "TextColor";
         public const string FormatLabelPropertyName = "FormatLabel";
 
         public static readonly BindableProperty LowerValueProperty =
@@ -58,8 +59,11 @@ namespace Xamarin.RangeSlider.Forms
         public static readonly BindableProperty TextFormatProperty =
             BindableProperty.Create(TextFormatPropertyName, typeof(string), typeof(RangeSlider), "F0");
 
+        public static readonly BindableProperty TextColorProperty =
+            BindableProperty.Create(TextColorPropertyName, typeof(Color), typeof(RangeSlider), Color.Default);
+
         public static readonly BindableProperty FormatLabelProperty =
-            BindableProperty.Create(FormatLabelPropertyName, typeof(Func<Thumb, float, string>), typeof(RangeSlider), null);
+            BindableProperty.Create(FormatLabelPropertyName, typeof(Func<Thumb, float, string>), typeof(RangeSlider));
 
         public float MinimumValue
         {
@@ -126,6 +130,12 @@ namespace Xamarin.RangeSlider.Forms
         {
             get { return (double)GetValue(TextSizeProperty); }
             set { SetValue(TextSizeProperty, value); }
+        }
+
+        public Color TextColor
+        {
+            get { return (Color)GetValue(TextColorProperty); }
+            set { SetValue(TextColorProperty, value); }
         }
 
         public string TextFormat

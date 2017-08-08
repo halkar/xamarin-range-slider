@@ -55,6 +55,8 @@ namespace Xamarin.RangeSlider.Forms
             control.ShowTextAboveThumbs = element.ShowTextAboveThumbs;
             control.TextSize = (float)element.TextSize;
             control.TextFormat = element.TextFormat;
+            if (element.TextColor != Color.Default)
+                control.TextColor = element.TextColor.ToUIColor();
             control.FormatLabel = element.FormatLabel;
         }
 
@@ -97,6 +99,10 @@ namespace Xamarin.RangeSlider.Forms
                     break;
                 case RangeSlider.TextFormatPropertyName:
                     Control.TextFormat = Element.TextFormat;
+                    break;
+                case RangeSlider.TextColorPropertyName:
+                    if (Element.TextColor != Color.Default)
+                        Control.TextColor = Element.TextColor.ToUIColor();
                     break;
                 case RangeSlider.FormatLabelPropertyName:
                     Control.FormatLabel = Element.FormatLabel;
