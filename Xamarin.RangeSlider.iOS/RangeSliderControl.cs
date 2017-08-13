@@ -70,6 +70,7 @@ namespace Xamarin.RangeSlider
         private bool _showTextAboveThumbs;
         private float _textSize = 10;
         private string _textFormat = "F0";
+        private UIColor _textColor;
         private float _lowerValue;
         private float _maximumValue;
         private float _minimumRange;
@@ -281,6 +282,18 @@ namespace Xamarin.RangeSlider
             set
             {
                 _textFormat = string.IsNullOrWhiteSpace(value) ? "F0" : value;
+                SetNeedsLayout();
+            }
+        }
+
+        [Export("TextColor")]
+        [Browsable(true)]
+        public UIColor TextColor
+        {
+            get { return _textColor; }
+            set
+            {
+                _textColor = value;
                 SetNeedsLayout();
             }
         }
@@ -840,12 +853,20 @@ namespace Xamarin.RangeSlider
                 Hidden = !ShowTextAboveThumbs,
                 Font = UIFont.SystemFontOfSize(_textSize)
             };
+
             _upperHandleLabel = new UILabel
             {
                 Text = "123",
                 Hidden = !ShowTextAboveThumbs,
-                Font = UIFont.SystemFontOfSize(_textSize)
+                Font = UIFont.SystemFontOfSize(_textSize),
+                TextColor = _textColor
             };
+
+            if (_textColor != null)
+            {
+                _lowerHandleLabel.TextColor = _textColor;
+                _upperHandleLabel.TextColor = _textColor;
+            }
 
             AddSubview(_trackBackground);
             AddSubview(_track);
@@ -889,6 +910,12 @@ namespace Xamarin.RangeSlider
             _upperHandleLabel.Font = UIFont.SystemFontOfSize(_textSize);
             _upperHandleLabel.Frame = HandleLabelRect(_upperHandleLabel, _upperHandle.Frame);
             _upperHandleLabel.Hidden = !ShowTextAboveThumbs || _upperHandleHidden;
+
+            if (_textColor != null)
+            {
+                _lowerHandleLabel.TextColor = _textColor;
+                _upperHandleLabel.TextColor = _textColor;
+            }
         }
 
         public override bool BeginTracking(UITouch uitouch, UIEvent uievent)

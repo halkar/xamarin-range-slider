@@ -1,8 +1,10 @@
 ﻿using System;
 using System.ComponentModel;
+using Windows.UI;
 using Xamarin.Forms;
 using Xamarin.RangeSlider.Forms;
 using Xamarin.Forms.Internals;
+using Color = Windows.UI.Color;
 using RangeSlider = Xamarin.RangeSlider.Forms.RangeSlider;
 
 #if WINDOWS_APP || WINDOWS_PHONE_APP
@@ -70,6 +72,8 @@ namespace Xamarin.RangeSlider.Forms
             control.ShowTextAboveThumbs = element.ShowTextAboveThumbs;
             control.TextSize = (int) element.TextSize;
             control.TextFormat = element.TextFormat;
+            if (element.TextColor != Xamarin.Forms.Color.Default)
+                control.TextColor = Color.FromArgb((byte)(element.TextColor.A * 255), (byte)(element.TextColor.R * 255), (byte)(element.TextColor.G * 255), (byte)(element.TextColor.B * 255));
             control.FormatLabel = element.FormatLabel;
             control.IgnoreRangeChecks = false;
             control.ValidateMinValue(element.LowerValue);
@@ -127,6 +131,10 @@ namespace Xamarin.RangeSlider.Forms
                     break;
                 case RangeSlider.TextFormatPropertyName:
                     Control.TextFormat = Element.TextFormat;
+                    break;
+                case RangeSlider.TextColorPropertyName:
+                    if (Element.TextColor != Xamarin.Forms.Color.Default)
+                        Control.TextColor = Color.FromArgb((byte)(Element.TextColor.A * 255), (byte)(Element.TextColor.R * 255), (byte)(Element.TextColor.G * 255), (byte)(Element.TextColor.B * 255));
                     break;
                 case RangeSlider.FormatLabelPropertyName:
                     Control.FormatLabel = Element.FormatLabel;

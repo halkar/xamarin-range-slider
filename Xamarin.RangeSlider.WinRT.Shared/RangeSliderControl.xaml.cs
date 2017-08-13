@@ -24,6 +24,7 @@ namespace Xamarin.RangeSlider
         public const string ShowTextAboveThumbsPropertyName = "ShowTextAboveThumbs";
         public const string TextSizePropertyName = "TextSize";
         public const string TextFormatPropertyName = "TextFormat";
+        public const string TextColorPropertyName = "TextColor";
 
         public const int ControlHeight = 32;
 
@@ -59,6 +60,9 @@ namespace Xamarin.RangeSlider
 
         public static readonly DependencyProperty TextFormatProperty = DependencyProperty.Register(TextFormatPropertyName,
             typeof(string), typeof(RangeSliderControl), new PropertyMetadata("F0", TextFormatPropertyChanged));
+
+        public static readonly DependencyProperty TextColorProperty = DependencyProperty.Register(TextColorPropertyName,
+            typeof(Color?), typeof(RangeSliderControl), new PropertyMetadata(null, TextColorPropertyChanged));
 
         public RangeSliderControl()
         {
@@ -129,6 +133,12 @@ namespace Xamarin.RangeSlider
         {
             get { return (int)GetValue(TextSizeProperty); }
             set { SetValue(TextSizeProperty, value); }
+        }
+
+        public Color? TextColor
+        {
+            get { return (Color?)GetValue(TextColorProperty); }
+            set { SetValue(TextColorProperty, value); }
         }
 
         public string TextFormat
@@ -206,6 +216,14 @@ namespace Xamarin.RangeSlider
             var slider = (RangeSliderControl)d;
             slider.UpdateMinThumb(slider.RangeMin);
             slider.UpdateMaxThumb(slider.RangeMax);
+        }
+
+        private static void TextColorPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var slider = (RangeSliderControl)d;
+            var newValue = (Color)e.NewValue;
+            slider.MinThumbText.Foreground = new SolidColorBrush(newValue);
+            slider.MaxThumbText.Foreground = new SolidColorBrush(newValue);
         }
 
         private static void ShowTextAboveThumbsPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
