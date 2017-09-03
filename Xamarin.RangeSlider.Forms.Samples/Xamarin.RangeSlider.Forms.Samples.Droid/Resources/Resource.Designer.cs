@@ -26,6 +26,7 @@ namespace Xamarin.RangeSlider.Forms.Samples.Droid
 		
 		public static void UpdateIdValues()
 		{
+			global::Xamarin.Forms.Platform.Android.Resource.Attribute.actionBarSize = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.actionBarSize;
 			global::Xamarin.RangeSlider.Resource.Attribute.absoluteMaxValue = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.absoluteMaxValue;
 			global::Xamarin.RangeSlider.Resource.Attribute.absoluteMinValue = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.absoluteMinValue;
 			global::Xamarin.RangeSlider.Resource.Attribute.activateOnDefaultValues = global::Xamarin.RangeSlider.Forms.Samples.Droid.Resource.Attribute.activateOnDefaultValues;
