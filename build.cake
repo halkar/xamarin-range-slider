@@ -1,12 +1,15 @@
+#tool "nuget:?package=vswhere"
 #tool "nuget:?package=GitVersion.CommandLine"
 
 var target = Argument("target", "Default");
 var nugetPackagesDir = Directory("./artifacts");
+var msBuildPath = VSWhereLatest().CombineWithFilePath("./MSBuild/15.0/Bin/MSBuild.exe");
+var solution = "./Xamarin.RangeSlider.sln";
 
 Task("Restore-NuGet-Packages")
     .Does(() =>
 {
-    NuGetRestore("./Xamarin.RangeSlider.sln");
+    NuGetRestore(solution);
 });
 
 Task("Build")
@@ -14,7 +17,12 @@ Task("Build")
 	.IsDependentOn("Restore-NuGet-Packages")
 	.Does (() =>
 {
-    DotNetBuild("./Xamarin.RangeSlider.sln", c => c.Configuration = "Release");
+    MSBuild(solution, new MSBuildSettings() {
+            ToolPath = msBuildPath
+        }
+        .SetConfiguration("Release")
+        .SetVerbosity(Verbosity.Minimal)
+        .SetNodeReuse(false));
 });
 
 var nuGetPackSettings = new NuGetPackSettings
