@@ -3900,41 +3900,41 @@ namespace Xamarin.RangeSlider.Forms
 		public partial class Style
 		{
 			
-			// aapt resource value: 0x7f0b00aa
-			public static int AlertDialog_AppCompat = 2131427498;
-			
-			// aapt resource value: 0x7f0b00ab
-			public static int AlertDialog_AppCompat_Light = 2131427499;
-			
 			// aapt resource value: 0x7f0b00ac
-			public static int Animation_AppCompat_Dialog = 2131427500;
+			public static int AlertDialog_AppCompat = 2131427500;
 			
 			// aapt resource value: 0x7f0b00ad
-			public static int Animation_AppCompat_DropDownUp = 2131427501;
+			public static int AlertDialog_AppCompat_Light = 2131427501;
+			
+			// aapt resource value: 0x7f0b00ae
+			public static int Animation_AppCompat_Dialog = 2131427502;
+			
+			// aapt resource value: 0x7f0b00af
+			public static int Animation_AppCompat_DropDownUp = 2131427503;
 			
 			// aapt resource value: 0x7f0b016e
 			public static int Animation_Design_BottomSheetDialog = 2131427694;
 			
-			// aapt resource value: 0x7f0b00ae
-			public static int Base_AlertDialog_AppCompat = 2131427502;
-			
-			// aapt resource value: 0x7f0b00af
-			public static int Base_AlertDialog_AppCompat_Light = 2131427503;
-			
 			// aapt resource value: 0x7f0b00b0
-			public static int Base_Animation_AppCompat_Dialog = 2131427504;
+			public static int Base_AlertDialog_AppCompat = 2131427504;
 			
 			// aapt resource value: 0x7f0b00b1
-			public static int Base_Animation_AppCompat_DropDownUp = 2131427505;
+			public static int Base_AlertDialog_AppCompat_Light = 2131427505;
+			
+			// aapt resource value: 0x7f0b00b2
+			public static int Base_Animation_AppCompat_Dialog = 2131427506;
+			
+			// aapt resource value: 0x7f0b00b3
+			public static int Base_Animation_AppCompat_DropDownUp = 2131427507;
 			
 			// aapt resource value: 0x7f0b000c
 			public static int Base_CardView = 2131427340;
 			
-			// aapt resource value: 0x7f0b00b2
-			public static int Base_DialogWindowTitle_AppCompat = 2131427506;
+			// aapt resource value: 0x7f0b00b4
+			public static int Base_DialogWindowTitle_AppCompat = 2131427508;
 			
-			// aapt resource value: 0x7f0b00b3
-			public static int Base_DialogWindowTitleBackground_AppCompat = 2131427507;
+			// aapt resource value: 0x7f0b00b5
+			public static int Base_DialogWindowTitleBackground_AppCompat = 2131427509;
 			
 			// aapt resource value: 0x7f0b004e
 			public static int Base_TextAppearance_AppCompat = 2131427406;
@@ -3990,8 +3990,8 @@ namespace Xamarin.RangeSlider.Forms
 			// aapt resource value: 0x7f0b005b
 			public static int Base_TextAppearance_AppCompat_Menu = 2131427419;
 			
-			// aapt resource value: 0x7f0b00b4
-			public static int Base_TextAppearance_AppCompat_SearchResult = 2131427508;
+			// aapt resource value: 0x7f0b00b6
+			public static int Base_TextAppearance_AppCompat_SearchResult = 2131427510;
 			
 			// aapt resource value: 0x7f0b005c
 			public static int Base_TextAppearance_AppCompat_SearchResult_Subtitle = 2131427420;
@@ -4041,11 +4041,11 @@ namespace Xamarin.RangeSlider.Forms
 			// aapt resource value: 0x7f0b0067
 			public static int Base_TextAppearance_AppCompat_Widget_Button = 2131427431;
 			
-			// aapt resource value: 0x7f0b00b5
-			public static int Base_TextAppearance_AppCompat_Widget_Button_Borderless_Colored = 2131427509;
+			// aapt resource value: 0x7f0b00aa
+			public static int Base_TextAppearance_AppCompat_Widget_Button_Borderless_Colored = 2131427498;
 			
-			// aapt resource value: 0x7f0b00b6
-			public static int Base_TextAppearance_AppCompat_Widget_Button_Colored = 2131427510;
+			// aapt resource value: 0x7f0b00ab
+			public static int Base_TextAppearance_AppCompat_Widget_Button_Colored = 2131427499;
 			
 			// aapt resource value: 0x7f0b00a4
 			public static int Base_TextAppearance_AppCompat_Widget_Button_Inverse = 2131427492;
