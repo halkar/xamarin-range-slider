@@ -49,9 +49,9 @@ namespace Xamarin.RangeSlider.Forms
 
         private void UpdateControl(RangeSliderControl control, RangeSlider element)
         {
+            control.SetRangeValues(element.MinimumValue, element.MaximumValue);
             control.SetSelectedMinValue(element.LowerValue);
             control.SetSelectedMaxValue(element.UpperValue);
-            control.SetRangeValues(element.MinimumValue, element.MaximumValue);
             control.MinThumbHidden = element.MinThumbHidden;
             control.MaxThumbHidden = element.MaxThumbHidden;
             control.StepValue = element.StepValue;
