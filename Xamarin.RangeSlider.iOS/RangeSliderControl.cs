@@ -14,6 +14,8 @@ namespace Xamarin.RangeSlider
     {
         private const string KeyPath = "frame";
 
+        public const int TextLateralPadding = 5;
+
         private UIImageView _lowerHandle;
 
         private bool _lowerHandleHidden;
@@ -918,10 +920,28 @@ namespace Xamarin.RangeSlider
             _upperHandleLabel.Frame = HandleLabelRect(_upperHandleLabel, _upperHandle.Frame);
             _upperHandleLabel.Hidden = !ShowTextAboveThumbs || _upperHandleHidden;
 
+            FixLabelFrames(_trackBackground.Frame, _lowerHandleLabel, _upperHandleLabel);
+
             if (_textColor != null)
             {
                 _lowerHandleLabel.TextColor = _textColor;
                 _upperHandleLabel.TextColor = _textColor;
+            }
+        }
+
+        private void FixLabelFrames(CGRect frame, UILabel lowerHandleLabel, UILabel upperHandleLabel)
+        {
+            if (lowerHandleLabel.Frame.X < frame.X) {
+                lowerHandleLabel.Frame = new CGRect(frame.X, lowerHandleLabel.Frame.Y, lowerHandleLabel.Frame.Width, lowerHandleLabel.Frame.Height);
+            }
+            if (upperHandleLabel.Frame.Right > frame.Right)
+            {
+                upperHandleLabel.Frame = new CGRect(frame.Right - upperHandleLabel.Frame.Width, upperHandleLabel.Frame.Y, upperHandleLabel.Frame.Width, upperHandleLabel.Frame.Height);
+            }
+            var overlap = (lowerHandleLabel.Frame.Right - upperHandleLabel.Frame.X) / 2 + TextLateralPadding;
+            if (overlap > 0) {
+                lowerHandleLabel.Frame = new CGRect(lowerHandleLabel.Frame.X - overlap, lowerHandleLabel.Frame.Y, lowerHandleLabel.Frame.Width, lowerHandleLabel.Frame.Height);
+                upperHandleLabel.Frame = new CGRect(upperHandleLabel.Frame.X + overlap, upperHandleLabel.Frame.Y, upperHandleLabel.Frame.Width, upperHandleLabel.Frame.Height);
             }
         }
 

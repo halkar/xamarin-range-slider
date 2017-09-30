@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using Xamarin.Forms;
+using Xamarin.RangeSlider.Common;
 
 namespace Xamarin.RangeSlider.Forms.Samples
 {
@@ -13,6 +14,12 @@ namespace Xamarin.RangeSlider.Forms.Samples
             RangeSlider.DragCompleted += RangeSliderOnDragCompleted;
             RangeSlider.LowerValueChanged += RangeSliderOnLowerValueChanged;
             RangeSlider.UpperValueChanged += RangeSliderOnUpperValueChanged;
+            RangeSlider.FormatLabel = FormaLabel;
+        }
+
+        private string FormaLabel(Thumb thumb, float val)
+        {
+            return DateTime.Today.AddDays(val).ToString("d");
         }
 
         private void RangeSliderOnUpperValueChanged(object sender, EventArgs eventArgs)
