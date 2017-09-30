@@ -712,6 +712,13 @@ namespace Xamarin.RangeSlider
             return label.SizeThatFits(new CGSize(float.MaxValue, float.MaxValue));
         }
 
+        private static CGRect Normalise(CGRect retValue) {
+            if (nfloat.IsNaN(retValue.Width) || retValue.Width < 0) return new CGRect();
+            if (nfloat.IsNaN(retValue.Height) || retValue.Height < 0) return new CGRect();
+
+            return retValue;
+        }
+
         /// <summary>
         /// returns the rect for the track image between the lower and upper values based on the trackimage object
         /// </summary>
@@ -749,7 +756,7 @@ namespace Xamarin.RangeSlider
             var alignmentInsets = TrackAlignmentInsets();
             retValue = alignmentInsets.InsetRect(retValue);
 
-            return retValue;
+            return Normalise(retValue);
         }
 
         private CGRect TrackBackgroundRect()
@@ -781,7 +788,7 @@ namespace Xamarin.RangeSlider
             var alignmentInsets = TrackAlignmentInsets();
             rect = alignmentInsets.InsetRect(rect);
 
-            return rect;
+            return Normalise(rect);
         }
 
         /// <summary>
@@ -805,7 +812,7 @@ namespace Xamarin.RangeSlider
             thumbRect.X = (float)Math.Round(xValue);
             thumbRect.Y = SpaceAboveThumbs + height / 2.0f - thumbRect.Size.Height / 2.0f;
 
-            return thumbRect.Integral();
+            return Normalise(thumbRect.Integral());
         }
 
         /// <summary>
@@ -819,7 +826,7 @@ namespace Xamarin.RangeSlider
             thumbRect.X = (float)Math.Round(xValue);
             thumbRect.Y = SpaceAboveThumbs / 2.0f - thumbRect.Size.Height / 2.0f;
 
-            return thumbRect.Integral();
+            return Normalise(thumbRect.Integral());
         }
 
         private void AddSubviews()
