@@ -394,7 +394,7 @@ namespace Xamarin.RangeSlider
         public void SetBarHeight(int barHeight)
         {
             int margin = (ControlHeight - barHeight)/2;
-            InactiveRectangle.Margin = new Thickness(0, margin, 0, margin);
+            InactiveRectangle.Margin = new Thickness(8, margin, 8, margin);
             InactiveRectangle.Height = barHeight;
             Canvas.SetTop(ActiveRectangle, margin);
             ActiveRectangle.Height = barHeight;
