@@ -34,21 +34,23 @@
                 </Setter>
             </Style>
         </Grid.Resources>
-        <Canvas x:Name="TexContainerCanvas" Grid.Row="0" Margin="8,0" Visibility="Collapsed">
-            <TextBlock x:Name="MinThumbText" FontSize="10" SizeChanged="ThumbTextSizeChanged"/>
-            <TextBlock x:Name="MaxThumbText" FontSize="10" SizeChanged="ThumbTextSizeChanged"/>
+        <Canvas x:Name="TexContainerCanvas" x:FieldModifier="public" Grid.Row="0" Margin="8,0" Visibility="Collapsed">
+            <TextBlock x:Name="MinThumbText" x:FieldModifier="public" FontSize="10" SizeChanged="ThumbTextSizeChanged"/>
+            <TextBlock x:Name="MaxThumbText" x:FieldModifier="public" FontSize="10" SizeChanged="ThumbTextSizeChanged"/>
         </Canvas>
         <Rectangle x:Name="InactiveRectangle"
+                   x:FieldModifier="public"
                    Grid.Row="1"
                    Height="16"
                    Margin="8,0"
                    Fill="#FFD5D5D5"
                    RadiusX="5"
                    RadiusY="5" />
-        <Canvas x:Name="ContainerCanvas" Grid.Row="1" Margin="8,0" Height="32" SizeChanged="ContainerCanvas_SizeChanged">
-            <Thumb x:Name="MinThumb" DragStarted="MinThumb_DragStarted" DragCompleted="MinThumb_DragCompleted" DragDelta="MinThumb_DragDelta" />
-            <Thumb x:Name="MaxThumb" DragStarted="MaxThumb_DragStarted" DragCompleted="MaxThumb_DragCompleted" DragDelta="MaxThumb_DragDelta" />
+        <Canvas x:Name="ContainerCanvas" x:FieldModifier="public"  Grid.Row="1" Margin="8,0" Height="32" SizeChanged="ContainerCanvas_SizeChanged">
+            <Thumb x:Name="MinThumb" x:FieldModifier="public" DragStarted="MinThumb_DragStarted" DragCompleted="MinThumb_DragCompleted" DragDelta="MinThumb_DragDelta" />
+            <Thumb x:Name="MaxThumb" x:FieldModifier="public" DragStarted="MaxThumb_DragStarted" DragCompleted="MaxThumb_DragCompleted" DragDelta="MaxThumb_DragDelta" />
             <Rectangle x:Name="ActiveRectangle"
+                       x:FieldModifier="public"
                        Canvas.Top="8"
                        Height="16"
                        Canvas.ZIndex="-1"
