@@ -252,10 +252,14 @@ namespace Xamarin.RangeSlider
             Canvas.SetLeft(MinThumb, relativeLeft);
             Canvas.SetLeft(ActiveRectangle, relativeLeft);
 
-            ActiveRectangle.Width = (RangeMax - min)/(Maximum - Minimum)*ContainerCanvas.ActualWidth;
+            ActiveRectangle.Width = (RangeMax - min) / (Maximum - Minimum) * ContainerCanvas.ActualWidth;
 
             MinThumbText.Text = ValueToString(min, Thumb.Lower);
-            Canvas.SetLeft(MinThumbText, relativeLeft - MinThumbText.ActualWidth/2);
+            var left = relativeLeft - MinThumbText.ActualWidth / 2;
+            if (left + MinThumbText.ActualWidth > Canvas.GetLeft(MaxThumbText) - 10)
+                left = Canvas.GetLeft(MaxThumbText) - MinThumbText.ActualWidth - 10;
+            Canvas.SetLeft(MinThumbText, left);
+            
         }
 
         public void UpdateMaxThumb(double max, bool update = false)
@@ -266,10 +270,13 @@ namespace Xamarin.RangeSlider
 
             Canvas.SetLeft(MaxThumb, relativeRight);
 
-            ActiveRectangle.Width = (max - RangeMin)/(Maximum - Minimum)*ContainerCanvas.ActualWidth;
+            ActiveRectangle.Width = (max - RangeMin) / (Maximum - Minimum) * ContainerCanvas.ActualWidth;
 
             MaxThumbText.Text = ValueToString(max, Thumb.Upper);
-            Canvas.SetLeft(MaxThumbText, relativeRight - MaxThumbText.ActualWidth/2);
+            var left = relativeRight - MaxThumbText.ActualWidth / 2;
+            if (left < Canvas.GetLeft(MinThumbText) + MinThumbText.ActualWidth + 10)
+                left = Canvas.GetLeft(MinThumbText) + MinThumbText.ActualWidth + 10;
+            Canvas.SetLeft(MaxThumbText, left);
         }
 
         private double ValueToRelativeLeft(double value)

@@ -30,7 +30,7 @@ namespace Xamarin.RangeSlider
         public const int DefaultMinimum = 0;
         public const int DefaultMaximum = 100;
         public const int HeightInDp = 16;
-        public const int TextLateralPaddingInDp = 3;
+        public const int TextLateralPaddingInDp = 5;
 
         private const int InitialPaddingInDp = 8;
         private const int DefaultTextSizeInSp = 15;
