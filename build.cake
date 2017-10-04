@@ -18,7 +18,7 @@ Task("SonarBegin")
   .Does(() => {
      SonarBegin(new SonarBeginSettings{
         Url = "https://sonarqube.com",
-        Login = "halkar@github",
+        Login = "f30c7ab65fe00a0bf6851e725c522981f0578ab3",
         Key = "xamarin-range-slider",
         Verbose = true
      });
@@ -27,7 +27,7 @@ Task("SonarBegin")
 Task("SonarEnd")
   .Does(() => {
      SonarEnd(new SonarEndSettings{
-        Login = "halkar@github"
+        Login = "f30c7ab65fe00a0bf6851e725c522981f0578ab3"
      });
   });
 
