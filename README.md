@@ -1,4 +1,5 @@
 ﻿[![Build status](https://ci.appveyor.com/api/projects/status/b90itu0lka0fj1sv/branch/master?svg=true)](https://ci.appveyor.com/project/halkar/xamarin-range-slider/branch/master)
+[![Quality Gate](https://sonarqube.com/api/badges/gate?key=XamarinRangeSlider)](https://sonarqube.com/dashboard/index/XamarinRangeSlider)
 # Xamarin.RangeSlider
 With Xamarin.RangeSlider you can pick ranges in Xamarin and Xamarin.Forms (Android, iOS, UWP, Win8 supported).
 Project is based on https://github.com/anothem/android-range-seek-bar (Android) and on https://github.com/muZZkat/NMRangeSlider (iOS).
