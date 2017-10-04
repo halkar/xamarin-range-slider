@@ -1,5 +1,7 @@
 #tool "nuget:?package=vswhere"
 #tool "nuget:?package=GitVersion.CommandLine"
+#tool nuget:?package=MSBuild.SonarQube.Runner.Tool
+#addin nuget:?package=Cake.Sonar
 
 var target = Argument("target", "Default");
 var nugetPackagesDir = Directory("./artifacts");
@@ -11,6 +13,22 @@ Task("Restore-NuGet-Packages")
 {
     NuGetRestore(solution);
 });
+
+Task("SonarBegin")
+  .Does(() => {
+     SonarBegin(new SonarBeginSettings{
+        Url = "https://sonarqube.com",
+        Login = "halkar@github",
+        Verbose = true
+     });
+  });
+
+Task("SonarEnd")
+  .Does(() => {
+     SonarEnd(new SonarEndSettings{
+        Login = "halkar@github"
+     });
+  });
 
 Task("Build")
 	.IsDependentOn("Update-Version")
@@ -31,7 +49,9 @@ var nuGetPackSettings = new NuGetPackSettings
     OutputDirectory = nugetPackagesDir
 };
 Task("Pack-NugetPackages")
+    .IsDependentOn("SonarBegin")
 	.IsDependentOn("Build")
+    .IsDependentOn("SonarEnd")
 	.Does (() =>
 {
     CreateDirectory(nugetPackagesDir);
