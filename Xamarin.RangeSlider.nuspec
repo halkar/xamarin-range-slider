@@ -11,7 +11,7 @@
         <tags>xamarin range slider</tags>
         <dependencies>
           <group targetFramework="monoandroid70">
-            <dependency id="Xamarin.Android.Support.v4" version="25.4.0.1" />
+            <dependency id="Xamarin.Android.Support.v4" />
           </group>
       </dependencies>
     </metadata>
