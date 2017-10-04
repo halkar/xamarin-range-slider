@@ -19,7 +19,8 @@ Task("SonarBegin")
      SonarBegin(new SonarBeginSettings{
         Url = "https://sonarqube.com",
         Login = "f30c7ab65fe00a0bf6851e725c522981f0578ab3",
-        Key = "xamarin-range-slider",
+        Key = "XamarinRangeSlider",
+        Organization = "halkar-github",
         Verbose = true
      });
   });
