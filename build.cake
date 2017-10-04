@@ -19,6 +19,7 @@ Task("SonarBegin")
      SonarBegin(new SonarBeginSettings{
         Url = "https://sonarqube.com",
         Login = "halkar@github",
+        Key = "xamarin-range-slider",
         Verbose = true
      });
   });
