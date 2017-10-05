@@ -11,8 +11,8 @@ You can find NuGet packages [here](https://www.nuget.org/packages/Xamarin.Forms.
 | --------------------- | ----------- | ---------------|
 | LowerValue            | Current lower value | Two way binding |
 | UpperValue            | Current upper value | Two way binding |
-| MinimumValue          | Maximum value ||
-| MaximumValue          | Minimu value ||
+| MinimumValue          | Minimum value ||
+| MaximumValue          | Maximum value ||
 | MinThumbHidden        | If *true* lower handle is hidden ||
 | MaxThumbHidden        | If *true* upper handle is hidden ||
 | StepValue             | Minimal difference between two consecutive values ||
