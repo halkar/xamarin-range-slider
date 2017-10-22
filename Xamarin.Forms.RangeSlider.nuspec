@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
         <id>Xamarin.Forms.RangeSlider</id>
@@ -13,6 +13,9 @@
             <dependency id="Xamarin.Forms" version="2.3.0" />
             <dependency id="Xamarin.RangeSlider" version="<%version%>" />
         </dependencies>
+        <contentFiles>
+            <files include="RangeSliderInitialization.cs" />
+        </contentFiles> 
     </metadata>
     <files>
     	<!--Portable-->
@@ -25,7 +28,6 @@
         <file src="Xamarin.RangeSlider.Forms.UWP\bin\Release\Xamarin.RangeSlider.Forms.dll" target="lib\uap10.0\Xamarin.RangeSlider.Forms.dll" />
         <file src="Xamarin.RangeSlider.Forms.UWP\bin\Release\Xamarin.RangeSlider.Forms.UWP.dll" target="lib\uap10.0\Xamarin.RangeSlider.Forms.UWP.dll" />
         <file src="Xamarin.RangeSlider.Forms.UWP\bin\Release\Xamarin.RangeSlider.Forms.UWP.pri" target="lib\uap10.0\Xamarin.RangeSlider.Forms.UWP.pri" />
-        <file src="RangeSliderInitialization.cs" target="content\uap10.0\RangeSliderInitialization.cs" />
         <!--iOS-->
         <file src="Xamarin.RangeSlider.Forms.iOS\bin\Release\Xamarin.RangeSlider.Forms.dll" target="lib\Xamarin.iOS10\Xamarin.RangeSlider.Forms.dll" />
         <file src="Xamarin.RangeSlider.Forms.iOS\bin\Release\Xamarin.RangeSlider.Forms.iOS.dll" target="lib\Xamarin.iOS10\Xamarin.RangeSlider.Forms.iOS.dll" />
