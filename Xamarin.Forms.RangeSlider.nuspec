@@ -13,9 +13,6 @@
             <dependency id="Xamarin.Forms" version="2.3.0" />
             <dependency id="Xamarin.RangeSlider" version="<%version%>" />
         </dependencies>
-        <contentFiles>
-            <files include="RangeSliderInitialization.cs" />
-        </contentFiles> 
     </metadata>
     <files>
     	<!--Portable-->
@@ -23,7 +20,6 @@
     	<!--Android-->
         <file src="Xamarin.RangeSlider.Forms.Droid\bin\Release\Xamarin.RangeSlider.Forms.dll" target="lib\MonoAndroid10\Xamarin.RangeSlider.Forms.dll" />
         <file src="Xamarin.RangeSlider.Forms.Droid\bin\Release\Xamarin.RangeSlider.Forms.Droid.dll" target="lib\MonoAndroid10\Xamarin.RangeSlider.Forms.Droid.dll" />
-        <file src="RangeSliderInitialization.cs" target="content\MonoAndroid10\RangeSliderInitialization.cs" />
         <!--UWP-->
         <file src="Xamarin.RangeSlider.Forms.UWP\bin\Release\Xamarin.RangeSlider.Forms.dll" target="lib\uap10.0\Xamarin.RangeSlider.Forms.dll" />
         <file src="Xamarin.RangeSlider.Forms.UWP\bin\Release\Xamarin.RangeSlider.Forms.UWP.dll" target="lib\uap10.0\Xamarin.RangeSlider.Forms.UWP.dll" />
@@ -31,6 +27,5 @@
         <!--iOS-->
         <file src="Xamarin.RangeSlider.Forms.iOS\bin\Release\Xamarin.RangeSlider.Forms.dll" target="lib\Xamarin.iOS10\Xamarin.RangeSlider.Forms.dll" />
         <file src="Xamarin.RangeSlider.Forms.iOS\bin\Release\Xamarin.RangeSlider.Forms.iOS.dll" target="lib\Xamarin.iOS10\Xamarin.RangeSlider.Forms.iOS.dll" />
-        <file src="RangeSliderInitialization.cs" target="content\Xamarin.iOS10\RangeSliderInitialization.cs" />
     </files>
 </package>
