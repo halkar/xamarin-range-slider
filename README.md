@@ -6,7 +6,20 @@ Project is based on https://github.com/anothem/android-range-seek-bar (Android) 
 
 You can find NuGet packages [here](https://www.nuget.org/packages/Xamarin.Forms.RangeSlider/). Version without Xamarin.Forms support is available [here](https://www.nuget.org/packages/Xamarin.RangeSlider/).
 
+## If element is not displayed
+
+If element is not displayed on a Xamarin.Forms page add this code to the startup platform-specific projects.
+
+```csharp
+#if NETFX_CORE
+[assembly: Xamarin.Forms.Platform.WinRT.ExportRenderer(typeof(Xamarin.RangeSlider.Forms.RangeSlider), typeof(Xamarin.RangeSlider.Forms.RangeSliderRenderer))]
+#else
+[assembly: Xamarin.Forms.ExportRenderer(typeof(Xamarin.RangeSlider.Forms.RangeSlider), typeof(Xamarin.RangeSlider.Forms.RangeSliderRenderer))]
+#endif
+```
+
 ## Supported Properties
+
 | Name                  | Description | Remarks |
 | --------------------- | ----------- | ---------------|
 | LowerValue            | Current lower value | Two way binding |
@@ -23,28 +36,36 @@ You can find NuGet packages [here](https://www.nuget.org/packages/Xamarin.Forms.
 | TextFormat            | Format string for text above the thumbs ||
 
 ## Supported Events
+
 | Name                  | Description |
 | --------------------- | ----------- | 
 | DragStarted           | User started moving one of the thumbs to changenge value |
 | DragCompleted         | Thumb has been released |
 
 ## Supported Delegates
+
 | Name                  | Description |
 | --------------------- | ----------- | 
 | FormatLabel           | Provide custom formatting for text above thumbs |
 
 ## Screenshots
+
 | Android | iOS | UWP |
 | ---| --- | --- |
 | <img src="https://raw.githubusercontent.com/halkar/xamarin-range-slider/master/Screenshots/android.png" alt="Android" style="width: 300px;"/> | <img src="https://raw.githubusercontent.com/halkar/xamarin-range-slider/master/Screenshots/ios.png" alt="iOS" style="width: 300px;"/> | <img src="https://raw.githubusercontent.com/halkar/xamarin-range-slider/master/Screenshots/uwp.png" alt="UWP" style="width: 300px;"/> |
 
 ## Samples
+
 ### Sample [project](https://github.com/halkar/xamarin-range-slider/tree/master/Xamarin.RangeSlider.Forms.Samples).
+
 ### XAML initialization
+
 ```xml
 <forms:RangeSlider x:Name="RangeSlider" MinimumValue="1" MaximumValue="100" LowerValue="1" UpperValue="100" StepValue="0" StepValueContinuously="False" VerticalOptions="Center" TextSize="15" />
 ```
+
 ### Displaying dates
+
 ```csharp
 public MainPage()
 {
@@ -59,8 +80,11 @@ private string FormaLabel(Thumb thumb, float val)
 ```
 
 ## Customization
+
 ### Android
+
 #### Change thumb image
+
 ```csharp
 using Android.Graphics;
 using Android.Graphics.Drawables;
@@ -103,7 +127,9 @@ namespace Droid.Effects
     }
 }
 ```
+
 #### Change bar color
+
 ```csharp
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
@@ -127,10 +153,15 @@ namespace Droid.Effects
     }
 }
 ```
+
 ### iOS
+
 #### Change thumb image
+
 Just replace handle images in the `Resources` folder.
+
 #### Change bar color
+
 ```csharp
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
@@ -153,11 +184,17 @@ namespace iOS.Effects
     }
 }
 ```
+
 ## Using Range Slider in native UI
+
 ### iOS
+
 Just throw the element on your storyboard in visual editor.
+
 ### Android
+
 #### Activity
+
 ```csharp
 protected override void OnCreate(Bundle savedInstanceState)
 {
@@ -171,7 +208,9 @@ protected override void OnCreate(Bundle savedInstanceState)
     slider.SetSelectedMaxValue(16);
 }
 ```
+
 #### .axml
+
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -192,4 +231,5 @@ protected override void OnCreate(Bundle savedInstanceState)
     />
 </LinearLayout>
 ```
+
 List of available attributes can be found [here](https://github.com/halkar/xamarin-range-slider/blob/master/Xamarin.RangeSlider.Droid/Resources/Values/attrs.xml).
