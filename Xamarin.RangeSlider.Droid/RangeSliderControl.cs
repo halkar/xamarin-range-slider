@@ -438,9 +438,9 @@ namespace Xamarin.RangeSlider
         /// Sets the currently selected minimum value. The widget will be Invalidated and redrawn.
         /// </summary>
         /// <param name="value">The Number value to set the minimum value to. Will be clamped to given absolute minimum/maximum range.</param>
-        public void SetSelectedMinValue(float value)
+        public void SetSelectedMinValue(float value, bool force = false)
         {
-            if (_pressedThumb == Thumb.Lower)
+            if (_pressedThumb == Thumb.Lower && !force)
                 return;
             // in case absoluteMinValue == absoluteMaxValue, avoid division by zero when normalizing.
             SetNormalizedMinValue(Math.Abs(MinToMaxRange) < float.Epsilon
@@ -461,9 +461,9 @@ namespace Xamarin.RangeSlider
         /// Sets the currently selected maximum value. The widget will be Invalidated and redrawn.
         /// </summary>
         /// <param name="value">The Number value to set the maximum value to. Will be clamped to given absolute minimum/maximum range.</param>
-        public void SetSelectedMaxValue(float value)
+        public void SetSelectedMaxValue(float value, bool force = false)
         {
-            if (_pressedThumb == Thumb.Upper)
+            if (_pressedThumb == Thumb.Upper && !force)
                 return;
             // in case absoluteMinValue == absoluteMaxValue, avoid division by zero when normalizing.
             SetNormalizedMaxValue(Math.Abs(MinToMaxRange) < float.Epsilon
