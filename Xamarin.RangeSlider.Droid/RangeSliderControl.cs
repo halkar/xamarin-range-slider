@@ -916,11 +916,11 @@ namespace Xamarin.RangeSlider
         /// </summary>
         protected float NormalizedToValue(float normalized)
         {
-            var v = AbsoluteMinValue + normalized * MinToMaxRange;
+            var v = normalized * MinToMaxRange;
             // TODO parameterize this rounding to allow variable decimal points
             if (Math.Abs(StepValue) < float.Epsilon)
-                return (float)Math.Round(v * 100) / 100f;
-            var normalizedToValue = (float)Math.Round(v / StepValue) * StepValue;
+                return AbsoluteMinValue + (float)Math.Round(v * 100) / 100f;
+            var normalizedToValue = AbsoluteMinValue + (float)Math.Round(v / StepValue) * StepValue;
             return Math.Max(AbsoluteMinValue, Math.Min(AbsoluteMaxValue, normalizedToValue));
         }
 
