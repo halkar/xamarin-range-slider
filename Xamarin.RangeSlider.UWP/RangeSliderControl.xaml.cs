@@ -344,7 +344,7 @@ namespace Xamarin.RangeSlider
         {
             if (Math.Abs(StepValue) < float.Epsilon)
                 return value;
-            return (float)Math.Round(value / StepValue) * StepValue;
+            return (float) Math.Round((value - Minimum) / StepValue) * StepValue + Minimum;
         }
 
         private double DragThumb(Windows.UI.Xaml.Controls.Primitives.Thumb thumb, double min, double max, double offset)

@@ -11,7 +11,7 @@
     <AssemblyName>Xamarin.RangeSlider.Forms.Samples.UWP</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.15063.0</TargetPlatformVersion>
+    <TargetPlatformVersion>10.0.16299.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.15063.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
@@ -128,6 +128,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Xamarin.RangeSlider.Common\Xamarin.RangeSlider.Common.csproj">
+      <Project>{8ea35996-d247-4847-bc05-5d4bd97b2d7d}</Project>
+      <Name>Xamarin.RangeSlider.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Xamarin.RangeSlider.Forms.UWP\Xamarin.RangeSlider.Forms.UWP.csproj">
       <Project>{e676f5e4-4d56-4081-a04c-1025f99774b3}</Project>
       <Name>Xamarin.RangeSlider.Forms.UWP</Name>
