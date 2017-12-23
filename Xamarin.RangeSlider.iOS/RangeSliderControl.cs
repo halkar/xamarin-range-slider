@@ -523,7 +523,7 @@ namespace Xamarin.RangeSlider
 
             if (_stepValueInternal > 0)
             {
-                value = (float)Math.Round(value / _stepValueInternal) * _stepValueInternal;
+                value = RoundToStepValue(value);
             }
 
             value = Math.Min(value, MaximumValue);
@@ -549,7 +549,7 @@ namespace Xamarin.RangeSlider
 
             if (_stepValueInternal > 0)
             {
-                value = (float)Math.Round(value / _stepValueInternal) * _stepValueInternal;
+                value = RoundToStepValue(value);
             }
 
             value = Math.Max(value, MinimumValue);
@@ -567,6 +567,11 @@ namespace Xamarin.RangeSlider
             SetNeedsLayout();
 
             OnUpperValueChanged();
+        }
+
+        private float RoundToStepValue(float value)
+        {
+            return (float)Math.Round((value - MinimumValue) / _stepValueInternal) * _stepValueInternal + MinimumValue;
         }
 
 
