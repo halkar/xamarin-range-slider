@@ -12,8 +12,6 @@ namespace Xamarin.RangeSlider
     [DesignTimeVisible(true)]
     public partial class RangeSliderControl : UIControl
     {
-        private const string KeyPath = "frame";
-
         public const int TextLateralPadding = 5;
 
         private UIImageView _lowerHandle;
@@ -517,34 +515,7 @@ namespace Xamarin.RangeSlider
             _upperTouchEdgeInsets = new UIEdgeInsets(-5, -5, -5, -5);
 
             AddSubviews();
-
-            _lowerHandle.AddObserver(this, KeyPath, NSKeyValueObservingOptions.New, IntPtr.Zero);
-            _upperHandle.AddObserver(this, KeyPath, NSKeyValueObservingOptions.New, IntPtr.Zero);
         }
-
-        protected override void Dispose(bool disposing)
-        {
-            base.Dispose(disposing);
-            if (disposing)
-            {
-                _lowerHandle.RemoveObserver(this, KeyPath);
-                _upperHandle.RemoveObserver(this, KeyPath);
-            }
-        }
-
-        public override void ObserveValue(NSString keyPath, NSObject ofObject, NSDictionary change, IntPtr context)
-        {
-            if (keyPath == KeyPath)
-            {
-                if (Equals(ofObject, _lowerHandle))
-                {
-                }
-                else if (Equals(ofObject, _upperHandle))
-                {
-                }
-            }
-        }
-
 
         private void SetLowerValue(float lowerValue)
         {
