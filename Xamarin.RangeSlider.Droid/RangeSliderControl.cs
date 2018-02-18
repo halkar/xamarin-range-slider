@@ -232,16 +232,20 @@ namespace Xamarin.RangeSlider
 
         private void Init(Context context, IAttributeSet attrs)
         {
+            Console.WriteLine("1");
             var thumbNormal = Resource.Drawable.seek_thumb_normal;
             var thumbPressed = Resource.Drawable.seek_thumb_pressed;
             var thumbDisabled = Resource.Drawable.seek_thumb_disabled;
             Color thumbShadowColor;
+            Console.WriteLine("2");
             var defaultShadowColor = Color.Argb(75, 0, 0, 0);
             var defaultShadowYOffset = PixelUtil.DpToPx(context, 2);
             var defaultShadowXOffset = PixelUtil.DpToPx(context, 0);
             var defaultShadowBlur = PixelUtil.DpToPx(context, 2);
+            Console.WriteLine("3");
 
             _distanceToTop = PixelUtil.DpToPx(context, DefaultTextDistanceToTopInDp);
+            Console.WriteLine("4");
 
             if (attrs == null)
             {
@@ -259,6 +263,7 @@ namespace Xamarin.RangeSlider
                 _thumbShadowBlur = defaultShadowBlur;
                 ActivateOnDefaultValues = false;
                 TextSizeInSp = DefaultTextSizeInSp;
+                Console.WriteLine("5");
             }
             else
             {
@@ -277,10 +282,8 @@ namespace Xamarin.RangeSlider
                     ActiveColor = a.GetColor(Resource.Styleable.RangeSliderControl_activeColor, DefaultActiveColor);
                     DefaultColor = a.GetColor(Resource.Styleable.RangeSliderControl_defaultColor, Color.Gray);
                     AlwaysActive = a.GetBoolean(Resource.Styleable.RangeSliderControl_alwaysActive, false);
-                    StepValue = ExtractNumericValueFromAttributes(a,
-                        Resource.Styleable.RangeSliderControl_stepValue, DefaultStepValue);
-                    StepValueContinuously = a.GetBoolean(Resource.Styleable.RangeSliderControl_stepValueContinuously,
-                        false);
+                    StepValue = ExtractNumericValueFromAttributes(a, Resource.Styleable.RangeSliderControl_stepValue, DefaultStepValue);
+                    StepValueContinuously = a.GetBoolean(Resource.Styleable.RangeSliderControl_stepValueContinuously, false);
 
                     var normalDrawable = a.GetDrawable(Resource.Styleable.RangeSliderControl_thumbNormal);
                     if (normalDrawable != null)
@@ -305,6 +308,7 @@ namespace Xamarin.RangeSlider
 
                     ActivateOnDefaultValues = a.GetBoolean(Resource.Styleable.RangeSliderControl_activateOnDefaultValues, false);
                     TextSizeInSp = a.GetInt(Resource.Styleable.RangeSliderControl_textSize, DefaultTextSizeInSp);
+                    Console.WriteLine("6");
                 }
                 finally
                 {
@@ -316,14 +320,17 @@ namespace Xamarin.RangeSlider
             {
                 ThumbImage = BitmapFactory.DecodeResource(Resources, thumbNormal);
             }
+            Console.WriteLine("7");
             if (ThumbPressedImage == null)
             {
                 ThumbPressedImage = BitmapFactory.DecodeResource(Resources, thumbPressed);
             }
+            Console.WriteLine("8");
             if (ThumbDisabledImage == null)
             {
                 ThumbDisabledImage = BitmapFactory.DecodeResource(Resources, thumbDisabled);
             }
+            Console.WriteLine("9");
 
             _thumbHalfWidth = 0.5f * ThumbImage.Width;
             _thumbHalfHeight = 0.5f * ThumbImage.Height;
@@ -334,6 +341,7 @@ namespace Xamarin.RangeSlider
             Focusable = true;
             FocusableInTouchMode = true;
             _scaledTouchSlop = ViewConfiguration.Get(Context).ScaledTouchSlop;
+            Console.WriteLine("10");
 
             if (ThumbShadow)
             {
@@ -344,6 +352,7 @@ namespace Xamarin.RangeSlider
                 _thumbShadowPath = new Path();
                 _thumbShadowPath.AddCircle(0, 0, _thumbHalfHeight, Path.Direction.Cw);
             }
+            Console.WriteLine("11");
         }
 
         public void SetBarHeight(float barHeight)
