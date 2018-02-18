@@ -40,7 +40,7 @@ Task("Build")
     MSBuild(solution, new MSBuildSettings() {
             ToolPath = msBuildPath
         }
-        .SetConfiguration("Release")
+        .SetConfiguration("Debug")
         .SetVerbosity(Verbosity.Minimal)
         .SetNodeReuse(false));
 });
