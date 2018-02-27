@@ -233,9 +233,6 @@ namespace Xamarin.RangeSlider
         private void Init(Context context, IAttributeSet attrs)
         {
             Log.Debug("[XRS]", "1");
-            var thumbNormal = Resource.Drawable.seek_thumb_normal;
-            var thumbPressed = Resource.Drawable.seek_thumb_pressed;
-            var thumbDisabled = Resource.Drawable.seek_thumb_disabled;
             Color thumbShadowColor;
             Log.Debug("[XRS]", "2");
             var defaultShadowColor = Color.Argb(75, 0, 0, 0);
@@ -318,17 +315,17 @@ namespace Xamarin.RangeSlider
 
             if (ThumbImage == null)
             {
-                ThumbImage = BitmapFactory.DecodeResource(Resources, thumbNormal);
+                ThumbImage = BitmapFactory.DecodeResource(base.Resources, Resource.Drawable.seek_thumb_normal);
             }
             Log.Debug("[XRS]", "7");
             if (ThumbPressedImage == null)
             {
-                ThumbPressedImage = BitmapFactory.DecodeResource(Resources, thumbPressed);
+                ThumbPressedImage = BitmapFactory.DecodeResource(base.Resources, Resource.Drawable.seek_thumb_pressed);
             }
             Log.Debug("[XRS]", "8");
             if (ThumbDisabledImage == null)
             {
-                ThumbDisabledImage = BitmapFactory.DecodeResource(Resources, thumbDisabled);
+                ThumbDisabledImage = BitmapFactory.DecodeResource(base.Resources, Resource.Drawable.seek_thumb_disabled);
             }
             Log.Debug("[XRS]", "9");
 
