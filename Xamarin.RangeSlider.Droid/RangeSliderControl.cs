@@ -315,17 +315,17 @@ namespace Xamarin.RangeSlider
 
             if (ThumbImage == null)
             {
-                ThumbImage = BitmapFactory.DecodeResource(base.Resources, Resource.Drawable.seek_thumb_normal);
+                ThumbImage = BitmapFactory.DecodeResource(context.Resources, Resource.Drawable.seek_thumb_normal);
             }
             Log.Debug("[XRS]", "7");
             if (ThumbPressedImage == null)
             {
-                ThumbPressedImage = BitmapFactory.DecodeResource(base.Resources, Resource.Drawable.seek_thumb_pressed);
+                ThumbPressedImage = BitmapFactory.DecodeResource(context.Resources, Resource.Drawable.seek_thumb_pressed);
             }
             Log.Debug("[XRS]", "8");
             if (ThumbDisabledImage == null)
             {
-                ThumbDisabledImage = BitmapFactory.DecodeResource(base.Resources, Resource.Drawable.seek_thumb_disabled);
+                ThumbDisabledImage = BitmapFactory.DecodeResource(context.Resources, Resource.Drawable.seek_thumb_disabled);
             }
             Log.Debug("[XRS]", "9");
 
