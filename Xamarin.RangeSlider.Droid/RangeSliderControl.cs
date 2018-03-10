@@ -314,15 +314,15 @@ namespace Xamarin.RangeSlider
 
             if (ThumbImage == null)
             {
-                ThumbImage = BitmapFactory.DecodeResource(Resources, thumbNormal);
+                ThumbImage = BitmapFromResourceId(thumbNormal);
             }
             if (ThumbPressedImage == null)
             {
-                ThumbPressedImage = BitmapFactory.DecodeResource(Resources, thumbPressed);
+                ThumbPressedImage = BitmapFromResourceId(thumbPressed);
             }
             if (ThumbDisabledImage == null)
             {
-                ThumbDisabledImage = BitmapFactory.DecodeResource(Resources, thumbDisabled);
+                ThumbDisabledImage = BitmapFromResourceId(thumbDisabled);
             }
 
             _thumbHalfWidth = 0.5f * ThumbImage.Width;
@@ -987,6 +987,14 @@ namespace Xamarin.RangeSlider
         protected virtual void OnUpperValueChanged()
         {
             UpperValueChanged?.Invoke(this, EventArgs.Empty);
+        }
+
+        private Bitmap BitmapFromResourceId(int id)
+        {
+            using (var stream = Resources.OpenRawResource(id))
+            {
+                return BitmapFactory.DecodeStream(stream);
+            }
         }
     }
 }
