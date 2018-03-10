@@ -252,7 +252,7 @@ namespace Xamarin.RangeSlider
             Canvas.SetLeft(MinThumb, relativeLeft);
             Canvas.SetLeft(ActiveRectangle, relativeLeft);
 
-            ActiveRectangle.Width = (RangeMax - min) / (Maximum - Minimum) * ContainerCanvas.ActualWidth;
+            ActiveRectangle.Width = Math.Max(RangeMax - min, 0.0) / (Maximum - Minimum) * ContainerCanvas.ActualWidth;
 
             MinThumbText.Text = ValueToString(min, Thumb.Lower);
             var left = relativeLeft - MinThumbText.ActualWidth / 2;
@@ -270,7 +270,7 @@ namespace Xamarin.RangeSlider
 
             Canvas.SetLeft(MaxThumb, relativeRight);
 
-            ActiveRectangle.Width = (max - RangeMin) / (Maximum - Minimum) * ContainerCanvas.ActualWidth;
+            ActiveRectangle.Width = Math.Max(max - RangeMin, 0.0) / (Maximum - Minimum) * ContainerCanvas.ActualWidth;
 
             MaxThumbText.Text = ValueToString(max, Thumb.Upper);
             var left = relativeRight - MaxThumbText.ActualWidth / 2;
@@ -310,7 +310,7 @@ namespace Xamarin.RangeSlider
             {
                 _aggregatedDrag += e.HorizontalChange;
                 var min = DragThumb(MinThumb, 0, Canvas.GetLeft(MaxThumb), _aggregatedDrag);
-                var normalized = Normalize(min);
+                var normalized = Math.Min(Normalize(min), RangeMax);
                 UpdateMinThumb(normalized, true);
                 RangeMin = normalized;
             }
@@ -318,7 +318,7 @@ namespace Xamarin.RangeSlider
             {
                 var min = DragThumb(MinThumb, 0, Canvas.GetLeft(MaxThumb), e.HorizontalChange);
                 UpdateMinThumb(min, true);
-                RangeMin = Normalize(min);
+                RangeMin = Math.Min(Normalize(min), RangeMax);
             }
         }
 
