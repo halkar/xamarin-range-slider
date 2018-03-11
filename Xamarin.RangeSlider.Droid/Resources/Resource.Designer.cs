@@ -109,39 +109,17 @@ namespace Xamarin.RangeSlider
 			}
 		}
 		
-		public partial class Drawable
-		{
-			
-			// aapt resource value: 0x7f020000
-			public static int seek_thumb_disabled = 2130837504;
-			
-			// aapt resource value: 0x7f020001
-			public static int seek_thumb_normal = 2130837505;
-			
-			// aapt resource value: 0x7f020002
-			public static int seek_thumb_pressed = 2130837506;
-			
-			static Drawable()
-			{
-				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
-			}
-			
-			private Drawable()
-			{
-			}
-		}
-		
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f030000
-			public static int app_name = 2130903040;
+			// aapt resource value: 0x7f020000
+			public static int app_name = 2130837504;
 			
-			// aapt resource value: 0x7f030002
-			public static int demo_max_label = 2130903042;
+			// aapt resource value: 0x7f020002
+			public static int demo_max_label = 2130837506;
 			
-			// aapt resource value: 0x7f030001
-			public static int demo_min_label = 2130903041;
+			// aapt resource value: 0x7f020001
+			public static int demo_min_label = 2130837505;
 			
 			static String()
 			{
