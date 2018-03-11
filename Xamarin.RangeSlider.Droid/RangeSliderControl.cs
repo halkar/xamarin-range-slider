@@ -329,7 +329,7 @@ namespace Xamarin.RangeSlider
                 ThumbImage = new LayerDrawable(new Drawable[] { c1, c2 });
 
             }
-            if (ThumbPressedImage == null) //TODO
+            if (ThumbPressedImage == null)
             {
                 var c1 = Circle(28, 102, 51, 181,229);
                 var c2 = Circle(9, 255, 51, 181, 229);
