@@ -346,8 +346,8 @@ namespace Xamarin.RangeSlider
             }
 
             var thumbBitmap = BitmapUtil.DrawableToBitmap(ThumbImage);
-            var _thumbWidth = thumbBitmap.Width;
-            var _thumbHeight = thumbBitmap.Height;
+            _thumbWidth = thumbBitmap.Width;
+            _thumbHeight = thumbBitmap.Height;
 
             SetBarHeight(_barHeight);
 
