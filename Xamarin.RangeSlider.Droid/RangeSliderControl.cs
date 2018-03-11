@@ -3,6 +3,8 @@ using System.Globalization;
 using Android.Content;
 using Android.Content.Res;
 using Android.Graphics;
+using Android.Graphics.Drawables;
+using Android.Graphics.Drawables.Shapes;
 using Android.OS;
 using Android.Runtime;
 using Android.Util;
@@ -60,9 +62,9 @@ namespace Xamarin.RangeSlider
 
         private int _textOffset;
         private int _textSize;
-        private float _thumbHalfHeight;
+        private int _thumbHeight;
 
-        private float _thumbHalfWidth;
+        private int _thumbWidth;
         private int _thumbShadowBlur;
         private Path _thumbShadowPath;
         protected float AbsoluteMinValue, AbsoluteMaxValue;
@@ -198,10 +200,10 @@ namespace Xamarin.RangeSlider
         }
 
         public Color TextAboveThumbsColor { get; set; }
-        public Bitmap ThumbDisabledImage { get; set; }
+        public Drawable ThumbDisabledImage { get; set; }
 
-        public Bitmap ThumbImage { get; set; }
-        public Bitmap ThumbPressedImage { get; set; }
+        public Drawable ThumbImage { get; set; }
+        public Drawable ThumbPressedImage { get; set; }
 
         public bool ThumbShadow { get; set; }
         public int ThumbShadowXOffset { get; set; }
@@ -228,6 +230,14 @@ namespace Xamarin.RangeSlider
         {
             var tv = a.PeekValue(attribute);
             return tv == null ? defaultValue : a.GetFloat(attribute, defaultValue);
+        }
+
+        public ShapeDrawable Circle(int radius, int a, int r, int g, int b)
+        {
+            var c = new ShapeDrawable(new OvalShape());
+            c.SetBounds(32 - radius, 32 - radius, 32 + radius, 32 + radius);
+            c.Paint.Color = Color.Argb(a, r, g, b);
+            return c;
         }
 
         private void Init(Context context, IAttributeSet attrs)
@@ -285,17 +295,17 @@ namespace Xamarin.RangeSlider
                     var normalDrawable = a.GetDrawable(Resource.Styleable.RangeSliderControl_thumbNormal);
                     if (normalDrawable != null)
                     {
-                        ThumbImage = BitmapUtil.DrawableToBitmap(normalDrawable);
+                        ThumbImage = normalDrawable;
                     }
                     var disabledDrawable = a.GetDrawable(Resource.Styleable.RangeSliderControl_thumbDisabled);
                     if (disabledDrawable != null)
                     {
-                        ThumbDisabledImage = BitmapUtil.DrawableToBitmap(disabledDrawable);
+                        ThumbDisabledImage = disabledDrawable;
                     }
                     var pressedDrawable = a.GetDrawable(Resource.Styleable.RangeSliderControl_thumbPressed);
                     if (pressedDrawable != null)
                     {
-                        ThumbPressedImage = BitmapUtil.DrawableToBitmap(pressedDrawable);
+                        ThumbPressedImage = pressedDrawable;
                     }
                     ThumbShadow = a.GetBoolean(Resource.Styleable.RangeSliderControl_thumbShadow, false);
                     thumbShadowColor = a.GetColor(Resource.Styleable.RangeSliderControl_thumbShadowColor, defaultShadowColor);
@@ -314,19 +324,30 @@ namespace Xamarin.RangeSlider
 
             if (ThumbImage == null)
             {
-                ThumbImage = BitmapFactory.DecodeResource(Resources, thumbNormal);
+                var c1 = Circle(28, 154, 51, 181, 229);
+                var c2 = Circle(9, 255, 51, 181, 229);
+                ThumbImage = new LayerDrawable(new Drawable[] { c1, c2 });
+
             }
-            if (ThumbPressedImage == null)
+            if (ThumbPressedImage == null) //TODO
             {
-                ThumbPressedImage = BitmapFactory.DecodeResource(Resources, thumbPressed);
+                var c1 = Circle(28, 102, 51, 181,229);
+                var c2 = Circle(9, 255, 51, 181, 229);
+                var c3 = Circle(28, 255, 51, 181, 229);
+                c3.Paint.StrokeWidth = 4;
+                c3.Paint.SetStyle(Paint.Style.Stroke);
+                ThumbPressedImage = new LayerDrawable(new Drawable[] { c1, c2, c3 });
             }
             if (ThumbDisabledImage == null)
             {
-                ThumbDisabledImage = BitmapFactory.DecodeResource(Resources, thumbDisabled);
+                var c1 = Circle(24, 77, 136, 136, 136);
+                var c2 = Circle(4, 255, 51, 181, 229);
+                ThumbDisabledImage = new LayerDrawable(new Drawable[] { c1, c2 });
             }
 
-            _thumbHalfWidth = 0.5f * ThumbImage.Width;
-            _thumbHalfHeight = 0.5f * ThumbImage.Height;
+            var thumbBitmap = BitmapUtil.DrawableToBitmap(ThumbImage);
+            var _thumbWidth = thumbBitmap.Width;
+            var _thumbHeight = thumbBitmap.Height;
 
             SetBarHeight(_barHeight);
 
@@ -342,12 +363,13 @@ namespace Xamarin.RangeSlider
                 _shadowPaint.Color = thumbShadowColor;
                 _shadowPaint.SetMaskFilter(new BlurMaskFilter(_thumbShadowBlur, BlurMaskFilter.Blur.Normal));
                 _thumbShadowPath = new Path();
-                _thumbShadowPath.AddCircle(0, 0, _thumbHalfHeight, Path.Direction.Cw);
+                _thumbShadowPath.AddCircle(0, 0, 0.5f * _thumbHeight, Path.Direction.Cw);
             }
         }
 
         public void SetBarHeight(float barHeight)
         {
+            var _thumbHalfHeight = 0.5f * _thumbHeight;
             _barHeight = barHeight;
             if (_rect == null)
                 _rect = new RectF(_padding,
@@ -664,7 +686,7 @@ namespace Xamarin.RangeSlider
                 width = MeasureSpec.GetSize(widthMeasureSpec);
             }
 
-            var height = ThumbImage.Height
+            var height = _thumbHeight
                          + (ShowTextAboveThumbs ? PixelUtil.DpToPx(Context, HeightInDp) + PixelUtil.SpToPx(Context, TextSizeInSp) : 0)
                          + (ThumbShadow ? ThumbShadowYOffset + _thumbShadowBlur : 0);
             if (MeasureSpecMode.Unspecified != MeasureSpec.GetMode(heightMeasureSpec))
@@ -693,11 +715,11 @@ namespace Xamarin.RangeSlider
                 var minLabel = Context.GetString(Resource.String.demo_min_label);
                 var maxLabel = Context.GetString(Resource.String.demo_max_label);
                 minMaxLabelSize = Math.Max(_paint.MeasureText(minLabel), _paint.MeasureText(maxLabel));
-                var minMaxHeight = _textOffset + _thumbHalfHeight + (float)_textSize / 3;
+                var minMaxHeight = _textOffset + (0.5f * _thumbHeight) + (float)_textSize / 3;
                 canvas.DrawText(minLabel, 0, minMaxHeight, _paint);
                 canvas.DrawText(maxLabel, Width - minMaxLabelSize, minMaxHeight, _paint);
             }
-            _padding = _internalPad + minMaxLabelSize + _thumbHalfWidth;
+            _padding = _internalPad + minMaxLabelSize + (0.5f * _thumbWidth);
 
             // draw seek bar background line
             _rect.Left = _padding;
@@ -824,13 +846,13 @@ namespace Xamarin.RangeSlider
         /// <param name="areSelectedValuesDefault"></param>
         private void DrawThumb(float screenCoord, bool pressed, Canvas canvas, bool areSelectedValuesDefault)
         {
-            Bitmap buttonToDraw;
+            Drawable buttonToDraw;
             if (!Enabled || (!ActivateOnDefaultValues && areSelectedValuesDefault))
                 buttonToDraw = ThumbDisabledImage;
             else
                 buttonToDraw = pressed ? ThumbPressedImage : ThumbImage;
 
-            canvas.DrawBitmap(buttonToDraw, screenCoord - _thumbHalfWidth, _textOffset, _paint);
+            buttonToDraw.Draw(canvas);
         }
 
         /// <summary>
@@ -841,7 +863,7 @@ namespace Xamarin.RangeSlider
         private void DrawThumbShadow(float screenCoord, Canvas canvas)
         {
             _thumbShadowMatrix.SetTranslate(screenCoord + ThumbShadowXOffset,
-                _textOffset + _thumbHalfHeight + ThumbShadowYOffset);
+                _textOffset + (0.5f * _thumbHeight) + ThumbShadowYOffset);
             _translatedThumbShadowPath.Set(_thumbShadowPath);
             _translatedThumbShadowPath.Transform(_thumbShadowMatrix);
             canvas.DrawPath(_translatedThumbShadowPath, _shadowPaint);
@@ -876,7 +898,7 @@ namespace Xamarin.RangeSlider
         /// <returns>true if x-coordinate is in thumb range, false otherwise.</returns>
         private bool IsInThumbRange(float touchX, float normalizedThumbValue)
         {
-            return Math.Abs(touchX - NormalizedToScreen(normalizedThumbValue)) <= _thumbHalfWidth;
+            return Math.Abs(touchX - NormalizedToScreen(normalizedThumbValue)) <= 0.5f * _thumbWidth;
         }
 
         /// <summary>
