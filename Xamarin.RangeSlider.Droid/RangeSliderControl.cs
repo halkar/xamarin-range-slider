@@ -232,7 +232,7 @@ namespace Xamarin.RangeSlider
             return tv == null ? defaultValue : a.GetFloat(attribute, defaultValue);
         }
 
-        public ShapeDrawable Circle(int radius, int a, int r, int g, int b)
+        public static ShapeDrawable Circle(int radius, int a, int r, int g, int b)
         {
             var c = new ShapeDrawable(new OvalShape());
             c.SetBounds(32 - radius, 32 - radius, 32 + radius, 32 + radius);
