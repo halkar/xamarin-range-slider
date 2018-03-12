@@ -17,7 +17,10 @@ namespace Xamarin.RangeSlider
     [Preserve(AllMembers = true)]
     public class RangeSliderControl : ImageView
     {
-        public static readonly Color DefaultActiveColor = Color.Argb(0xFF, 0x33, 0xB5, 0xE5);
+        public static readonly Color DefaultDarkBlueColor = Color.Argb(255, 51, 181, 229);
+        public static readonly Color DefaultLightBlueColor = Color.Argb(154, 51, 181, 229);
+        public static readonly Color DefaultGrayColor = Color.Argb(77, 136, 136, 136);
+        public static readonly Color DefaultLightestBlueColor = Color.Argb(102, 51, 181, 229);
 
         /// <summary>
         ///     An invalid pointer id.
@@ -232,11 +235,11 @@ namespace Xamarin.RangeSlider
             return tv == null ? defaultValue : a.GetFloat(attribute, defaultValue);
         }
 
-        private static ShapeDrawable Circle(int a, int r, int g, int b)
+        private static ShapeDrawable Circle(Color color)
         {
-            var c = new ShapeDrawable(new OvalShape());
-            c.Paint.Color = Color.Argb(a, r, g, b);
-            return c;
+            var circle = new ShapeDrawable(new OvalShape());
+            circle.Paint.Color = color;
+            return circle;
         }
 
         private void Init(Context context, IAttributeSet attrs)
@@ -254,7 +257,7 @@ namespace Xamarin.RangeSlider
                 SetRangeToDefaultValues();
                 _internalPad = PixelUtil.DpToPx(context, InitialPaddingInDp);
                 _barHeight = PixelUtil.DpToPx(context, LineHeightInDp);
-                ActiveColor = DefaultActiveColor;
+                ActiveColor = DefaultDarkBlueColor;
                 DefaultColor = Color.Gray;
                 AlwaysActive = false;
                 ShowTextAboveThumbs = true;
@@ -280,7 +283,7 @@ namespace Xamarin.RangeSlider
                     ShowLabels = a.GetBoolean(Resource.Styleable.RangeSliderControl_showRangeLabels, true);
                     _internalPad = a.GetDimensionPixelSize(Resource.Styleable.RangeSliderControl_internalPadding, InitialPaddingInDp);
                     _barHeight = a.GetDimensionPixelSize(Resource.Styleable.RangeSliderControl_barHeight, LineHeightInDp);
-                    ActiveColor = a.GetColor(Resource.Styleable.RangeSliderControl_activeColor, DefaultActiveColor);
+                    ActiveColor = a.GetColor(Resource.Styleable.RangeSliderControl_activeColor, DefaultDarkBlueColor);
                     DefaultColor = a.GetColor(Resource.Styleable.RangeSliderControl_defaultColor, Color.Gray);
                     AlwaysActive = a.GetBoolean(Resource.Styleable.RangeSliderControl_alwaysActive, false);
                     StepValue = ExtractNumericValueFromAttributes(a,
@@ -320,9 +323,9 @@ namespace Xamarin.RangeSlider
 
             if (ThumbImage == null)
             {
-                var c1 = Circle(154, 51, 181, 229);
-                var c2 = Circle(255, 51, 181, 229);
-                LayerDrawable ld = new LayerDrawable(new Drawable[] { c1, c2 });
+                var outerCircle = Circle(DefaultLightBlueColor);
+                var innerCircle = Circle(DefaultDarkBlueColor);
+                LayerDrawable ld = new LayerDrawable(new Drawable[] { outerCircle, innerCircle });
 
                 ld.SetLayerInset(0, 4, 4, 4, 4);
                 ld.SetLayerInset(1, 23, 23, 23, 23);
@@ -331,14 +334,14 @@ namespace Xamarin.RangeSlider
             }
             if (ThumbPressedImage == null)
             {
-                var c1 = Circle(255, 51, 181, 229);
-                c1.Paint.StrokeWidth = 4;
-                c1.Paint.SetStyle(Paint.Style.Stroke);
-                var c2 = Circle(102, 51, 181,229);
-                var c3 = Circle(255, 51, 181, 229);
+                var outerCircle = Circle(DefaultDarkBlueColor);
+                outerCircle.Paint.StrokeWidth = 4;
+                outerCircle.Paint.SetStyle(Paint.Style.Stroke);
+                var middleCircle = Circle(DefaultLightestBlueColor);
+                var innerCircle = Circle(DefaultDarkBlueColor);
 
 
-                LayerDrawable ld = new LayerDrawable(new Drawable[] { c1, c2, c3 });
+                LayerDrawable ld = new LayerDrawable(new Drawable[] { outerCircle, middleCircle, innerCircle });
                 ld.SetLayerInset(0, 4, 4, 4, 4);
                 ld.SetLayerInset(1, 4, 4, 4, 4);
                 ld.SetLayerInset(2, 23, 23, 23, 23);
@@ -348,10 +351,10 @@ namespace Xamarin.RangeSlider
             }
             if (ThumbDisabledImage == null)
             {
-                var c1 = Circle(77, 136, 136, 136);
-                var c2 = Circle(255, 51, 181, 229);
+                var outerCircle = Circle(DefaultGrayColor);
+                var innerCircle = Circle(DefaultDarkBlueColor);
 
-                LayerDrawable ld = new LayerDrawable(new Drawable[] { c1, c2 });
+                LayerDrawable ld = new LayerDrawable(new Drawable[] { outerCircle, innerCircle });
                 ld.SetLayerInset(0, 8, 8, 8, 8);
                 ld.SetLayerInset(1, 28, 28, 28, 28);
                 ld.SetBounds(0, 0, 64, 64);
