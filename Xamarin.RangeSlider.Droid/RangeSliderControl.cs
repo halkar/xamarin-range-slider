@@ -3,6 +3,8 @@ using System.Globalization;
 using Android.Content;
 using Android.Content.Res;
 using Android.Graphics;
+using Android.Graphics.Drawables;
+using Android.Graphics.Drawables.Shapes;
 using Android.OS;
 using Android.Runtime;
 using Android.Util;
@@ -15,7 +17,10 @@ namespace Xamarin.RangeSlider
     [Preserve(AllMembers = true)]
     public class RangeSliderControl : ImageView
     {
-        public static readonly Color DefaultActiveColor = Color.Argb(0xFF, 0x33, 0xB5, 0xE5);
+        public static readonly Color DefaultDarkBlueColor = Color.Argb(255, 51, 181, 229);
+        public static readonly Color DefaultLightBlueColor = Color.Argb(154, 51, 181, 229);
+        public static readonly Color DefaultGrayColor = Color.Argb(77, 136, 136, 136);
+        public static readonly Color DefaultLightestBlueColor = Color.Argb(102, 51, 181, 229);
 
         /// <summary>
         ///     An invalid pointer id.
@@ -61,7 +66,6 @@ namespace Xamarin.RangeSlider
         private int _textOffset;
         private int _textSize;
         private float _thumbHalfHeight;
-
         private float _thumbHalfWidth;
         private int _thumbShadowBlur;
         private Path _thumbShadowPath;
@@ -230,11 +234,15 @@ namespace Xamarin.RangeSlider
             return tv == null ? defaultValue : a.GetFloat(attribute, defaultValue);
         }
 
+        private static ShapeDrawable Circle(Color color)
+        {
+            var circle = new ShapeDrawable(new OvalShape());
+            circle.Paint.Color = color;
+            return circle;
+        }
+
         private void Init(Context context, IAttributeSet attrs)
         {
-            var thumbNormal = Resource.Drawable.seek_thumb_normal;
-            var thumbPressed = Resource.Drawable.seek_thumb_pressed;
-            var thumbDisabled = Resource.Drawable.seek_thumb_disabled;
             Color thumbShadowColor;
             var defaultShadowColor = Color.Argb(75, 0, 0, 0);
             var defaultShadowYOffset = PixelUtil.DpToPx(context, 2);
@@ -248,7 +256,7 @@ namespace Xamarin.RangeSlider
                 SetRangeToDefaultValues();
                 _internalPad = PixelUtil.DpToPx(context, InitialPaddingInDp);
                 _barHeight = PixelUtil.DpToPx(context, LineHeightInDp);
-                ActiveColor = DefaultActiveColor;
+                ActiveColor = DefaultDarkBlueColor;
                 DefaultColor = Color.Gray;
                 AlwaysActive = false;
                 ShowTextAboveThumbs = true;
@@ -274,7 +282,7 @@ namespace Xamarin.RangeSlider
                     ShowLabels = a.GetBoolean(Resource.Styleable.RangeSliderControl_showRangeLabels, true);
                     _internalPad = a.GetDimensionPixelSize(Resource.Styleable.RangeSliderControl_internalPadding, InitialPaddingInDp);
                     _barHeight = a.GetDimensionPixelSize(Resource.Styleable.RangeSliderControl_barHeight, LineHeightInDp);
-                    ActiveColor = a.GetColor(Resource.Styleable.RangeSliderControl_activeColor, DefaultActiveColor);
+                    ActiveColor = a.GetColor(Resource.Styleable.RangeSliderControl_activeColor, DefaultDarkBlueColor);
                     DefaultColor = a.GetColor(Resource.Styleable.RangeSliderControl_defaultColor, Color.Gray);
                     AlwaysActive = a.GetBoolean(Resource.Styleable.RangeSliderControl_alwaysActive, false);
                     StepValue = ExtractNumericValueFromAttributes(a,
@@ -314,15 +322,43 @@ namespace Xamarin.RangeSlider
 
             if (ThumbImage == null)
             {
-                ThumbImage = BitmapFactory.DecodeResource(Resources, thumbNormal);
+                var outerCircle = Circle(DefaultLightBlueColor);
+                var innerCircle = Circle(DefaultDarkBlueColor);
+                LayerDrawable ld = new LayerDrawable(new Drawable[] { outerCircle, innerCircle });
+
+                ld.SetLayerInset(0, 4, 4, 4, 4);
+                ld.SetLayerInset(1, 23, 23, 23, 23);
+                ld.SetBounds(0, 0, 64, 64);
+                ThumbImage = BitmapUtil.DrawableToBitmap(ld);
             }
             if (ThumbPressedImage == null)
             {
-                ThumbPressedImage = BitmapFactory.DecodeResource(Resources, thumbPressed);
+                var outerCircle = Circle(DefaultDarkBlueColor);
+                outerCircle.Paint.StrokeWidth = 4;
+                outerCircle.Paint.SetStyle(Paint.Style.Stroke);
+                var middleCircle = Circle(DefaultLightestBlueColor);
+                var innerCircle = Circle(DefaultDarkBlueColor);
+
+
+                LayerDrawable ld = new LayerDrawable(new Drawable[] { outerCircle, middleCircle, innerCircle });
+                ld.SetLayerInset(0, 4, 4, 4, 4);
+                ld.SetLayerInset(1, 4, 4, 4, 4);
+                ld.SetLayerInset(2, 23, 23, 23, 23);
+                ld.SetBounds(0, 0, 64, 64);
+
+                ThumbPressedImage = BitmapUtil.DrawableToBitmap(ld);
             }
             if (ThumbDisabledImage == null)
             {
-                ThumbDisabledImage = BitmapFactory.DecodeResource(Resources, thumbDisabled);
+                var outerCircle = Circle(DefaultGrayColor);
+                var innerCircle = Circle(DefaultDarkBlueColor);
+
+                LayerDrawable ld = new LayerDrawable(new Drawable[] { outerCircle, innerCircle });
+                ld.SetLayerInset(0, 8, 8, 8, 8);
+                ld.SetLayerInset(1, 28, 28, 28, 28);
+                ld.SetBounds(0, 0, 64, 64);
+
+                ThumbDisabledImage = BitmapUtil.DrawableToBitmap(ld);
             }
 
             _thumbHalfWidth = 0.5f * ThumbImage.Width;
@@ -829,7 +865,7 @@ namespace Xamarin.RangeSlider
                 buttonToDraw = ThumbDisabledImage;
             else
                 buttonToDraw = pressed ? ThumbPressedImage : ThumbImage;
-
+            
             canvas.DrawBitmap(buttonToDraw, screenCoord - _thumbHalfWidth, _textOffset, _paint);
         }
 
@@ -841,7 +877,7 @@ namespace Xamarin.RangeSlider
         private void DrawThumbShadow(float screenCoord, Canvas canvas)
         {
             _thumbShadowMatrix.SetTranslate(screenCoord + ThumbShadowXOffset,
-                _textOffset + _thumbHalfHeight + ThumbShadowYOffset);
+                                            _textOffset + _thumbHalfHeight + ThumbShadowYOffset);
             _translatedThumbShadowPath.Set(_thumbShadowPath);
             _translatedThumbShadowPath.Transform(_thumbShadowMatrix);
             canvas.DrawPath(_translatedThumbShadowPath, _shadowPaint);
