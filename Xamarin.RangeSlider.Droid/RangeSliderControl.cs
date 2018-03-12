@@ -65,9 +65,8 @@ namespace Xamarin.RangeSlider
 
         private int _textOffset;
         private int _textSize;
-        private int _thumbHeight;
-
-        private int _thumbWidth;
+        private float _thumbHalfHeight;
+        private float _thumbHalfWidth;
         private int _thumbShadowBlur;
         private Path _thumbShadowPath;
         protected float AbsoluteMinValue, AbsoluteMaxValue;
@@ -362,8 +361,8 @@ namespace Xamarin.RangeSlider
                 ThumbDisabledImage = BitmapUtil.DrawableToBitmap(ld);
             }
 
-            _thumbWidth = ThumbImage.Width;
-            _thumbHeight = ThumbImage.Height;
+            _thumbHalfWidth = 0.5f * ThumbImage.Width;
+            _thumbHalfHeight = 0.5f * ThumbImage.Height;
 
             SetBarHeight(_barHeight);
 
@@ -379,13 +378,12 @@ namespace Xamarin.RangeSlider
                 _shadowPaint.Color = thumbShadowColor;
                 _shadowPaint.SetMaskFilter(new BlurMaskFilter(_thumbShadowBlur, BlurMaskFilter.Blur.Normal));
                 _thumbShadowPath = new Path();
-                _thumbShadowPath.AddCircle(0, 0, 0.5f * _thumbHeight, Path.Direction.Cw);
+                _thumbShadowPath.AddCircle(0, 0, _thumbHalfHeight, Path.Direction.Cw);
             }
         }
 
         public void SetBarHeight(float barHeight)
         {
-            var _thumbHalfHeight = 0.5f * _thumbHeight;
             _barHeight = barHeight;
             if (_rect == null)
                 _rect = new RectF(_padding,
@@ -702,7 +700,7 @@ namespace Xamarin.RangeSlider
                 width = MeasureSpec.GetSize(widthMeasureSpec);
             }
 
-            var height = _thumbHeight
+            var height = ThumbImage.Height
                          + (ShowTextAboveThumbs ? PixelUtil.DpToPx(Context, HeightInDp) + PixelUtil.SpToPx(Context, TextSizeInSp) : 0)
                          + (ThumbShadow ? ThumbShadowYOffset + _thumbShadowBlur : 0);
             if (MeasureSpecMode.Unspecified != MeasureSpec.GetMode(heightMeasureSpec))
@@ -731,11 +729,11 @@ namespace Xamarin.RangeSlider
                 var minLabel = Context.GetString(Resource.String.demo_min_label);
                 var maxLabel = Context.GetString(Resource.String.demo_max_label);
                 minMaxLabelSize = Math.Max(_paint.MeasureText(minLabel), _paint.MeasureText(maxLabel));
-                var minMaxHeight = _textOffset + (0.5f * _thumbHeight) + (float)_textSize / 3;
+                var minMaxHeight = _textOffset + _thumbHalfHeight + (float)_textSize / 3;
                 canvas.DrawText(minLabel, 0, minMaxHeight, _paint);
                 canvas.DrawText(maxLabel, Width - minMaxLabelSize, minMaxHeight, _paint);
             }
-            _padding = _internalPad + minMaxLabelSize + (0.5f * _thumbWidth);
+            _padding = _internalPad + minMaxLabelSize + _thumbHalfWidth;
 
             // draw seek bar background line
             _rect.Left = _padding;
@@ -868,7 +866,7 @@ namespace Xamarin.RangeSlider
             else
                 buttonToDraw = pressed ? ThumbPressedImage : ThumbImage;
             
-            canvas.DrawBitmap(buttonToDraw, screenCoord - (_thumbHeight / 2.0f), _textOffset, _paint);
+            canvas.DrawBitmap(buttonToDraw, screenCoord - _thumbHalfWidth, _textOffset, _paint);
         }
 
         /// <summary>
@@ -879,7 +877,7 @@ namespace Xamarin.RangeSlider
         private void DrawThumbShadow(float screenCoord, Canvas canvas)
         {
             _thumbShadowMatrix.SetTranslate(screenCoord + ThumbShadowXOffset,
-                _textOffset + (0.5f * _thumbHeight) + ThumbShadowYOffset);
+                                            _textOffset + _thumbHalfHeight + ThumbShadowYOffset);
             _translatedThumbShadowPath.Set(_thumbShadowPath);
             _translatedThumbShadowPath.Transform(_thumbShadowMatrix);
             canvas.DrawPath(_translatedThumbShadowPath, _shadowPaint);
@@ -914,7 +912,7 @@ namespace Xamarin.RangeSlider
         /// <returns>true if x-coordinate is in thumb range, false otherwise.</returns>
         private bool IsInThumbRange(float touchX, float normalizedThumbValue)
         {
-            return Math.Abs(touchX - NormalizedToScreen(normalizedThumbValue)) <= 0.5f * _thumbWidth;
+            return Math.Abs(touchX - NormalizedToScreen(normalizedThumbValue)) <= _thumbHalfWidth;
         }
 
         /// <summary>
