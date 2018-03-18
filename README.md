@@ -36,7 +36,7 @@ If element is not displayed on a Xamarin.Forms page add this code to the startup
 | TextSize              | Text above the thumbs size | *dp* on Android, *points* on iOS, *pixels* on UWP |
 | TextFormat            | Format string for text above the thumbs ||
 | ActiveColor           | Active bar color | Not supported on iOS. Used for thumb color in Android material UI. |
-| MaterialUI            | Material UI | Only supported on Android |
+| MaterialUI            | Material UI | Only supported on Android <img src="https://raw.githubusercontent.com/halkar/xamarin-range-slider/master/Screenshots/android-material.png" alt="Android" style="width: 300px;"/> |
 
 ## Supported Events
 
