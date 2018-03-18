@@ -65,6 +65,9 @@ namespace Xamarin.RangeSlider.Forms
                 control.TextAboveThumbsColor = element.TextColor.ToAndroid();
             control.FormatLabel = element.FormatLabel;
 			control.ActivateOnDefaultValues = true;
+            if(element.ActiveColor != Xamarin.Forms.Color.Default)
+                control.ActiveColor = element.ActiveColor.ToAndroid();
+            control.MaterialUI = element.MaterialUI;
         }
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -115,6 +118,13 @@ namespace Xamarin.RangeSlider.Forms
                     break;
                 case RangeSlider.FormatLabelPropertyName:
                     Control.FormatLabel = Element.FormatLabel;
+                    break;
+                case RangeSlider.ActiveColorPropertyName:
+                    if (Element.ActiveColor != Xamarin.Forms.Color.Default)
+                        Control.ActiveColor = Element.ActiveColor.ToAndroid();
+                    break;
+                case RangeSlider.MaterialUiPropertyName:
+                    Control.MaterialUI = Element.MaterialUI;
                     break;
             }
         }

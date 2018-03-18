@@ -51,6 +51,9 @@ namespace Xamarin.RangeSlider
 			// aapt resource value: 0x7f010007
 			public static int internalPadding = 2130771975;
 			
+			// aapt resource value: 0x7f010018
+			public static int materialUI = 2130771992;
+			
 			// aapt resource value: 0x7f010003
 			public static int maxThumbHidden = 2130771971;
 			
@@ -158,7 +161,8 @@ namespace Xamarin.RangeSlider
 					2130771988,
 					2130771989,
 					2130771990,
-					2130771991};
+					2130771991,
+					2130771992};
 			
 			// aapt resource value: 1
 			public static int RangeSliderControl_absoluteMaxValue = 1;
@@ -183,6 +187,9 @@ namespace Xamarin.RangeSlider
 			
 			// aapt resource value: 7
 			public static int RangeSliderControl_internalPadding = 7;
+			
+			// aapt resource value: 24
+			public static int RangeSliderControl_materialUI = 24;
 			
 			// aapt resource value: 3
 			public static int RangeSliderControl_maxThumbHidden = 3;

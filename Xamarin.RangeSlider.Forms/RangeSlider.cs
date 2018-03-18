@@ -22,6 +22,8 @@ namespace Xamarin.RangeSlider.Forms
         public const string TextFormatPropertyName = "TextFormat";
         public const string TextColorPropertyName = "TextColor";
         public const string FormatLabelPropertyName = "FormatLabel";
+        public const string ActiveColorPropertyName = "ActiveColor";
+        public const string MaterialUiPropertyName = "MaterialUI";
 
         public static readonly BindableProperty LowerValueProperty =
             BindableProperty.Create(LowerValuePropertyName, typeof(float), typeof(RangeSlider), 0f);
@@ -64,6 +66,12 @@ namespace Xamarin.RangeSlider.Forms
 
         public static readonly BindableProperty FormatLabelProperty =
             BindableProperty.Create(FormatLabelPropertyName, typeof(Func<Thumb, float, string>), typeof(RangeSlider));
+
+        public static readonly BindableProperty ActiveColorProperty =
+            BindableProperty.Create(ActiveColorPropertyName, typeof(Color), typeof(RangeSlider), Color.Default);
+
+        public static readonly BindableProperty MaterialUiProperty =
+            BindableProperty.Create(MaterialUiPropertyName, typeof(bool), typeof(RangeSlider), false);
 
         public float MinimumValue
         {
@@ -142,6 +150,18 @@ namespace Xamarin.RangeSlider.Forms
         {
             get { return (string)GetValue(TextFormatProperty); }
             set { SetValue(TextFormatProperty, value); }
+        }
+
+        public Color ActiveColor
+        {
+            get { return (Color)GetValue(ActiveColorProperty); }
+            set { SetValue(ActiveColorProperty, value); }
+        }
+
+        public bool MaterialUI
+        {
+            get { return (bool)GetValue(MaterialUiProperty); }
+            set { SetValue(MaterialUiProperty, value); }
         }
 
         public Func<Thumb, float, string> FormatLabel
