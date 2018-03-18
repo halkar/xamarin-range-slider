@@ -78,6 +78,8 @@ namespace Xamarin.RangeSlider.Forms
             control.IgnoreRangeChecks = false;
             control.ValidateMinValue(element.LowerValue);
             control.ValidateMaxValue(element.UpperValue);
+            if (element.ActiveColor != Xamarin.Forms.Color.Default)
+                control.ActiveColor = Color.FromArgb((byte)(element.ActiveColor.A * 255), (byte)(element.ActiveColor.R * 255), (byte)(element.ActiveColor.G * 255), (byte)(element.ActiveColor.B * 255));
         }
 
         private void RangeSlider_UpperValueChanged(object sender, EventArgs e)
@@ -138,6 +140,10 @@ namespace Xamarin.RangeSlider.Forms
                     break;
                 case RangeSlider.FormatLabelPropertyName:
                     Control.FormatLabel = Element.FormatLabel;
+                    break;
+                case RangeSlider.ActiveColorPropertyName:
+                    if (Element.ActiveColor != Xamarin.Forms.Color.Default)
+                        Control.ActiveColor = Color.FromArgb((byte)(Element.ActiveColor.A * 255), (byte)(Element.ActiveColor.R * 255), (byte)(Element.ActiveColor.G * 255), (byte)(Element.ActiveColor.B * 255));
                     break;
             }
         }

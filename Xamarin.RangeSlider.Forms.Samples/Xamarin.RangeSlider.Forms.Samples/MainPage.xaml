@@ -31,6 +31,7 @@
 				<RowDefinition />
 				<RowDefinition />
 				<RowDefinition />
+                <RowDefinition />
 			</Grid.RowDefinitions>
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="50" />
@@ -56,6 +57,8 @@
 			<Entry Grid.Row="7" Grid.Column="2" BindingContext="{x:Reference Name=RangeSlider}" Text="{Binding TextSize, Mode=TwoWay, Converter={StaticResource StringToIntConverter}}" />
 			<Switch Grid.Row="8" BindingContext="{x:Reference Name=RangeSlider}" IsToggled="{Binding IsEnabled, Mode=TwoWay}" VerticalOptions="Center" />
 			<Label Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="2" Text="Enabled" VerticalOptions="Center" />
+            <Switch Grid.Row="9" BindingContext="{x:Reference Name=RangeSlider}" IsToggled="{Binding MaterialUI, Mode=TwoWay}" VerticalOptions="Center" />
+            <Label Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="2" Text="Material UI" VerticalOptions="Center" />
 		</Grid>
 	</StackLayout>
 </ContentPage>

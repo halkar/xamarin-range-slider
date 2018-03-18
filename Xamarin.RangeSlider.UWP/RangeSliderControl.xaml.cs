@@ -25,6 +25,7 @@ namespace Xamarin.RangeSlider
         public const string TextSizePropertyName = "TextSize";
         public const string TextFormatPropertyName = "TextFormat";
         public const string TextColorPropertyName = "TextColor";
+        public const string ActiveColorPropertyName = "ActiveColor";
 
         public const int ControlHeight = 32;
 
@@ -64,6 +65,9 @@ namespace Xamarin.RangeSlider
         public static readonly DependencyProperty TextColorProperty = DependencyProperty.Register(TextColorPropertyName,
             typeof(Color?), typeof(RangeSliderControl), new PropertyMetadata(null, TextColorPropertyChanged));
 
+        public static readonly DependencyProperty ActiveColorProperty = DependencyProperty.Register(ActiveColorPropertyName,
+            typeof(Color?), typeof(RangeSliderControl), new PropertyMetadata(null, ActiveColorPropertyChanged));
+
         public RangeSliderControl()
         {
             InitializeComponent();
@@ -72,79 +76,90 @@ namespace Xamarin.RangeSlider
 
         private void RangeSliderControlIsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            ActiveRectangle.Fill = new SolidColorBrush(IsEnabled ? Color.FromArgb(255, 105, 160, 204) : Color.FromArgb(255, 184, 197, 209));
+            UpdateActiveRectangleColor();
+        }
+
+        private void UpdateActiveRectangleColor()
+        {
+            ActiveRectangle.Fill = new SolidColorBrush(IsEnabled ? (ActiveColor ?? Color.FromArgb(255, 105, 160, 204)) : Color.FromArgb(255, 184, 197, 209));
         }
 
         public double Minimum
         {
-            get { return (double) GetValue(MinimumProperty); }
-            set { SetValue(MinimumProperty, value); }
+            get => (double)GetValue(MinimumProperty);
+            set => SetValue(MinimumProperty, value);
         }
 
         public double Maximum
         {
-            get { return (double) GetValue(MaximumProperty); }
-            set { SetValue(MaximumProperty, value); }
+            get => (double)GetValue(MaximumProperty);
+            set => SetValue(MaximumProperty, value);
         }
 
         public double RangeMin
         {
-            get { return (double) GetValue(RangeMinProperty); }
-            set { SetValue(RangeMinProperty, value); }
+            get => (double)GetValue(RangeMinProperty);
+            set => SetValue(RangeMinProperty, value);
         }
 
         public double RangeMax
         {
-            get { return (double) GetValue(RangeMaxProperty); }
-            set { SetValue(RangeMaxProperty, value); }
+            get => (double)GetValue(RangeMaxProperty);
+            set => SetValue(RangeMaxProperty, value);
         }
 
         public bool MinThumbHidden
         {
-            get { return (bool)GetValue(MinThumbHiddenProperty); }
-            set { SetValue(MinThumbHiddenProperty, value); }
+            get => (bool)GetValue(MinThumbHiddenProperty);
+            set => SetValue(MinThumbHiddenProperty, value);
         }
 
         public bool MaxThumbHidden
         {
-            get { return (bool)GetValue(MaxThumbHiddenProperty); }
-            set { SetValue(MaxThumbHiddenProperty, value); }
+            get => (bool)GetValue(MaxThumbHiddenProperty);
+            set => SetValue(MaxThumbHiddenProperty, value);
         }
 
         public double StepValue
         {
-            get { return (double)GetValue(StepValueProperty); }
-            set { SetValue(StepValueProperty, value); }
+            get => (double)GetValue(StepValueProperty);
+            set => SetValue(StepValueProperty, value);
         }
 
         public bool StepValueContinuously
         {
-            get { return (bool)GetValue(StepValueContinuouslyProperty); }
-            set { SetValue(StepValueContinuouslyProperty, value); }
+            get => (bool)GetValue(StepValueContinuouslyProperty);
+            set => SetValue(StepValueContinuouslyProperty, value);
         }
 
         public bool ShowTextAboveThumbs
         {
-            get { return (bool)GetValue(ShowTextAboveThumbsProperty); }
-            set { SetValue(ShowTextAboveThumbsProperty, value); }
+            get => (bool)GetValue(ShowTextAboveThumbsProperty);
+            set => SetValue(ShowTextAboveThumbsProperty, value);
         }
 
         public int TextSize
         {
-            get { return (int)GetValue(TextSizeProperty); }
-            set { SetValue(TextSizeProperty, value); }
+            get => (int)GetValue(TextSizeProperty);
+            set => SetValue(TextSizeProperty, value);
         }
 
         public Color? TextColor
         {
-            get { return (Color?)GetValue(TextColorProperty); }
-            set { SetValue(TextColorProperty, value); }
+            get => (Color?)GetValue(TextColorProperty);
+            set => SetValue(TextColorProperty, value);
+        }
+
+        public Color? ActiveColor
+        {
+            get => (Color?)GetValue(ActiveColorProperty);
+            set => SetValue(ActiveColorProperty, value);
         }
 
         public string TextFormat
         {
-            get { return (string)GetValue(TextFormatProperty); }
-            set { SetValue(TextFormatProperty, value); }
+            get => (string)GetValue(TextFormatProperty);
+            set => SetValue(TextFormatProperty, value);
         }
 
         public Func<Thumb, float, string> FormatLabel { get; set; }
@@ -155,13 +170,13 @@ namespace Xamarin.RangeSlider
         public event EventHandler DragStarted;
         public event EventHandler DragCompleted;
 
-        private double _aggregatedDrag = 0;
-        private double _initialLeft = 0;
+        private double _aggregatedDrag;
+        private double _initialLeft;
 
         private static void OnRangeMinPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var slider = (RangeSliderControl) d;
-            var newValue = (double) e.NewValue;
+            var slider = (RangeSliderControl)d;
+            var newValue = (double)e.NewValue;
 
             if (slider.IgnoreRangeChecks)
                 slider.RangeMin = newValue;
@@ -175,8 +190,8 @@ namespace Xamarin.RangeSlider
 
         private static void OnRangeMaxPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var slider = (RangeSliderControl) d;
-            var newValue = (double) e.NewValue;
+            var slider = (RangeSliderControl)d;
+            var newValue = (double)e.NewValue;
 
             if (slider.IgnoreRangeChecks)
                 slider.RangeMax = newValue;
@@ -226,6 +241,14 @@ namespace Xamarin.RangeSlider
             slider.MaxThumbText.Foreground = new SolidColorBrush(newValue);
         }
 
+        private static void ActiveColorPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var slider = (RangeSliderControl)d;
+            var newValue = (Color)e.NewValue;
+            slider.ActiveRectangle.Fill = new SolidColorBrush(newValue);
+            slider.MaxThumbText.Foreground = new SolidColorBrush(newValue);
+        }
+
         private static void ShowTextAboveThumbsPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var slider = (RangeSliderControl)d;
@@ -259,7 +282,7 @@ namespace Xamarin.RangeSlider
             if (left + MinThumbText.ActualWidth > Canvas.GetLeft(MaxThumbText) - 10)
                 left = Canvas.GetLeft(MaxThumbText) - MinThumbText.ActualWidth - 10;
             Canvas.SetLeft(MinThumbText, left);
-            
+
         }
 
         public void UpdateMaxThumb(double max, bool update = false)
@@ -289,23 +312,23 @@ namespace Xamarin.RangeSlider
             var func = FormatLabel;
             return func == null
                 ? value.ToString(TextFormat, CultureInfo.InvariantCulture)
-                : func(thumb, (float) value);
+                : func(thumb, (float)value);
         }
 
         private void ContainerCanvas_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            var relativeLeft = (RangeMin - Minimum)/(Maximum - Minimum)*ContainerCanvas.ActualWidth;
-            var relativeRight = (RangeMax - Minimum)/(Maximum - Minimum)*ContainerCanvas.ActualWidth;
+            var relativeLeft = (RangeMin - Minimum) / (Maximum - Minimum) * ContainerCanvas.ActualWidth;
+            var relativeRight = (RangeMax - Minimum) / (Maximum - Minimum) * ContainerCanvas.ActualWidth;
 
             Canvas.SetLeft(MinThumb, relativeLeft);
             Canvas.SetLeft(ActiveRectangle, relativeLeft);
             Canvas.SetLeft(MaxThumb, relativeRight);
 
-            ActiveRectangle.Width = (RangeMax - RangeMin)/(Maximum - Minimum)*ContainerCanvas.ActualWidth;
+            ActiveRectangle.Width = (RangeMax - RangeMin) / (Maximum - Minimum) * ContainerCanvas.ActualWidth;
         }
 
         private void MinThumb_DragDelta(object sender, DragDeltaEventArgs e)
-        {   
+        {
             if (StepValueContinuously)
             {
                 _aggregatedDrag += e.HorizontalChange;
@@ -344,7 +367,7 @@ namespace Xamarin.RangeSlider
         {
             if (Math.Abs(StepValue) < float.Epsilon)
                 return value;
-            return (float) Math.Round((value - Minimum) / StepValue) * StepValue + Minimum;
+            return (float)Math.Round((value - Minimum) / StepValue) * StepValue + Minimum;
         }
 
         private double DragThumb(Windows.UI.Xaml.Controls.Primitives.Thumb thumb, double min, double max, double offset)
@@ -355,7 +378,7 @@ namespace Xamarin.RangeSlider
             nextPos = Math.Max(min, nextPos);
             nextPos = Math.Min(max, nextPos);
 
-            return Minimum + nextPos/ContainerCanvas.ActualWidth*(Maximum - Minimum);
+            return Minimum + nextPos / ContainerCanvas.ActualWidth * (Maximum - Minimum);
         }
 
         private void MinThumb_DragCompleted(object sender, DragCompletedEventArgs e)
@@ -400,7 +423,7 @@ namespace Xamarin.RangeSlider
 
         public void SetBarHeight(int barHeight)
         {
-            int margin = (ControlHeight - barHeight)/2;
+            int margin = (ControlHeight - barHeight) / 2;
             InactiveRectangle.Margin = new Thickness(8, margin, 8, margin);
             InactiveRectangle.Height = barHeight;
             Canvas.SetTop(ActiveRectangle, margin);
