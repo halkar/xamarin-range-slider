@@ -35,6 +35,8 @@ If element is not displayed on a Xamarin.Forms page add this code to the startup
 | ShowTextAboveThumbs   | Show current values above the thumbs ||
 | TextSize              | Text above the thumbs size | *dp* on Android, *points* on iOS, *pixels* on UWP |
 | TextFormat            | Format string for text above the thumbs ||
+| ActiveColor           | Active bar color | Not supported on iOS. Used for thumb color in Android material UI. |
+| MaterialUI            | Material UI | Only supported on Android |
 
 ## Supported Events
 
