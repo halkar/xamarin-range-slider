@@ -111,13 +111,13 @@ namespace Xamarin.RangeSlider
         public bool MinThumbHidden
         {
             get => (bool)GetValue(MinThumbHiddenProperty);
-            set => SetValue(MinThumbHiddenProperty, value);
+            set { SetValue(MinThumbHiddenProperty, value); MinThumbText.Visibility = value ? Visibility.Visible : Visibility.Collapsed; }
         }
 
         public bool MaxThumbHidden
         {
             get => (bool)GetValue(MaxThumbHiddenProperty);
-            set => SetValue(MaxThumbHiddenProperty, value);
+            set { SetValue(MaxThumbHiddenProperty, value); MaxThumbText.Visibility = value ? Visibility.Visible : Visibility.Collapsed; }
         }
 
         public double StepValue
