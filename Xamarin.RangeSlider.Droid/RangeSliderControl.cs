@@ -849,16 +849,21 @@ namespace Xamarin.RangeSlider
                     minPosition -= overlap * NormalizedMinValue / (NormalizedMinValue + 1 - NormalizedMaxValue);
                     maxPosition += overlap * (1 - NormalizedMaxValue) / (NormalizedMinValue + 1 - NormalizedMaxValue);
                 }
+            }
+            if (!MinThumbHidden)
+            {
                 canvas.DrawText(minText,
                     minPosition,
                     _distanceToTop + _textSize,
                     _paint);
             }
-
-            canvas.DrawText(maxText,
-                maxPosition,
-                _distanceToTop + _textSize,
-                _paint);
+            if (!MaxThumbHidden)
+            {
+                canvas.DrawText(maxText,
+                    maxPosition,
+                    _distanceToTop + _textSize,
+                    _paint);
+            }
         }
 
         protected string ValueToString(float value, Thumb thumb)
