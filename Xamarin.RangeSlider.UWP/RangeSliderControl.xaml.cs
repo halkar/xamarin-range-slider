@@ -207,12 +207,14 @@ namespace Xamarin.RangeSlider
         {
             var slider = (RangeSliderControl)d;
             slider.MinThumb.Visibility = (bool)e.NewValue ? Visibility.Collapsed : Visibility.Visible;
+            slider.MinThumbText.Visibility = (bool)e.NewValue ? Visibility.Collapsed : Visibility.Visible;
         }
 
         private static void MaxThumbHiddenPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var slider = (RangeSliderControl)d;
             slider.MaxThumb.Visibility = (bool)e.NewValue ? Visibility.Collapsed : Visibility.Visible;
+            slider.MaxThumbText.Visibility = (bool)e.NewValue ? Visibility.Collapsed : Visibility.Visible;
         }
 
         private static void TextSizePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
