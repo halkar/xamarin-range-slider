@@ -760,6 +760,10 @@ namespace Xamarin.RangeSlider
         protected override void OnDraw(Canvas canvas)
         {
             base.OnDraw(canvas);
+            if (ThumbImage != null) {
+              _thumbHalfHeight = 0.5f * ThumbImage.Height;
+              _thumbHalfWidth = 0.5f * ThumbImage.Width;
+            }
 
             _paint.TextSize = _textSize;
             _paint.SetStyle(Paint.Style.Fill);
@@ -782,6 +786,8 @@ namespace Xamarin.RangeSlider
             // draw seek bar background line
             _rect.Left = _padding;
             _rect.Right = Width - _padding;
+            _rect.Top = _textOffset + _thumbHalfHeight - _barHeight / 2;
+            _rect.Bottom = _textOffset + _thumbHalfHeight + _barHeight / 2;
             canvas.DrawRect(_rect, _paint);
 
             var selectedValuesAreDefault = NormalizedMinValue <= MinDeltaForDefault &&
@@ -910,12 +916,13 @@ namespace Xamarin.RangeSlider
         private void DrawThumb(float screenCoord, bool pressed, Canvas canvas, bool areSelectedValuesDefault)
         {
             Bitmap buttonToDraw;
-            if (!Enabled || (!ActivateOnDefaultValues && areSelectedValuesDefault))
-                buttonToDraw = ThumbDisabledImage;
-            else
-                buttonToDraw = pressed ? ThumbPressedImage : ThumbImage;
-            
-            canvas.DrawBitmap(buttonToDraw, screenCoord - _thumbHalfWidth, _textOffset, _paint);
+            if (!Enabled || (!ActivateOnDefaultValues && areSelectedValuesDefault)) {
+              buttonToDraw = ThumbDisabledImage;
+              canvas.DrawBitmap(buttonToDraw, screenCoord - ThumbDisabledImage.Width * 0.5f, _textOffset + (ThumbImage.Height - ThumbDisabledImage.Height) / 2, _paint);
+            } else {
+              buttonToDraw = pressed ? ThumbPressedImage : ThumbImage;
+              canvas.DrawBitmap(buttonToDraw, screenCoord - _thumbHalfWidth, _textOffset, _paint);
+            }
         }
 
         /// <summary>
