@@ -50,62 +50,106 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\slider-default_trackBackground%402x.png" />
-    <BundleResource Include="Resources\slider-default-handle-disabled.png" />
-    <BundleResource Include="Resources\slider-default7-handle-disabled.png" />
-    <BundleResource Include="Resources\slider-default-handle-disabled%402x.png" />
-    <BundleResource Include="Resources\slider-default7-handle-disabled%402x.png" />
+    <BundleResource Include="Resources\slider-default_trackBackground%402x.png">
+      <IncludeInPackage>true</IncludeInPackage>
+    </BundleResource>
+    <BundleResource Include="Resources\slider-default-handle-disabled.png">
+      <IncludeInPackage>true</IncludeInPackage>
+    </BundleResource>
+    <BundleResource Include="Resources\slider-default7-handle-disabled.png">
+      <IncludeInPackage>true</IncludeInPackage>
+    </BundleResource>
+    <BundleResource Include="Resources\slider-default-handle-disabled%402x.png">
+      <IncludeInPackage>true</IncludeInPackage>
+    </BundleResource>
+    <BundleResource Include="Resources\slider-default7-handle-disabled%402x.png">
+      <IncludeInPackage>true</IncludeInPackage>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\slider-default7-handle.png" />
+    <BundleResource Include="Resources\slider-default7-handle.png">
+      <IncludeInPackage>true</IncludeInPackage>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\slider-default7-handle%402x.png" />
+    <BundleResource Include="Resources\slider-default7-handle%402x.png">
+      <IncludeInPackage>true</IncludeInPackage>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\slider-default7-track.png" />
+    <BundleResource Include="Resources\slider-default7-track.png">
+      <IncludeInPackage>true</IncludeInPackage>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\slider-default7-track%402x.png" />
+    <BundleResource Include="Resources\slider-default7-track%402x.png">
+      <IncludeInPackage>true</IncludeInPackage>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\slider-default7-trackBackground.png" />
+    <BundleResource Include="Resources\slider-default7-trackBackground.png">
+      <IncludeInPackage>true</IncludeInPackage>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\slider-default7-trackBackground%402x.png" />
+    <BundleResource Include="Resources\slider-default7-trackBackground%402x.png">
+      <IncludeInPackage>true</IncludeInPackage>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\slider-default7-trackCrossedOver.png" />
+    <BundleResource Include="Resources\slider-default7-trackCrossedOver.png">
+      <IncludeInPackage>true</IncludeInPackage>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\slider-default7-trackCrossedOver%402x.png" />
+    <BundleResource Include="Resources\slider-default7-trackCrossedOver%402x.png">
+      <IncludeInPackage>true</IncludeInPackage>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\slider-default-handle.png" />
+    <BundleResource Include="Resources\slider-default-handle.png">
+      <IncludeInPackage>true</IncludeInPackage>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\slider-default-handle%402x.png" />
+    <BundleResource Include="Resources\slider-default-handle%402x.png">
+      <IncludeInPackage>true</IncludeInPackage>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\slider-default-handle-highlighted.png" />
+    <BundleResource Include="Resources\slider-default-handle-highlighted.png">
+      <IncludeInPackage>true</IncludeInPackage>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\slider-default-handle-highlighted%402x.png" />
+    <BundleResource Include="Resources\slider-default-handle-highlighted%402x.png">
+      <IncludeInPackage>true</IncludeInPackage>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\slider-default-track.png" />
+    <BundleResource Include="Resources\slider-default-track.png">
+      <IncludeInPackage>true</IncludeInPackage>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\slider-default-track%402x.png" />
+    <BundleResource Include="Resources\slider-default-track%402x.png">
+      <IncludeInPackage>true</IncludeInPackage>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\slider-default-trackBackground.png" />
+    <BundleResource Include="Resources\slider-default-trackBackground.png">
+      <IncludeInPackage>true</IncludeInPackage>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\slider-default-trackCrossedOver.png" />
+    <BundleResource Include="Resources\slider-default-trackCrossedOver.png">
+      <IncludeInPackage>true</IncludeInPackage>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\slider-default-trackCrossedOver%402x.png" />
+    <BundleResource Include="Resources\slider-default-trackCrossedOver%402x.png">
+      <IncludeInPackage>true</IncludeInPackage>
+    </BundleResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
