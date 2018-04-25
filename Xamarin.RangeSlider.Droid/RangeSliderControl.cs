@@ -224,6 +224,15 @@ namespace Xamarin.RangeSlider
 
         public Bitmap ThumbDisabledImage { get; set; }
         public Bitmap ThumbImage { get; set; }
+        private Bitmap _customThumbImage;
+        public Bitmap CustomThumbImage 
+        {
+            get { return _customThumbImage; }
+            set {
+                _customThumbImage = value;
+                UpdateThumbImages();
+            }
+        }
         public Bitmap ThumbPressedImage { get; set; }
         public Bitmap DefaultThumbImage { get; private set; }
         public Bitmap DefaultThumbDisabledImage { get; private set; }
@@ -353,7 +362,7 @@ namespace Xamarin.RangeSlider
 
         private void UpdateThumbImages()
         {
-            ThumbImage = DefaultThumbImage ?? BitmapUtil.DrawableToBitmap(GetThumbDrawable());
+            ThumbImage = DefaultThumbImage ?? (CustomThumbImage ?? BitmapUtil.DrawableToBitmap(GetThumbDrawable()));
             ThumbPressedImage = DefaultThumbPressedImage ?? BitmapUtil.DrawableToBitmap(GetPressedThumbDrawable());
             ThumbDisabledImage = DefaultThumbDisabledImage ?? BitmapUtil.DrawableToBitmap(GetDisabledThumbDrawable());
 
@@ -760,10 +769,6 @@ namespace Xamarin.RangeSlider
         protected override void OnDraw(Canvas canvas)
         {
             base.OnDraw(canvas);
-            if (ThumbImage != null) {
-              _thumbHalfHeight = 0.5f * ThumbImage.Height;
-              _thumbHalfWidth = 0.5f * ThumbImage.Width;
-            }
 
             _paint.TextSize = _textSize;
             _paint.SetStyle(Paint.Style.Fill);
@@ -918,11 +923,10 @@ namespace Xamarin.RangeSlider
             Bitmap buttonToDraw;
             if (!Enabled || (!ActivateOnDefaultValues && areSelectedValuesDefault)) {
               buttonToDraw = ThumbDisabledImage;
-              canvas.DrawBitmap(buttonToDraw, screenCoord - ThumbDisabledImage.Width * 0.5f, _textOffset + (ThumbImage.Height - ThumbDisabledImage.Height) / 2, _paint);
             } else {
               buttonToDraw = pressed ? ThumbPressedImage : ThumbImage;
-              canvas.DrawBitmap(buttonToDraw, screenCoord - _thumbHalfWidth, _textOffset, _paint);
             }
+            canvas.DrawBitmap(buttonToDraw, screenCoord - buttonToDraw.Width * 0.5f, _textOffset + (ThumbImage.Height - buttonToDraw.Height) / 2, _paint);
         }
 
         /// <summary>

@@ -23,8 +23,8 @@ namespace Xamarin.RangeSlider.Forms.Samples.Droid.PlattformEffects {
       var drawable = ContextCompat.GetDrawable(context, Resource.Drawable.scrubber_control_normal_holo);
       var thumbImage = new BitmapDrawable(ctrl.ThumbImage);
 
-      ctrl.ThumbImage = ConvertToBitmap(drawable, icon.Width, icon.Height);
-      ctrl.ThumbPressedImage = ConvertToBitmap(drawable, icon.Width, icon.Height);
+      ctrl.CustomThumbImage = ConvertToBitmap(drawable, icon.Width, icon.Height);
+      //ctrl.ThumbPressedImage = ConvertToBitmap(drawable, icon.Width, icon.Height);
     }
 
     protected override void OnDetached() {
