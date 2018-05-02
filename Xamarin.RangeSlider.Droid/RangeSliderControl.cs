@@ -224,15 +224,6 @@ namespace Xamarin.RangeSlider
 
         public Bitmap ThumbDisabledImage { get; set; }
         public Bitmap ThumbImage { get; set; }
-        private Bitmap _customThumbImage;
-        public Bitmap CustomThumbImage 
-        {
-            get { return _customThumbImage; }
-            set {
-                _customThumbImage = value;
-                UpdateThumbImages();
-            }
-        }
         public Bitmap ThumbPressedImage { get; set; }
         public Bitmap DefaultThumbImage { get; private set; }
         public Bitmap DefaultThumbDisabledImage { get; private set; }
@@ -362,14 +353,19 @@ namespace Xamarin.RangeSlider
 
         private void UpdateThumbImages()
         {
-            ThumbImage = DefaultThumbImage ?? (CustomThumbImage ?? BitmapUtil.DrawableToBitmap(GetThumbDrawable()));
+            ThumbImage = DefaultThumbImage ?? BitmapUtil.DrawableToBitmap(GetThumbDrawable());
             ThumbPressedImage = DefaultThumbPressedImage ?? BitmapUtil.DrawableToBitmap(GetPressedThumbDrawable());
             ThumbDisabledImage = DefaultThumbDisabledImage ?? BitmapUtil.DrawableToBitmap(GetDisabledThumbDrawable());
 
+            updateThumbValues();
+        }
+
+        private void updateThumbValues() 
+        {
             _thumbHalfWidth = 0.5f * ThumbImage.Width;
             _thumbHalfHeight = 0.5f * ThumbImage.Height;
 
-            if (ThumbShadow)
+            if (ThumbShadow) 
             {
                 // We need to remove hardware acceleration in order to blur the shadow
                 SetLayerType(LayerType.Software, null);
@@ -569,6 +565,22 @@ namespace Xamarin.RangeSlider
         public void SetThumbShadowPath(Path thumbShadowPath)
         {
             _thumbShadowPath = thumbShadowPath;
+        }
+
+        public void SetCustomThumbImage(Bitmap customThumbImage) 
+        {
+            ThumbImage = customThumbImage;
+            updateThumbValues();
+        }
+
+        public void SetCustomThumbPressedImage(Bitmap customThumbImage) 
+        {
+            ThumbPressedImage = customThumbImage;
+        }
+
+        public void SetCustomThumbDisabledImage(Bitmap customThumbDisabledImage) 
+        {
+            ThumbDisabledImage = customThumbDisabledImage;
         }
 
         /// <summary>
