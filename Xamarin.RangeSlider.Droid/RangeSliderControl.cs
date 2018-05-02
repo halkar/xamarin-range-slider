@@ -357,10 +357,10 @@ namespace Xamarin.RangeSlider
             ThumbPressedImage = DefaultThumbPressedImage ?? BitmapUtil.DrawableToBitmap(GetPressedThumbDrawable());
             ThumbDisabledImage = DefaultThumbDisabledImage ?? BitmapUtil.DrawableToBitmap(GetDisabledThumbDrawable());
 
-            updateThumbValues();
+            UpdateThumbValues();
         }
 
-        private void updateThumbValues() 
+        private void UpdateThumbValues() 
         {
             _thumbHalfWidth = 0.5f * ThumbImage.Width;
             _thumbHalfHeight = 0.5f * ThumbImage.Height;
@@ -570,7 +570,7 @@ namespace Xamarin.RangeSlider
         public void SetCustomThumbImage(Bitmap customThumbImage) 
         {
             ThumbImage = customThumbImage;
-            updateThumbValues();
+            UpdateThumbValues();
         }
 
         public void SetCustomThumbPressedImage(Bitmap customThumbImage) 
