@@ -576,11 +576,13 @@ namespace Xamarin.RangeSlider
         public void SetCustomThumbPressedImage(Bitmap customThumbImage) 
         {
             ThumbPressedImage = customThumbImage;
+            UpdateThumbValues();
         }
 
         public void SetCustomThumbDisabledImage(Bitmap customThumbDisabledImage) 
         {
             ThumbDisabledImage = customThumbDisabledImage;
+            UpdateThumbValues();
         }
 
         /// <summary>
