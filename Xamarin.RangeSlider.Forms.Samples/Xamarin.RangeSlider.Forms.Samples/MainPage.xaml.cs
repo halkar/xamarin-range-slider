@@ -15,6 +15,7 @@ namespace Xamarin.RangeSlider.Forms.Samples
             RangeSlider.LowerValueChanged += RangeSliderOnLowerValueChanged;
             RangeSlider.UpperValueChanged += RangeSliderOnUpperValueChanged;
             RangeSlider.FormatLabel = FormaLabel;
+            RangeSliderWithEffect.Effects.Add(Effect.Resolve("EffectsSlider.RangeSliderEffect"));
         }
 
         private string FormaLabel(Thumb thumb, float val)
