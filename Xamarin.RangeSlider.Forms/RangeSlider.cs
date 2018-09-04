@@ -26,7 +26,7 @@ namespace Xamarin.RangeSlider.Forms
         public const string MaterialUiPropertyName = "MaterialUI";
 
         public static readonly BindableProperty LowerValueProperty =
-            BindableProperty.Create(LowerValuePropertyName, typeof(float), typeof(RangeSlider), 0f);
+            BindableProperty.Create(LowerValuePropertyName, typeof(float), typeof(RangeSlider), 0f, defaultBindingMode: BindingMode.TwoWay);
 
         public static readonly BindableProperty MaximumValueProperty =
             BindableProperty.Create(MaximumValuePropertyName, typeof(float), typeof(RangeSlider), 0f);
@@ -47,7 +47,7 @@ namespace Xamarin.RangeSlider.Forms
             BindableProperty.Create(StepValuePropertyName, typeof(float), typeof(RangeSlider), 0f);
 
         public static readonly BindableProperty UpperValueProperty =
-            BindableProperty.Create(UpperValuePropertyName, typeof(float), typeof(RangeSlider), 0f);
+            BindableProperty.Create(UpperValuePropertyName, typeof(float), typeof(RangeSlider), 0f, defaultBindingMode: BindingMode.TwoWay);
 
         public static readonly BindableProperty BarHeightProperty =
             BindableProperty.Create(BarHeightPropertyName, typeof(int?), typeof(RangeSlider));
