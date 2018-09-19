@@ -79,7 +79,8 @@ namespace Xamarin.RangeSlider
         private float _stepValue;
         private bool _stepValueContinuously;
         private float _upperValue;
-
+        private bool _lowerHandleLabelHidden;
+        private bool _upperHandleLabelHidden;
 
         public RangeSliderControl()
         {
@@ -104,7 +105,7 @@ namespace Xamarin.RangeSlider
         /// <summary>
         ///     defafult true, indicating whether changes in the sliders value generate continuous update events.
         /// </summary>
-        [Export("Continuous")]
+        [Export(nameof(Continuous))]
         [Browsable(true)]
         public bool Continuous
         {
@@ -119,7 +120,7 @@ namespace Xamarin.RangeSlider
         /// <summary>
         ///     default 0.0. this value will be pinned to min/max
         /// </summary>
-        [Export("LowerValue")]
+        [Export(nameof(LowerValue))]
         [Browsable(true)]
         public float LowerValue
         {
@@ -134,7 +135,7 @@ namespace Xamarin.RangeSlider
         /// <summary>
         ///     default 1.0
         /// </summary>
-        [Export("MaximumValue")]
+        [Export(nameof(MaximumValue))]
         [Browsable(true)]
         public float MaximumValue
         {
@@ -149,7 +150,7 @@ namespace Xamarin.RangeSlider
         /// <summary>
         ///     default 0.0. This is the minimum distance between between the upper and lower values
         /// </summary>
-        [Export("MinimumRange")]
+        [Export(nameof(MinimumRange))]
         [Browsable(true)]
         public float MinimumRange
         {
@@ -161,7 +162,7 @@ namespace Xamarin.RangeSlider
             }
         }
 
-        [Export("MinimumValue")]
+        [Export(nameof(MinimumValue))]
         [Browsable(true)]
         public float MinimumValue
         {
@@ -176,7 +177,7 @@ namespace Xamarin.RangeSlider
         /// <summary>
         ///     default 0.0 (disabled)
         /// </summary>
-        [Export("StepValue")]
+        [Export(nameof(StepValue))]
         [Browsable(true)]
         public float StepValue
         {
@@ -193,7 +194,7 @@ namespace Xamarin.RangeSlider
         /// If true the slider will stay in its current position until it reaches a new step value.
         /// default false
         /// </summary>
-        [Export("StepValueContinuously")]
+        [Export(nameof(StepValueContinuously))]
         [Browsable(true)]
         public bool StepValueContinuously
         {
@@ -208,7 +209,7 @@ namespace Xamarin.RangeSlider
         /// <summary>
         ///     default 1.0. this value will be pinned to min/max
         /// </summary>
-        [Export("UpperValue")]
+        [Export(nameof(UpperValue))]
         [Browsable(true)]
         public float UpperValue
         {
@@ -220,7 +221,7 @@ namespace Xamarin.RangeSlider
             }
         }
 
-        [Export("LowerHandleHidden")]
+        [Export(nameof(LowerHandleHidden))]
         [Browsable(true)]
         public bool LowerHandleHidden
         {
@@ -232,7 +233,7 @@ namespace Xamarin.RangeSlider
             }
         }
 
-        [Export("UpperHandleHidden")]
+        [Export(nameof(UpperHandleHidden))]
         [Browsable(true)]
         public bool UpperHandleHidden
         {
@@ -244,7 +245,7 @@ namespace Xamarin.RangeSlider
             }
         }
 
-        [Export("TextSize")]
+        [Export(nameof(TextSize))]
         [Browsable(true)]
         public float TextSize
         {
@@ -260,7 +261,7 @@ namespace Xamarin.RangeSlider
             }
         }
 
-        [Export("ShowTextAboveThumbs")]
+        [Export(nameof(ShowTextAboveThumbs))]
         [Browsable(true)]
         public bool ShowTextAboveThumbs
         {
@@ -274,7 +275,7 @@ namespace Xamarin.RangeSlider
             }
         }
 
-        [Export("TextFormat")]
+        [Export(nameof(TextFormat))]
         [Browsable(true)]
         public string TextFormat
         {
@@ -286,7 +287,7 @@ namespace Xamarin.RangeSlider
             }
         }
 
-        [Export("TextColor")]
+        [Export(nameof(TextColor))]
         [Browsable(true)]
         public UIColor TextColor
         {
@@ -297,6 +298,31 @@ namespace Xamarin.RangeSlider
                 SetNeedsLayout();
             }
         }
+
+        [Export(nameof(LowerHandleLabelHidden))]
+        [Browsable(true)]
+        public bool LowerHandleLabelHidden
+        {
+            get { return _lowerHandleHidden;  }
+            set
+            {
+                _lowerHandleHidden = value;
+                SetNeedsLayout();
+            }
+        }
+
+        [Export(nameof(LowerHandleLabelHidden))]
+        [Browsable(true)]
+        public bool UpperHandleLabelHidden
+        {
+            get { return _upperHandleHidden; }
+            set
+            {
+                _upperHandleHidden = value;
+                SetNeedsLayout();
+            }
+        }
+
 
         public Func<Thumb, float, string> FormatLabel { get; set; }
 
@@ -889,12 +915,12 @@ namespace Xamarin.RangeSlider
             _lowerHandleLabel.Text = ValueToString(LowerValue, Thumb.Lower);
             _lowerHandleLabel.Font = UIFont.SystemFontOfSize(_textSize);
             _lowerHandleLabel.Frame = HandleLabelRect(_lowerHandleLabel, _lowerHandle.Frame);
-            _lowerHandleLabel.Hidden = !ShowTextAboveThumbs || _lowerHandleHidden;
+            _lowerHandleLabel.Hidden = !ShowTextAboveThumbs || _lowerHandleHidden || _lowerHandleLabelHidden;
 
             _upperHandleLabel.Text = ValueToString(UpperValue, Thumb.Upper);
             _upperHandleLabel.Font = UIFont.SystemFontOfSize(_textSize);
             _upperHandleLabel.Frame = HandleLabelRect(_upperHandleLabel, _upperHandle.Frame);
-            _upperHandleLabel.Hidden = !ShowTextAboveThumbs || _upperHandleHidden;
+            _upperHandleLabel.Hidden = !ShowTextAboveThumbs || _upperHandleHidden || _upperHandleLabelHidden;
 
             FixLabelFrames(_trackBackground.Frame, _lowerHandleLabel, _upperHandleLabel);
 

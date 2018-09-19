@@ -53,7 +53,9 @@ namespace Xamarin.RangeSlider.Forms
             control.SetSelectedMinValue(element.LowerValue);
             control.SetSelectedMaxValue(element.UpperValue);
             control.MinThumbHidden = element.MinThumbHidden;
+            control.MinThumbTextHidden = element.MinThumbTextHidden;
             control.MaxThumbHidden = element.MaxThumbHidden;
+            control.MaxThumbTextHidden = element.MaxThumbTextHidden;
             control.StepValue = element.StepValue;
             control.StepValueContinuously = element.StepValueContinuously;
             if (element.BarHeight.HasValue)
@@ -125,6 +127,12 @@ namespace Xamarin.RangeSlider.Forms
                     break;
                 case RangeSlider.MaterialUiPropertyName:
                     Control.MaterialUI = Element.MaterialUI;
+                    break;
+                case nameof(RangeSlider.MinThumbTextHidden):
+                    Control.MinThumbTextHidden = Element.MinThumbTextHidden;
+                    break;
+                case nameof(RangeSlider.MaxThumbTextHidden):
+                    Control.MaxThumbTextHidden = Element.MaxThumbTextHidden;
                     break;
             }
         }

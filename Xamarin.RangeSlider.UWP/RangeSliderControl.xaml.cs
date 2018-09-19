@@ -44,8 +44,14 @@ namespace Xamarin.RangeSlider
         public static readonly DependencyProperty MinThumbHiddenProperty = DependencyProperty.Register(MinThumbHiddenPropertyName,
             typeof(bool), typeof(RangeSliderControl), new PropertyMetadata(false, MinThumbHiddenPropertyChanged));
 
+        public static readonly DependencyProperty MinThumbTextHiddenProperty = DependencyProperty.Register(MinThumbHiddenPropertyName,
+            typeof(bool), typeof(RangeSliderControl), new PropertyMetadata(false, MinThumbTextHiddenPropertyChanged));
+
         public static readonly DependencyProperty MaxThumbHiddenProperty = DependencyProperty.Register(MaxThumbHiddenPropertyName,
             typeof(bool), typeof(RangeSliderControl), new PropertyMetadata(false, MaxThumbHiddenPropertyChanged));
+
+        public static readonly DependencyProperty MaxThumbTextHiddenProperty = DependencyProperty.Register(MaxThumbHiddenPropertyName,
+            typeof(bool), typeof(RangeSliderControl), new PropertyMetadata(false, MaxThumbTextHiddenPropertyChanged));
 
         public static readonly DependencyProperty StepValueProperty = DependencyProperty.Register(StepValuePropertyName,
             typeof(double), typeof(RangeSliderControl), new PropertyMetadata(0.0));
@@ -112,6 +118,12 @@ namespace Xamarin.RangeSlider
         {
             get => (bool)GetValue(MinThumbHiddenProperty);
             set => SetValue(MinThumbHiddenProperty, value);
+        }
+
+        public bool MinThumbTextHidden
+        {
+            get => (bool)GetValue(MinThumbTextHiddenProperty);
+            set => SetValue(MinThumbTextHiddenProperty, value);
         }
 
         public bool MaxThumbHidden
@@ -210,10 +222,22 @@ namespace Xamarin.RangeSlider
             slider.MinThumbText.Visibility = (bool)e.NewValue ? Visibility.Collapsed : Visibility.Visible;
         }
 
+        private static void MinThumbTextHiddenPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var slider = (RangeSliderControl)d;
+            slider.MinThumbText.Visibility = (bool)e.NewValue ? Visibility.Collapsed : Visibility.Visible;
+        }
+
         private static void MaxThumbHiddenPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var slider = (RangeSliderControl)d;
             slider.MaxThumb.Visibility = (bool)e.NewValue ? Visibility.Collapsed : Visibility.Visible;
+            slider.MaxThumbText.Visibility = (bool)e.NewValue ? Visibility.Collapsed : Visibility.Visible;
+        }
+
+        private static void MaxThumbTextHiddenPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var slider = (RangeSliderControl)d;
             slider.MaxThumbText.Visibility = (bool)e.NewValue ? Visibility.Collapsed : Visibility.Visible;
         }
 

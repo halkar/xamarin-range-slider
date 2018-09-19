@@ -76,7 +76,9 @@ namespace Xamarin.RangeSlider
         protected float NormalizedMinValue;
         private Color _activeColor;
         private bool _minThumbHidden;
+        private bool _minThumbLabelHidden;
         private bool _maxThumbHidden;
+        private bool _maxThumbLabelHidden;
         private bool _showTextAboveThumbs;
         private float _barHeight;
         private string _textFormat = "F0";
@@ -208,12 +210,32 @@ namespace Xamarin.RangeSlider
             }
         }
 
+        public bool MinThumbTextHidden
+        {
+            get { return _minThumbLabelHidden; }
+            set
+            {
+                _minThumbLabelHidden = value;
+                Invalidate();
+            }
+        }
+
         public bool MaxThumbHidden
         {
             get { return _maxThumbHidden; }
             set
             {
                 _maxThumbHidden = value;
+                Invalidate();
+            }
+        }
+
+        public bool MaxThumbTextHidden
+        {
+            get { return _maxThumbLabelHidden; }
+            set
+            {
+                _maxThumbLabelHidden = value;
                 Invalidate();
             }
         }
@@ -797,8 +819,15 @@ namespace Xamarin.RangeSlider
                 var maxLabel = Context.GetString(Resource.String.demo_max_label);
                 minMaxLabelSize = Math.Max(_paint.MeasureText(minLabel), _paint.MeasureText(maxLabel));
                 var minMaxHeight = _textOffset + _thumbHalfHeight + (float)_textSize / 3;
-                canvas.DrawText(minLabel, 0, minMaxHeight, _paint);
-                canvas.DrawText(maxLabel, Width - minMaxLabelSize, minMaxHeight, _paint);
+                if (!MinThumbTextHidden)
+                {
+                    canvas.DrawText(minLabel, 0, minMaxHeight, _paint);
+                }
+
+                if(!MaxThumbTextHidden)
+                {
+                    canvas.DrawText(maxLabel, Width - minMaxLabelSize, minMaxHeight, _paint);
+                }
             }
             _padding = _internalPad + minMaxLabelSize + _thumbHalfWidth;
 
@@ -875,14 +904,14 @@ namespace Xamarin.RangeSlider
                     maxPosition += overlap * (1 - NormalizedMaxValue) / (NormalizedMinValue + 1 - NormalizedMaxValue);
                 }
             }
-            if (!MinThumbHidden)
+            if (!MinThumbHidden && !MinThumbTextHidden)
             {
                 canvas.DrawText(minText,
                     minPosition,
                     _distanceToTop + _textSize,
                     _paint);
             }
-            if (!MaxThumbHidden)
+            if (!MaxThumbHidden && !MaxThumbTextHidden)
             {
                 canvas.DrawText(maxText,
                     maxPosition,
