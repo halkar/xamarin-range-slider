@@ -65,56 +65,68 @@ namespace Xamarin.RangeSlider.Forms
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             base.OnElementPropertyChanged(sender, e);
-            switch (e.PropertyName)
+            if (e.PropertyName == RangeSlider.LowerValueProperty.PropertyName)
             {
-                case RangeSlider.LowerValuePropertyName:
-                    Control.LowerValue = Element.LowerValue;
-                    break;
-                case RangeSlider.UpperValuePropertyName:
-                    Control.UpperValue = Element.UpperValue;
-                    break;
-                case RangeSlider.MinimumValuePropertyName:
-                    Control.MinimumValue = Element.MinimumValue;
-                    break;
-                case RangeSlider.MaximumValuePropertyName:
-                    Control.MaximumValue = Element.MaximumValue;
-                    break;
-                case RangeSlider.MaxThumbHiddenPropertyName:
-                    Control.UpperHandleHidden = Element.MaxThumbHidden;
-                    break;
-                case RangeSlider.MinThumbHiddenPropertyName:
-                    Control.LowerHandleHidden = Element.MinThumbHidden;
-                    break;
-                case nameof(RangeSlider.MinThumbTextHidden):
-                    Control.LowerHandleLabelHidden = Element.MinThumbTextHidden;
-                    break;
-                case nameof(RangeSlider.MaxThumbTextHidden):
-                    Control.UpperHandleLabelHidden = Element.MaxThumbTextHidden;
-                    break;
-                case RangeSlider.StepValuePropertyName:
-                    Control.StepValue = Element.StepValue;
-                    break;
-                case RangeSlider.StepValueContinuouslyPropertyName:
-                    Control.StepValueContinuously = Element.StepValueContinuously;
-                    break;
-                case RangeSlider.ShowTextAboveThumbsPropertyName:
-                    Control.ShowTextAboveThumbs = Element.ShowTextAboveThumbs;
-                    ForceFormsLayout();
-                    break;
-                case RangeSlider.TextSizePropertyName:
-                    Control.TextSize = (float)Element.TextSize;
-                    ForceFormsLayout();
-                    break;
-                case RangeSlider.TextFormatPropertyName:
-                    Control.TextFormat = Element.TextFormat;
-                    break;
-                case RangeSlider.TextColorPropertyName:
-                    if (Element.TextColor != Color.Default)
-                        Control.TextColor = Element.TextColor.ToUIColor();
-                    break;
-                case RangeSlider.FormatLabelPropertyName:
-                    Control.FormatLabel = Element.FormatLabel;
-                    break;
+                Control.LowerValue = Element.LowerValue;
+            }
+            else if (e.PropertyName == RangeSlider.UpperValueProperty.PropertyName)
+            {
+                Control.UpperValue = Element.UpperValue;
+            }
+            else if (e.PropertyName == RangeSlider.MinimumValueProperty.PropertyName)
+            {
+                Control.MinimumValue = Element.MinimumValue;
+            }
+            else if (e.PropertyName == RangeSlider.MaximumValueProperty.PropertyName)
+            {
+                Control.MaximumValue = Element.MaximumValue;
+            }
+            else if (e.PropertyName == RangeSlider.MaxThumbHiddenProperty.PropertyName)
+            {
+                Control.UpperHandleHidden = Element.MaxThumbHidden;
+            }
+            else if (e.PropertyName == RangeSlider.MinThumbHiddenProperty.PropertyName)
+            {
+                Control.LowerHandleHidden = Element.MinThumbHidden;
+            }
+            else if (e.PropertyName == RangeSlider.MinThumbTextHiddenProperty.PropertyName)
+            {
+                Control.LowerHandleLabelHidden = Element.MinThumbTextHidden;
+            }
+            else if (e.PropertyName == RangeSlider.MaxThumbTextHiddenProperty.PropertyName)
+            {
+                Control.UpperHandleLabelHidden = Element.MaxThumbTextHidden;
+            }
+            else if (e.PropertyName == RangeSlider.StepValueProperty.PropertyName)
+            {
+                Control.StepValue = Element.StepValue;
+            }
+            else if (e.PropertyName == RangeSlider.StepValueContinuouslyProperty.PropertyName)
+            {
+                Control.StepValueContinuously = Element.StepValueContinuously;
+            }
+            else if (e.PropertyName == RangeSlider.ShowTextAboveThumbsProperty.PropertyName)
+            {
+                Control.ShowTextAboveThumbs = Element.ShowTextAboveThumbs;
+                ForceFormsLayout();
+            }
+            else if (e.PropertyName == RangeSlider.TextSizeProperty.PropertyName)
+            {
+                Control.TextSize = (float)Element.TextSize;
+                ForceFormsLayout();
+            }
+            else if (e.PropertyName == RangeSlider.TextFormatProperty.PropertyName)
+            {
+                Control.TextFormat = Element.TextFormat;
+            }
+            else if (e.PropertyName == RangeSlider.TextColorProperty.PropertyName)
+            {
+                if (Element.TextColor != Color.Default)
+                    Control.TextColor = Element.TextColor.ToUIColor();
+            }
+            else if (e.PropertyName == RangeSlider.FormatLabelProperty.PropertyName)
+            {
+                Control.FormatLabel = Element.FormatLabel;
             }
             Control.SetNeedsLayout();
         }
