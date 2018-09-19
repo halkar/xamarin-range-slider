@@ -64,7 +64,9 @@ namespace Xamarin.RangeSlider.Forms
             control.RangeMin = element.LowerValue;
             control.RangeMax = element.UpperValue;
             control.MinThumbHidden = element.MinThumbHidden;
+            control.MinThumbTextHidden = element.MinThumbTextHidden;
             control.MaxThumbHidden = element.MaxThumbHidden;
+            control.MaxThumbTextHidden = element.MaxThumbTextHidden;
             control.StepValue = element.StepValue;
             control.StepValueContinuously = element.StepValueContinuously;
             if (element.BarHeight.HasValue)
@@ -144,6 +146,12 @@ namespace Xamarin.RangeSlider.Forms
                 case RangeSlider.ActiveColorPropertyName:
                     if (Element.ActiveColor != Xamarin.Forms.Color.Default)
                         Control.ActiveColor = Color.FromArgb((byte)(Element.ActiveColor.A * 255), (byte)(Element.ActiveColor.R * 255), (byte)(Element.ActiveColor.G * 255), (byte)(Element.ActiveColor.B * 255));
+                    break;
+                case nameof(RangeSlider.MinThumbTextHidden):
+                    Control.MinThumbTextHidden = Element.MinThumbTextHidden;
+                    break;
+                case nameof(RangeSlider.MaxThumbTextHidden):
+                    Control.MaxThumbTextHidden = Element.MaxThumbTextHidden;
                     break;
             }
         }

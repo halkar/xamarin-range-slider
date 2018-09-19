@@ -303,22 +303,22 @@ namespace Xamarin.RangeSlider
         [Browsable(true)]
         public bool LowerHandleLabelHidden
         {
-            get { return _lowerHandleHidden;  }
+            get { return _lowerHandleLabelHidden;  }
             set
             {
-                _lowerHandleHidden = value;
+                _lowerHandleLabelHidden = value;
                 SetNeedsLayout();
             }
         }
 
-        [Export(nameof(LowerHandleLabelHidden))]
+        [Export(nameof(UpperHandleLabelHidden))]
         [Browsable(true)]
         public bool UpperHandleLabelHidden
         {
-            get { return _upperHandleHidden; }
+            get { return _upperHandleLabelHidden; }
             set
             {
-                _upperHandleHidden = value;
+                _upperHandleLabelHidden = value;
                 SetNeedsLayout();
             }
         }

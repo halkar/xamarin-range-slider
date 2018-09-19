@@ -132,6 +132,12 @@ namespace Xamarin.RangeSlider
             set => SetValue(MaxThumbHiddenProperty, value);
         }
 
+        public bool MaxThumbTextHidden
+        {
+            get => (bool)GetValue(MaxThumbTextHiddenProperty);
+            set => SetValue(MaxThumbTextHiddenProperty, value);
+        }
+
         public double StepValue
         {
             get => (double)GetValue(StepValueProperty);
