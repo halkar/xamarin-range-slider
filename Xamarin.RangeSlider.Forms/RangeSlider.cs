@@ -9,7 +9,7 @@ namespace Xamarin.RangeSlider.Forms
     public class RangeSlider : View
     {
         public static readonly BindableProperty LowerValueProperty =
-            BindableProperty.Create(nameof(LowerValue), typeof(float), typeof(RangeSlider), 0f);
+            BindableProperty.Create(nameof(LowerValue), typeof(float), typeof(RangeSlider), 0f, defaultBindingMode: BindingMode.TwoWay);
 
         public static readonly BindableProperty MaximumValueProperty =
             BindableProperty.Create(nameof(MaximumValue), typeof(float), typeof(RangeSlider), 0f);
@@ -36,7 +36,7 @@ namespace Xamarin.RangeSlider.Forms
             BindableProperty.Create(nameof(StepValue), typeof(float), typeof(RangeSlider), 0f);
 
         public static readonly BindableProperty UpperValueProperty =
-            BindableProperty.Create(nameof(UpperValue), typeof(float), typeof(RangeSlider), 0f);
+            BindableProperty.Create(nameof(UpperValue), typeof(float), typeof(RangeSlider), 0f, defaultBindingMode: BindingMode.TwoWay);
 
         public static readonly BindableProperty BarHeightProperty =
             BindableProperty.Create(nameof(BarHeight), typeof(int?), typeof(RangeSlider));
