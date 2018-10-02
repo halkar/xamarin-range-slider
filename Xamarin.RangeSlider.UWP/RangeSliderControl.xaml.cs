@@ -13,59 +13,51 @@ namespace Xamarin.RangeSlider
 {
     public sealed partial class RangeSliderControl
     {
-        public const string MinimumPropertyName = "Minimum";
-        public const string MaximumPropertyName = "Maximum";
-        public const string RangeminPropertyName = "RangeMin";
-        public const string RangemaxPropertyName = "RangeMax";
-        public const string MinThumbHiddenPropertyName = "MinThumbHidden";
-        public const string MaxThumbHiddenPropertyName = "MaxThumbHidden";
-        public const string StepValuePropertyName = "StepValue";
-        public const string StepValueContinuouslyPropertyName = "StepValueContinuously";
-        public const string ShowTextAboveThumbsPropertyName = "ShowTextAboveThumbs";
-        public const string TextSizePropertyName = "TextSize";
-        public const string TextFormatPropertyName = "TextFormat";
-        public const string TextColorPropertyName = "TextColor";
-        public const string ActiveColorPropertyName = "ActiveColor";
-
         public const int ControlHeight = 32;
 
-        public static readonly DependencyProperty MinimumProperty = DependencyProperty.Register(MinimumPropertyName,
+        public static readonly DependencyProperty MinimumProperty = DependencyProperty.Register(nameof(Minimum),
             typeof(double), typeof(RangeSliderControl), new PropertyMetadata(0.0));
 
-        public static readonly DependencyProperty MaximumProperty = DependencyProperty.Register(MaximumPropertyName,
+        public static readonly DependencyProperty MaximumProperty = DependencyProperty.Register(nameof(Maximum),
             typeof(double), typeof(RangeSliderControl), new PropertyMetadata(1.0));
 
-        public static readonly DependencyProperty RangeMinProperty = DependencyProperty.Register(RangeminPropertyName,
+        public static readonly DependencyProperty RangeMinProperty = DependencyProperty.Register(nameof(RangeMin),
             typeof(double), typeof(RangeSliderControl), new PropertyMetadata(0.0, OnRangeMinPropertyChanged));
 
-        public static readonly DependencyProperty RangeMaxProperty = DependencyProperty.Register(RangemaxPropertyName,
+        public static readonly DependencyProperty RangeMaxProperty = DependencyProperty.Register(nameof(RangeMax),
             typeof(double), typeof(RangeSliderControl), new PropertyMetadata(1.0, OnRangeMaxPropertyChanged));
 
-        public static readonly DependencyProperty MinThumbHiddenProperty = DependencyProperty.Register(MinThumbHiddenPropertyName,
+        public static readonly DependencyProperty MinThumbHiddenProperty = DependencyProperty.Register(nameof(MinThumbHidden),
             typeof(bool), typeof(RangeSliderControl), new PropertyMetadata(false, MinThumbHiddenPropertyChanged));
 
-        public static readonly DependencyProperty MaxThumbHiddenProperty = DependencyProperty.Register(MaxThumbHiddenPropertyName,
+        public static readonly DependencyProperty MinThumbTextHiddenProperty = DependencyProperty.Register(nameof(MinThumbTextHidden),
+            typeof(bool), typeof(RangeSliderControl), new PropertyMetadata(false, MinThumbTextHiddenPropertyChanged));
+
+        public static readonly DependencyProperty MaxThumbHiddenProperty = DependencyProperty.Register(nameof(MaxThumbTextHidden),
             typeof(bool), typeof(RangeSliderControl), new PropertyMetadata(false, MaxThumbHiddenPropertyChanged));
 
-        public static readonly DependencyProperty StepValueProperty = DependencyProperty.Register(StepValuePropertyName,
+        public static readonly DependencyProperty MaxThumbTextHiddenProperty = DependencyProperty.Register(nameof(MaxThumbTextHidden),
+            typeof(bool), typeof(RangeSliderControl), new PropertyMetadata(false, MaxThumbTextHiddenPropertyChanged));
+
+        public static readonly DependencyProperty StepValueProperty = DependencyProperty.Register(nameof(StepValue),
             typeof(double), typeof(RangeSliderControl), new PropertyMetadata(0.0));
 
-        public static readonly DependencyProperty StepValueContinuouslyProperty = DependencyProperty.Register(StepValueContinuouslyPropertyName,
+        public static readonly DependencyProperty StepValueContinuouslyProperty = DependencyProperty.Register(nameof(StepValueContinuously),
             typeof(bool), typeof(RangeSliderControl), new PropertyMetadata(false));
 
-        public static readonly DependencyProperty ShowTextAboveThumbsProperty = DependencyProperty.Register(ShowTextAboveThumbsPropertyName,
+        public static readonly DependencyProperty ShowTextAboveThumbsProperty = DependencyProperty.Register(nameof(ShowTextAboveThumbs),
             typeof(bool), typeof(RangeSliderControl), new PropertyMetadata(false, ShowTextAboveThumbsPropertyChanged));
 
-        public static readonly DependencyProperty TextSizeProperty = DependencyProperty.Register(TextSizePropertyName,
+        public static readonly DependencyProperty TextSizeProperty = DependencyProperty.Register(nameof(TextSize),
             typeof(int), typeof(RangeSliderControl), new PropertyMetadata(10, TextSizePropertyChanged));
 
-        public static readonly DependencyProperty TextFormatProperty = DependencyProperty.Register(TextFormatPropertyName,
+        public static readonly DependencyProperty TextFormatProperty = DependencyProperty.Register(nameof(TextFormat),
             typeof(string), typeof(RangeSliderControl), new PropertyMetadata("F0", TextFormatPropertyChanged));
 
-        public static readonly DependencyProperty TextColorProperty = DependencyProperty.Register(TextColorPropertyName,
+        public static readonly DependencyProperty TextColorProperty = DependencyProperty.Register(nameof(TextColor),
             typeof(Color?), typeof(RangeSliderControl), new PropertyMetadata(null, TextColorPropertyChanged));
 
-        public static readonly DependencyProperty ActiveColorProperty = DependencyProperty.Register(ActiveColorPropertyName,
+        public static readonly DependencyProperty ActiveColorProperty = DependencyProperty.Register(nameof(ActiveColor),
             typeof(Color?), typeof(RangeSliderControl), new PropertyMetadata(null, ActiveColorPropertyChanged));
 
         public RangeSliderControl()
@@ -114,10 +106,22 @@ namespace Xamarin.RangeSlider
             set => SetValue(MinThumbHiddenProperty, value);
         }
 
+        public bool MinThumbTextHidden
+        {
+            get => (bool)GetValue(MinThumbTextHiddenProperty);
+            set => SetValue(MinThumbTextHiddenProperty, value);
+        }
+
         public bool MaxThumbHidden
         {
             get => (bool)GetValue(MaxThumbHiddenProperty);
             set => SetValue(MaxThumbHiddenProperty, value);
+        }
+
+        public bool MaxThumbTextHidden
+        {
+            get => (bool)GetValue(MaxThumbTextHiddenProperty);
+            set => SetValue(MaxThumbTextHiddenProperty, value);
         }
 
         public double StepValue
@@ -210,10 +214,22 @@ namespace Xamarin.RangeSlider
             slider.MinThumbText.Visibility = (bool)e.NewValue ? Visibility.Collapsed : Visibility.Visible;
         }
 
+        private static void MinThumbTextHiddenPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var slider = (RangeSliderControl)d;
+            slider.MinThumbText.Visibility = (bool)e.NewValue ? Visibility.Collapsed : Visibility.Visible;
+        }
+
         private static void MaxThumbHiddenPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var slider = (RangeSliderControl)d;
             slider.MaxThumb.Visibility = (bool)e.NewValue ? Visibility.Collapsed : Visibility.Visible;
+            slider.MaxThumbText.Visibility = (bool)e.NewValue ? Visibility.Collapsed : Visibility.Visible;
+        }
+
+        private static void MaxThumbTextHiddenPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var slider = (RangeSliderControl)d;
             slider.MaxThumbText.Visibility = (bool)e.NewValue ? Visibility.Collapsed : Visibility.Visible;
         }
 

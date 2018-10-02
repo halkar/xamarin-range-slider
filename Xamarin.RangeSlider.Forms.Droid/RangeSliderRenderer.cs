@@ -53,7 +53,9 @@ namespace Xamarin.RangeSlider.Forms
             control.SetSelectedMinValue(element.LowerValue);
             control.SetSelectedMaxValue(element.UpperValue);
             control.MinThumbHidden = element.MinThumbHidden;
+            control.MinThumbTextHidden = element.MinThumbTextHidden;
             control.MaxThumbHidden = element.MaxThumbHidden;
+            control.MaxThumbTextHidden = element.MaxThumbTextHidden;
             control.StepValue = element.StepValue;
             control.StepValueContinuously = element.StepValueContinuously;
             if (element.BarHeight.HasValue)
@@ -64,8 +66,8 @@ namespace Xamarin.RangeSlider.Forms
             if (element.TextColor != Xamarin.Forms.Color.Default)
                 control.TextAboveThumbsColor = element.TextColor.ToAndroid();
             control.FormatLabel = element.FormatLabel;
-			control.ActivateOnDefaultValues = true;
-            if(element.ActiveColor != Xamarin.Forms.Color.Default)
+            control.ActivateOnDefaultValues = true;
+            if (element.ActiveColor != Xamarin.Forms.Color.Default)
                 control.ActiveColor = element.ActiveColor.ToAndroid();
             control.MaterialUI = element.MaterialUI;
         }
@@ -73,59 +75,78 @@ namespace Xamarin.RangeSlider.Forms
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             base.OnElementPropertyChanged(sender, e);
-            switch (e.PropertyName)
+            if (e.PropertyName == RangeSlider.LowerValueProperty.PropertyName)
             {
-                case RangeSlider.LowerValuePropertyName:
-                    Control.SetSelectedMinValue(Element.LowerValue);
-                    break;
-                case RangeSlider.UpperValuePropertyName:
-                    Control.SetSelectedMaxValue(Element.UpperValue);
-                    break;
-                case RangeSlider.MinimumValuePropertyName:
-                case RangeSlider.MaximumValuePropertyName:
-                    Control.SetRangeValues(Element.MinimumValue, Element.MaximumValue);
-                    break;
-                case RangeSlider.MaxThumbHiddenPropertyName:
-                    Control.MaxThumbHidden = Element.MaxThumbHidden;
-                    break;
-                case RangeSlider.MinThumbHiddenPropertyName:
-                    Control.MinThumbHidden = Element.MinThumbHidden;
-                    break;
-                case RangeSlider.StepValuePropertyName:
-                    Control.StepValue = Element.StepValue;
-                    break;
-                case RangeSlider.StepValueContinuouslyPropertyName:
-                    Control.StepValueContinuously = Element.StepValueContinuously;
-                    break;
-                case RangeSlider.BarHeightPropertyName:
-                    if (Element.BarHeight.HasValue)
-                        Control.SetBarHeight(Element.BarHeight.Value);
-                    break;
-                case RangeSlider.ShowTextAboveThumbsPropertyName:
-                    Control.ShowTextAboveThumbs = Element.ShowTextAboveThumbs;
-                    ForceFormsLayout();
-                    break;
-                case RangeSlider.TextSizePropertyName:
-                    Control.TextSizeInSp = (int)Font.SystemFontOfSize(Element.TextSize).ToScaledPixel();
-                    ForceFormsLayout();
-                    break;
-                case RangeSlider.TextFormatPropertyName:
-                    Control.TextFormat = Element.TextFormat;
-                    break;
-                case RangeSlider.TextColorPropertyName:
-                    if (Element.TextColor != Xamarin.Forms.Color.Default)
-                        Control.TextAboveThumbsColor = Element.TextColor.ToAndroid();
-                    break;
-                case RangeSlider.FormatLabelPropertyName:
-                    Control.FormatLabel = Element.FormatLabel;
-                    break;
-                case RangeSlider.ActiveColorPropertyName:
-                    if (Element.ActiveColor != Xamarin.Forms.Color.Default)
-                        Control.ActiveColor = Element.ActiveColor.ToAndroid();
-                    break;
-                case RangeSlider.MaterialUiPropertyName:
-                    Control.MaterialUI = Element.MaterialUI;
-                    break;
+                Control.SetSelectedMinValue(Element.LowerValue);
+            }
+            else if (e.PropertyName == RangeSlider.UpperValueProperty.PropertyName)
+            {
+                Control.SetSelectedMaxValue(Element.UpperValue);
+            }
+            else if (e.PropertyName == RangeSlider.MinimumValueProperty.PropertyName || e.PropertyName == RangeSlider.MaximumValueProperty.PropertyName)
+            {
+                Control.SetRangeValues(Element.MinimumValue, Element.MaximumValue);
+            }
+            else if (e.PropertyName == RangeSlider.MaxThumbHiddenProperty.PropertyName)
+            {
+                Control.MaxThumbHidden = Element.MaxThumbHidden;
+            }
+            else if (e.PropertyName == RangeSlider.MinThumbHiddenProperty.PropertyName)
+            {
+                Control.MinThumbHidden = Element.MinThumbHidden;
+            }
+            else if (e.PropertyName == RangeSlider.StepValueProperty.PropertyName)
+            {
+                Control.StepValue = Element.StepValue;
+            }
+            else if (e.PropertyName == RangeSlider.StepValueContinuouslyProperty.PropertyName)
+            {
+                Control.StepValueContinuously = Element.StepValueContinuously;
+            }
+            else if (e.PropertyName == RangeSlider.BarHeightProperty.PropertyName)
+            {
+                if (Element.BarHeight.HasValue)
+                    Control.SetBarHeight(Element.BarHeight.Value);
+            }
+            else if (e.PropertyName == RangeSlider.ShowTextAboveThumbsProperty.PropertyName)
+            {
+                Control.ShowTextAboveThumbs = Element.ShowTextAboveThumbs;
+                ForceFormsLayout();
+            }
+            else if (e.PropertyName == RangeSlider.TextSizeProperty.PropertyName)
+            {
+                Control.TextSizeInSp = (int)Font.SystemFontOfSize(Element.TextSize).ToScaledPixel();
+                ForceFormsLayout();
+            }
+            else if (e.PropertyName == RangeSlider.TextFormatProperty.PropertyName)
+            {
+                Control.TextFormat = Element.TextFormat;
+            }
+            else if (e.PropertyName == RangeSlider.TextColorProperty.PropertyName)
+            {
+                if (Element.TextColor != Xamarin.Forms.Color.Default)
+                    Control.TextAboveThumbsColor = Element.TextColor.ToAndroid();
+            }
+            else if (e.PropertyName == RangeSlider.FormatLabelProperty.PropertyName)
+            {
+                Control.FormatLabel = Element.FormatLabel;
+            }
+            else if (e.PropertyName == RangeSlider.ActiveColorProperty.PropertyName)
+            {
+                if (Element.ActiveColor != Xamarin.Forms.Color.Default)
+                    Control.ActiveColor = Element.ActiveColor.ToAndroid();
+            }
+            else if (e.PropertyName == RangeSlider.MaterialUiProperty.PropertyName)
+            {
+                Control.MaterialUI = Element.MaterialUI;
+            }
+            else if (e.PropertyName == RangeSlider.MinThumbTextHiddenProperty.PropertyName)
+            {
+                Control.MinThumbTextHidden = Element.MinThumbTextHidden;
+            }
+            else if (e.PropertyName == RangeSlider.MaxThumbTextHiddenProperty.PropertyName)
+            {
+                Control.MaxThumbTextHidden = Element.MaxThumbTextHidden;
             }
         }
 

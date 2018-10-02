@@ -8,70 +8,59 @@ namespace Xamarin.RangeSlider.Forms
     [Preserve(AllMembers = true)]
     public class RangeSlider : View
     {
-        public const string LowerValuePropertyName = "LowerValue";
-        public const string MaximumValuePropertyName = "MaximumValue";
-        public const string MinimumValuePropertyName = "MinimumValue";
-        public const string UpperValuePropertyName = "UpperValue";
-        public const string MinThumbHiddenPropertyName = "MinThumbHidden";
-        public const string MaxThumbHiddenPropertyName = "MaxThumbHidden";
-        public const string StepValuePropertyName = "StepValue";
-        public const string StepValueContinuouslyPropertyName = "StepValueContinuously";
-        public const string BarHeightPropertyName = "BarHeight";
-        public const string ShowTextAboveThumbsPropertyName = "ShowTextAboveThumbs";
-        public const string TextSizePropertyName = "TextSize";
-        public const string TextFormatPropertyName = "TextFormat";
-        public const string TextColorPropertyName = "TextColor";
-        public const string FormatLabelPropertyName = "FormatLabel";
-        public const string ActiveColorPropertyName = "ActiveColor";
-        public const string MaterialUiPropertyName = "MaterialUI";
-
         public static readonly BindableProperty LowerValueProperty =
-            BindableProperty.Create(LowerValuePropertyName, typeof(float), typeof(RangeSlider), 0f, defaultBindingMode: BindingMode.TwoWay);
+            BindableProperty.Create(nameof(LowerValue), typeof(float), typeof(RangeSlider), 0f, defaultBindingMode: BindingMode.TwoWay);
 
         public static readonly BindableProperty MaximumValueProperty =
-            BindableProperty.Create(MaximumValuePropertyName, typeof(float), typeof(RangeSlider), 0f);
+            BindableProperty.Create(nameof(MaximumValue), typeof(float), typeof(RangeSlider), 0f);
 
         public static readonly BindableProperty MaxThumbHiddenProperty =
-            BindableProperty.Create(MaxThumbHiddenPropertyName, typeof(bool), typeof(RangeSlider), false);
+            BindableProperty.Create(nameof(MaxThumbHidden), typeof(bool), typeof(RangeSlider), false);
+
+        public static readonly BindableProperty MaxThumbTextHiddenProperty =
+           BindableProperty.Create(nameof(MaxThumbTextHidden), typeof(bool), typeof(RangeSlider), false);
 
         public static readonly BindableProperty MinimumValueProperty =
-            BindableProperty.Create(MinimumValuePropertyName, typeof(float), typeof(RangeSlider), 0f);
+            BindableProperty.Create(nameof(MinimumValue), typeof(float), typeof(RangeSlider), 0f);
 
         public static readonly BindableProperty MinThumbHiddenProperty =
-            BindableProperty.Create(MinThumbHiddenPropertyName, typeof(bool), typeof(RangeSlider), false);
+            BindableProperty.Create(nameof(MinThumbHidden), typeof(bool), typeof(RangeSlider), false);
+
+        public static readonly BindableProperty MinThumbTextHiddenProperty =
+            BindableProperty.Create(nameof(MinThumbTextHidden), typeof(bool), typeof(RangeSlider), false);
 
         public static readonly BindableProperty StepValueContinuouslyProperty =
-            BindableProperty.Create(StepValueContinuouslyPropertyName, typeof(bool), typeof(RangeSlider), false);
+            BindableProperty.Create(nameof(StepValueContinuously), typeof(bool), typeof(RangeSlider), false);
 
         public static readonly BindableProperty StepValueProperty =
-            BindableProperty.Create(StepValuePropertyName, typeof(float), typeof(RangeSlider), 0f);
+            BindableProperty.Create(nameof(StepValue), typeof(float), typeof(RangeSlider), 0f);
 
         public static readonly BindableProperty UpperValueProperty =
-            BindableProperty.Create(UpperValuePropertyName, typeof(float), typeof(RangeSlider), 0f, defaultBindingMode: BindingMode.TwoWay);
+            BindableProperty.Create(nameof(UpperValue), typeof(float), typeof(RangeSlider), 0f, defaultBindingMode: BindingMode.TwoWay);
 
         public static readonly BindableProperty BarHeightProperty =
-            BindableProperty.Create(BarHeightPropertyName, typeof(int?), typeof(RangeSlider));
+            BindableProperty.Create(nameof(BarHeight), typeof(int?), typeof(RangeSlider));
 
         public static readonly BindableProperty ShowTextAboveThumbsProperty =
-            BindableProperty.Create(ShowTextAboveThumbsPropertyName, typeof(bool), typeof(RangeSlider), false);
+            BindableProperty.Create(nameof(ShowTextAboveThumbs), typeof(bool), typeof(RangeSlider), false);
 
         public static readonly BindableProperty TextSizeProperty =
-            BindableProperty.Create(TextSizePropertyName, typeof(double), typeof(RangeSlider), 10D);
+            BindableProperty.Create(nameof(TextSize), typeof(double), typeof(RangeSlider), 10D);
 
         public static readonly BindableProperty TextFormatProperty =
-            BindableProperty.Create(TextFormatPropertyName, typeof(string), typeof(RangeSlider), "F0");
+            BindableProperty.Create(nameof(TextFormat), typeof(string), typeof(RangeSlider), "F0");
 
         public static readonly BindableProperty TextColorProperty =
-            BindableProperty.Create(TextColorPropertyName, typeof(Color), typeof(RangeSlider), Color.Default);
+            BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(RangeSlider), Color.Default);
 
         public static readonly BindableProperty FormatLabelProperty =
-            BindableProperty.Create(FormatLabelPropertyName, typeof(Func<Thumb, float, string>), typeof(RangeSlider));
+            BindableProperty.Create(nameof(FormatLabel), typeof(Func<Thumb, float, string>), typeof(RangeSlider));
 
         public static readonly BindableProperty ActiveColorProperty =
-            BindableProperty.Create(ActiveColorPropertyName, typeof(Color), typeof(RangeSlider), Color.Default);
+            BindableProperty.Create(nameof(ActiveColor), typeof(Color), typeof(RangeSlider), Color.Default);
 
         public static readonly BindableProperty MaterialUiProperty =
-            BindableProperty.Create(MaterialUiPropertyName, typeof(bool), typeof(RangeSlider), false);
+            BindableProperty.Create(nameof(MaterialUI), typeof(bool), typeof(RangeSlider), false);
 
         public float MinimumValue
         {
@@ -101,6 +90,18 @@ namespace Xamarin.RangeSlider.Forms
         {
             get => (bool)GetValue(MinThumbHiddenProperty);
             set => SetValue(MinThumbHiddenProperty, value);
+        }
+
+        public bool MinThumbTextHidden
+        {
+            get => (bool)GetValue(MinThumbTextHiddenProperty);
+            set => SetValue(MinThumbTextHiddenProperty, value);
+        }
+
+        public bool MaxThumbTextHidden
+        {
+            get => (bool)GetValue(MaxThumbTextHiddenProperty);
+            set => SetValue(MaxThumbTextHiddenProperty, value);
         }
 
         public bool MaxThumbHidden

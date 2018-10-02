@@ -37,6 +37,8 @@ If element is not displayed on a Xamarin.Forms page add this code to the startup
 | TextFormat            | Format string for text above the thumbs ||
 | ActiveColor           | Active bar color | Not supported on iOS. Used for thumb color in Android material UI. |
 | MaterialUI            | Material UI | Only supported on Android |
+| MinThumbTextHidden    | Show current value above the lower handle. Requires ShowTextAboveThumbs to be set to true first
+| MaxThumbTextHidden    | Show current value above the upper handle. Requires ShowTextAboveThumbs to be set to true first
 
 ## Supported Events
 
