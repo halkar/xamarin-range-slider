@@ -937,8 +937,8 @@ namespace Xamarin.RangeSlider
         {
             var bundle = new Bundle();
             bundle.PutParcelable("SUPER", base.OnSaveInstanceState());
-            bundle.PutDouble("MIN", NormalizedMinValue);
-            bundle.PutDouble("MAX", NormalizedMaxValue);
+            bundle.PutFloat("MIN", NormalizedMinValue);
+            bundle.PutFloat("MAX", NormalizedMaxValue);
             return bundle;
         }
 
