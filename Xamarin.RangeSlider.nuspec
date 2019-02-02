@@ -12,10 +12,10 @@
     </metadata>
     <files>
     	<!--Portable-->
-    	<file src="Xamarin.RangeSlider.Common\bin\Release\Xamarin.RangeSlider.Common.dll" target="lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.RangeSlider.Common.dll" />
+    	<file src="Xamarin.RangeSlider.Common\bin\Release\netstandard2.0\Xamarin.RangeSlider.Common.dll" target="lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.RangeSlider.Common.dll" />
         <!--Android-->
        <file src="Xamarin.RangeSlider.Droid\bin\Release\Xamarin.RangeSlider.Droid.dll" target="lib\MonoAndroid10\Xamarin.RangeSlider.Droid.dll" />
-       <file src="Xamarin.RangeSlider.Droid\bin\Release\Xamarin.RangeSlider.Common.dll" target="lib\MonoAndroid10\Xamarin.RangeSlider.Common.dll" />
+       <file src="Xamarin.RangeSlider.Droid\bin\Release\netstandard2.0\Xamarin.RangeSlider.Common.dll" target="lib\MonoAndroid10\Xamarin.RangeSlider.Common.dll" />
         <!--UWP-->
         <file src="Xamarin.RangeSlider.UWP\bin\Release\RangeSliderControl.xbf" target="lib\uap10.0\Xamarin.RangeSlider.UWP\RangeSliderControl.xbf" />
         <file src="Xamarin.RangeSlider.UWP\bin\Release\Xamarin.RangeSlider.UWP.dll" target="lib\uap10.0\Xamarin.RangeSlider.UWP.dll" />

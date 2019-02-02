@@ -16,7 +16,7 @@
     </metadata>
     <files>
     	<!--Portable-->
-    	<file src="Xamarin.RangeSlider.Forms\bin\Release\Xamarin.RangeSlider.Forms.dll" target="lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.RangeSlider.Forms.dll" />
+    	<file src="Xamarin.RangeSlider.Forms\bin\Release\netstandard2.0\Xamarin.RangeSlider.Forms.dll" target="lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.RangeSlider.Forms.dll" />
     	<!--Android-->
         <file src="Xamarin.RangeSlider.Forms.Droid\bin\Release\Xamarin.RangeSlider.Forms.dll" target="lib\MonoAndroid10\Xamarin.RangeSlider.Forms.dll" />
         <file src="Xamarin.RangeSlider.Forms.Droid\bin\Release\Xamarin.RangeSlider.Forms.Droid.dll" target="lib\MonoAndroid10\Xamarin.RangeSlider.Forms.Droid.dll" />
