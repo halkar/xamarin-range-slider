@@ -9,28 +9,32 @@
 	<ContentPage.Padding>
 		<OnPlatform x:TypeArguments="Thickness">
 			<OnPlatform.iOS>
-        0, 20, 0, 0
-      </OnPlatform.iOS>
+				0, 20, 0, 0
+			</OnPlatform.iOS>
 			<OnPlatform.Android>
-        0, 0, 0, 0
-      </OnPlatform.Android>
+				0, 0, 0, 0
+			</OnPlatform.Android>
 			<OnPlatform.WinPhone>
-        0, 0, 0, 0
-      </OnPlatform.WinPhone>
+				0, 0, 0, 0
+			</OnPlatform.WinPhone>
 		</OnPlatform>
 	</ContentPage.Padding>
-	<StackLayout>
+	<ScrollView>
 		<Grid x:Name="Grid">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="Auto" />
-				<RowDefinition />
-				<RowDefinition />
-				<RowDefinition />
-				<RowDefinition />
-				<RowDefinition />
-				<RowDefinition />
-				<RowDefinition />
-				<RowDefinition />
+				<RowDefinition Height="Auto"  />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
 			</Grid.RowDefinitions>
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="50" />
@@ -39,6 +43,7 @@
 			</Grid.ColumnDefinitions>
 			<Label Grid.Column="0" BindingContext="{x:Reference Name=RangeSlider}" Text="{Binding LowerValue, StringFormat='{0:F2}'}" VerticalOptions="Center" />
 			<forms:RangeSlider Grid.Column="1" x:Name="RangeSlider" MinimumValue="1" MaximumValue="101" LowerValue="1" UpperValue="100" StepValue="10" StepValueContinuously="True" VerticalOptions="Center" TextSize="15" TextColor="Purple" />
+
 			<Label Grid.Column="2" BindingContext="{x:Reference Name=RangeSlider}" Text="{Binding UpperValue, StringFormat='{0:F2}'}" VerticalOptions="Center" />
 			<Switch Grid.Row="1" BindingContext="{x:Reference Name=RangeSlider}" IsToggled="{Binding MinThumbHidden, Mode=TwoWay}" VerticalOptions="Center" />
 			<Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="Min Thumb Hidden" VerticalOptions="Center" />
@@ -51,11 +56,23 @@
 			<Label Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Text="Bar height" VerticalOptions="Center" />
 			<Entry Grid.Row="5" Grid.Column="2" BindingContext="{x:Reference Name=RangeSlider}" Text="{Binding BarHeight, Mode=TwoWay, Converter={StaticResource StringToIntConverter}}" />
 			<Switch Grid.Row="6" BindingContext="{x:Reference Name=RangeSlider}" IsToggled="{Binding ShowTextAboveThumbs, Mode=TwoWay}" VerticalOptions="Center" />
-			<Label Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" Text="Show text abowe thumbs" VerticalOptions="Center" />
+			<Label Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" Text="Show text above thumbs" VerticalOptions="Center" />
 			<Label Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Text="Text size" VerticalOptions="Center" />
 			<Entry Grid.Row="7" Grid.Column="2" BindingContext="{x:Reference Name=RangeSlider}" Text="{Binding TextSize, Mode=TwoWay, Converter={StaticResource StringToIntConverter}}" />
 			<Switch Grid.Row="8" BindingContext="{x:Reference Name=RangeSlider}" IsToggled="{Binding IsEnabled, Mode=TwoWay}" VerticalOptions="Center" />
 			<Label Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="2" Text="Enabled" VerticalOptions="Center" />
-		</Grid>
-	</StackLayout>
+			<Switch Grid.Row="9" BindingContext="{x:Reference Name=RangeSlider}" IsToggled="{Binding MaterialUI, Mode=TwoWay}" VerticalOptions="Center" />
+			<Label Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="2" Text="Material UI" VerticalOptions="Center" />
+     
+			<Label Grid.Column="0" Grid.Row="10" BindingContext="{x:Reference Name=RangeSliderWithEffect}" Text="{Binding LowerValue, StringFormat='{0:F2}'}" VerticalOptions="Center" />
+			<forms:RangeSlider Grid.Column="1" Grid.Row="10" x:Name="RangeSliderWithEffect" BindingContext="{x:Reference Name=RangeSlider}" MinimumValue="{Binding MinimumValue}" MaximumValue="{Binding MaximumValue}" LowerValue="{Binding LowerValue, Mode=TwoWay}" 
+                         UpperValue="{Binding UpperValue, Mode=TwoWay}" StepValue="{Binding StepValue}" StepValueContinuously="{Binding StepValueContinuously}" VerticalOptions="{Binding VerticalOptions}" TextSize="{Binding TextSize}" TextColor="{Binding TextColor}" 
+                         MinThumbHidden="{Binding MinThumbHidden}" MaxThumbHidden="{Binding MaxThumbHidden}" BarHeight="{Binding BarHeight}" ShowTextAboveThumbs="{Binding ShowTextAboveThumbs}" IsEnabled="{Binding IsEnabled}"/>
+			<Label Grid.Column="2" Grid.Row="10" BindingContext="{x:Reference Name=RangeSliderWithEffect}" Text="{Binding UpperValue, StringFormat='{0:F2}'}" VerticalOptions="Center"/>
+      <Switch Grid.Row="11" BindingContext="{x:Reference Name=RangeSlider}" IsToggled="{Binding MinThumbTextHidden, Mode=TwoWay}" VerticalOptions="Center" />
+      <Label Grid.Row="11" Grid.Column="1" Grid.ColumnSpan="2" Text="Min Thumb Text Hidden" VerticalOptions="Center" />
+      <Switch Grid.Row="12" BindingContext="{x:Reference Name=RangeSlider}" IsToggled="{Binding MaxThumbTextHidden, Mode=TwoWay}" VerticalOptions="Center" />
+      <Label Grid.Row="12" Grid.Column="1" Grid.ColumnSpan="2" Text="Max Thumb Text Hidden" VerticalOptions="Center" />
+    </Grid>
+	</ScrollView>
 </ContentPage>

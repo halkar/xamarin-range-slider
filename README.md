@@ -35,6 +35,10 @@ If element is not displayed on a Xamarin.Forms page add this code to the startup
 | ShowTextAboveThumbs   | Show current values above the thumbs ||
 | TextSize              | Text above the thumbs size | *dp* on Android, *points* on iOS, *pixels* on UWP |
 | TextFormat            | Format string for text above the thumbs ||
+| ActiveColor           | Active bar color | Not supported on iOS. Used for thumb color in Android material UI. |
+| MaterialUI            | Material UI | Only supported on Android |
+| MinThumbTextHidden    | Show current value above the lower handle. Requires ShowTextAboveThumbs to be set to true first
+| MaxThumbTextHidden    | Show current value above the upper handle. Requires ShowTextAboveThumbs to be set to true first
 
 ## Supported Events
 
@@ -54,6 +58,10 @@ If element is not displayed on a Xamarin.Forms page add this code to the startup
 | Android | iOS | UWP |
 | ---| --- | --- |
 | <img src="https://raw.githubusercontent.com/halkar/xamarin-range-slider/master/Screenshots/android.png" alt="Android" style="width: 300px;"/> | <img src="https://raw.githubusercontent.com/halkar/xamarin-range-slider/master/Screenshots/ios.png" alt="iOS" style="width: 300px;"/> | <img src="https://raw.githubusercontent.com/halkar/xamarin-range-slider/master/Screenshots/uwp.png" alt="UWP" style="width: 300px;"/> |
+
+### Android material UI
+
+<img src="https://raw.githubusercontent.com/halkar/xamarin-range-slider/master/Screenshots/android-material.png" alt="Android" style="width: 50px;"/>
 
 ## Samples
 

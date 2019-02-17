@@ -13,56 +13,52 @@ namespace Xamarin.RangeSlider
 {
     public sealed partial class RangeSliderControl
     {
-        public const string MinimumPropertyName = "Minimum";
-        public const string MaximumPropertyName = "Maximum";
-        public const string RangeminPropertyName = "RangeMin";
-        public const string RangemaxPropertyName = "RangeMax";
-        public const string MinThumbHiddenPropertyName = "MinThumbHidden";
-        public const string MaxThumbHiddenPropertyName = "MaxThumbHidden";
-        public const string StepValuePropertyName = "StepValue";
-        public const string StepValueContinuouslyPropertyName = "StepValueContinuously";
-        public const string ShowTextAboveThumbsPropertyName = "ShowTextAboveThumbs";
-        public const string TextSizePropertyName = "TextSize";
-        public const string TextFormatPropertyName = "TextFormat";
-        public const string TextColorPropertyName = "TextColor";
-
         public const int ControlHeight = 32;
 
-        public static readonly DependencyProperty MinimumProperty = DependencyProperty.Register(MinimumPropertyName,
+        public static readonly DependencyProperty MinimumProperty = DependencyProperty.Register(nameof(Minimum),
             typeof(double), typeof(RangeSliderControl), new PropertyMetadata(0.0));
 
-        public static readonly DependencyProperty MaximumProperty = DependencyProperty.Register(MaximumPropertyName,
+        public static readonly DependencyProperty MaximumProperty = DependencyProperty.Register(nameof(Maximum),
             typeof(double), typeof(RangeSliderControl), new PropertyMetadata(1.0));
 
-        public static readonly DependencyProperty RangeMinProperty = DependencyProperty.Register(RangeminPropertyName,
+        public static readonly DependencyProperty RangeMinProperty = DependencyProperty.Register(nameof(RangeMin),
             typeof(double), typeof(RangeSliderControl), new PropertyMetadata(0.0, OnRangeMinPropertyChanged));
 
-        public static readonly DependencyProperty RangeMaxProperty = DependencyProperty.Register(RangemaxPropertyName,
+        public static readonly DependencyProperty RangeMaxProperty = DependencyProperty.Register(nameof(RangeMax),
             typeof(double), typeof(RangeSliderControl), new PropertyMetadata(1.0, OnRangeMaxPropertyChanged));
 
-        public static readonly DependencyProperty MinThumbHiddenProperty = DependencyProperty.Register(MinThumbHiddenPropertyName,
+        public static readonly DependencyProperty MinThumbHiddenProperty = DependencyProperty.Register(nameof(MinThumbHidden),
             typeof(bool), typeof(RangeSliderControl), new PropertyMetadata(false, MinThumbHiddenPropertyChanged));
 
-        public static readonly DependencyProperty MaxThumbHiddenProperty = DependencyProperty.Register(MaxThumbHiddenPropertyName,
+        public static readonly DependencyProperty MinThumbTextHiddenProperty = DependencyProperty.Register(nameof(MinThumbTextHidden),
+            typeof(bool), typeof(RangeSliderControl), new PropertyMetadata(false, MinThumbTextHiddenPropertyChanged));
+
+        public static readonly DependencyProperty MaxThumbHiddenProperty = DependencyProperty.Register(nameof(MaxThumbTextHidden),
             typeof(bool), typeof(RangeSliderControl), new PropertyMetadata(false, MaxThumbHiddenPropertyChanged));
 
-        public static readonly DependencyProperty StepValueProperty = DependencyProperty.Register(StepValuePropertyName,
+        public static readonly DependencyProperty MaxThumbTextHiddenProperty = DependencyProperty.Register(nameof(MaxThumbTextHidden),
+            typeof(bool), typeof(RangeSliderControl), new PropertyMetadata(false, MaxThumbTextHiddenPropertyChanged));
+
+        public static readonly DependencyProperty StepValueProperty = DependencyProperty.Register(nameof(StepValue),
             typeof(double), typeof(RangeSliderControl), new PropertyMetadata(0.0));
 
-        public static readonly DependencyProperty StepValueContinuouslyProperty = DependencyProperty.Register(StepValueContinuouslyPropertyName,
+        public static readonly DependencyProperty StepValueContinuouslyProperty = DependencyProperty.Register(nameof(StepValueContinuously),
             typeof(bool), typeof(RangeSliderControl), new PropertyMetadata(false));
 
-        public static readonly DependencyProperty ShowTextAboveThumbsProperty = DependencyProperty.Register(ShowTextAboveThumbsPropertyName,
+        public static readonly DependencyProperty ShowTextAboveThumbsProperty = DependencyProperty.Register(nameof(ShowTextAboveThumbs),
             typeof(bool), typeof(RangeSliderControl), new PropertyMetadata(false, ShowTextAboveThumbsPropertyChanged));
 
-        public static readonly DependencyProperty TextSizeProperty = DependencyProperty.Register(TextSizePropertyName,
+        public static readonly DependencyProperty TextSizeProperty = DependencyProperty.Register(nameof(TextSize),
             typeof(int), typeof(RangeSliderControl), new PropertyMetadata(10, TextSizePropertyChanged));
 
-        public static readonly DependencyProperty TextFormatProperty = DependencyProperty.Register(TextFormatPropertyName,
+        public static readonly DependencyProperty TextFormatProperty = DependencyProperty.Register(nameof(TextFormat),
             typeof(string), typeof(RangeSliderControl), new PropertyMetadata("F0", TextFormatPropertyChanged));
 
-        public static readonly DependencyProperty TextColorProperty = DependencyProperty.Register(TextColorPropertyName,
+        public static readonly DependencyProperty TextColorProperty = DependencyProperty.Register(nameof(TextColor),
             typeof(Color?), typeof(RangeSliderControl), new PropertyMetadata(null, TextColorPropertyChanged));
+
+        public static readonly DependencyProperty ActiveColorProperty = DependencyProperty.Register(nameof(ActiveColor),
+            typeof(Color?), typeof(RangeSliderControl), new PropertyMetadata(null, ActiveColorPropertyChanged));
 
         public RangeSliderControl()
         {
@@ -72,79 +68,102 @@ namespace Xamarin.RangeSlider
 
         private void RangeSliderControlIsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            ActiveRectangle.Fill = new SolidColorBrush(IsEnabled ? Color.FromArgb(255, 105, 160, 204) : Color.FromArgb(255, 184, 197, 209));
+            UpdateActiveRectangleColor();
+        }
+
+        private void UpdateActiveRectangleColor()
+        {
+            ActiveRectangle.Fill = new SolidColorBrush(IsEnabled ? (ActiveColor ?? Color.FromArgb(255, 105, 160, 204)) : Color.FromArgb(255, 184, 197, 209));
         }
 
         public double Minimum
         {
-            get { return (double) GetValue(MinimumProperty); }
-            set { SetValue(MinimumProperty, value); }
+            get => (double)GetValue(MinimumProperty);
+            set => SetValue(MinimumProperty, value);
         }
 
         public double Maximum
         {
-            get { return (double) GetValue(MaximumProperty); }
-            set { SetValue(MaximumProperty, value); }
+            get => (double)GetValue(MaximumProperty);
+            set => SetValue(MaximumProperty, value);
         }
 
         public double RangeMin
         {
-            get { return (double) GetValue(RangeMinProperty); }
-            set { SetValue(RangeMinProperty, value); }
+            get => (double)GetValue(RangeMinProperty);
+            set => SetValue(RangeMinProperty, value);
         }
 
         public double RangeMax
         {
-            get { return (double) GetValue(RangeMaxProperty); }
-            set { SetValue(RangeMaxProperty, value); }
+            get => (double)GetValue(RangeMaxProperty);
+            set => SetValue(RangeMaxProperty, value);
         }
 
         public bool MinThumbHidden
         {
-            get { return (bool)GetValue(MinThumbHiddenProperty); }
-            set { SetValue(MinThumbHiddenProperty, value); }
+            get => (bool)GetValue(MinThumbHiddenProperty);
+            set => SetValue(MinThumbHiddenProperty, value);
+        }
+
+        public bool MinThumbTextHidden
+        {
+            get => (bool)GetValue(MinThumbTextHiddenProperty);
+            set => SetValue(MinThumbTextHiddenProperty, value);
         }
 
         public bool MaxThumbHidden
         {
-            get { return (bool)GetValue(MaxThumbHiddenProperty); }
-            set { SetValue(MaxThumbHiddenProperty, value); }
+            get => (bool)GetValue(MaxThumbHiddenProperty);
+            set => SetValue(MaxThumbHiddenProperty, value);
+        }
+
+        public bool MaxThumbTextHidden
+        {
+            get => (bool)GetValue(MaxThumbTextHiddenProperty);
+            set => SetValue(MaxThumbTextHiddenProperty, value);
         }
 
         public double StepValue
         {
-            get { return (double)GetValue(StepValueProperty); }
-            set { SetValue(StepValueProperty, value); }
+            get => (double)GetValue(StepValueProperty);
+            set => SetValue(StepValueProperty, value);
         }
 
         public bool StepValueContinuously
         {
-            get { return (bool)GetValue(StepValueContinuouslyProperty); }
-            set { SetValue(StepValueContinuouslyProperty, value); }
+            get => (bool)GetValue(StepValueContinuouslyProperty);
+            set => SetValue(StepValueContinuouslyProperty, value);
         }
 
         public bool ShowTextAboveThumbs
         {
-            get { return (bool)GetValue(ShowTextAboveThumbsProperty); }
-            set { SetValue(ShowTextAboveThumbsProperty, value); }
+            get => (bool)GetValue(ShowTextAboveThumbsProperty);
+            set => SetValue(ShowTextAboveThumbsProperty, value);
         }
 
         public int TextSize
         {
-            get { return (int)GetValue(TextSizeProperty); }
-            set { SetValue(TextSizeProperty, value); }
+            get => (int)GetValue(TextSizeProperty);
+            set => SetValue(TextSizeProperty, value);
         }
 
         public Color? TextColor
         {
-            get { return (Color?)GetValue(TextColorProperty); }
-            set { SetValue(TextColorProperty, value); }
+            get => (Color?)GetValue(TextColorProperty);
+            set => SetValue(TextColorProperty, value);
+        }
+
+        public Color? ActiveColor
+        {
+            get => (Color?)GetValue(ActiveColorProperty);
+            set => SetValue(ActiveColorProperty, value);
         }
 
         public string TextFormat
         {
-            get { return (string)GetValue(TextFormatProperty); }
-            set { SetValue(TextFormatProperty, value); }
+            get => (string)GetValue(TextFormatProperty);
+            set => SetValue(TextFormatProperty, value);
         }
 
         public Func<Thumb, float, string> FormatLabel { get; set; }
@@ -155,13 +174,13 @@ namespace Xamarin.RangeSlider
         public event EventHandler DragStarted;
         public event EventHandler DragCompleted;
 
-        private double _aggregatedDrag = 0;
-        private double _initialLeft = 0;
+        private double _aggregatedDrag;
+        private double _initialLeft;
 
         private static void OnRangeMinPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var slider = (RangeSliderControl) d;
-            var newValue = (double) e.NewValue;
+            var slider = (RangeSliderControl)d;
+            var newValue = (double)e.NewValue;
 
             if (slider.IgnoreRangeChecks)
                 slider.RangeMin = newValue;
@@ -175,8 +194,8 @@ namespace Xamarin.RangeSlider
 
         private static void OnRangeMaxPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var slider = (RangeSliderControl) d;
-            var newValue = (double) e.NewValue;
+            var slider = (RangeSliderControl)d;
+            var newValue = (double)e.NewValue;
 
             if (slider.IgnoreRangeChecks)
                 slider.RangeMax = newValue;
@@ -192,12 +211,26 @@ namespace Xamarin.RangeSlider
         {
             var slider = (RangeSliderControl)d;
             slider.MinThumb.Visibility = (bool)e.NewValue ? Visibility.Collapsed : Visibility.Visible;
+            slider.MinThumbText.Visibility = (bool)e.NewValue ? Visibility.Collapsed : Visibility.Visible;
+        }
+
+        private static void MinThumbTextHiddenPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var slider = (RangeSliderControl)d;
+            slider.MinThumbText.Visibility = (bool)e.NewValue ? Visibility.Collapsed : Visibility.Visible;
         }
 
         private static void MaxThumbHiddenPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var slider = (RangeSliderControl)d;
             slider.MaxThumb.Visibility = (bool)e.NewValue ? Visibility.Collapsed : Visibility.Visible;
+            slider.MaxThumbText.Visibility = (bool)e.NewValue ? Visibility.Collapsed : Visibility.Visible;
+        }
+
+        private static void MaxThumbTextHiddenPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var slider = (RangeSliderControl)d;
+            slider.MaxThumbText.Visibility = (bool)e.NewValue ? Visibility.Collapsed : Visibility.Visible;
         }
 
         private static void TextSizePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -223,6 +256,14 @@ namespace Xamarin.RangeSlider
             var slider = (RangeSliderControl)d;
             var newValue = (Color)e.NewValue;
             slider.MinThumbText.Foreground = new SolidColorBrush(newValue);
+            slider.MaxThumbText.Foreground = new SolidColorBrush(newValue);
+        }
+
+        private static void ActiveColorPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var slider = (RangeSliderControl)d;
+            var newValue = (Color)e.NewValue;
+            slider.ActiveRectangle.Fill = new SolidColorBrush(newValue);
             slider.MaxThumbText.Foreground = new SolidColorBrush(newValue);
         }
 
@@ -259,7 +300,7 @@ namespace Xamarin.RangeSlider
             if (left + MinThumbText.ActualWidth > Canvas.GetLeft(MaxThumbText) - 10)
                 left = Canvas.GetLeft(MaxThumbText) - MinThumbText.ActualWidth - 10;
             Canvas.SetLeft(MinThumbText, left);
-            
+
         }
 
         public void UpdateMaxThumb(double max, bool update = false)
@@ -289,23 +330,23 @@ namespace Xamarin.RangeSlider
             var func = FormatLabel;
             return func == null
                 ? value.ToString(TextFormat, CultureInfo.InvariantCulture)
-                : func(thumb, (float) value);
+                : func(thumb, (float)value);
         }
 
         private void ContainerCanvas_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            var relativeLeft = (RangeMin - Minimum)/(Maximum - Minimum)*ContainerCanvas.ActualWidth;
-            var relativeRight = (RangeMax - Minimum)/(Maximum - Minimum)*ContainerCanvas.ActualWidth;
+            var relativeLeft = (RangeMin - Minimum) / (Maximum - Minimum) * ContainerCanvas.ActualWidth;
+            var relativeRight = (RangeMax - Minimum) / (Maximum - Minimum) * ContainerCanvas.ActualWidth;
 
             Canvas.SetLeft(MinThumb, relativeLeft);
             Canvas.SetLeft(ActiveRectangle, relativeLeft);
             Canvas.SetLeft(MaxThumb, relativeRight);
 
-            ActiveRectangle.Width = (RangeMax - RangeMin)/(Maximum - Minimum)*ContainerCanvas.ActualWidth;
+            ActiveRectangle.Width = (RangeMax - RangeMin) / (Maximum - Minimum) * ContainerCanvas.ActualWidth;
         }
 
         private void MinThumb_DragDelta(object sender, DragDeltaEventArgs e)
-        {   
+        {
             if (StepValueContinuously)
             {
                 _aggregatedDrag += e.HorizontalChange;
@@ -344,7 +385,7 @@ namespace Xamarin.RangeSlider
         {
             if (Math.Abs(StepValue) < float.Epsilon)
                 return value;
-            return (float) Math.Round((value - Minimum) / StepValue) * StepValue + Minimum;
+            return (float)Math.Round((value - Minimum) / StepValue) * StepValue + Minimum;
         }
 
         private double DragThumb(Windows.UI.Xaml.Controls.Primitives.Thumb thumb, double min, double max, double offset)
@@ -355,7 +396,7 @@ namespace Xamarin.RangeSlider
             nextPos = Math.Max(min, nextPos);
             nextPos = Math.Min(max, nextPos);
 
-            return Minimum + nextPos/ContainerCanvas.ActualWidth*(Maximum - Minimum);
+            return Minimum + nextPos / ContainerCanvas.ActualWidth * (Maximum - Minimum);
         }
 
         private void MinThumb_DragCompleted(object sender, DragCompletedEventArgs e)
@@ -400,7 +441,7 @@ namespace Xamarin.RangeSlider
 
         public void SetBarHeight(int barHeight)
         {
-            int margin = (ControlHeight - barHeight)/2;
+            int margin = (ControlHeight - barHeight) / 2;
             InactiveRectangle.Margin = new Thickness(8, margin, 8, margin);
             InactiveRectangle.Height = barHeight;
             Canvas.SetTop(ActiveRectangle, margin);

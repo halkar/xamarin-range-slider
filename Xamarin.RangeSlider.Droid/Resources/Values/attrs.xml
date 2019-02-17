@@ -41,5 +41,6 @@
 		<attr name="stepValueContinuously" format="boolean" />
 		<!-- font size for text above thumbs -->
 		<attr name="textSize" format="integer|float" />
+        <attr name="materialUI" format="boolean" />
 	</declare-styleable>
 </resources>

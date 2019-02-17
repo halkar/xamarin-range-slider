@@ -8,146 +8,167 @@ namespace Xamarin.RangeSlider.Forms
     [Preserve(AllMembers = true)]
     public class RangeSlider : View
     {
-        public const string LowerValuePropertyName = "LowerValue";
-        public const string MaximumValuePropertyName = "MaximumValue";
-        public const string MinimumValuePropertyName = "MinimumValue";
-        public const string UpperValuePropertyName = "UpperValue";
-        public const string MinThumbHiddenPropertyName = "MinThumbHidden";
-        public const string MaxThumbHiddenPropertyName = "MaxThumbHidden";
-        public const string StepValuePropertyName = "StepValue";
-        public const string StepValueContinuouslyPropertyName = "StepValueContinuously";
-        public const string BarHeightPropertyName = "BarHeight";
-        public const string ShowTextAboveThumbsPropertyName = "ShowTextAboveThumbs";
-        public const string TextSizePropertyName = "TextSize";
-        public const string TextFormatPropertyName = "TextFormat";
-        public const string TextColorPropertyName = "TextColor";
-        public const string FormatLabelPropertyName = "FormatLabel";
-
         public static readonly BindableProperty LowerValueProperty =
-            BindableProperty.Create(LowerValuePropertyName, typeof(float), typeof(RangeSlider), 0f);
+            BindableProperty.Create(nameof(LowerValue), typeof(float), typeof(RangeSlider), 0f, defaultBindingMode: BindingMode.TwoWay);
 
         public static readonly BindableProperty MaximumValueProperty =
-            BindableProperty.Create(MaximumValuePropertyName, typeof(float), typeof(RangeSlider), 0f);
+            BindableProperty.Create(nameof(MaximumValue), typeof(float), typeof(RangeSlider), 0f);
 
         public static readonly BindableProperty MaxThumbHiddenProperty =
-            BindableProperty.Create(MaxThumbHiddenPropertyName, typeof(bool), typeof(RangeSlider), false);
+            BindableProperty.Create(nameof(MaxThumbHidden), typeof(bool), typeof(RangeSlider), false);
+
+        public static readonly BindableProperty MaxThumbTextHiddenProperty =
+           BindableProperty.Create(nameof(MaxThumbTextHidden), typeof(bool), typeof(RangeSlider), false);
 
         public static readonly BindableProperty MinimumValueProperty =
-            BindableProperty.Create(MinimumValuePropertyName, typeof(float), typeof(RangeSlider), 0f);
+            BindableProperty.Create(nameof(MinimumValue), typeof(float), typeof(RangeSlider), 0f);
 
         public static readonly BindableProperty MinThumbHiddenProperty =
-            BindableProperty.Create(MinThumbHiddenPropertyName, typeof(bool), typeof(RangeSlider), false);
+            BindableProperty.Create(nameof(MinThumbHidden), typeof(bool), typeof(RangeSlider), false);
+
+        public static readonly BindableProperty MinThumbTextHiddenProperty =
+            BindableProperty.Create(nameof(MinThumbTextHidden), typeof(bool), typeof(RangeSlider), false);
 
         public static readonly BindableProperty StepValueContinuouslyProperty =
-            BindableProperty.Create(StepValueContinuouslyPropertyName, typeof(bool), typeof(RangeSlider), false);
+            BindableProperty.Create(nameof(StepValueContinuously), typeof(bool), typeof(RangeSlider), false);
 
         public static readonly BindableProperty StepValueProperty =
-            BindableProperty.Create(StepValuePropertyName, typeof(float), typeof(RangeSlider), 0f);
+            BindableProperty.Create(nameof(StepValue), typeof(float), typeof(RangeSlider), 0f);
 
         public static readonly BindableProperty UpperValueProperty =
-            BindableProperty.Create(UpperValuePropertyName, typeof(float), typeof(RangeSlider), 0f);
+            BindableProperty.Create(nameof(UpperValue), typeof(float), typeof(RangeSlider), 0f, defaultBindingMode: BindingMode.TwoWay);
 
         public static readonly BindableProperty BarHeightProperty =
-            BindableProperty.Create(BarHeightPropertyName, typeof(int?), typeof(RangeSlider));
+            BindableProperty.Create(nameof(BarHeight), typeof(int?), typeof(RangeSlider));
 
         public static readonly BindableProperty ShowTextAboveThumbsProperty =
-            BindableProperty.Create(ShowTextAboveThumbsPropertyName, typeof(bool), typeof(RangeSlider), false);
+            BindableProperty.Create(nameof(ShowTextAboveThumbs), typeof(bool), typeof(RangeSlider), false);
 
         public static readonly BindableProperty TextSizeProperty =
-            BindableProperty.Create(TextSizePropertyName, typeof(double), typeof(RangeSlider), 10D);
+            BindableProperty.Create(nameof(TextSize), typeof(double), typeof(RangeSlider), 10D);
 
         public static readonly BindableProperty TextFormatProperty =
-            BindableProperty.Create(TextFormatPropertyName, typeof(string), typeof(RangeSlider), "F0");
+            BindableProperty.Create(nameof(TextFormat), typeof(string), typeof(RangeSlider), "F0");
 
         public static readonly BindableProperty TextColorProperty =
-            BindableProperty.Create(TextColorPropertyName, typeof(Color), typeof(RangeSlider), Color.Default);
+            BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(RangeSlider), Color.Default);
 
         public static readonly BindableProperty FormatLabelProperty =
-            BindableProperty.Create(FormatLabelPropertyName, typeof(Func<Thumb, float, string>), typeof(RangeSlider));
+            BindableProperty.Create(nameof(FormatLabel), typeof(Func<Thumb, float, string>), typeof(RangeSlider));
+
+        public static readonly BindableProperty ActiveColorProperty =
+            BindableProperty.Create(nameof(ActiveColor), typeof(Color), typeof(RangeSlider), Color.Default);
+
+        public static readonly BindableProperty MaterialUiProperty =
+            BindableProperty.Create(nameof(MaterialUI), typeof(bool), typeof(RangeSlider), false);
 
         public float MinimumValue
         {
-            get { return (float)GetValue(MinimumValueProperty); }
-            set { SetValue(MinimumValueProperty, value); }
+            get => (float)GetValue(MinimumValueProperty);
+            set => SetValue(MinimumValueProperty, value);
         }
 
         public float MaximumValue
         {
-            get { return (float)GetValue(MaximumValueProperty); }
-            set { SetValue(MaximumValueProperty, value); }
+            get => (float)GetValue(MaximumValueProperty);
+            set => SetValue(MaximumValueProperty, value);
         }
 
         public float LowerValue
         {
-            get { return (float)GetValue(LowerValueProperty); }
-            set { SetValue(LowerValueProperty, value); }
+            get => (float)GetValue(LowerValueProperty);
+            set => SetValue(LowerValueProperty, value);
         }
 
         public float UpperValue
         {
-            get { return (float)GetValue(UpperValueProperty); }
-            set { SetValue(UpperValueProperty, value); }
+            get => (float)GetValue(UpperValueProperty);
+            set => SetValue(UpperValueProperty, value);
         }
 
         public bool MinThumbHidden
         {
-            get { return (bool)GetValue(MinThumbHiddenProperty); }
-            set { SetValue(MinThumbHiddenProperty, value); }
+            get => (bool)GetValue(MinThumbHiddenProperty);
+            set => SetValue(MinThumbHiddenProperty, value);
+        }
+
+        public bool MinThumbTextHidden
+        {
+            get => (bool)GetValue(MinThumbTextHiddenProperty);
+            set => SetValue(MinThumbTextHiddenProperty, value);
+        }
+
+        public bool MaxThumbTextHidden
+        {
+            get => (bool)GetValue(MaxThumbTextHiddenProperty);
+            set => SetValue(MaxThumbTextHiddenProperty, value);
         }
 
         public bool MaxThumbHidden
         {
-            get { return (bool)GetValue(MaxThumbHiddenProperty); }
-            set { SetValue(MaxThumbHiddenProperty, value); }
+            get => (bool)GetValue(MaxThumbHiddenProperty);
+            set => SetValue(MaxThumbHiddenProperty, value);
         }
 
         public float StepValue
         {
-            get { return (float)GetValue(StepValueProperty); }
-            set { SetValue(StepValueProperty, value); }
+            get => (float)GetValue(StepValueProperty);
+            set => SetValue(StepValueProperty, value);
         }
 
         public bool StepValueContinuously
         {
-            get { return (bool)GetValue(StepValueContinuouslyProperty); }
-            set { SetValue(StepValueContinuouslyProperty, value); }
+            get => (bool)GetValue(StepValueContinuouslyProperty);
+            set => SetValue(StepValueContinuouslyProperty, value);
         }
 
         public int? BarHeight
         {
-            get { return (int?)GetValue(BarHeightProperty); }
-            set { SetValue(BarHeightProperty, value); }
+            get => (int?)GetValue(BarHeightProperty);
+            set => SetValue(BarHeightProperty, value);
         }
 
         public bool ShowTextAboveThumbs
         {
-            get { return (bool)GetValue(ShowTextAboveThumbsProperty); }
-            set { SetValue(ShowTextAboveThumbsProperty, value); }
+            get => (bool)GetValue(ShowTextAboveThumbsProperty);
+            set => SetValue(ShowTextAboveThumbsProperty, value);
         }
 
         [TypeConverter(typeof(FontSizeConverter))]
         public double TextSize
         {
-            get { return (double)GetValue(TextSizeProperty); }
-            set { SetValue(TextSizeProperty, value); }
+            get => (double)GetValue(TextSizeProperty);
+            set => SetValue(TextSizeProperty, value);
         }
 
         public Color TextColor
         {
-            get { return (Color)GetValue(TextColorProperty); }
-            set { SetValue(TextColorProperty, value); }
+            get => (Color)GetValue(TextColorProperty);
+            set => SetValue(TextColorProperty, value);
         }
 
         public string TextFormat
         {
-            get { return (string)GetValue(TextFormatProperty); }
-            set { SetValue(TextFormatProperty, value); }
+            get => (string)GetValue(TextFormatProperty);
+            set => SetValue(TextFormatProperty, value);
+        }
+
+        public Color ActiveColor
+        {
+            get => (Color)GetValue(ActiveColorProperty);
+            set => SetValue(ActiveColorProperty, value);
+        }
+
+        public bool MaterialUI
+        {
+            get => (bool)GetValue(MaterialUiProperty);
+            set => SetValue(MaterialUiProperty, value);
         }
 
         public Func<Thumb, float, string> FormatLabel
         {
-            get { return (Func<Thumb, float, string>)GetValue(FormatLabelProperty); }
-            set { SetValue(FormatLabelProperty, value); }
+            get => (Func<Thumb, float, string>)GetValue(FormatLabelProperty);
+            set => SetValue(FormatLabelProperty, value);
         }
 
         public event EventHandler LowerValueChanged;
