@@ -348,18 +348,10 @@ namespace Xamarin.RangeSlider
             {
                 if (_trackBackgroundImage != null)
                     return _trackBackgroundImage;
-                if (IS_PRE_IOS7())
-                {
-                    var image = ImageFromBundle(@"slider-default-trackBackground");
-                    image = image.CreateResizableImage(new UIEdgeInsets(0.0f, 5.0f, 0.0f, 5.0f));
-                    _trackBackgroundImage = image;
-                }
-                else
-                {
-                    var image = ImageFromBundle(@"slider-default7-trackBackground");
-                    image = image.CreateResizableImage(new UIEdgeInsets(0.0f, 2.0f, 0.0f, 2.0f));
-                    _trackBackgroundImage = image;
-                }
+
+                var image = ImageFromBundle(@"slider-default7-trackBackground");
+                image = image.CreateResizableImage(new UIEdgeInsets(0.0f, 2.0f, 0.0f, 2.0f));
+                _trackBackgroundImage = image;
 
                 return _trackBackgroundImage;
             }
@@ -371,19 +363,11 @@ namespace Xamarin.RangeSlider
             {
                 if (_trackImage != null)
                     return _trackImage;
-                if (IS_PRE_IOS7())
-                {
-                    var image = ImageFromBundle(@"slider-default-track");
-                    image = image.CreateResizableImage(new UIEdgeInsets(0.0f, 7.0f, 0.0f, 7.0f));
-                    _trackImage = image;
-                }
-                else
-                {
-                    var image = ImageFromBundle(@"slider-default7-track");
-                    image = image.CreateResizableImage(new UIEdgeInsets(0.0f, 2.0f, 0.0f, 2.0f));
-                    image = image.ImageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate);
-                    _trackImage = image;
-                }
+
+                var image = ImageFromBundle(@"slider-default7-track");
+                image = image.CreateResizableImage(new UIEdgeInsets(0.0f, 2.0f, 0.0f, 2.0f));
+                image = image.ImageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate);
+                _trackImage = image;
 
                 return _trackImage;
             }
@@ -395,18 +379,10 @@ namespace Xamarin.RangeSlider
             {
                 if (_trackCrossedOverImage != null)
                     return _trackCrossedOverImage;
-                if (IS_PRE_IOS7())
-                {
-                    var image = ImageFromBundle(@"slider-default-trackCrossedOver");
-                    image = image.CreateResizableImage(new UIEdgeInsets(0.0f, 7.0f, 0.0f, 7.0f));
-                    _trackCrossedOverImage = image;
-                }
-                else
-                {
-                    var image = ImageFromBundle(@"slider-default7-trackCrossedOver");
-                    image = image.CreateResizableImage(new UIEdgeInsets(0.0f, 2.0f, 0.0f, 2.0f));
-                    _trackCrossedOverImage = image;
-                }
+
+                var image = ImageFromBundle(@"slider-default7-trackCrossedOver");
+                image = image.CreateResizableImage(new UIEdgeInsets(0.0f, 2.0f, 0.0f, 2.0f));
+                _trackCrossedOverImage = image;
 
                 return _trackCrossedOverImage;
             }
@@ -418,16 +394,9 @@ namespace Xamarin.RangeSlider
             {
                 if (_lowerHandleImageNormal != null)
                     return _lowerHandleImageNormal;
-                if (IS_PRE_IOS7())
-                {
-                    var image = ImageFromBundle(Enabled ? @"slider-default-handle" : @"slider-default-handle-disabled");
-                    _lowerHandleImageNormal = image.ImageWithAlignmentRectInsets(new UIEdgeInsets(0, 2, 0, 2));
-                }
-                else
-                {
-                    var image = ImageFromBundle(Enabled ? @"slider-default7-handle" : @"slider-default7-handle-disabled");
-                    _lowerHandleImageNormal = image.ImageWithAlignmentRectInsets(new UIEdgeInsets(-1, 8, 1, 8));
-                }
+
+                var image = ImageFromBundle(Enabled ? @"slider-default7-handle" : @"slider-default7-handle-disabled");
+                _lowerHandleImageNormal = image.ImageWithAlignmentRectInsets(new UIEdgeInsets(-1, 8, 1, 8));
 
                 return _lowerHandleImageNormal;
             }
@@ -439,17 +408,9 @@ namespace Xamarin.RangeSlider
             {
                 if (_lowerHandleImageHighlighted != null)
                     return _lowerHandleImageHighlighted;
-                if (IS_PRE_IOS7())
-                {
-                    var image = ImageFromBundle(@"slider-default-handle-highlighted");
-                    _lowerHandleImageHighlighted = image;
-                    _lowerHandleImageHighlighted = image.ImageWithAlignmentRectInsets(new UIEdgeInsets(0, 2, 0, 2));
-                }
-                else
-                {
-                    var image = ImageFromBundle(@"slider-default7-handle");
-                    _lowerHandleImageHighlighted = image.ImageWithAlignmentRectInsets(new UIEdgeInsets(-1, 8, 1, 8));
-                }
+
+                var image = ImageFromBundle(@"slider-default7-handle");
+                _lowerHandleImageHighlighted = image.ImageWithAlignmentRectInsets(new UIEdgeInsets(-1, 8, 1, 8));
 
                 return _lowerHandleImageHighlighted;
             }
@@ -461,16 +422,9 @@ namespace Xamarin.RangeSlider
             {
                 if (_upperHandleImageNormal != null)
                     return _upperHandleImageNormal;
-                if (IS_PRE_IOS7())
-                {
-                    var image = ImageFromBundle(Enabled ? @"slider-default-handle" : @"slider-default-handle-disabled");
-                    _upperHandleImageNormal = image.ImageWithAlignmentRectInsets(new UIEdgeInsets(0, 2, 0, 2));
-                }
-                else
-                {
-                    var image = ImageFromBundle(Enabled ? @"slider-default7-handle" : @"slider-default7-handle-disabled");
-                    _upperHandleImageNormal = image.ImageWithAlignmentRectInsets(new UIEdgeInsets(-1, 8, 1, 8));
-                }
+
+                var image = ImageFromBundle(Enabled ? @"slider-default7-handle" : @"slider-default7-handle-disabled");
+                _upperHandleImageNormal = image.ImageWithAlignmentRectInsets(new UIEdgeInsets(-1, 8, 1, 8));
 
                 return _upperHandleImageNormal;
             }
@@ -482,16 +436,8 @@ namespace Xamarin.RangeSlider
             {
                 if (_upperHandleImageHighlighted != null)
                     return _upperHandleImageHighlighted;
-                if (IS_PRE_IOS7())
-                {
-                    var image = ImageFromBundle(@"slider-default-handle-highlighted");
-                    _upperHandleImageHighlighted = image.ImageWithAlignmentRectInsets(new UIEdgeInsets(0, 2, 0, 2));
-                }
-                else
-                {
-                    var image = ImageFromBundle(@"slider-default7-handle");
-                    _upperHandleImageHighlighted = image.ImageWithAlignmentRectInsets(new UIEdgeInsets(-1, 8, 1, 8));
-                }
+                var image = ImageFromBundle(@"slider-default7-handle");
+                _upperHandleImageHighlighted = image.ImageWithAlignmentRectInsets(new UIEdgeInsets(-1, 8, 1, 8));
 
                 return _upperHandleImageHighlighted;
             }
@@ -509,11 +455,6 @@ namespace Xamarin.RangeSlider
         public event EventHandler UpperValueChanged;
         public event EventHandler DragStarted;
         public event EventHandler DragCompleted;
-
-        private static bool IS_PRE_IOS7()
-        {
-            return int.Parse(UIDevice.CurrentDevice.SystemVersion.Split('.')[0]) < 7;
-        }
 
         private void ConfigureView()
         {
