@@ -128,7 +128,7 @@ namespace Xamarin.RangeSlider.Forms
             {
                 Control.FormatLabel = Element.FormatLabel;
             }
-            Control.SetNeedsLayout();
+            Control?.SetNeedsLayout();
         }
 
         private void ForceFormsLayout()
