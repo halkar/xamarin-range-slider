@@ -27,80 +27,80 @@ namespace Xamarin.RangeSlider
 		public partial class Attribute
 		{
 			
-			// aapt resource value: 0x7f010001
-			public static int absoluteMaxValue = 2130771969;
+			// aapt resource value: 0x7F010000
+			public static int absoluteMaxValue = 2130771968;
 			
-			// aapt resource value: 0x7f010000
-			public static int absoluteMinValue = 2130771968;
+			// aapt resource value: 0x7F010001
+			public static int absoluteMinValue = 2130771969;
 			
-			// aapt resource value: 0x7f010014
-			public static int activateOnDefaultValues = 2130771988;
+			// aapt resource value: 0x7F010002
+			public static int activateOnDefaultValues = 2130771970;
 			
-			// aapt resource value: 0x7f01000a
-			public static int activeColor = 2130771978;
+			// aapt resource value: 0x7F010003
+			public static int activeColor = 2130771971;
 			
-			// aapt resource value: 0x7f010005
-			public static int alwaysActive = 2130771973;
+			// aapt resource value: 0x7F010004
+			public static int alwaysActive = 2130771972;
 			
-			// aapt resource value: 0x7f010008
-			public static int barHeight = 2130771976;
+			// aapt resource value: 0x7F010005
+			public static int barHeight = 2130771973;
 			
-			// aapt resource value: 0x7f010009
-			public static int defaultColor = 2130771977;
+			// aapt resource value: 0x7F010006
+			public static int defaultColor = 2130771974;
 			
-			// aapt resource value: 0x7f010007
+			// aapt resource value: 0x7F010007
 			public static int internalPadding = 2130771975;
 			
-			// aapt resource value: 0x7f010018
-			public static int materialUI = 2130771992;
+			// aapt resource value: 0x7F010008
+			public static int materialUI = 2130771976;
 			
-			// aapt resource value: 0x7f010003
-			public static int maxThumbHidden = 2130771971;
+			// aapt resource value: 0x7F010009
+			public static int maxThumbHidden = 2130771977;
 			
-			// aapt resource value: 0x7f010002
-			public static int minThumbHidden = 2130771970;
+			// aapt resource value: 0x7F01000A
+			public static int minThumbHidden = 2130771978;
 			
-			// aapt resource value: 0x7f010004
-			public static int showRangeLabels = 2130771972;
+			// aapt resource value: 0x7F01000B
+			public static int showRangeLabels = 2130771979;
 			
-			// aapt resource value: 0x7f010015
-			public static int stepValue = 2130771989;
+			// aapt resource value: 0x7F01000C
+			public static int stepValue = 2130771980;
 			
-			// aapt resource value: 0x7f010016
-			public static int stepValueContinuously = 2130771990;
+			// aapt resource value: 0x7F01000D
+			public static int stepValueContinuously = 2130771981;
 			
-			// aapt resource value: 0x7f01000b
-			public static int textAboveThumbsColor = 2130771979;
+			// aapt resource value: 0x7F01000E
+			public static int textAboveThumbsColor = 2130771982;
 			
-			// aapt resource value: 0x7f010017
-			public static int textSize = 2130771991;
+			// aapt resource value: 0x7F01000F
+			public static int textSize = 2130771983;
 			
-			// aapt resource value: 0x7f01000e
-			public static int thumbDisabled = 2130771982;
+			// aapt resource value: 0x7F010010
+			public static int thumbDisabled = 2130771984;
 			
-			// aapt resource value: 0x7f01000c
-			public static int thumbNormal = 2130771980;
+			// aapt resource value: 0x7F010011
+			public static int thumbNormal = 2130771985;
 			
-			// aapt resource value: 0x7f01000d
-			public static int thumbPressed = 2130771981;
+			// aapt resource value: 0x7F010012
+			public static int thumbPressed = 2130771986;
 			
-			// aapt resource value: 0x7f01000f
-			public static int thumbShadow = 2130771983;
+			// aapt resource value: 0x7F010013
+			public static int thumbShadow = 2130771987;
 			
-			// aapt resource value: 0x7f010013
-			public static int thumbShadowBlur = 2130771987;
+			// aapt resource value: 0x7F010014
+			public static int thumbShadowBlur = 2130771988;
 			
-			// aapt resource value: 0x7f010010
-			public static int thumbShadowColor = 2130771984;
+			// aapt resource value: 0x7F010015
+			public static int thumbShadowColor = 2130771989;
 			
-			// aapt resource value: 0x7f010011
-			public static int thumbShadowXOffset = 2130771985;
+			// aapt resource value: 0x7F010016
+			public static int thumbShadowXOffset = 2130771990;
 			
-			// aapt resource value: 0x7f010012
-			public static int thumbShadowYOffset = 2130771986;
+			// aapt resource value: 0x7F010017
+			public static int thumbShadowYOffset = 2130771991;
 			
-			// aapt resource value: 0x7f010006
-			public static int valuesAboveThumbs = 2130771974;
+			// aapt resource value: 0x7F010018
+			public static int valuesAboveThumbs = 2130771992;
 			
 			static Attribute()
 			{
@@ -115,14 +115,14 @@ namespace Xamarin.RangeSlider
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f020000
+			// aapt resource value: 0x7F020000
 			public static int app_name = 2130837504;
 			
-			// aapt resource value: 0x7f020002
-			public static int demo_max_label = 2130837506;
+			// aapt resource value: 0x7F020001
+			public static int demo_max_label = 2130837505;
 			
-			// aapt resource value: 0x7f020001
-			public static int demo_min_label = 2130837505;
+			// aapt resource value: 0x7F020002
+			public static int demo_min_label = 2130837506;
 			
 			static String()
 			{
@@ -137,6 +137,7 @@ namespace Xamarin.RangeSlider
 		public partial class Styleable
 		{
 			
+			// aapt resource value: { 0x7F010000,0x7F010001,0x7F010002,0x7F010003,0x7F010004,0x7F010005,0x7F010006,0x7F010007,0x7F010008,0x7F010009,0x7F01000A,0x7F01000B,0x7F01000C,0x7F01000D,0x7F01000E,0x7F01000F,0x7F010010,0x7F010011,0x7F010012,0x7F010013,0x7F010014,0x7F010015,0x7F010016,0x7F010017,0x7F010018 }
 			public static int[] RangeSliderControl = new int[] {
 					2130771968,
 					2130771969,
@@ -164,80 +165,80 @@ namespace Xamarin.RangeSlider
 					2130771991,
 					2130771992};
 			
-			// aapt resource value: 1
-			public static int RangeSliderControl_absoluteMaxValue = 1;
-			
 			// aapt resource value: 0
-			public static int RangeSliderControl_absoluteMinValue = 0;
+			public static int RangeSliderControl_absoluteMaxValue = 0;
 			
-			// aapt resource value: 20
-			public static int RangeSliderControl_activateOnDefaultValues = 20;
+			// aapt resource value: 1
+			public static int RangeSliderControl_absoluteMinValue = 1;
 			
-			// aapt resource value: 10
-			public static int RangeSliderControl_activeColor = 10;
+			// aapt resource value: 2
+			public static int RangeSliderControl_activateOnDefaultValues = 2;
+			
+			// aapt resource value: 3
+			public static int RangeSliderControl_activeColor = 3;
+			
+			// aapt resource value: 4
+			public static int RangeSliderControl_alwaysActive = 4;
 			
 			// aapt resource value: 5
-			public static int RangeSliderControl_alwaysActive = 5;
+			public static int RangeSliderControl_barHeight = 5;
 			
-			// aapt resource value: 8
-			public static int RangeSliderControl_barHeight = 8;
-			
-			// aapt resource value: 9
-			public static int RangeSliderControl_defaultColor = 9;
+			// aapt resource value: 6
+			public static int RangeSliderControl_defaultColor = 6;
 			
 			// aapt resource value: 7
 			public static int RangeSliderControl_internalPadding = 7;
 			
-			// aapt resource value: 24
-			public static int RangeSliderControl_materialUI = 24;
+			// aapt resource value: 8
+			public static int RangeSliderControl_materialUI = 8;
 			
-			// aapt resource value: 3
-			public static int RangeSliderControl_maxThumbHidden = 3;
+			// aapt resource value: 9
+			public static int RangeSliderControl_maxThumbHidden = 9;
 			
-			// aapt resource value: 2
-			public static int RangeSliderControl_minThumbHidden = 2;
-			
-			// aapt resource value: 4
-			public static int RangeSliderControl_showRangeLabels = 4;
-			
-			// aapt resource value: 21
-			public static int RangeSliderControl_stepValue = 21;
-			
-			// aapt resource value: 22
-			public static int RangeSliderControl_stepValueContinuously = 22;
+			// aapt resource value: 10
+			public static int RangeSliderControl_minThumbHidden = 10;
 			
 			// aapt resource value: 11
-			public static int RangeSliderControl_textAboveThumbsColor = 11;
-			
-			// aapt resource value: 23
-			public static int RangeSliderControl_textSize = 23;
-			
-			// aapt resource value: 14
-			public static int RangeSliderControl_thumbDisabled = 14;
+			public static int RangeSliderControl_showRangeLabels = 11;
 			
 			// aapt resource value: 12
-			public static int RangeSliderControl_thumbNormal = 12;
+			public static int RangeSliderControl_stepValue = 12;
 			
 			// aapt resource value: 13
-			public static int RangeSliderControl_thumbPressed = 13;
+			public static int RangeSliderControl_stepValueContinuously = 13;
+			
+			// aapt resource value: 14
+			public static int RangeSliderControl_textAboveThumbsColor = 14;
 			
 			// aapt resource value: 15
-			public static int RangeSliderControl_thumbShadow = 15;
-			
-			// aapt resource value: 19
-			public static int RangeSliderControl_thumbShadowBlur = 19;
+			public static int RangeSliderControl_textSize = 15;
 			
 			// aapt resource value: 16
-			public static int RangeSliderControl_thumbShadowColor = 16;
+			public static int RangeSliderControl_thumbDisabled = 16;
 			
 			// aapt resource value: 17
-			public static int RangeSliderControl_thumbShadowXOffset = 17;
+			public static int RangeSliderControl_thumbNormal = 17;
 			
 			// aapt resource value: 18
-			public static int RangeSliderControl_thumbShadowYOffset = 18;
+			public static int RangeSliderControl_thumbPressed = 18;
 			
-			// aapt resource value: 6
-			public static int RangeSliderControl_valuesAboveThumbs = 6;
+			// aapt resource value: 19
+			public static int RangeSliderControl_thumbShadow = 19;
+			
+			// aapt resource value: 20
+			public static int RangeSliderControl_thumbShadowBlur = 20;
+			
+			// aapt resource value: 21
+			public static int RangeSliderControl_thumbShadowColor = 21;
+			
+			// aapt resource value: 22
+			public static int RangeSliderControl_thumbShadowXOffset = 22;
+			
+			// aapt resource value: 23
+			public static int RangeSliderControl_thumbShadowYOffset = 23;
+			
+			// aapt resource value: 24
+			public static int RangeSliderControl_valuesAboveThumbs = 24;
 			
 			static Styleable()
 			{
