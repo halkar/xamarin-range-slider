@@ -912,7 +912,7 @@ namespace Xamarin.RangeSlider
 
             DragStarted?.Invoke(this, EventArgs.Empty);
 
-            return false;
+            return true;
         }
 
         public override bool ContinueTracking(UITouch uitouch, UIEvent uievent)
@@ -968,7 +968,7 @@ namespace Xamarin.RangeSlider
             //redraw
             SetNeedsLayout();
 
-            return false;
+            return true;
         }
 
         public override void EndTracking(UITouch uitouch, UIEvent uievent)
@@ -987,6 +987,11 @@ namespace Xamarin.RangeSlider
             SendActionForControlEvents(UIControlEvent.ValueChanged);
 
             DragCompleted?.Invoke(this, EventArgs.Empty);
+        }
+        
+        public override bool GestureRecognizerShouldBegin(UIGestureRecognizer gestureRecognizer)
+        {
+            return false;
         }
 
         protected virtual void OnLowerValueChanged()
