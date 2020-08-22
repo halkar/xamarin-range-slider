@@ -912,7 +912,7 @@ namespace Xamarin.RangeSlider
 
             DragStarted?.Invoke(this, EventArgs.Empty);
 
-            return true;
+            return false;
         }
 
         public override bool ContinueTracking(UITouch uitouch, UIEvent uievent)
@@ -968,7 +968,7 @@ namespace Xamarin.RangeSlider
             //redraw
             SetNeedsLayout();
 
-            return true;
+            return false;
         }
 
         public override void EndTracking(UITouch uitouch, UIEvent uievent)
