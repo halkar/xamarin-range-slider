@@ -42,5 +42,34 @@ namespace Xamarin.RangeSlider.Forms.Samples
         {
             Debug.WriteLine("RangeSliderOnDragStarted");
         }
+
+        private void SetActiveColor_Clicked(object sender, EventArgs e)
+        {
+            var color = Color.FromHex(ActiveColorEntry.Text);
+
+            RangeSlider.ActiveColor = color;
+            RangeSliderWithEffect.ActiveColor = color;
+            ActiveColorBox.BackgroundColor = color;
+
+            ActiveColorEntry.Text = ColorToString(color);
+        }
+
+        private void SetTextColor_Clicked(object sender, EventArgs e)
+        {
+            var color = Color.FromHex(TextColorEntry.Text);
+
+            RangeSlider.TextColor = color;
+            RangeSliderWithEffect.TextColor = color;
+            TextColorBox.BackgroundColor = color;
+
+            TextColorEntry.Text = ColorToString(color);
+        }
+
+        private static string ColorToString(Color color)
+        {
+            return color == Color.Default ?
+                "Default" :
+                string.Format("#{0:X}{1:X}{2:X}{3:X}", (int)(color.A * 255), (int)(color.R * 255), (int)(color.G * 255), (int)(color.B * 255));
+        }
     }
 }

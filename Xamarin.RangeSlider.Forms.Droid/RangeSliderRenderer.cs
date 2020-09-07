@@ -136,7 +136,7 @@ namespace Xamarin.RangeSlider.Forms
                 if (Element.ActiveColor != Xamarin.Forms.Color.Default)
                     Control.ActiveColor = Element.ActiveColor.ToAndroid();
             }
-            else if (e.PropertyName == RangeSlider.MaterialUiProperty.PropertyName)
+            else if (e.PropertyName == RangeSlider.MaterialUIProperty.PropertyName)
             {
                 Control.MaterialUI = Element.MaterialUI;
             }
