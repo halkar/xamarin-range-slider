@@ -51,9 +51,9 @@ var nuGetPackSettings = new NuGetPackSettings
     OutputDirectory = nugetPackagesDir
 };
 Task("Pack-NugetPackages")
-    .IsDependentOn("SonarBegin")
+    //.IsDependentOn("SonarBegin")
 	.IsDependentOn("Build")
-    .IsDependentOn("SonarEnd")
+    //.IsDependentOn("SonarEnd")
 	.Does (() =>
 {
     CreateDirectory(nugetPackagesDir);
