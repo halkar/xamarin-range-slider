@@ -51,10 +51,8 @@ var nuGetPackSettings = new NuGetPackSettings
     OutputDirectory = nugetPackagesDir
 };
 Task("Pack-NugetPackages")
-    .IsDependentOn("SonarBegin")
-	.IsDependentOn("Build")
-    .IsDependentOn("SonarEnd")
-	.Does (() =>
+    .IsDependentOn("Build")
+    .Does (() =>
 {
     CreateDirectory(nugetPackagesDir);
     NuGetPack("./Xamarin.RangeSlider.nuspec", nuGetPackSettings);
