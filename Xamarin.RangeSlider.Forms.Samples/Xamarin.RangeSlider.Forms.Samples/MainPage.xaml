@@ -6,10 +6,11 @@
 			<samples:StringToIntConverter x:Key="StringToIntConverter" />
 		</ResourceDictionary>
 	</ContentPage.Resources>
+
 	<ContentPage.Padding>
 		<OnPlatform x:TypeArguments="Thickness">
 			<OnPlatform.iOS>
-				0, 20, 0, 0
+				0, 40, 0, 0
 			</OnPlatform.iOS>
 			<OnPlatform.Android>
 				0, 0, 0, 0
@@ -19,11 +20,16 @@
 			</OnPlatform.WinPhone>
 		</OnPlatform>
 	</ContentPage.Padding>
+
 	<ScrollView>
 		<Grid x:Name="Grid">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="Auto" />
 				<RowDefinition Height="Auto"  />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
 				<RowDefinition Height="Auto" />
 				<RowDefinition Height="Auto" />
 				<RowDefinition Height="Auto" />
@@ -69,10 +75,24 @@
                          UpperValue="{Binding UpperValue, Mode=TwoWay}" StepValue="{Binding StepValue}" StepValueContinuously="{Binding StepValueContinuously}" VerticalOptions="{Binding VerticalOptions}" TextSize="{Binding TextSize}" TextColor="{Binding TextColor}" 
                          MinThumbHidden="{Binding MinThumbHidden}" MaxThumbHidden="{Binding MaxThumbHidden}" BarHeight="{Binding BarHeight}" ShowTextAboveThumbs="{Binding ShowTextAboveThumbs}" IsEnabled="{Binding IsEnabled}"/>
 			<Label Grid.Column="2" Grid.Row="10" BindingContext="{x:Reference Name=RangeSliderWithEffect}" Text="{Binding UpperValue, StringFormat='{0:F2}'}" VerticalOptions="Center"/>
-      <Switch Grid.Row="11" BindingContext="{x:Reference Name=RangeSlider}" IsToggled="{Binding MinThumbTextHidden, Mode=TwoWay}" VerticalOptions="Center" />
-      <Label Grid.Row="11" Grid.Column="1" Grid.ColumnSpan="2" Text="Min Thumb Text Hidden" VerticalOptions="Center" />
-      <Switch Grid.Row="12" BindingContext="{x:Reference Name=RangeSlider}" IsToggled="{Binding MaxThumbTextHidden, Mode=TwoWay}" VerticalOptions="Center" />
-      <Label Grid.Row="12" Grid.Column="1" Grid.ColumnSpan="2" Text="Max Thumb Text Hidden" VerticalOptions="Center" />
-    </Grid>
+			<Switch Grid.Row="11" BindingContext="{x:Reference Name=RangeSlider}" IsToggled="{Binding MinThumbTextHidden, Mode=TwoWay}" VerticalOptions="Center" />
+			<Label Grid.Row="11" Grid.Column="1" Grid.ColumnSpan="2" Text="Min Thumb Text Hidden" VerticalOptions="Center" />
+			<Switch Grid.Row="12" BindingContext="{x:Reference Name=RangeSlider}" IsToggled="{Binding MaxThumbTextHidden, Mode=TwoWay}" VerticalOptions="Center" />
+			<Label Grid.Row="12" Grid.Column="1" Grid.ColumnSpan="2" Text="Max Thumb Text Hidden" VerticalOptions="Center" />
+
+			<Label Grid.Row="13" Grid.ColumnSpan="2" Text="Active Color" />
+			<StackLayout Grid.Row="14" Grid.ColumnSpan="3" Orientation="Horizontal" VerticalOptions="Start">
+				<Entry x:Name="ActiveColorEntry" Text="Default" VerticalOptions="Center" HorizontalOptions="FillAndExpand" />
+				<BoxView x:Name="ActiveColorBox" VerticalOptions="Center" />
+				<Button Text="Set" Clicked="SetActiveColor_Clicked" VerticalOptions="Center" />
+			</StackLayout>
+
+			<Label Grid.Row="15" Grid.ColumnSpan="2" Text="Text Color" />
+			<StackLayout Grid.Row="16" Grid.ColumnSpan="3" Orientation="Horizontal" VerticalOptions="Start">
+				<Entry x:Name="TextColorEntry" Text="Default" VerticalOptions="Center" HorizontalOptions="FillAndExpand" />
+				<BoxView x:Name="TextColorBox" VerticalOptions="Center" />
+				<Button Text="Set" Clicked="SetTextColor_Clicked" VerticalOptions="Center" />
+			</StackLayout>
+		</Grid>
 	</ScrollView>
 </ContentPage>

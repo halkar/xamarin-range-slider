@@ -71,6 +71,7 @@ namespace Xamarin.RangeSlider
         private float _textSize = 10;
         private string _textFormat = "F0";
         private UIColor _textColor;
+        private UIColor _activeColor;
         private float _lowerValue;
         private float _maximumValue;
         private float _minimumRange;
@@ -299,6 +300,18 @@ namespace Xamarin.RangeSlider
             }
         }
 
+        [Export(nameof(ActiveColor))]
+        [Browsable(true)]
+        public UIColor ActiveColor
+        {
+            get { return _activeColor; }
+            set
+            {
+                _activeColor = value;
+                SetNeedsLayout();
+            }
+        }
+
         [Export(nameof(LowerHandleLabelHidden))]
         [Browsable(true)]
         public bool LowerHandleLabelHidden
@@ -382,6 +395,7 @@ namespace Xamarin.RangeSlider
 
                 var image = ImageFromBundle(@"slider-default7-trackCrossedOver");
                 image = image.CreateResizableImage(new UIEdgeInsets(0.0f, 2.0f, 0.0f, 2.0f));
+                image = image.ImageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate);
                 _trackCrossedOverImage = image;
 
                 return _trackCrossedOverImage;
@@ -396,7 +410,9 @@ namespace Xamarin.RangeSlider
                     return _lowerHandleImageNormal;
 
                 var image = ImageFromBundle(Enabled ? @"slider-default7-handle" : @"slider-default7-handle-disabled");
-                _lowerHandleImageNormal = image.ImageWithAlignmentRectInsets(new UIEdgeInsets(-1, 8, 1, 8));
+                image = image.ImageWithAlignmentRectInsets(new UIEdgeInsets(-1, 8, 1, 8));
+                image = image.ImageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate);
+                _lowerHandleImageNormal = image;
 
                 return _lowerHandleImageNormal;
             }
@@ -410,7 +426,9 @@ namespace Xamarin.RangeSlider
                     return _lowerHandleImageHighlighted;
 
                 var image = ImageFromBundle(@"slider-default7-handle");
-                _lowerHandleImageHighlighted = image.ImageWithAlignmentRectInsets(new UIEdgeInsets(-1, 8, 1, 8));
+                image = image.ImageWithAlignmentRectInsets(new UIEdgeInsets(-1, 8, 1, 8));
+                image = image.ImageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate);
+                _lowerHandleImageHighlighted = image;
 
                 return _lowerHandleImageHighlighted;
             }
@@ -424,7 +442,9 @@ namespace Xamarin.RangeSlider
                     return _upperHandleImageNormal;
 
                 var image = ImageFromBundle(Enabled ? @"slider-default7-handle" : @"slider-default7-handle-disabled");
-                _upperHandleImageNormal = image.ImageWithAlignmentRectInsets(new UIEdgeInsets(-1, 8, 1, 8));
+                image = image.ImageWithAlignmentRectInsets(new UIEdgeInsets(-1, 8, 1, 8));
+                image = image.ImageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate);
+                _upperHandleImageNormal = image;
 
                 return _upperHandleImageNormal;
             }
@@ -437,7 +457,9 @@ namespace Xamarin.RangeSlider
                 if (_upperHandleImageHighlighted != null)
                     return _upperHandleImageHighlighted;
                 var image = ImageFromBundle(@"slider-default7-handle");
-                _upperHandleImageHighlighted = image.ImageWithAlignmentRectInsets(new UIEdgeInsets(-1, 8, 1, 8));
+                image = image.ImageWithAlignmentRectInsets(new UIEdgeInsets(-1, 8, 1, 8));
+                image = image.ImageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate);
+                _upperHandleImageHighlighted = image;
 
                 return _upperHandleImageHighlighted;
             }
@@ -840,17 +862,20 @@ namespace Xamarin.RangeSlider
             _trackBackground.Frame = TrackBackgroundRect();
             _track.Frame = TrackRect();
             _track.Image = TrackImageForCurrentValues;
+            _track.TintColor = ActiveColor;
 
             // Layout the lower handle
             _lowerHandle.Frame = ThumbRectForValue(LowerValue, LowerHandleImageNormal);
             _lowerHandle.Image = LowerHandleImageNormal;
             _lowerHandle.HighlightedImage = LowerHandleImageHighlighted;
+            _lowerHandle.TintColor = ActiveColor;
             _lowerHandle.Hidden = _lowerHandleHidden;
 
             // Layoput the upper handle
             _upperHandle.Frame = ThumbRectForValue(UpperValue, UpperHandleImageNormal);
             _upperHandle.Image = UpperHandleImageNormal;
             _upperHandle.HighlightedImage = UpperHandleImageHighlighted;
+            _upperHandle.TintColor = ActiveColor;
             _upperHandle.Hidden = _upperHandleHidden;
 
             _lowerHandleLabel.Text = ValueToString(LowerValue, Thumb.Lower);
@@ -987,6 +1012,11 @@ namespace Xamarin.RangeSlider
             SendActionForControlEvents(UIControlEvent.ValueChanged);
 
             DragCompleted?.Invoke(this, EventArgs.Empty);
+        }
+        
+        public override bool GestureRecognizerShouldBegin(UIGestureRecognizer gestureRecognizer)
+        {
+            return false;
         }
 
         protected virtual void OnLowerValueChanged()

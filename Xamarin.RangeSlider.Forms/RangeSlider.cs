@@ -59,7 +59,7 @@ namespace Xamarin.RangeSlider.Forms
         public static readonly BindableProperty ActiveColorProperty =
             BindableProperty.Create(nameof(ActiveColor), typeof(Color), typeof(RangeSlider), Color.Default);
 
-        public static readonly BindableProperty MaterialUiProperty =
+        public static readonly BindableProperty MaterialUIProperty =
             BindableProperty.Create(nameof(MaterialUI), typeof(bool), typeof(RangeSlider), false);
 
         public float MinimumValue
@@ -161,8 +161,8 @@ namespace Xamarin.RangeSlider.Forms
 
         public bool MaterialUI
         {
-            get => (bool)GetValue(MaterialUiProperty);
-            set => SetValue(MaterialUiProperty, value);
+            get => (bool)GetValue(MaterialUIProperty);
+            set => SetValue(MaterialUIProperty, value);
         }
 
         public Func<Thumb, float, string> FormatLabel
